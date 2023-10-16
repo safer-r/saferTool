@@ -1,0 +1,71 @@
+######## head() #### head of the left or right of big 2D objects
+
+#' @title head
+#' @description
+#' As head() but display the left or right head of big 2D objects.
+#' @param data1 Any object but more dedicated for matrix, data frame or table.
+#' @param n As in head() but for for matrix, data frame or table, number of dimension to print (10 means 10 rows and columns).
+#' @param side Either "l" or "r" for the left or right side of the 2D object (only for matrix, data frame or table).
+#' @returns The head.
+#' @details 
+#' REQUIRED PACKAGES
+#' 
+#' none
+#' 
+#' REQUIRED FUNCTIONS FROM CUTE_LITTLE_R_FUNCTION
+#' 
+#' fun_check()
+#'
+#' BEWARE
+#' 
+#' Other arguments of head() not used.
+#' @examples
+#' obs1 = matrix(1:30, ncol = 5, dimnames = list(letters[1:6], LETTERS[1:5])) ; 
+#' obs1 ; 
+#' fun_head(obs1, 3)
+#' @export
+fun_head <- function(
+        data1, 
+        n = 6, 
+        side = "l"
+){
+    # DEBUGGING
+    # data1 = matrix(1:30, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) # for function debugging
+    # function name
+    function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()")
+    # end function name
+    # required function checking
+    if(length(utils::find("fun_check", mode = "function")) == 0L){
+        tempo.cat <- paste0("ERROR IN ", function.name, ": REQUIRED fun_check() FUNCTION IS MISSING IN THE R ENVIRONMENT")
+        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }
+    # end required function checking
+    # argument checking
+    arg.check <- NULL #
+    text.check <- NULL #
+    checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
+    ee <- expression(arg.check <- c(arg.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
+    tempo <- fun_check(data = n, class = "vector", typeof = "integer", double.as.integer.allowed = TRUE, length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- fun_check(data = side, options = c("l", "r"), length = 1, fun.name = function.name) ; eval(ee)
+    if( ! is.null(arg.check)){
+        if(any(arg.check) == TRUE){
+            stop(paste0("\n\n================\n\n", paste(text.check[arg.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
+        }
+    }
+    # source("C:/Users/Gael/Documents/Git_versions_to_use/debugging_tools_for_r_dev-v1.7/r_debugging_tools-v1.7.R") ; eval(parse(text = str_basic_arg_check_dev)) ; eval(parse(text = str_arg_check_with_fun_check_dev)) # activate this line and use the function (with no arguments left as NULL) to check arguments status and if they have been checked using fun_check()
+    # end argument checking
+    # main code
+    if( ! (any(class(data1) %in% c("data.frame", "table")) | all(class(data1) %in% c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data1) %in% c("matrix", "data.frame", "table"))
+        return(head(data1, n))
+    }else{
+        obs.dim <- dim(data1)
+        row <- 1:ifelse(obs.dim[1] < n, obs.dim[1], n)
+        if(side == "l"){
+            col <- 1:ifelse(obs.dim[2] < n, obs.dim[2], n)
+        }
+        if(side == "r"){
+            col <- ifelse(obs.dim[2] < n, 1, obs.dim[2] - n + 1):obs.dim[2]
+        }
+        return(data1[row, col])
+    }
+}
