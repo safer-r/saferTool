@@ -1,5 +1,13 @@
 ######## comp_2d() #### comparison of two 2D datasets (row & col names, dimensions, etc.)
 
+# todo list check OK
+# Check r_debugging_tools-v1.4.R
+# Check fun_test() 20201107 (see cute_checks.docx) 
+# example sheet 
+# check all and any OK
+# -> clear to go Apollo
+# -> transferred into the cute package
+
 #' @title comp_2d
 #' @description
 #' Compare two 2D datasets of the same class or not. Check and report in a list if the 2 datasets have:
@@ -17,53 +25,55 @@
 #' @returns 
 #' A list containing:
 #' - $same.class: logical. Are classes identical ?
-#' - $class: identical class of the 2 datasets (NULL otherwise)
+#' - $class: identical class of the 2 datasets (NULL otherwise).
 #' - $same.mode: logical. Are modes identical ?
-#' - $mode: identical mode of the 2 datasets (NULL otherwise)
+#' - $mode: identical mode of the 2 datasets (NULL otherwise).
 #' - $same.type: logical. Are types identical ?
-#' - $type: identical type of the 2 datasets (NULL otherwise)
+#' - $type: identical type of the 2 datasets (NULL otherwise).
 #' - $same.dim: logical. Are dimension identical ?
-#' - $dim: dimension of the 2 datasets (NULL otherwise)
+#' - $dim: dimension of the 2 datasets (NULL otherwise).
 #' - $same.row.nb: logical. Are number of rows identical ?
-#' - $row.nb: nb of rows of the 2 datasets if identical (NULL otherwise)
+#' - $row.nb: nb of rows of the 2 datasets if identical (NULL otherwise).
 #' - $same.col.nb: logical. Are number of columns identical ?
-#' - $col.nb: nb of columns of the 2 datasets if identical (NULL otherwise)
-#' - $same.row.name: logical. Are row names identical ? NULL if no row names in the two 2D datasets
-#' - $row.name: name of rows of the 2 datasets if identical (NULL otherwise)
-#' - $any.id.row.name: logical. Is there any row names identical ? NULL if no row names in the two 2D datasets
-#' - $same.row.names.pos1: positions, in data1, of the row names identical in data2
-#' - $same.row.names.pos2: positions, in data2, of the row names identical in data1
-#' - $same.row.names.match1: positions, in data2, of the row names that match the row names in data1, as given by match(data1, data2) (NULL otherwise)
-#' - $same.row.names.match2: positions, in data1, of the row names that match the row names in data2, as given by match(data1, data2) (NULL otherwise)
-#' - $common.row.names: common row names between data1 and data2 (can be a subset of $name or not). NULL if no common row names
-#' - $same.col.name: logical. Are column names identical ? NULL if no col names in the two 2D datasets
-#' - $col.name: name of columns of the 2 datasets if identical (NULL otherwise)
-#' - $any.id.col.name: logical. Is there any column names identical ? NULL if no col names in the two 2D datasets
-#' - $same.col.names.pos1: positions, in data1, of the column names identical in data2
-#' - $same.col.names.pos2: positions, in data2, of the column names identical in data1
-#' - $same.col.names.match1: positions, in data2, of the column names that match the column names in data1, as given by match(data1, data2) (NULL otherwise)
-#' - $same.col.names.match2: positions, in data1, of the column names that match the column names in data2, as given by match(data1, data2) (NULL otherwise)
-#' - $common.col.names: common column names between data1 and data2 (can be a subset of $name or not). NULL if no common column names
-#' - $any.id.row: logical. is there identical rows (not considering row names)? NULL if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character
-#' - $same.row.pos1: positions, in data1, of the rows identical in data2 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character
-#' - $same.row.pos2: positions, in data2, of the rows identical in data1 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character
-#' - $same.row.match1: positions, in data2, of the rows that match the rows in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character
-#' - $same.row.match2: positions, in data1, of the rows that match the rows in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character
-#' - $any.id.col: logical. is there identical columns (not considering column names)? NULL if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character
-#' - $same.col.pos1: position in data1 of the cols identical in data2 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character
-#' - $same.col.pos2: position in data2 of the cols identical in data1 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character
-#' - $same.col.match1: positions, in data2, of the columns that match the columns in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character
-#' - $same.row.match2: positions, in data1, of the columns that match the columns in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character
-#' - $identical.content: logical. Are contents identical ? Row and column names are not considered. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character)
-#' - $identical: logical. Idem as $identical.content but including row & column names
+#' - $col.nb: nb of columns of the 2 datasets if identical (NULL otherwise).
+#' - $same.row.name: logical. Are row names identical ? NULL if no row names in the two 2D datasets.
+#' - $row.name: name of rows of the 2 datasets if identical (NULL otherwise).
+#' - $any.id.row.name: logical. Is there any row names identical ? NULL if no row names in the two 2D datasets.
+#' - $same.row.names.pos1: positions, in data1, of the row names identical in data2.
+#' - $same.row.names.pos2: positions, in data2, of the row names identical in data1.
+#' - $same.row.names.match1: positions, in data2, of the row names that match the row names in data1, as given by match(data1, data2) (NULL otherwise).
+#' - $same.row.names.match2: positions, in data1, of the row names that match the row names in data2, as given by match(data1, data2) (NULL otherwise).
+#' - $common.row.names: common row names between data1 and data2 (can be a subset of $name or not). NULL if no common row names.
+#' - $same.col.name: logical. Are column names identical ? NULL if no col names in the two 2D datasets.
+#' - $col.name: name of columns of the 2 datasets if identical (NULL otherwise).
+#' - $any.id.col.name: logical. Is there any column names identical ? NULL if no col names in the two 2D datasets.
+#' - $same.col.names.pos1: positions, in data1, of the column names identical in data2.
+#' - $same.col.names.pos2: positions, in data2, of the column names identical in data1.
+#' - $same.col.names.match1: positions, in data2, of the column names that match the column names in data1, as given by match(data1, data2) (NULL otherwise).
+#' - $same.col.names.match2: positions, in data1, of the column names that match the column names in data2, as given by match(data1, data2) (NULL otherwise).
+#' - $common.col.names: common column names between data1 and data2 (can be a subset of $name or not). NULL if no common column names.
+#' - $any.id.row: logical. is there identical rows (not considering row names)? NULL if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same.row.pos1: positions, in data1, of the rows identical in data2 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same.row.pos2: positions, in data2, of the rows identical in data1 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same.row.match1: positions, in data2, of the rows that match the rows in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same.row.match2: positions, in data1, of the rows that match the rows in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $any.id.col: logical. is there identical columns (not considering column names)? NULL if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same.col.pos1: position in data1 of the cols identical in data2 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same.col.pos2: position in data2 of the cols identical in data1 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same.col.match1: positions, in data2, of the columns that match the columns in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same.row.match2: positions, in data1, of the columns that match the columns in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $identical.content: logical. Are contents identical ? Row and column names are not considered. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character).
+#' - $identical: logical. Idem as $identical.content but including row & column names.
 #' @details 
 #' REQUIRED PACKAGES
 #' 
 #' none
 #' 
+#' 
 #' REQUIRED FUNCTIONS FROM CUTE_LITTLE_R_FUNCTION
 #' 
 #' none
+#'
 #'
 #' WARNINGS
 #' 
@@ -107,6 +117,7 @@
 #' obs2 ; 
 #' fun_comp_2d(obs1, obs2)
 #' 
+#' 
 #' # large matrices
 #' 
 #' obs1 = matrix(1:1e6, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; 
@@ -121,6 +132,7 @@
 #' head(obs2) ; 
 #' fun_comp_2d(obs1, obs2)
 #' 
+#' 
 #' # Matrices: same row content and same row names
 #' 
 #' obs1 = matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; 
@@ -128,6 +140,7 @@
 #' obs1 ; 
 #' obs2 ; 
 #' fun_comp_2d(obs1, obs2)
+#' 
 #' 
 #' # Matrices: same row content but not same row names
 #' 
@@ -143,6 +156,7 @@
 #' obs2 ; 
 #' fun_comp_2d(obs1, obs2)
 #' 
+#' 
 #' # Data frames: same row content and same row names, not same mode between columns
 #' 
 #' obs1 = as.data.frame(matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5]))) ; 
@@ -154,6 +168,7 @@
 #' str(obs1) ; 
 #' str(obs2) ; 
 #' fun_comp_2d(obs1, obs2)
+#' 
 #' 
 #' # Data frames: same row content but not same row names
 #' 
@@ -167,8 +182,10 @@
 #' str(obs2) ; 
 #' fun_comp_2d(obs1, obs2)
 #' @export
-fun_comp_2d <- function(data1, data2){
-
+fun_comp_2d <- function(
+        data1, 
+        data2
+){
     # DEBUGGING
     # data1 = matrix(1:10, ncol = 5) ; data2 = matrix(1:10, ncol = 5) # for function debugging
     # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) # for function debugging
@@ -185,8 +202,29 @@ fun_comp_2d <- function(data1, data2){
     # data1 = matrix(1:1e6, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; data2 = matrix((1:1e6)+1e6/5, ncol = 5, dimnames = list(NULL, LETTERS[1:5]))
     # function name
     function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()")
+    arg.names <- names(formals(fun = sys.function(sys.parent(n = 2)))) # names of all the arguments
+    arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
-    # argument checking
+    
+    # required function checking
+    # end required function checking
+    
+    # reserved words (to avoid bugs)
+    # end reserved words (to avoid bugs)
+    
+    # arg with no default values
+    mandat.args <- c(
+        "data1", 
+        "data2"
+    )
+    tempo <- eval(parse(text = paste0("missing(", paste0(mandat.args, collapse = ") | missing("), ")")))
+    if(any(tempo)){ # normally no NA for missing() output
+        tempo.cat <- paste0("ERROR IN ", function.name, "\nFOLLOWING ARGUMENT", ifelse(sum(tempo, na.rm = TRUE) > 1, "S HAVE", "HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", paste0(mandat.args, collapse = "\n"))
+        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }
+    # end arg with no default values
+    
+    # argument primary checking
     if( ! (any(class(data1) %in% c("data.frame", "table")) | all(class(data1) %in% c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data1) %in% c("matrix", "data.frame", "table"))
         tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
@@ -195,16 +233,57 @@ fun_comp_2d <- function(data1, data2){
         tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
-    if(all(class(data1) == "table") & length(dim(data1)) == 1L){
+    if(all(class(data1) == "table", na.rm = TRUE) & length(dim(data1)) == 1L){
         tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT IS A 1D TABLE. USE THE fun_comp_1d FUNCTION")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
-    if(all(class(data2) == "table") & length(dim(data2)) == 1L){
+    if(all(class(data2) == "table", na.rm = TRUE) & length(dim(data2)) == 1L){
         tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT IS A 1D TABLE. USE THE fun_comp_1d FUNCTION")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
-    # source("C:/Users/Gael/Documents/Git_versions_to_use/debugging_tools_for_r_dev-v1.7/r_debugging_tools-v1.7.R") ; eval(parse(text = str_basic_arg_check_dev)) # activate this line and use the function to check arguments status
-    # end argument checking
+    # source("C:/Users/Gael/Documents/Git_versions_to_use/debugging_tools_for_r_dev-v1.7/r_debugging_tools-v1.7.R") ; eval(parse(text = str_basic_arg_check_dev))     # activate this line and use the function to check arguments status
+    # end argument primary checking
+    
+    # second round of checking and data preparation
+    # management of NA arguments
+    if( ! (all(class(arg.user.setting) == "list", na.rm = TRUE) & length(arg.user.setting) == 0)){
+        tempo.arg <- names(arg.user.setting) # values provided by the user
+        tempo.log <- suppressWarnings(sapply(lapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = is.na), FUN = any)) & lapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = length) == 1L # no argument provided by the user can be just NA
+        if(any(tempo.log) == TRUE){ # normally no NA because is.na() used here
+            tempo.cat <- paste0("ERROR IN ", function.name, "\n", ifelse(sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS", "THIS ARGUMENT"), " CANNOT JUST BE NA:", paste0(tempo.arg[tempo.log], collapse = "\n"))
+            stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+        }
+    }
+    # end management of NA arguments
+    
+    # management of NULL arguments
+    tempo.arg <-c(
+        "data1", 
+        "data2"
+    )
+    tempo.log <- sapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = is.null)
+    if(any(tempo.log) == TRUE){# normally no NA with is.null()
+        tempo.cat <- paste0("ERROR IN ", function.name, ":\n", ifelse(sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS\n", "THIS ARGUMENT\n"), paste0(tempo.arg[tempo.log], collapse = "\n"),"\nCANNOT BE NULL")
+        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }
+    # end management of NULL arguments
+    
+    # code that protects set.seed() in the global environment
+    # end code that protects set.seed() in the global environment
+    
+    # warning initiation
+    # end warning initiation
+    
+    # other checkings
+    # end other checkings
+    
+    # reserved word checking
+    # end reserved word checking
+    # end second round of checking and data preparation
+    
+    # package checking
+    # end package checking
+    
     # main code
     same.class <- NULL
     class <- NULL
@@ -474,7 +553,7 @@ fun_comp_2d <- function(data1, data2){
             # same.col.pos1 and 2 remain NULL
         }
         if(same.dim == TRUE){
-            if(all(data1 == data2)){
+            if(all(data1 == data2, na.rm = TRUE)){
                 identical.content <- TRUE
             }else{
                 identical.content <- FALSE
@@ -483,6 +562,9 @@ fun_comp_2d <- function(data1, data2){
             identical.content <- FALSE
         }
     }
+    # output
     output <- list(same.class = same.class, class = class, same.mode = same.mode, mode = mode, same.type = same.type , type = type, same.dim = same.dim, dim = dim, same.row.nb = same.row.nb, row.nb = row.nb, same.col.nb = same.col.nb , col.nb = col.nb, same.row.name = same.row.name, row.name = row.name, any.id.row.name = any.id.row.name, same.row.names.pos1 = same.row.names.pos1, same.row.names.pos2 = same.row.names.pos2, same.row.names.match1 = same.row.names.match1, same.row.names.match2 = same.row.names.match2, common.row.names = common.row.names, same.col.name = same.col.name, col.name = col.name,any.id.col.name = any.id.col.name, same.col.names.pos1 = same.col.names.pos1, same.col.names.pos2 = same.col.names.pos2, same.col.names.match1 = same.col.names.match1, same.col.names.match2 = same.col.names.match2, common.col.names = common.col.names, any.id.row = any.id.row, same.row.pos1 = same.row.pos1, same.row.pos2 = same.row.pos2, same.row.match1 = same.row.match1, same.row.match2 = same.row.match2, any.id.col = any.id.col, same.col.pos1 = same.col.pos1, same.col.pos2 = same.col.pos2, same.col.match1 = same.col.match1, same.col.match2 = same.col.match2, identical.content = identical.content, identical = identical.object)
     return(output)
+    # end output
+    # end main code
 }

@@ -13,51 +13,53 @@
 #' @description
 #' Provide a broad description of an object.
 #' @param data Object to analyse.
-#' @param n Positive integer value indicating the n first number of elements to display per compartment of the output list (i.e., head(..., n)). Write NULL to return all the elements. Does not apply for the $STRUCTURE compartment output.
-#' @param warn.print Logical. Print potential warnings at the end of the execution? If FALSE the warning messages are added in the output list as an additional compartment (or NULL if no message).
+#' @param n Single positive integer value indicating the n first number of elements to display per compartment of the output list (i.e., head(..., n)). Write NULL to return all the elements. Does not apply for the $STRUCTURE compartment output.
+#' @param warn.print Single logical value. Print potential warnings at the end of the execution? If FALSE the warning messages are added in the output list as an additional compartment (or NULL if no message).
 #' @returns
 #' A list containing information, depending on the class and type of data. The backbone is generally:
-#' - $NAME: name of the object
-#' - $CLASS: class of the object (class() value)
-#' - $TYPE: type of the object (typeof() value)
-#' - $LENGTH: length of the object (length() value)
-#' - $NA.NB: number of NA and NaN (only for type "logical", "integer", "double", "complex", "character" or "list")
-#' - $HEAD: head of the object (head() value)
-#' - $TAIL: tail of the object (tail() value)
-#' - $DIMENSION: dimension (only for object with dimensions)
-#' - $SUMMARY: object summary (summary() value)
-#' - $STRUCTURE: object structure (str() value)
-#' - $WARNING: warning messages (only if the warn.print argument is FALSE)
+#' - $NAME: name of the object.
+#' - $CLASS: class of the object (class() value).
+#' - $TYPE: type of the object (typeof() value).
+#' - $LENGTH: length of the object (length() value).
+#' - $NA.NB: number of NA and NaN (only for type "logical", "integer", "double", "complex", "character" or "list").
+#' - $HEAD: head of the object (head() value).
+#' - $TAIL: tail of the object (tail() value).
+#' - $DIMENSION: dimension (only for object with dimensions).
+#' - $SUMMARY: object summary (summary() value).
+#' - $STRUCTURE: object structure (str() value).
+#' - $WARNING: warning messages (only if the warn.print argument is FALSE).
 #' 
 #' If data is made of numerics, provide also:
-#' - $INF.NB: number of Inf and -Inf
-#' - $RANGE: range after removing Inf and NA
-#' - $SUM: sum after removing Inf and NA
-#' - $MEAN: mean after removing Inf and NA
+#' - $INF.NB: number of Inf and -Inf.
+#' - $RANGE: range after removing Inf and NA.
+#' - $SUM: sum after removing Inf and NA.
+#' - $MEAN: mean after removing Inf and NA.
 #' 
 #' If data is a 2D object, provide also:
 #' 
-#' - $ROW_NAMES: row names
-#' - $COL_NAMES: column names
+#' - $ROW_NAMES: row names.
+#' - $COL_NAMES: column names.
 #' 
 #' If data is a data frame, provide also:
 #' 
-#' - $COLUMN_TYPE: type of each column (typeof() value)
+#' - $COLUMN_TYPE: type of each column (typeof() value).
 #' 
 #' If data is a list, provide also:
 #' 
-#' - $COMPARTMENT_NAMES: names of the comprtments
-#' - $COMPARTMENT_TYPE: type of each compartment (typeof() value)
+#' - $COMPARTMENT_NAMES: names of the comprtments.
+#' - $COMPARTMENT_TYPE: type of each compartment (typeof() value).
 #' @details 
 #' REQUIRED PACKAGES
 #' 
 #' none
+#' 
 #' 
 #' REQUIRED FUNCTIONS FROM CUTE_LITTLE_R_FUNCTION
 #' 
 #' fun_check()
 #' 
 #' fun_get_message()
+#'
 #'
 #' WARNINGS
 #' 
