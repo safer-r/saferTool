@@ -1,13 +1,3 @@
-######## comp_list() #### comparison of two lists
-
-# todo list check OK
-# Check r_debugging_tools-v1.4.R
-# Check fun_test() 20201107 (see cute_checks.docx) 
-# example sheet 
-# check all and any OK
-# -> clear to go Apollo
-# -> transferred into the cute package
-
 #' @title comp_list
 #' @description
 #' Compare two lists. Check and report in a list if the 2 datasets have:

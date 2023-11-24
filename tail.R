@@ -1,13 +1,3 @@
-######## tail() #### tail of the left or right of big 2D objects
-
-# todo list check OK
-# Check r_debugging_tools-v1.4.R
-# Check fun_test() 20201107 (see cute_checks.docx) 
-# example sheet 
-# check all and any OK
-# -> clear to go Apollo
-# -> transferred into the cute package
-
 #' @title tail
 #' @description
 #' As tail() but display the left or right head of big 2D objects.

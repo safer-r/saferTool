@@ -1,14 +1,3 @@
-######## fun_info() #### broad description of an object
-
-# todo list check OK
-# Check r_debugging_tools-v1.4.R OK
-# Check fun_test() 20201107 (see cute_checks.docx) OK
-# example sheet OK 
-# check all and any OK
-# -> clear to go Apollo
-# -> transferred into the cute package
-# Do not modify this function in cute_little_R_function anymore. See the cute repo
-
 #' @title info
 #' @description
 #' Provide a broad description of an object.
