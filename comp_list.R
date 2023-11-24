@@ -32,24 +32,24 @@
 #' @examples
 #' obs1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; 
 #' obs2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; 
-#' fun_comp_list(obs1, obs2)
+#' comp_list(obs1, obs2)
 #' 
 #' 
 #' obs1 = list(1:5, LETTERS[1:2]) ; 
 #' obs2 = list(a = 1:5, b = LETTERS[1:2]) ; 
-#' fun_comp_list(obs1, obs2)
+#' comp_list(obs1, obs2)
 #' 
 #' 
 #' obs1 = list(b = 1:5, c = LETTERS[1:2]) ; 
 #' obs2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; 
-#' fun_comp_list(obs1, obs2)
+#' comp_list(obs1, obs2)
 #' 
 #' 
 #' obs1 = list(b = 1:5, c = LETTERS[1:2]) ; 
 #' obs2 = list(LETTERS[5:9], matrix(1:6), 1:5) ; 
-#' fun_comp_list(obs1, obs2)
+#' comp_list(obs1, obs2)
 #' @export
-fun_comp_list <- function(
+comp_list <- function(
         data1, 
         data2
 ){
@@ -63,12 +63,18 @@ fun_comp_list <- function(
     arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
     
+    # package checking
+    # check of lib.path
+    # end check of lib.path
+
     # required function checking 
     # end required function checking
     
-    # reserved words (to avoid bugs)
-    # end reserved words (to avoid bugs)
+   
     
+   
+    
+    # argument primary checking
     # arg with no default values
     mandat.args <- c(
         "data1", 
@@ -81,7 +87,6 @@ fun_comp_list <- function(
     }
     # end arg with no default values
     
-    # argument primary checking
     if( ! any(class(data1) %in% "list")){
         tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT MUST BE A LIST")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
@@ -90,7 +95,9 @@ fun_comp_list <- function(
         tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT MUST BE A LIST")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
+    # check with r_debugging_tools
     # source("C:/Users/Gael/Documents/Git_versions_to_use/debugging_tools_for_r_dev-v1.7/r_debugging_tools-v1.7.R") ; eval(parse(text = str_basic_arg_check_dev)) # activate this line and use the function to check arguments status
+    # end check with r_debugging_tools
     # end argument primary checking
     
     # second round of checking and data preparation
@@ -126,12 +133,9 @@ fun_comp_list <- function(
     # other checkings
     # end other checkings
     
-    # reserved word checking
-    # end reserved word checking
+    # reserved word checking to avoid bugs
+    # end reserved word checking to avoid bugs
     # end second round of checking and data preparation
-    
-    # package checking
-    # end package checking
     
     # main code
     same.length <- NULL
@@ -209,6 +213,8 @@ fun_comp_list <- function(
     }
     output <- list(same.length = same.length, length = length, same.names = same.names, name = name, any.id.name = any.id.name, same.names.pos1 = same.names.pos1, same.names.pos2 = same.names.pos2, any.id.compartment = any.id.compartment, same.compartment.pos1 = same.compartment.pos1, same.compartment.pos2 = same.compartment.pos2, identical.object = identical.object, identical.content = identical.content)
     # output
+    # warning output
+    # end warning output
     return(output)
     # end output
     # end main code

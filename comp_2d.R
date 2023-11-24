@@ -105,7 +105,7 @@
 #' obs2 = as.data.frame(matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])), stringsAsFactors = TRUE) ; 
 #' obs1 ; 
 #' obs2 ; 
-#' fun_comp_2d(obs1, obs2)
+#' comp_2d(obs1, obs2)
 #' 
 #' 
 #' # large matrices
@@ -114,13 +114,13 @@
 #' obs2 = matrix(as.integer((1:1e6)+1e6/5), ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; 
 #' head(obs1) ; 
 #' head(obs2) ; 
-#' fun_comp_2d(obs1, obs2)
+#' comp_2d(obs1, obs2)
 #' 
 #' obs1 = matrix(1:1e6, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; 
 #' obs2 = matrix((1:1e6)+1e6/5, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; 
 #' head(obs1) ; 
 #' head(obs2) ; 
-#' fun_comp_2d(obs1, obs2)
+#' comp_2d(obs1, obs2)
 #' 
 #' 
 #' # Matrices: same row content and same row names
@@ -129,7 +129,7 @@
 #' obs2 = matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4]))) ; 
 #' obs1 ; 
 #' obs2 ; 
-#' fun_comp_2d(obs1, obs2)
+#' comp_2d(obs1, obs2)
 #' 
 #' 
 #' # Matrices: same row content but not same row names
@@ -138,13 +138,13 @@
 #' obs2 = matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("x", "z", "y"), c(LETTERS[1:2], "k", LETTERS[5:4]))) ; 
 #' obs1 ; 
 #' obs2 ; 
-#' fun_comp_2d(obs1, obs2)
+#' comp_2d(obs1, obs2)
 #' 
 #' obs1 = t(matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5]))) ; 
 #' obs2 = t(matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4])))) ; 
 #' obs1 ; 
 #' obs2 ; 
-#' fun_comp_2d(obs1, obs2)
+#' comp_2d(obs1, obs2)
 #' 
 #' 
 #' # Data frames: same row content and same row names, not same mode between columns
@@ -157,7 +157,7 @@
 #' obs2 ; 
 #' str(obs1) ; 
 #' str(obs2) ; 
-#' fun_comp_2d(obs1, obs2)
+#' comp_2d(obs1, obs2)
 #' 
 #' 
 #' # Data frames: same row content but not same row names
@@ -170,9 +170,9 @@
 #' obs2 ; 
 #' str(obs1) ; 
 #' str(obs2) ; 
-#' fun_comp_2d(obs1, obs2)
+#' comp_2d(obs1, obs2)
 #' @export
-fun_comp_2d <- function(
+comp_2d <- function(
         data1, 
         data2
 ){
@@ -196,12 +196,19 @@ fun_comp_2d <- function(
     arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
     
+    # package checking
+    # check of lib.path
+    # end check of lib.path
+
     # required function checking
     # end required function checking
     
     # reserved words (to avoid bugs)
     # end reserved words (to avoid bugs)
     
+    
+    
+    # argument primary checking
     # arg with no default values
     mandat.args <- c(
         "data1", 
@@ -213,8 +220,7 @@ fun_comp_2d <- function(
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end arg with no default values
-    
-    # argument primary checking
+    # argument checking with arg_check()
     if( ! (any(class(data1) %in% c("data.frame", "table")) | all(class(data1) %in% c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data1) %in% c("matrix", "data.frame", "table"))
         tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
@@ -224,14 +230,17 @@ fun_comp_2d <- function(
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     if(all(class(data1) == "table") & length(dim(data1)) == 1L){ # class() cannot return NA
-        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT IS A 1D TABLE. USE THE fun_comp_1d FUNCTION")
+        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     if(all(class(data2) == "table", na.rm = TRUE) & length(dim(data2)) == 1L){
-        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT IS A 1D TABLE. USE THE fun_comp_1d FUNCTION")
+        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
-    # source("C:/Users/Gael/Documents/Git_versions_to_use/debugging_tools_for_r_dev-v1.7/r_debugging_tools-v1.7.R") ; eval(parse(text = str_basic_arg_check_dev))     # activate this line and use the function to check arguments status
+    # end argument checking with arg_check()
+    # check with r_debugging_tools
+    # source("C:/Users/yhan/Documents/Git_projects/debugging_tools_for_r_dev/r_debugging_tools.R") ; eval(parse(text = str_basic_arg_check_dev))     # activate this line and use the function to check arguments status
+    # end check with r_debugging_tools
     # end argument primary checking
     
     # second round of checking and data preparation
@@ -267,13 +276,10 @@ fun_comp_2d <- function(
     # other checkings
     # end other checkings
     
-    # reserved word checking
-    # end reserved word checking
+    # reserved word checking to avoid bugs
+    # end reserved word checking to avoid bugs
     # end second round of checking and data preparation
-    
-    # package checking
-    # end package checking
-    
+
     # main code
     same.class <- NULL
     class <- NULL
@@ -553,6 +559,8 @@ fun_comp_2d <- function(
         }
     }
     # output
+    # warning output
+    # end warning output
     output <- list(same.class = same.class, class = class, same.mode = same.mode, mode = mode, same.type = same.type , type = type, same.dim = same.dim, dim = dim, same.row.nb = same.row.nb, row.nb = row.nb, same.col.nb = same.col.nb , col.nb = col.nb, same.row.name = same.row.name, row.name = row.name, any.id.row.name = any.id.row.name, same.row.names.pos1 = same.row.names.pos1, same.row.names.pos2 = same.row.names.pos2, same.row.names.match1 = same.row.names.match1, same.row.names.match2 = same.row.names.match2, common.row.names = common.row.names, same.col.name = same.col.name, col.name = col.name,any.id.col.name = any.id.col.name, same.col.names.pos1 = same.col.names.pos1, same.col.names.pos2 = same.col.names.pos2, same.col.names.match1 = same.col.names.match1, same.col.names.match2 = same.col.names.match2, common.col.names = common.col.names, any.id.row = any.id.row, same.row.pos1 = same.row.pos1, same.row.pos2 = same.row.pos2, same.row.match1 = same.row.match1, same.row.match2 = same.row.match2, any.id.col = any.id.col, same.col.pos1 = same.col.pos1, same.col.pos2 = same.col.pos2, same.col.match1 = same.col.match1, same.col.match2 = same.col.match2, identical.content = identical.content, identical = identical.object)
     return(output)
     # end output
