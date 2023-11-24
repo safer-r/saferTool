@@ -233,7 +233,7 @@ fun_comp_2d <- function(
         tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
-    if(all(class(data1) == "table", na.rm = TRUE) & length(dim(data1)) == 1L){
+    if(all(class(data1) == "table") & length(dim(data1)) == 1L){ # class() cannot return NA
         tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT IS A 1D TABLE. USE THE fun_comp_1d FUNCTION")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }

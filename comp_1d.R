@@ -1,13 +1,3 @@
-######## fun_comp_1d() #### comparison of two 1D datasets (vectors, factors, 1D tables)
-
-# todo list check OK
-# Check r_debugging_tools-v1.4.R
-# Check fun_test() 20201107 (see cute_checks.docx) 
-# example sheet 
-# check all and any OK
-# -> clear to go Apollo
-# -> transferred into the cute package
-
 #' @title comp_1d
 #' @description
 #' Compare two 1D datasets (vector or factor or 1D table, or 1D matrix or 1D array) of the same class or not. Check and report in a list if the 2 datasets have:
@@ -60,19 +50,19 @@
 #' 
 #' none
 #' @examples
-#' obs1 = 1:5 ; obs2 = 1:5 ; names(obs1) <- LETTERS[1:5] ; names(obs2) <- LETTERS[1:5] ; fun_comp_1d(obs1, obs2)
-#' obs1 = 1:5 ; obs2 = 1:5 ; names(obs1) <- LETTERS[1:5] ; fun_comp_1d(obs1, obs2)
-#' obs1 = 1:5 ; obs2 = 3:6 ; names(obs1) <- LETTERS[1:5] ; names(obs2) <- LETTERS[1:4] ; fun_comp_1d(obs1, obs2)
-#' obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[1:5]) ; fun_comp_1d(obs1, obs2)
-#' obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[10:11]) ; fun_comp_1d(obs1, obs2)
-#' obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[4:7]) ; fun_comp_1d(obs1, obs2)
-#' obs1 = factor(c(LETTERS[1:4], "E")) ; obs2 = factor(c(LETTERS[1:4], "F")) ; fun_comp_1d(obs1, obs2)
-#' obs1 = 1:5 ; obs2 = factor(LETTERS[1:5]) ; fun_comp_1d(obs1, obs2)
-#' obs1 = 1:5 ; obs2 = 1.1:6.1 ; fun_comp_1d(obs1, obs2)
-#' obs1 = as.table(1:5); obs2 = as.table(1:5) ; fun_comp_1d(obs1, obs2)
-#' obs1 = as.table(1:5); obs2 = 1:5 ; fun_comp_1d(obs1, obs2)
+#' obs1 = 1:5 ; obs2 = 1:5 ; names(obs1) <- LETTERS[1:5] ; names(obs2) <- LETTERS[1:5] ; comp_1d(obs1, obs2)
+#' obs1 = 1:5 ; obs2 = 1:5 ; names(obs1) <- LETTERS[1:5] ; comp_1d(obs1, obs2)
+#' obs1 = 1:5 ; obs2 = 3:6 ; names(obs1) <- LETTERS[1:5] ; names(obs2) <- LETTERS[1:4] ; comp_1d(obs1, obs2)
+#' obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[1:5]) ; comp_1d(obs1, obs2)
+#' obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[10:11]) ; comp_1d(obs1, obs2)
+#' obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[4:7]) ; comp_1d(obs1, obs2)
+#' obs1 = factor(c(LETTERS[1:4], "E")) ; obs2 = factor(c(LETTERS[1:4], "F")) ; comp_1d(obs1, obs2)
+#' obs1 = 1:5 ; obs2 = factor(LETTERS[1:5]) ; comp_1d(obs1, obs2)
+#' obs1 = 1:5 ; obs2 = 1.1:6.1 ; comp_1d(obs1, obs2)
+#' obs1 = as.table(1:5); obs2 = as.table(1:5) ; comp_1d(obs1, obs2)
+#' obs1 = as.table(1:5); obs2 = 1:5 ; comp_1d(obs1, obs2)
 #' @export
-fun_comp_1d <- function(
+comp_1d <- function(
         data1, 
         data2
 ){
@@ -84,12 +74,19 @@ fun_comp_1d <- function(
     arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
     
+    # package checking
+    # check of lib.path
+    # end check of lib.path
+    
     # required function checking
     # end required function checking
     
     # reserved words (to avoid bugs)
     # end reserved words (to avoid bugs)
     
+    
+    
+    # argument primary checking
     # arg with no default values
     mandat.args <- c(
         "data1", 
@@ -101,8 +98,7 @@ fun_comp_1d <- function(
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end arg with no default values
-    
-    # argument primary checking
+    # argument checking with arg_check()
     if( ! any(class(data1) %in% c("logical", "integer", "numeric", "character", "factor", "table"))){
         tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT MUST BE A NON NULL VECTOR, FACTOR OR 1D TABLE")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
@@ -121,7 +117,10 @@ fun_comp_1d <- function(
             stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
         }
     }
-    # source("C:/Users/Gael/Documents/Git_versions_to_use/debugging_tools_for_r_dev-v1.7/r_debugging_tools-v1.7.R") ; eval(parse(text = str_basic_arg_check_dev)) # activate this line and use the function to check arguments status
+    # end argument checking with arg_check()
+    # check with r_debugging_tools
+    # source("C:/Users/yhan/Documents/Git_projects/debugging_tools_for_r_dev/r_debugging_tools.R") ; eval(parse(text = str_basic_arg_check_dev)) # activate this line and use the function to check arguments status
+    # end check with r_debugging_tools
     # end argument primary checking
     
     # second round of checking and data preparation
@@ -160,10 +159,7 @@ fun_comp_1d <- function(
     # reserved word checking
     # end reserved word checking
     # end second round of checking and data preparation
-    
-    # package checking
-    # end package checking
-    
+
     # main code
     same.class <- FALSE
     class <- NULL
@@ -314,6 +310,8 @@ fun_comp_1d <- function(
         }
     }
     # output
+    # warning output
+    # end warning output
     output <- list(same.class = same.class, class = class, same.length = same.length, length = length, same.levels = same.levels, levels = levels, any.id.levels = any.id.levels, same.levels.pos1 = same.levels.pos1, same.levels.pos2 = same.levels.pos2, same.levels.match1 = same.levels.match1, same.levels.match2 = same.levels.match2, common.levels = common.levels, same.names = same.names, name = name, any.id.name = any.id.name, same.names.pos1 = same.names.pos1, same.names.pos2 = same.names.pos2, same.names.match1 = same.names.match1, same.names.match2 = same.names.match2, common.names = common.names, any.id.element = any.id.element, same.elements.pos1 = same.elements.pos1, same.elements.pos2 = same.elements.pos2, same.elements.match1 = same.elements.match1, same.elements.match2 = same.elements.match2, common.elements = common.elements, same.order = same.order, order1 = order1, order2 = order2, identical.object = identical.object, identical.content = identical.content)
     return(output)
     # end output
