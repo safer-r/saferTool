@@ -8,12 +8,12 @@
 #' @details 
 #' REQUIRED PACKAGES
 #' 
-#' none
+#' cuteDev
 #' 
 #' 
 #' REQUIRED FUNCTIONS FROM CUTE_LITTLE_R_FUNCTION
 #' 
-#' fun_check()
+#' arg_check()
 #'
 #'
 #' BEWARE
@@ -22,9 +22,9 @@
 #' @examples
 #' obs1 = matrix(1:30, ncol = 5, dimnames = list(letters[1:6], LETTERS[1:5])) ; 
 #' obs1 ; 
-#' fun_head(obs1, 3)
+#' head(obs1, 3)
 #' @export
-fun_head <- function(
+head <- function(
         data1, 
         n = 6, 
         side = "l"
@@ -36,9 +36,13 @@ fun_head <- function(
     arg.names <- names(formals(fun = sys.function(sys.parent(n = 2)))) # names of all the arguments
     arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
+    # package checking
+    # check of lib.path
+    # end check of lib.path
+
     # required function checking
     req.function <- c(
-        "fun_check"
+        "arg_check"
     )
     tempo <- NULL
     for(i1 in req.function){
@@ -52,9 +56,8 @@ fun_head <- function(
     }
     # end required function checking
     
-    # reserved words (to avoid bugs)
-    # end reserved words (to avoid bugs)
     
+    # argument primary checking
     # arg with no default values
     mandat.args <- c(
         "data1"
@@ -65,20 +68,22 @@ fun_head <- function(
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end arg with no default values
-    
-    # argument primary checking
+    # argument checking with arg_check()
     arg.check <- NULL #
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- expression(arg.check <- c(arg.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
-    tempo <- fun_check(data = n, class = "vector", typeof = "integer", double.as.integer.allowed = TRUE, length = 1, fun.name = function.name) ; eval(ee)
-    tempo <- fun_check(data = side, options = c("l", "r"), length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- arg_check(data = n, class = "vector", typeof = "integer", double.as.integer.allowed = TRUE, length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- arg_check(data = side, options = c("l", "r"), length = 1, fun.name = function.name) ; eval(ee)
     if( ! is.null(arg.check)){
         if(any(arg.check, na.rm = TRUE) == TRUE){
             stop(paste0("\n\n================\n\n", paste(text.check[arg.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
         }
     }
-    # source("C:/Users/Gael/Documents/Git_versions_to_use/debugging_tools_for_r_dev-v1.7/r_debugging_tools-v1.7.R") ; eval(parse(text = str_basic_arg_check_dev)) ; eval(parse(text = str_arg_check_with_fun_check_dev)) # activate this line and use the function (with no arguments left as NULL) to check arguments status and if they have been checked using fun_check()
+    # end argument checking with arg_check()
+    # check with r_debugging_tools
+    # source("C:/Users/yhan/Documents/Git_projects/debugging_tools_for_r_dev/r_debugging_tools.R") ; eval(parse(text = str_basic_arg_check_dev)) ; eval(parse(text = str_arg_check_with_fun_check_dev)) # activate this line and use the function (with no arguments left as NULL) to check arguments status and if they have been checked using arg_check()
+    # end check with r_debugging_tools
     # end argument primary checking
     
     # second round of checking and data preparation
@@ -115,15 +120,14 @@ fun_head <- function(
     # other checkings
     # end other checkings
     
-    # reserved word checking
-    # end reserved word checking
+    # reserved word checking to avoid bugs
+    # end reserved word checking to avoid bugs
     # end second round of checking and data preparation
-    
-    # package checking
-    # end package checking
-    
+
     # main code
     # output
+    # warning output
+    # end warning output
     if( ! (any(class(data1) %in% c("data.frame", "table")) | all(class(data1) %in% c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data1) %in% c("matrix", "data.frame", "table"))
         return(head(data1, n))
     }else{

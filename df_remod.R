@@ -92,15 +92,15 @@ df_remod <- function(
     }
     # end argument checking without arg_check()
     # argument checking with arg_check()
-    arg.check <- NULL #
+    argum.check <- NULL #
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
-    ee <- expression(arg.check <- c(arg.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
+    ee <- expression(argum.check <- c(argum.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
     tempo <- arg_check(data = quanti.col.name, class = "character", length = 1, fun.name = function.name) ; eval(ee)
     tempo <- arg_check(data = quali.col.name, class = "character", length = 1, fun.name = function.name) ; eval(ee)
-    if( ! is.null(arg.check)){
-        if(any(arg.check, na.rm = TRUE) == TRUE){
-            stop(paste0("\n\n================\n\n", paste(text.check[arg.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
+    if( ! is.null(argum.check)){
+        if(any(argum.check, na.rm = TRUE) == TRUE){
+            stop(paste0("\n\n================\n\n", paste(text.check[argum.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
         }
     }
     # end argument checking with arg_check()
