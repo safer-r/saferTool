@@ -40,24 +40,24 @@
 #' @details 
 #' REQUIRED PACKAGES
 #' 
-#' none
+#' cuteDev
 #' 
 #' 
 #' REQUIRED FUNCTIONS FROM CUTE_LITTLE_R_FUNCTION
 #' 
-#' fun_check()
+#' arg_check()
 #' 
-#' fun_get_message()
+#' get_message()
 #'
 #'
 #' WARNINGS
 #' 
 #' None
 #' @examples
-#' fun_info(data = 1:3)
+#' info(data = 1:3)
 #' @seealso html
 #' @export
-fun_info <- function(
+info <- function(
         data, 
         n = NULL, 
         warn.print = TRUE
@@ -69,10 +69,14 @@ fun_info <- function(
     arg.names <- names(formals(fun = sys.function(sys.parent(n = 2)))) # names of all the arguments
     arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
+    # package checking
+    # check of lib.path
+    # end check of lib.path
+
     # required function checking
     req.function <- c(
-        "fun_check", 
-        "fun_get_message"
+        "arg_check", 
+        "get_message"
     )
     tempo <- NULL
     for(i1 in req.function){
@@ -87,6 +91,8 @@ fun_info <- function(
     # end required function checking
     # reserved words
     # end reserved words
+    
+    # argument primary checking
     # arg with no default values
     mandat.args <- c(
         "data"
@@ -97,25 +103,26 @@ fun_info <- function(
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end arg with no default values
-    # argument primary checking
-    arg.check <- NULL #
+    # argument checking with arg_check()
+    argum.check <- NULL #
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
-    ee <- expression(arg.check <- c(arg.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
+    ee <- expression(argum.check <- c(argum.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
     if( ! is.null(n)){
-        tempo <- fun_check(data = n, class = "vector", typeof = "integer", length = 1, double.as.integer.allowed = TRUE, fun.name = function.name) ; eval(ee)
+        tempo <- arg_check(data = n, class = "vector", typeof = "integer", length = 1, double.as.integer.allowed = TRUE, fun.name = function.name) ; eval(ee)
     }else{
-        # no fun_check test here, it is just for checked.arg.names
-        tempo <- fun_check(data = n, class = "vector")
+        # no arg_check test here, it is just for checked.arg.names
+        tempo <- arg_check(data = n, class = "vector")
         checked.arg.names <- c(checked.arg.names, tempo$object.name)
     }
-    tempo <- fun_check(data = warn.print, class = "logical", length = 1, fun.name = function.name) ; eval(ee)
-    if( ! is.null(arg.check)){
-        if(any(arg.check) == TRUE){
-            stop(paste0("\n\n================\n\n", paste(text.check[arg.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
+    tempo <- arg_check(data = warn.print, class = "logical", length = 1, fun.name = function.name) ; eval(ee)
+    if( ! is.null(argum.check)){
+        if(any(argum.check) == TRUE){
+            stop(paste0("\n\n================\n\n", paste(text.check[argum.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
         }
     }
-    # source("C:/Users/Gael/Documents/Git_versions_to_use/debugging_tools_for_r_dev-v1.7/r_debugging_tools-v1.7.R") ; eval(parse(text = str_basic_arg_check_dev)) ; eval(parse(text = str_arg_check_with_fun_check_dev)) # activate this line and use the function (with no arguments left as NULL) to check arguments status and if they have been checked using fun_check()
+    # end argument checking with arg_check()
+    # source("C:/Users/yhan/Documents/Git_projects/debugging_tools_for_r_dev/r_debugging_tools.R") ; eval(parse(text = str_basic_arg_check_dev)) ; eval(parse(text = str_arg_check_with_fun_check_dev)) # activate this line and use the function (with no arguments left as NULL) to check arguments status and if they have been checked using arg_check()
     # end argument primary checking
     # second round of checking and data preparation
     # management of NA arguments
@@ -146,13 +153,13 @@ fun_info <- function(
     ini.warning.length <- options()$warning.length
     options(warning.length = 8170)
     warn <- NULL
-    # warn.count <- 0 # not required
+    warn.count <- 0 
     # end warning initiation
     # other checkings
     if( ! is.null(n)){
         if(n < 1){
             tempo.cat <- paste0("ERROR IN ", function.name, ": n ARGUMENT MUST BE A POSITIVE AND NON NULL INTEGER")
-            stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+            stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n", ifelse(is.null(warn), "", paste0("IN ADDITION\nWARNING", ifelse(warn.count > 1, "S", ""), ":\n\n", warn))), call. = FALSE)
         }else if(is.finite(n)){
             # warn.count <- warn.count + 1
             tempo.warn <- paste0("SOME COMPARTMENTS CAN BE TRUNCATED (n ARGUMENT IS ", n, ")")
@@ -160,15 +167,14 @@ fun_info <- function(
         }
     }
     # end other checkings
-    # reserved word checking
-    # end reserved word checking
+    # reserved word checking to avoid bugs
+    # end reserved word checking to avoid bugs
     # end second round of checking and data preparation
-    # package checking
-    # end package checking
+
     # main code
     # new environment
     env.name <- paste0("env", as.numeric(Sys.time()))
-    if(exists(env.name, where = -1)){ # verify if still ok when fun_info() is inside a function
+    if(exists(env.name, where = -1)){ # verify if still ok when info() is inside a function
         tempo.cat <- paste0("ERROR IN ", function.name, ": ENVIRONMENT env.name ALREADY EXISTS. PLEASE RERUN ONCE")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }else{
@@ -178,17 +184,17 @@ fun_info <- function(
     # end new environment
     data.name <- deparse(substitute(data))
     output <- list("NAME" = data.name)
-    tempo.try.error <- fun_get_message(data = "class(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
+    tempo.try.error <- get_message(data = "class(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
     if(is.null(tempo.try.error)){
         tempo <- list("CLASS" = class(data))
         output <- c(output, tempo)
     }
-    tempo.try.error <- fun_get_message(data = "typeof(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
+    tempo.try.error <- get_message(data = "typeof(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
     if(is.null(tempo.try.error)){
         tempo <- list("TYPE" = typeof(data))
         output <- c(output, tempo)
     }
-    tempo.try.error <- fun_get_message(data = "length(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
+    tempo.try.error <- get_message(data = "length(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
     if(is.null(tempo.try.error)){
         tempo <- list("LENGTH" = length(data))
         output <- c(output, tempo)
@@ -204,20 +210,20 @@ fun_info <- function(
         output <- c(output, tempo)
     }
     if(all(typeof(data) %in% c("logical", "integer", "double", "complex", "character", "list"))){ # all() without na.rm -> ok because typeof(NA) is "logical"
-        tempo.try.error <- fun_get_message(data = "is.na(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
+        tempo.try.error <- get_message(data = "is.na(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
         if(is.null(tempo.try.error)){
             tempo <- list("NA.NB" = sum(is.na(data)))
             output <- c(output, tempo)
         }
     }
-    tempo.try.error <- fun_get_message(data = "head(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
+    tempo.try.error <- get_message(data = "head(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
     if(is.null(tempo.try.error)){
         tempo <- list("HEAD" = head(data))
         output <- c(output, tempo)
         tempo <- list("TAIL" = tail(data)) # no reason that tail() does not work if head() works
         output <- c(output, tempo)
     }
-    tempo.try.error <- fun_get_message(data = "dim(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
+    tempo.try.error <- get_message(data = "dim(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
     if(is.null(tempo.try.error)){
         if(length(dim(data)) > 0){
             tempo <- list("DIMENSION" = dim(data))
@@ -235,12 +241,12 @@ fun_info <- function(
             output <- c(output, tempo)
         }
     }
-    tempo.try.error <- fun_get_message(data = "summary(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
+    tempo.try.error <- get_message(data = "summary(data)", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
     if(is.null(tempo.try.error)){
         tempo <- list("SUMMARY" = summary(data))
         output <- c(output, tempo)
     }
-    tempo.try.error <- fun_get_message(data = "noquote(matrix(capture.output(str(data))))", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
+    tempo.try.error <- get_message(data = "noquote(matrix(capture.output(str(data))))", kind = "error", header = FALSE, env = get(env.name, env = sys.nframe(), inherit = FALSE))
     if(is.null(tempo.try.error)){
         tempo <- capture.output(str(data))
         tempo <- list("STRUCTURE" = noquote(matrix(tempo, dimnames = list(rep("", length(tempo)), "")))) # str() print automatically, ls.str() not but does not give the order of the data.frame
@@ -278,12 +284,18 @@ fun_info <- function(
         output[names(output) != "STRUCTURE"] <- lapply(X = output[names(output) != "STRUCTURE"], FUN = head, n = n, simplify = FALSE)
     }
     # output
+    # warning output
+    if(warn.print == TRUE & ! is.null(warn)){
+        on.exit(warning(paste0("FROM ", function.name, ":\n\n", warn), call. = FALSE))
+      }
+      on.exit(expr = options(warning.length = ini.warning.length), add = TRUE)
+    # end warning output
     if(warn.print == FALSE){
         output <- c(output, WARNING = warn)
     }else if(warn.print == TRUE & ! is.null(warn)){
         on.exit(warning(paste0("FROM ", function.name, ":\n\n", warn), call. = FALSE))
     }
-    on.exit(exp = options(warning.length = ini.warning.length), add = TRUE)
+    on.exit(expr = options(warning.length = ini.warning.length), add = TRUE)
     return(output)
     # end output
     # end main code
