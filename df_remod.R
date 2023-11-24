@@ -11,29 +11,29 @@
 #' @details 
 #' REQUIRED PACKAGES
 #' 
-#' none
+#' cuteDev
 #' 
 #' 
 #' REQUIRED FUNCTIONS FROM CUTE_LITTLE_R_FUNCTION
 #' 
-#' fun_check()
+#' arg_check()
 #' @examples
 #' obs <- data.frame(col1 = (1:4)*10, col2 = c("A", "B", "A", "A"), stringsAsFactors = TRUE) ; 
 #' obs ; 
-#' fun_df_remod(obs)
+#' df_remod(obs)
 #' 
 #' 
 #' obs <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE) ; 
 #' obs ; 
-#' fun_df_remod(obs, quanti.col.name = "quanti", quali.col.name = "quali")
+#' df_remod(obs, quanti.col.name = "quanti", quali.col.name = "quali")
 #' 
 #' 
 #' obs <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE) ; 
 #' rownames(obs) <- paste0("row", 1:4) ; 
 #' obs ;
-#' fun_df_remod(obs, quanti.col.name = "quanti", quali.col.name = "quali")
+#' df_remod(obs, quanti.col.name = "quanti", quali.col.name = "quali")
 #' @export
-fun_df_remod <- function(
+df_remod <- function(
         data, 
         quanti.col.name = "quanti", 
         quali.col.name = "quali"
@@ -50,9 +50,13 @@ fun_df_remod <- function(
     arg.names <- names(formals(fun = sys.function(sys.parent(n = 2)))) # names of all the arguments
     arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
+    # package checking
+    # check of lib.path
+    # end check of lib.path
+    
     # required function checking
     req.function <- c(
-        "fun_check"
+        "arg_check"
     )
     tempo <- NULL
     for(i1 in req.function){
@@ -68,6 +72,9 @@ fun_df_remod <- function(
     # reserved words (to avoid bugs)
     # end reserved words (to avoid bugs)
     
+    
+    
+    # argument primary checking
     # arg with no default values
     mandat.args <- c(
         "data"
@@ -78,28 +85,28 @@ fun_df_remod <- function(
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end arg with no default values
-    
-    # argument primary checking
-    # argument checking without fun_check()
+    # argument checking without arg_check()
     if( ! any(class(data) %in% "data.frame")){
         tempo.cat <- paste0("ERROR IN ", function.name, ": THE data ARGUMENT MUST BE A DATA FRAME")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
-    # end argument checking without fun_check()
-    # argument checking with fun_check()
+    # end argument checking without arg_check()
+    # argument checking with arg_check()
     arg.check <- NULL #
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- expression(arg.check <- c(arg.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
-    tempo <- fun_check(data = quanti.col.name, class = "character", length = 1, fun.name = function.name) ; eval(ee)
-    tempo <- fun_check(data = quali.col.name, class = "character", length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- arg_check(data = quanti.col.name, class = "character", length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- arg_check(data = quali.col.name, class = "character", length = 1, fun.name = function.name) ; eval(ee)
     if( ! is.null(arg.check)){
         if(any(arg.check, na.rm = TRUE) == TRUE){
             stop(paste0("\n\n================\n\n", paste(text.check[arg.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
         }
     }
-    # end argument checking with fun_check()
-    # source("C:/Users/Gael/Documents/Git_versions_to_use/debugging_tools_for_r_dev-v1.7/r_debugging_tools-v1.7.R") ; eval(parse(text = str_basic_arg_check_dev)) ; eval(parse(text = str_arg_check_with_fun_check_dev)) # activate this line and use the function (with no arguments left as NULL) to check arguments status and if they have been checked using fun_check()
+    # end argument checking with arg_check()
+    # check with r_debugging_tools
+    # source("C:/Users/yhan/Documents/Git_projects/debugging_tools_for_r_dev/r_debugging_tools.R") ; eval(parse(text = str_basic_arg_check_dev)) ; eval(parse(text = str_arg_check_with_fun_check_dev)) # activate this line and use the function (with no arguments left as NULL) to check arguments status and if they have been checked using arg_check()
+    # end check with r_debugging_tools
     # end argument primary checking
     
     # second round of checking and data preparation
@@ -139,9 +146,6 @@ fun_df_remod <- function(
     # reserved word checking
     # end reserved word checking
     # end second round of checking and data preparation
-    
-    # package checking
-    # end package checking
     
     # main code
     tempo.factor <- unlist(lapply(data, class))
@@ -198,6 +202,8 @@ fun_df_remod <- function(
         output.data<-data.frame(tempo, stringsAsFactors = TRUE, check.names = FALSE)
     }
     # output
+    # warning output
+    # end warning output
     return(output.data)
     # end output
     # end main code
