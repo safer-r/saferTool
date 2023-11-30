@@ -191,7 +191,11 @@ comp_2d <- function(
     # data1 = table(Exp1 = c("A", "A", "A", "B", "B", "B"), Exp2 = c("A1", "B1", "A1", "C1", "C1", "B1")) ; data2 = data.frame(A = 1:3, B= letters[1:3], stringsAsFactors = TRUE) # for function debugging
     # data1 = matrix(1:1e6, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; data2 = matrix((1:1e6)+1e6/5, ncol = 5, dimnames = list(NULL, LETTERS[1:5]))
     # function name
-    function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()")
+    ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
+    function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
+    if(function.name[1] == "::()"){
+        function.name <- function.name[3]
+    }
     arg.names <- names(formals(fun = sys.function(sys.parent(n = 2)))) # names of all the arguments
     arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
@@ -200,13 +204,9 @@ comp_2d <- function(
     # check of lib.path
     # end check of lib.path
 
-    # required function checking
-    # end required function checking
-    
-    # reserved words (to avoid bugs)
-    # end reserved words (to avoid bugs)
-    
-    
+    # check of the required function from the required packages
+    # end check of the required function from the required packages
+    # end package checking
     
     # argument primary checking
     # arg with no default values
@@ -221,22 +221,6 @@ comp_2d <- function(
     }
     # end arg with no default values
     # argument checking with arg_check()
-    if( ! (any(class(data1) %in% c("data.frame", "table")) | all(class(data1) %in% c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data1) %in% c("matrix", "data.frame", "table"))
-        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
-    }
-    if( ! (any(class(data2) %in% c("data.frame", "table")) | all(class(data2) %in% c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data2) %in% c("matrix", "data.frame", "table"))
-        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
-    }
-    if(all(class(data1) == "table") & length(dim(data1)) == 1L){ # class() cannot return NA
-        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
-    }
-    if(all(class(data2) == "table", na.rm = TRUE) & length(dim(data2)) == 1L){
-        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
-    }
     # end argument checking with arg_check()
     # check with r_debugging_tools
     # source("C:/Users/yhan/Documents/Git_projects/debugging_tools_for_r_dev/r_debugging_tools.R") ; eval(parse(text = str_basic_arg_check_dev))     # activate this line and use the function to check arguments status
@@ -274,6 +258,22 @@ comp_2d <- function(
     # end warning initiation
     
     # other checkings
+    if( ! (any(class(data1) %in% c("data.frame", "table")) | all(class(data1) %in% c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data1) %in% c("matrix", "data.frame", "table"))
+        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
+        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }
+    if( ! (any(class(data2) %in% c("data.frame", "table")) | all(class(data2) %in% c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data2) %in% c("matrix", "data.frame", "table"))
+        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
+        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }
+    if(all(class(data1) == "table") & length(dim(data1)) == 1L){ # class() cannot return NA
+        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION")
+        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }
+    if(all(class(data2) == "table", na.rm = TRUE) & length(dim(data2)) == 1L){
+        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION")
+        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }
     # end other checkings
     
     # reserved word checking to avoid bugs

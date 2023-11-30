@@ -58,7 +58,11 @@ comp_list <- function(
     # data1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) # for function debugging
     # data1 = list(a = 1:5, b = LETTERS[1:2]) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) # for function debugging
     # function name
-    function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()")
+    ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
+    function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
+    if(function.name[1] == "::()"){
+        function.name <- function.name[3]
+    }
     arg.names <- names(formals(fun = sys.function(sys.parent(n = 2)))) # names of all the arguments
     arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
@@ -67,12 +71,9 @@ comp_list <- function(
     # check of lib.path
     # end check of lib.path
 
-    # required function checking 
-    # end required function checking
-    
-   
-    
-   
+    # check of the required function from the required packages
+    # end check of the required function from the required packages
+    # end package checking
     
     # argument primary checking
     # arg with no default values
@@ -86,17 +87,10 @@ comp_list <- function(
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end arg with no default values
-    
-    if( ! any(class(data1) %in% "list")){
-        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT MUST BE A LIST")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
-    }
-    if( ! any(class(data2) %in% "list")){
-        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT MUST BE A LIST")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
-    }
+    # argument checking with arg_check()
+    # end argument checking with arg_check()
     # check with r_debugging_tools
-    # source("C:/Users/Gael/Documents/Git_versions_to_use/debugging_tools_for_r_dev-v1.7/r_debugging_tools-v1.7.R") ; eval(parse(text = str_basic_arg_check_dev)) # activate this line and use the function to check arguments status
+    # source("C:/Users/yhan/Documents/Git_projects/debugging_tools_for_r_dev/r_debugging_tools.R") ; eval(parse(text = str_basic_arg_check_dev)) # activate this line and use the function to check arguments status
     # end check with r_debugging_tools
     # end argument primary checking
     
@@ -131,6 +125,14 @@ comp_list <- function(
     # end warning initiation
     
     # other checkings
+    if( ! any(class(data1) %in% "list")){
+        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT MUST BE A LIST")
+        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }
+    if( ! any(class(data2) %in% "list")){
+        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT MUST BE A LIST")
+        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }
     # end other checkings
     
     # reserved word checking to avoid bugs

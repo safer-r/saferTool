@@ -69,22 +69,23 @@ comp_1d <- function(
     # DEBUGGING
     # data1 = 1:5 ; data2 = 1:5 ; names(data1) <- LETTERS[1:5] ; names(data2) <- LETTERS[1:5] # for function debugging
     # function name
-    function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()")
+    ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
+    function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
+    if(function.name[1] == "::()"){
+        function.name <- function.name[3]
+    }
     arg.names <- names(formals(fun = sys.function(sys.parent(n = 2)))) # names of all the arguments
     arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
+
     # end function name
     
     # package checking
     # check of lib.path
     # end check of lib.path
     
-    # required function checking
-    # end required function checking
-    
-    # reserved words (to avoid bugs)
-    # end reserved words (to avoid bugs)
-    
-    
+    # check of the required function from the required packages
+    # end check of the required function from the required packages
+    # end package checking
     
     # argument primary checking
     # arg with no default values
@@ -99,25 +100,9 @@ comp_1d <- function(
     }
     # end arg with no default values
     # argument checking with arg_check()
-    if( ! any(class(data1) %in% c("logical", "integer", "numeric", "character", "factor", "table"))){
-        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT MUST BE A NON NULL VECTOR, FACTOR OR 1D TABLE")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
-    }else if(all(class(data1) %in% "table")){
-        if(length(dim(data1)) > 1){
-            tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT MUST BE A 1D TABLE")
-            stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
-        }
-    }
-    if( ! any(class(data2) %in% c("logical", "integer", "numeric", "character", "factor", "table"))){
-        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT MUST BE A NON NULL VECTOR, FACTOR OR 1D TABLE")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
-    }else if(all(class(data2) %in% "table")){
-        if(length(dim(data2)) > 1){
-            tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT MUST BE A 1D TABLE")
-            stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
-        }
-    }
     # end argument checking with arg_check()
+    
+ 
     # check with r_debugging_tools
     # source("C:/Users/yhan/Documents/Git_projects/debugging_tools_for_r_dev/r_debugging_tools.R") ; eval(parse(text = str_basic_arg_check_dev)) # activate this line and use the function to check arguments status
     # end check with r_debugging_tools
@@ -154,10 +139,28 @@ comp_1d <- function(
     # end warning initiation
     
     # other checkings
+    if( ! any(class(data1) %in% c("logical", "integer", "numeric", "character", "factor", "table"))){
+        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT MUST BE A NON NULL VECTOR, FACTOR OR 1D TABLE")
+        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }else if(all(class(data1) %in% "table")){
+        if(length(dim(data1)) > 1){
+            tempo.cat <- paste0("ERROR IN ", function.name, ": THE data1 ARGUMENT MUST BE A 1D TABLE")
+            stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+        }
+    }
+    if( ! any(class(data2) %in% c("logical", "integer", "numeric", "character", "factor", "table"))){
+        tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT MUST BE A NON NULL VECTOR, FACTOR OR 1D TABLE")
+        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }else if(all(class(data2) %in% "table")){
+        if(length(dim(data2)) > 1){
+            tempo.cat <- paste0("ERROR IN ", function.name, ": THE data2 ARGUMENT MUST BE A 1D TABLE")
+            stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+        }
+    }
     # end other checkings
     
-    # reserved word checking
-    # end reserved word checking
+    # reserved words (to avoid bugs)
+    # end reserved words (to avoid bugs)
     # end second round of checking and data preparation
 
     # main code
