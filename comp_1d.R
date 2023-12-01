@@ -76,7 +76,6 @@ comp_1d <- function(
     }
     arg.names <- names(formals(fun = sys.function(sys.parent(n = 2)))) # names of all the arguments
     arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
-
     # end function name
     
     # package checking
@@ -101,7 +100,6 @@ comp_1d <- function(
     # end arg with no default values
     # argument checking with arg_check()
     # end argument checking with arg_check()
-    
  
     # check with r_debugging_tools
     # source("C:/Users/yhan/Documents/Git_projects/debugging_tools_for_r_dev/r_debugging_tools.R") ; eval(parse(text = str_basic_arg_check_dev)) # activate this line and use the function to check arguments status
