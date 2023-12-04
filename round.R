@@ -100,8 +100,8 @@ round <- function(
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- expression(arg.check <- c(arg.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
     tempo <- cuteDev::arg_check(data = data, class = "vector", na.contain = TRUE, fun.name = function.name) ; eval(ee)
-    tempo <- arg_check(data = dec.nb, class = "vector", typeof = "integer", length = 1, double.as.integer.allowed = TRUE, neg.values = FALSE, fun.name = function.name) ; eval(ee)
-    tempo <- arg_check(data = after.lead.zero, class = "logical", length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- cuteDev::arg_check(data = dec.nb, class = "vector", typeof = "integer", length = 1, double.as.integer.allowed = TRUE, neg.values = FALSE, fun.name = function.name) ; eval(ee)
+    tempo <- cuteDev::arg_check(data = after.lead.zero, class = "logical", length = 1, fun.name = function.name) ; eval(ee)
     if( ! is.null(arg.check)){
         if(any(arg.check, na.rm = TRUE) == TRUE){
             stop(paste0("\n\n================\n\n", paste(text.check[arg.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
