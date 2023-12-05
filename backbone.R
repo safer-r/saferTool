@@ -1,37 +1,25 @@
-#' @title sum
+#' @title .arguments_check
 #' @description
-#' Calculate the sum of numeric and logical value.
+#' Check if 1) the types of input are correct and 2) an input is missed.
 #' @param x Numeric or logical vector or matrix or numeric table where find the initial values to calculate.
 #' @param na.rm Single logical value. Should missing values (NA and NaN) be removed ?
 #' @param finite Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.
-#' @returns The sum of the given arguments. Returns NA if the input contains NA and the argument na.rm = TRUE, else returns a value.
-#' @details
-#' REQUIRED PACKAGES
-#' 
-#' cuteDev
-#' 
-#' 
-#' REQUIRED FUNCTIONS FROM CUTE_LITTLE_R_FUNCTION
-#' 
-#' arg_check()
+#' @returns An error message if the type of input is not correct, or input missed, nothing otherwise.
 #' @examples
-#' vec <- c(1:3) ; sum(x = vec)
+#' \dontrun{
+#' # Example that shouldn't be run because this is an internal function
+#' .arguments_check(x = 1:3, na.rm = TRUE)
 #' 
-#' vec <- c(1,3,5,TRUE) ; sum(x = vec)
-#' 
-#' 
-#' 
-#' # This example returns an error because of the character in the vector
-#' # vec <- c(1,3,5,TRUE,"apple") ; sum(x = vec)
-#' @importFrom cuteDev arg_check
-#' @export
-sum <- function(
+#' .arguments_check(x = c(Inf, NA), na.rm = TRUE, finite = TRUE)
+#' @keywords internal
+#' @rdname internal_function_backbone
+
+
+.arguments_check <- function(
         x,
         na.rm = FALSE,
         finite = FALSE
 ){
-    # DEBUGGING
-    # vec <- c(1,3,5,TRUE) ; sum(x = vec) # for function debugging
     # function name
     ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
     function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
@@ -128,15 +116,6 @@ sum <- function(
     # end reserved words (to avoid bugs)
     # end second round of checking and data preparation
     
-    # main code
-    if(finite == TRUE){
-    x <- x[ ! x %in% c(Inf, -Inf)]
-    }
-    output <- base::sum(x, na.rm = na.rm)
-    # end main code
-    # output
-    # warning output
-    # end warning output
-    return(output)
-    # end output
 }
+
+
