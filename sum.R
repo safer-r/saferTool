@@ -2,7 +2,8 @@
 #' @description
 #' Calculate the sum of numeric and logical value.
 #' @param x Numeric or logical vector or matrix or numeric table where find the initial values to calculate.
-#' @param na.rm Single logical value. Should missing values be removed ?
+#' @param na.rm Single logical value. Should missing values (NA and NaN) be removed ?
+#' @param finite Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.
 #' @returns The sum of the values in the vector. Returns NA if the input contains NA and the argument na.rm = TRUE, else returns a value.
 #' @details
 #' REQUIRED PACKAGES
@@ -26,7 +27,8 @@
 #' @export
 sum <- function(
         x,
-        na.rm = FALSE
+        na.rm = FALSE,
+        finite = FALSE
 ){
     # DEBUGGING
     # vec <- c(1,3,5,TRUE) ; sum(x = vec) # for function debugging
@@ -43,8 +45,8 @@ sum <- function(
     # check of lib.path
     # end check of lib.path
     # check of the required function from the required packages
-    .pack_and_function_check <- function(
-        req.package = c(
+    .pack_and_function_check(
+        fun = c(
             "cuteDev::arg_check"
         ),
         lib.path = NULL,
@@ -70,14 +72,15 @@ sum <- function(
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- expression(argum.check = c(argum.check, tempo$problem) , text.check = c(text.check, tempo$text) , checked.arg.names = c(checked.arg.names, tempo$object.name))
     tempo <- cuteDev::arg_check(data = na.rm, class = "vector", typeof = "logical", length = 1, fun.name = function.name) ; eval(ee)
-    
+    tempo <- cuteDev::arg_check(data = finite, class = "vector", typeof = "logical", length = 1, fun.name = function.name) ; eval(ee)
     tempo1 <- cuteDev::arg_check(data = x, class = "vector", mode = "numeric", na.contain = TRUE, fun.name = function.name)
     tempo2 <- cuteDev::arg_check(data = x, class = "vector", mode = "logical", na.contain = TRUE, fun.name = function.name)
     tempo3 <- cuteDev::arg_check(data = x, class = "matrix", mode = "numeric", na.contain = TRUE, fun.name = function.name)
     tempo4 <- cuteDev::arg_check(data = x, class = "matrix", mode = "logical", na.contain = TRUE, fun.name = function.name)
     tempo5 <- cuteDev::arg_check(data = x, class = "table", mode = "numeric", na.contain = TRUE, fun.name = function.name)
+    
     if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE & tempo5$problem == TRUE){
-        tempo.cat <- paste0("ERROR IN ", function.name, ": x ARGUMENT MUST BE A NUMERIC OR LOGICAL VECTOR, MATRIX OR TABLE")
+        tempo.cat <- paste0("ERROR IN ", function.name, ": x ARGUMENT MUST BE A VECTOR, MATRIX OR TABLE OF NUMERIC OR LOGICAL VALUES")
         text.check <- c(text.check, tempo.cat)
         argum.check <- c(argum.check, TRUE)
     }
@@ -105,7 +108,8 @@ sum <- function(
     # management of NULL arguments
     tempo.arg <- c(
         "x",
-        "na.rm"
+        "na.rm",
+        "finite"
     )
     tempo.log <- sapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = is.null)
     if(any(tempo.log) == TRUE){# normally no NA with is.null()
@@ -125,29 +129,14 @@ sum <- function(
     # end second round of checking and data preparation
     
     # main code
-    result <- 0
-    length.arg <- length(x)
-    if(tempo1 == TRUE | tempo2 == TRUE | tempo3 == TRUE | tempo4 == TRUE){
-        for(i in 1:length.arg){
-            if(is.null(x[i])){
-                x[i] <- 0
-            }
-            if((!is.na(x[i])) | (na.rm == FALSE && is.na(x[i]))){
-                result <- result + x[i]
-            }
-        }
-    }else{
-        name.arg <- as.numeric(names(x))
-        elements.arg <- as.numeric(name.arg)
-        for(i in 1:6){
-            if (!(is.na(name.arg[i]) && na.rm == TRUE))
-                result <- result + name.arg[i] * elements.arg[i]
-        }
+    if(finite == TRUE){
+    x <- x[ ! x %in% c(Inf, -Inf)]
     }
+    output <- base::sum(x, na.rm = na.rm)
     # end main code
     # output
     # warning output
     # end warning output
-    return(result)
+    return(output)
     # end output
 }
