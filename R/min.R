@@ -8,12 +8,12 @@
 #' @details
 #' REQUIRED PACKAGES
 #' 
-#' cuteDev
+#' none
 #' 
 #' 
 #' REQUIRED FUNCTIONS FROM CUTE_LITTLE_R_FUNCTION
 #' 
-#' arg_check()
+#' none
 #' @examples
 #' vec <- c(1:3) ; min(x = vec)
 #' 
@@ -22,7 +22,6 @@
 #' 
 #' # This example returns an error because of the character in the vector
 #' # vec <- c(1,3,5,TRUE,"apple") ; min(x = vec)
-#' @importFrom cuteDev arg_check
 #' @export
 min <- function(
         x,

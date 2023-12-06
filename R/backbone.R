@@ -12,6 +12,7 @@
 #' 
 #' .arguments_check(x = c(Inf, NA), na.rm = TRUE, finite = TRUE)
 #' @keywords internal
+#' @importFrom cuteDev arg_check
 #' @rdname internal_function_backbone
 
 
