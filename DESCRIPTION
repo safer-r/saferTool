@@ -13,3 +13,5 @@ Maintainer: Gaël Millot <gael.millot@pasteur.fr>
 Description: Functions for object analysis and object modification.
 License: GPL-3
 RoxygenNote: 7.2.3
+Imports: 
+    cuteDev
