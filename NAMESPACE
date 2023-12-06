@@ -1,0 +1,2 @@
+export("comp_1d", "comp_2d", "comp_list", "df_remod", "head", "info", "max", "min", "name_change", "range", "round",
+       "sum", "tail")
