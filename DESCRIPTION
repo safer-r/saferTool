@@ -1,6 +1,6 @@
 Package: cuteTool
 Type: Package
-Title: Basis functions for object analysis.
+Title: Basis functions for object analysis
 Version: 1.0
 Date: 2023-12-06
 Authors@R: c(
