@@ -17,11 +17,14 @@
 #' @examples
 #' vec <- c(1:3) ; max(x = vec)
 #' 
-#' vec <- c(1,3,5,TRUE) ; max(x = vec)
+#' vec <- c(1,3,5,TRUE, FALSE, NA) ; max(x = vec, na.rm = TRUE)
 #' 
 #' 
 #' # This example returns an error because of the character in the vector
 #' # vec <- c(1,3,5,TRUE,"apple") ; max(x = vec)
+#' 
+#' # This example returns an error because of the argument na.rm, when the function max() of the package base doesn't return an error
+#' # vec <- c(1,3,5,TRUE) ; max(x = vec, na.rn = TRUE)
 #' @export
 max <- function(
         x,
