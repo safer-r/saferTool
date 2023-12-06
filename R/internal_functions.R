@@ -6,10 +6,12 @@
 #' @param external.function.name Name of the function using the .pack_and_function_check() function.
 #' @returns An error message if at least one of the checked packages is missing in lib.path, or if at least one of the checked functions is missing in the required package, nothing otherwise.
 #' @examples
-#' # .pack_and_function_check(fun = "ggplot2::notgood") # commented because this example returns an error
 #' \dontrun{
 #' # Example that shouldn't be run because this is an internal function
 #' .pack_and_function_check(fun = c("ggplot2::geom_point", "grid::gpar"))
+#' 
+#' # This example returns an error
+#' .pack_and_function_check(fun = "ggplot2::notgood") 
 #' }
 #' @keywords internal
 #' @rdname internal_function

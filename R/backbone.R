@@ -11,6 +11,7 @@
 #' .arguments_check(x = 1:3, na.rm = TRUE)
 #' 
 #' .arguments_check(x = c(Inf, NA), na.rm = TRUE, finite = TRUE)
+#' }
 #' @keywords internal
 #' @importFrom cuteDev arg_check
 #' @rdname internal_function_backbone
