@@ -28,7 +28,7 @@
 #' obs2 <- c("A", "A_modif1", "C") ; 
 #' name_change(obs1, obs2) 
 #' # the function checks that the new names are neither in obs1 nor in obs2 (increment the number after the added string)
-#' @importFrom cuteDev name_change
+#' @importFrom cuteDev arg_check
 #' @export
 name_change <- function(
         data1, 

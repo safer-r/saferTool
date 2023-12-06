@@ -19,4 +19,12 @@ An error message if the type of input is not correct, or input missed, nothing o
 \description{
 Check if 1) the types of input are correct and 2) an input is missed.
 }
+\examples{
+\dontrun{
+# Example that shouldn't be run because this is an internal function
+.arguments_check(x = 1:3, na.rm = TRUE)
+
+.arguments_check(x = c(Inf, NA), na.rm = TRUE, finite = TRUE)
+}
+}
 \keyword{internal}
