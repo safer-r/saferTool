@@ -17,7 +17,7 @@
 #' @examples
 #' vec <- c(1:3) ; min(x = vec)
 #' 
-#' vec <- c(1,3,5,TRUE) ; min(x = vec)
+#' vec <- c(1, 3, 5, TRUE, FALSE) ; min(x = vec)
 #' 
 #' 
 #' # This example returns an error because of the character in the vector
