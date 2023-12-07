@@ -1,4 +1,6 @@
-name: rworkflows
+  - name: rworkflows
+    uses: neurogenomics/rworkflows@v1
+            
 'on':
   push:
     branches:
