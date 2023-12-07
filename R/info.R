@@ -244,9 +244,9 @@ info <- function(
         tempo <- list("SUMMARY" = summary(data))
         output <- c(output, tempo)
     }
-    tempo.try.error <- cuteDev::get_message(data = "noquote(matrix(capture.output(str(data))))", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
+    tempo.try.error <- cuteDev::get_message(data = "noquote(matrix(base::capture.output(base::str(data))))", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
     if(is.null(tempo.try.error)){
-        tempo <- capture.output(str(data))
+        tempo <- base::capture.output(base::str(data))
         tempo <- list("STRUCTURE" = noquote(matrix(tempo, dimnames = list(rep("", length(tempo)), "")))) # str() print automatically, ls.str() not but does not give the order of the data.frame
         output <- c(output, tempo)
     }
