@@ -45,8 +45,8 @@ tail <- function(
     # check of lib.path
     # end check of lib.path
     # check of the required function from the required packages
-    .pack_and_function_check <- function(
-        req.package = c(
+    .pack_and_function_check(
+        fun = c(
             "cuteDev::arg_check"
         ),
         lib.path = NULL,
@@ -67,7 +67,7 @@ tail <- function(
     }
     # end arg with no default values
     
-# argument checking with arg_check()
+    # argument checking with arg_check()
     argum.check <- NULL #
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools

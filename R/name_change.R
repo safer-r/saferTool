@@ -50,10 +50,10 @@ name_change <- function(
     # package checking
     # check of lib.path
     # end check of lib.path
-
-   # check of the required function from the required packages
-    .pack_and_function_check <- function(
-        req.package = c(
+    
+    # check of the required function from the required packages
+    .pack_and_function_check(
+        fun = c(
             "cuteDev::arg_check"
         ),
         lib.path = NULL,
@@ -61,7 +61,7 @@ name_change <- function(
     )
     # end check of the required function from the required packages
     # end package checking
-
+    
     # argument primary checking
     # arg with no default values
     mandat.args <- c(
@@ -128,7 +128,7 @@ name_change <- function(
     # reserved words (to avoid bugs)
     # end reserved words (to avoid bugs)
     # end second round of checking and data preparation
-
+    
     
     # package checking
     # end package checking

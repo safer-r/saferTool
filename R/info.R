@@ -77,19 +77,19 @@ info <- function(
     # package checking
     # check of lib.path
     # end check of lib.path
-
+    
     # check of the required function from the required packages
-    .pack_and_function_check <- function(
-        req.package = c(
-            "cuteDev::arg_check", 
-            "cuteDev::get_message()"
+    .pack_and_function_check(
+        fun = c(
+            "cuteDev::arg_check",
+            "cuteDev::get_message"
         ),
         lib.path = NULL,
         external.function.name = function.name
     )
     # end check of the required function from the required packages
     # end package checking
-
+    
     # argument primary checking
     # arg with no default values
     mandat.args <- c(
@@ -168,7 +168,7 @@ info <- function(
     # reserved words (to avoid bugs)
     # end reserved words (to avoid bugs)
     # end second round of checking and data preparation
-
+    
     # main code
     # new environment
     env.name <- paste0("env", as.numeric(Sys.time()))
@@ -285,8 +285,8 @@ info <- function(
     # warning output
     if(warn.print == TRUE & ! is.null(warn)){
         on.exit(warning(paste0("FROM ", function.name, ":\n\n", warn), call. = FALSE))
-      }
-      on.exit(expr = options(warning.length = ini.warning.length), add = TRUE)
+    }
+    on.exit(expr = options(warning.length = ini.warning.length), add = TRUE)
     # end warning output
     if(warn.print == FALSE){
         output <- c(output, WARNING = warn)

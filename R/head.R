@@ -33,7 +33,7 @@ head <- function(
     # DEBUGGING
     # data1 = matrix(1:30, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) # for function debugging
     # function name
-   ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
+    ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
     function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
     if(function.name[1] == "::()"){
         function.name <- function.name[3]
@@ -45,10 +45,10 @@ head <- function(
     # package checking
     # check of lib.path
     # end check of lib.path
-
+    
     # check of the required function from the required packages
-    .pack_and_function_check <- function(
-        req.package = c(
+    .pack_and_function_check(
+        fun = c(
             "cuteDev::arg_check"
         ),
         lib.path = NULL,
@@ -123,7 +123,7 @@ head <- function(
     # reserved words (to avoid bugs)
     # end reserved words (to avoid bugs)
     # end second round of checking and data preparation
-
+    
     # main code
     # output
     # warning output

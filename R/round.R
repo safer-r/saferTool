@@ -71,8 +71,8 @@ round <- function(
     # end check of lib.path
 
     # check of the required function from the required packages
-    .pack_and_function_check <- function(
-        req.package = c(
+    .pack_and_function_check(
+        fun = c(
             "cuteDev::arg_check"
         ),
         lib.path = NULL,
