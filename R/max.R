@@ -32,6 +32,8 @@ max <- function(
         finite = FALSE
         
 ){
+    # DEBUGGING
+    # vec <- c(1,3,5,TRUE) ; max(x = vec) # for function debugging
     .arguments_check(
         x = x,
         na.rm = na.rm,
