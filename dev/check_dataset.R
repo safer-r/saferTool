@@ -40,6 +40,8 @@ l2 <- list(vec6) # list with only NA
 df2 <- as.data.frame(mat3) # dataframe with only NA
 
 
+angle1 <- list(-90, 0, 45, 90, 180) # vector of positive integers
+log1 <- list("no", "log2", "log10") # vector of characters
 
 
 t25_20201108 <- list( # test list
@@ -52,16 +54,27 @@ t25_20201108 <- list( # test list
     vec3, 
     vec4, 
     vec5, 
+    vec6,
+    vec7,
+    vec8,
+    vec9,
+    vec10,
+    vec11,
     cpx1, 
     mat1, 
     mat2, 
+    mat3,
     df1, 
-    l1, 
+    df2,
+    l1,
+    l2,
     fac1, 
     tab1, 
     tab2, 
     exp1, 
     name1, 
+    angle1,
+    log1,
     fun1, 
     fun2, 
     fun3, 
@@ -123,6 +136,8 @@ env1 <- new.env() # environment
 s4.1 <- show # S4 object
 call1 <- call("call1") # object of class "call", mode "call" &  type "language"
 
+
+
 t26_20201124 <- list( # test list
     NULL, 
     NA, 
@@ -139,11 +154,13 @@ t26_20201124 <- list( # test list
     df1, 
     df2, 
     l1, 
-    fac1, 
+    fac1,
     tab1, 
     tab2, 
     exp1, 
     name1, 
+    angle1,
+    log1,
     fun1, 
     fun2, 
     fun3, 
