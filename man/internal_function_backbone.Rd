@@ -4,7 +4,7 @@
 \alias{.arguments_check}
 \title{.arguments_check}
 \usage{
-.arguments_check(x, na.rm = FALSE, finite = FALSE)
+.arguments_check(x, na.rm = FALSE, finite = FALSE, external.function.name)
 }
 \arguments{
 \item{x}{Numeric or logical vector or matrix or numeric table where find the initial values to calculate.}
@@ -12,6 +12,8 @@
 \item{na.rm}{Single logical value. Should missing values (NA and NaN) be removed ?}
 
 \item{finite}{Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.}
+
+\item{external.function.name}{Name of the function using the .arguments_check() function.}
 }
 \value{
 An error message if the type of input is not correct, or input missed, nothing otherwise.
