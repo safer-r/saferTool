@@ -47,7 +47,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.arguments_check</span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span>, finite <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.arguments_check</span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span>, finite <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">external.function.name</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -62,6 +62,10 @@
 
 <dt>finite</dt>
 <dd><p>Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.</p></dd>
+
+
+<dt>external.function.name</dt>
+<dd><p>Name of the function using the .arguments_check() function.</p></dd>
 
 </dl></div>
     <div id="value">
