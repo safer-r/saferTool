@@ -27,7 +27,6 @@ min <- function(
         x,
         na.rm = FALSE,
         finite = FALSE,
-        warn = TRUE
 ){
     # DEBUGGING
     # vec <- c(1,3,5,TRUE, -Inf,NA) ; min(x = vec,na.rm = TRUE, finite = FALSE) # for function debugging
@@ -35,7 +34,6 @@ min <- function(
         x = x,
         na.rm = na.rm,
         finite = finite,
-        warn = warn
     )
     # main code
     if(finite == TRUE){

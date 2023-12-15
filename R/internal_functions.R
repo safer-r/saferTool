@@ -129,6 +129,7 @@
 #' @param x Numeric or logical vector or matrix or numeric table where find the initial values to calculate.
 #' @param na.rm Single logical value. Should missing values (NA and NaN) be removed ?
 #' @param finite Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.
+#' @param external.function.name Name of the function using the .arguments_check() function.
 #' @returns An error message if the type of input is not correct, or input missed, nothing otherwise.
 #' @examples
 #' \dontrun{
@@ -144,7 +145,7 @@
         x,
         na.rm = FALSE,
         finite = FALSE,
-        external.function.name,
+        external.function.name
 ){
     # function name
     ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
