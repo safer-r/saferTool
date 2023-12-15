@@ -26,14 +26,14 @@
 min <- function(
         x,
         na.rm = FALSE,
-        finite = FALSE,
+        finite = FALSE
 ){
     # DEBUGGING
     # vec <- c(1,3,5,TRUE, -Inf,NA) ; min(x = vec,na.rm = TRUE, finite = FALSE) # for function debugging
     .arguments_check(
         x = x,
         na.rm = na.rm,
-        finite = finite,
+        finite = finite
     )
     # main code
     if(finite == TRUE){
