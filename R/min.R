@@ -43,9 +43,6 @@ min <- function(
     # end main code
     # output
     # warning output
-    if(warn == TRUE){
-        on.exit(warning(paste0("From ", function.name, ": not the classical function from base::", function.name, "() used."), call. = FALSE)
-    }
     # end warning output
     return(output)
     # end output
