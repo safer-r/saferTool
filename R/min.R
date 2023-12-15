@@ -26,15 +26,16 @@
 min <- function(
         x,
         na.rm = FALSE,
-        finite = FALSE
-        
+        finite = FALSE,
+        warn = TRUE
 ){
     # DEBUGGING
     # vec <- c(1,3,5,TRUE, -Inf,NA) ; min(x = vec,na.rm = TRUE, finite = FALSE) # for function debugging
     .arguments_check(
         x = x,
         na.rm = na.rm,
-        finite = finite
+        finite = finite,
+        warn = warn
     )
     # main code
     if(finite == TRUE){
@@ -44,6 +45,9 @@ min <- function(
     # end main code
     # output
     # warning output
+    if(warn == TRUE){
+        on.exit(warning(paste0("From ", function.name, ": not the classical function from base::", function.name, "() used."), call. = FALSE)
+    }
     # end warning output
     return(output)
     # end output

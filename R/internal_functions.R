@@ -143,7 +143,8 @@
 .arguments_check <- function(
         x,
         na.rm = FALSE,
-        finite = FALSE
+        finite = FALSE,
+        external.function.name,
 ){
     # function name
     ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
@@ -236,6 +237,7 @@
     # code that protects set.seed() in the global environment
     # end code that protects set.seed() in the global environment
     # warning initiation
+    
     # end warning initiation
     # other checkings
     # end other checkings

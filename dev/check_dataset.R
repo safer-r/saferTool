@@ -35,13 +35,19 @@ vec8 <- c(0, 12.55, 1.5) # vector with positive floats and 0
 vec9 <- c(-1.6,0, 7.5) # vector with floats and 0
 vec10 <- c(-1.6, -12.5, -0.8, 0) # vector with negative floats and 0
 vec11 <- c(-1.6, -12.5, -0.8) # vector with negative floats
+vec12 <- 1:3 # vector with positive integers
+vec13 <- 0:3 # vector with positive integers and 0
+vec14 <- -3:0 # vector with negative integers and 0
 mat3 <- matrix(vec6) # matix with only NA
 l2 <- list(vec6) # list with only NA
 df2 <- as.data.frame(mat3) # dataframe with only NA
-
+fac2 <- factor(rep(NA,2)) # factor with only NA
+tab3 <- table(fac2) # 1D table with only NA
+tab4 <- table(fac2, fac2) # 2D table with only NA
 
 angle1 <- list(-90, 0, 45, 90, 180) # vector of positive integers
 log1 <- list("no", "log2", "log10") # vector of characters
+logic1 <- list(TRUE, FALSE) # vector of logic
 
 
 t25_20201108 <- list( # test list
@@ -60,6 +66,9 @@ t25_20201108 <- list( # test list
     vec9,
     vec10,
     vec11,
+    vec12,
+    vec13,
+    vec14,
     cpx1, 
     mat1, 
     mat2, 
@@ -69,12 +78,16 @@ t25_20201108 <- list( # test list
     l1,
     l2,
     fac1, 
+    fac2,
     tab1, 
     tab2, 
+    tab3,
+    tab4,
     exp1, 
     name1, 
     angle1,
     log1,
+    logic1,
     fun1, 
     fun2, 
     fun3, 
