@@ -11,7 +11,7 @@
 #' none
 #' 
 #' 
-#' REQUIRED FUNCTIONS FROM CUTE_LITTLE_R_FUNCTION
+#' REQUIRED FUNCTIONS FROM THE cute PACKAGE
 #' 
 #' none
 #' @examples
@@ -34,7 +34,8 @@ sum <- function(
      .arguments_check(
         x = x,
         na.rm = na.rm,
-        finite = finite
+        finite = finite, 
+        external.function.name = function.name
     )
     
     # main code
