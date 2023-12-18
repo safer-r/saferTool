@@ -19,6 +19,11 @@ An error message if at least one of the checked packages is missing in lib.path,
 \description{
 Check if 1) required functions are present in required packages and 2) required packages are installed locally.
 }
+\details{
+WARNING
+
+arguments of the .pack_and_function_check() function are not checked, so use carefully inside other functions
+}
 \examples{
 \dontrun{
 # Example that shouldn't be run because this is an internal function

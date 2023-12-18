@@ -192,7 +192,7 @@ df_remod <- function(
         if(class(data[, 1]) == "character"){
             data <- cbind(data[2], data[1], stringsAsFactors = TRUE)
         }
-        nc.max <- max(table(data[, 2])) # effectif maximum des classes
+        nc.max <- base::max(table(data[, 2])) # effectif maximum des classes
         nb.na <- nc.max - table(data[,2]) # nombre de NA à ajouter pour réaliser la data frame
         tempo<-split(data[, 1], data[, 2])
         for(i in 1:length(tempo)){tempo[[i]] <- append(tempo[[i]], rep(NA, nb.na[i]))} # des NA doivent être ajoutés lorsque les effectifs sont différents entre les classes. C'est uniquement pour que chaque colonne ait le même nombre de lignes

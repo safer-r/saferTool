@@ -4,7 +4,7 @@
 \alias{.arguments_check}
 \title{.arguments_check}
 \usage{
-.arguments_check(x, na.rm = FALSE, finite = FALSE, external.function.name)
+.arguments_check(x, na.rm, finite, external.function.name)
 }
 \arguments{
 \item{x}{Numeric or logical vector or matrix or numeric table where find the initial values to calculate.}
@@ -20,6 +20,11 @@ An error message if the type of input is not correct, or input missed, nothing o
 }
 \description{
 Check if 1) the types of input are correct and 2) an input is missed.
+}
+\details{
+WARNING
+
+arguments of the .arguments_check() function are not checked, so use carefully inside other functions
 }
 \examples{
 \dontrun{

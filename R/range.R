@@ -31,10 +31,17 @@ range <- function(
 ){
     # DEBUGGING
     # vec <- c(1,3,5,TRUE, Inf) ; range(x = vec, finite = TRUE) # for function debugging
+    # function name
+    function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
+    if(function.name[1] == "::()"){
+        function.name <- function.name[3]
+    }
+    # end function name
     .arguments_check(
         x = x,
         na.rm = na.rm,
-        finite = finite
+        finite = finite,
+        external.function.name = function.name
     )
     # main code
     output <- base::range(x, na.rm = na.rm, finite = finite)
@@ -44,4 +51,4 @@ range <- function(
     # end warning output
     return(output)
     # end output
-    }
+}

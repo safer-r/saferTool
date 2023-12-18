@@ -97,7 +97,7 @@ info <- function(
     )
     tempo <- eval(parse(text = paste0("c(missing(", paste0(mandat.args, collapse = "),missing("), "))")))
     if(any(tempo)){ # normally no NA for missing() output
-        tempo.cat <- paste0("ERROR IN ", function.name, "\nFOLLOWING ARGUMENT", ifelse(sum(tempo, na.rm = TRUE) > 1, "S HAVE", " HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", paste0(mandat.args, collapse = "\n"))
+        tempo.cat <- paste0("ERROR IN ", function.name, "\nFOLLOWING ARGUMENT", ifelse(base::sum(tempo, na.rm = TRUE) > 1, "S HAVE", " HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", paste0(mandat.args, collapse = "\n"))
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end arg with no default values
@@ -128,7 +128,7 @@ info <- function(
         tempo.arg <- names(arg.user.setting) # values provided by the user
         tempo.log <- suppressWarnings(sapply(lapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = is.na), FUN = any)) & lapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = length) == 1L # no argument provided by the user can be just NA
         if(any(tempo.log) == TRUE){
-            tempo.cat <- paste0("ERROR IN ", function.name, "\n", ifelse(sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS", "THIS ARGUMENT"), " CANNOT JUST BE NA:", paste0(tempo.arg[tempo.log], collapse = "\n"))
+            tempo.cat <- paste0("ERROR IN ", function.name, "\n", ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS", "THIS ARGUMENT"), " CANNOT JUST BE NA:", paste0(tempo.arg[tempo.log], collapse = "\n"))
             stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
         }
     }
@@ -141,7 +141,7 @@ info <- function(
     )
     tempo.log <- sapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = is.null)
     if(any(tempo.log) == TRUE){# normally no NA with is.null()
-        tempo.cat <- paste0("ERROR IN ", function.name, ":\n", ifelse(sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS\n", "THIS ARGUMENT\n"), paste0(tempo.arg[tempo.log], collapse = "\n"),"\nCANNOT BE NULL")
+        tempo.cat <- paste0("ERROR IN ", function.name, ":\n", ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS\n", "THIS ARGUMENT\n"), paste0(tempo.arg[tempo.log], collapse = "\n"),"\nCANNOT BE NULL")
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end management of NULL arguments
@@ -198,11 +198,11 @@ info <- function(
         output <- c(output, tempo)
     }
     if(all(typeof(data) %in% c("integer", "numeric", "double")) & ! any(class(data) %in% "factor")){ # all() without na.rm -> ok because typeof(NA) is "logical" # any() without na.rm -> ok because class(NA) is "logical"
-        tempo <- list("INF.NB" = sum(is.infinite(data)))
+        tempo <- list("INF.NB" = base::sum(is.infinite(data)))
         output <- c(output, tempo)
-        tempo <- list("RANGE" = range(data[ ! is.infinite(data)], na.rm = TRUE))
+        tempo <- list("RANGE" = base::range(data[ ! is.infinite(data)], na.rm = TRUE))
         output <- c(output, tempo)
-        tempo <- list("SUM" = sum(data[ ! is.infinite(data)], na.rm = TRUE))
+        tempo <- list("SUM" = base::sum(data[ ! is.infinite(data)], na.rm = TRUE))
         output <- c(output, tempo)
         tempo <- list("MEAN" = mean(data[ ! is.infinite(data)], na.rm = TRUE))
         output <- c(output, tempo)
@@ -210,7 +210,7 @@ info <- function(
     if(all(typeof(data) %in% c("logical", "integer", "double", "complex", "character", "list"))){ # all() without na.rm -> ok because typeof(NA) is "logical"
         tempo.try.error <- cuteDev::get_message(data = "is.na(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
         if(is.null(tempo.try.error)){
-            tempo <- list("NA.NB" = sum(is.na(data)))
+            tempo <- list("NA.NB" = base::sum(is.na(data)))
             output <- c(output, tempo)
         }
     }
