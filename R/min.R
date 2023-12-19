@@ -30,6 +30,9 @@ min <- function(
 ){
     # DEBUGGING
     # vec <- c(1,3,5,TRUE, -Inf,NA) ; x = vec ; na.rm = TRUE ; finite = FALSE # for function debugging
+    # package name
+    package.name <- "cuteTool"
+    # end package name
     # function name
     function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
     if(function.name[1] == "::()"){
