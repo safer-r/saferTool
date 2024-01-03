@@ -47,7 +47,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.arguments_check</span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span>, finite <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">external.function.name</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">.arguments_check</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span>, <span class="va">finite</span>, <span class="va">external.function.name</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -73,6 +73,11 @@
     
 
 <p>An error message if the type of input is not correct, or input missed, nothing otherwise.</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>WARNING</p>
+<p>arguments of the .arguments_check() function are not checked, so use carefully inside other functions</p>
     </div>
 
     <div id="ref-examples">
