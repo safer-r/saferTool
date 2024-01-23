@@ -1,4 +1,4 @@
-#' @title sum
+#' @title sum2
 #' @description
 #' Calculate the sum of numeric and logical value.
 #' @param x Numeric or logical vector or matrix or numeric table where find the initial values to calculate.
@@ -15,22 +15,22 @@
 #' 
 #' none
 #' @examples
-#' vec <- c(1:3) ; sum(x = vec)
+#' vec <- c(1:3) ; sum2(x = vec)
 #' 
-#' vec <- c(1,3,5,TRUE) ; sum(x = vec)
+#' vec <- c(1,3,5,TRUE) ; sum2(x = vec)
 #' 
 #' 
 #' 
 #' # This example returns an error because of the character in the vector
-#' # vec <- c(1,3,5,TRUE,"apple") ; sum(x = vec)
+#' # vec <- c(1,3,5,TRUE,"apple") ; sum2(x = vec)
 #' @export
-sum <- function(
+sum2 <- function(
         x,
         na.rm = FALSE,
         finite = FALSE
 ){
     # DEBUGGING
-    # vec <- c(1,3,5,TRUE) ; sum(x = vec) # for function debugging
+    # vec <- c(1,3,5,TRUE) ; sum2(x = vec) # for function debugging
     # package name
     package.name <- "cuteTool"
     # end package name

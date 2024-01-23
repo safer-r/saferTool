@@ -26,7 +26,7 @@
 #' - $any.id.name: logical. Is there any element names identical ?
 #' - $same.names.pos1: positions, in data1, of the element names identical in data2. NULL if no identical names.
 #' - $same.names.pos2: positions, in data2, of the elements names identical in data1. NULL if no identical names.
-# - $same.names.match1: positions, in data2, of the names that match the names in data1, as given by match(data1, data2) (NULL otherwise).
+#' - $same.names.match1: positions, in data2, of the names that match the names in data1, as given by match(data1, data2) (NULL otherwise).
 #' - $same.names.match2: positions, in data1, of the names that match the names in data2, as given by match(data1, data2) (NULL otherwise).
 #' - $common.names: common element names between data1 and data2 (can be a subset of $name or not). NULL if no common element names.
 #' - $any.id.element: logical. is there any identical elements ?

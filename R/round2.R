@@ -1,4 +1,4 @@
-#' @title round
+#' @title round2
 #' @description
 #' Round a vector of values, if decimal, with the desired number of decimal digits after the decimal leading zeros.
 #' @param data A vector of numbers (numeric or character mode).
@@ -26,29 +26,29 @@
 #' @examples
 #' ini.options <- options()$digits ; 
 #' options(digits = 8) ; 
-#' cat(round(data = c(NA, 10, 100.001, 333.0001254, 12312.1235), dec.nb = 2, after.lead.zero = FALSE), "\n\n") ; 
+#' cat(round2(data = c(NA, 10, 100.001, 333.0001254, 12312.1235), dec.nb = 2, after.lead.zero = FALSE), "\n\n") ; 
 #' options(digits = ini.options)
 #' 
 #' 
 #' ini.options <- options()$digits ; 
 #' options(digits = 8) ; 
-#' cat(round(data = c(NA, 10, 100.001, 333.0001254, 12312.1235), dec.nb = 2, after.lead.zero = TRUE), "\n\n") ; 
+#' cat(round2(data = c(NA, 10, 100.001, 333.0001254, 12312.1235), dec.nb = 2, after.lead.zero = TRUE), "\n\n") ; 
 #' options(digits = ini.options)
 #' 
 #' 
 #' ini.options <- options()$digits ; 
 #' options(digits = 8) ; 
-#' cat(round(data = c(NA, "10", "100.001", "333.0001254", "12312.1235"), dec.nb = 2, after.lead.zero = FALSE), "\n\n") ; 
+#' cat(round2(data = c(NA, "10", "100.001", "333.0001254", "12312.1235"), dec.nb = 2, after.lead.zero = FALSE), "\n\n") ; 
 #' options(digits = ini.options)
 #' 
 #' 
 #' ini.options <- options()$digits ; 
 #' options(digits = 8) ; 
-#' cat(round(data = c(NA, "10", "100.001", "333.0001254", "12312.1235"), dec.nb = 2, after.lead.zero = TRUE), "\n\n") ; 
+#' cat(round2(data = c(NA, "10", "100.001", "333.0001254", "12312.1235"), dec.nb = 2, after.lead.zero = TRUE), "\n\n") ; 
 #' options(digits = ini.options)
 #' @importFrom cuteDev arg_check
 #' @export
-round <- function(
+round2 <- function(
         data, 
         dec.nb = 2, 
         after.lead.zero = TRUE

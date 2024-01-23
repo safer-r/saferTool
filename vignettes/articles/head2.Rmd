@@ -1,0 +1,64 @@
+---
+title: "head2"
+---
+<br>
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "> "
+)
+```
+
+```{r setup}
+library(cuteTool)
+```
+<br>
+
+### Datasets
+
+```{r}
+vec1 <- 1:100 # vector of integers
+mat1 <- diag(1:20) ;  dimnames(mat1) <- list(letters[1:20], LETTERS[1:20]) # diagonal matrix 20 * 20 with row names and column names
+```
+
+<br>
+
+### Datasets info
+
+```{r}
+vec1 # vector of integers
+mat1 # diagonal matrix 20 * 20 with row names and column names
+```
+<br>
+
+### Simple examples
+
+```{r}
+head(data1 = vec1) # head() works like utils::head() on non 2D objects
+head(data1 = mat1)
+```
+<br>
+
+### Argument n
+
+```{r}
+head(data1 = mat1, n = 5) # number of dimension to print (5 means 5 rows and columns)
+```
+<br>
+
+### Argument side
+```{r}
+head(data1 = mat1, side = "r") # left or right side of the 2D object (only for matrix, data frame or table)
+```
+<br>
+
+### All the arguments
+```{r}
+head(
+    data1 = mat1, 
+    n = 6, 
+    side = "l"
+)
+```
+

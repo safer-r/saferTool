@@ -1,8 +1,8 @@
-#' @title head
+#' @title head2
 #' @description
-#' As head() but display the left or right head of big 2D objects.
+#' As head2() but display the left or right head of big 2D objects.
 #' @param data1 Any object but more dedicated for matrix, data frame or table.
-#' @param n As in head() but for for matrix, data frame or table, number of dimension to print (10 means 10 rows and columns).
+#' @param n As in head2() but for for matrix, data frame or table, number of dimension to print (10 means 10 rows and columns).
 #' @param side Either "l" or "r" for the left or right side of the 2D object (only for matrix, data frame or table).
 #' @returns The head.
 #' @details 
@@ -22,10 +22,10 @@
 #' @examples
 #' obs1 = matrix(1:30, ncol = 5, dimnames = list(letters[1:6], LETTERS[1:5])) ; 
 #' obs1 ; 
-#' head(obs1, 3)
+#' head2(obs1, 3)
 #' @importFrom cuteDev arg_check
 #' @export
-head <- function(
+head2 <- function(
         data1, 
         n = 6, 
         side = "l"
@@ -132,7 +132,7 @@ head <- function(
     # warning output
     # end warning output
     if( ! (any(class(data1) %in% c("data.frame", "table")) | all(class(data1) %in% c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data1) %in% c("matrix", "data.frame", "table"))
-        return(head(data1, n))
+        return(head2(data1, n))
     }else{
         obs.dim <- dim(data1)
         row <- 1:ifelse(obs.dim[1] < n, obs.dim[1], n)

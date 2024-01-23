@@ -1,4 +1,4 @@
-#' @title max
+#' @title max2
 #' @description
 #' Find and return the maximum value of a set of data.
 #' @param x Numeric or logical vector or matrix or numeric table where find the initial values to use.
@@ -15,25 +15,25 @@
 #' 
 #' none
 #' @examples
-#' vec <- c(1:3) ; max(x = vec)
+#' vec <- c(1:3) ; max2(x = vec)
 #' 
-#' vec <- c(1,3,5,TRUE, FALSE, NA) ; max(x = vec, na.rm = TRUE)
+#' vec <- c(1,3,5,TRUE, FALSE, NA) ; max2(x = vec, na.rm = TRUE)
 #' 
 #' 
 #' # This example returns an error because of the character in the vector
-#' # vec <- c(1,3,5,TRUE,"apple") ; max(x = vec)
+#' # vec <- c(1,3,5,TRUE,"apple") ; max2(x = vec)
 #' 
-#' # This example returns an error because of the argument na.rm, when the function max() of the package base doesn't return an error
-#' # vec <- c(1,3,5,TRUE) ; max(x = vec, na.rn = TRUE)
+#' # This example returns an error because of the argument na.rm, when the function max2() of the package base doesn't return an error
+#' # vec <- c(1,3,5,TRUE) ; max2(x = vec, na.rn = TRUE)
 #' @export
-max <- function(
+max2 <- function(
         x,
         na.rm = FALSE,
         finite = FALSE
         
 ){
     # DEBUGGING
-    # vec <- c(1,3,5,TRUE) ; max(x = vec) # for function debugging
+    # vec <- c(1,3,5,TRUE) ; max2(x = vec) # for function debugging
     # package name
     package.name <- "cuteTool"
     # end package name
