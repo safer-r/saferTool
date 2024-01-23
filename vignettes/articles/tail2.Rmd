@@ -33,27 +33,27 @@ mat1 # diagonal matrix 20 * 20 with row names and column names
 ### Simple examples
 
 ```{r}
-tail(data1 = vec1) # fun_tail() works like utils::tail() on non 2D objects
-tail(data1 = mat1)
+tail2(data1 = vec1) # tail2() works like utils::tail() on non 2D objects
+tail2(data1 = mat1)
 ```
 <br>
 
 ### Argument n
 
 ```{r}
-tail(data1 = mat1, n = 5) # number of dimension to print (5 means 5 rows and columns)
+tail2(data1 = mat1, n = 5) # number of dimension to print (5 means 5 rows and columns)
 ```
 <br>
 
 ### Argument side
 ```{r}
-tail(data1 = mat1, side = "r") # left or right side of the 2D object (only for matrix, data frame or table)
+tail2(data1 = mat1, side = "r") # left or right side of the 2D object (only for matrix, data frame or table)
 ```
 <br>
 
 ### All the arguments
 ```{r}
-tail(
+tail2(
     data1 = mat1, 
     n = 6, 
     side = "l"

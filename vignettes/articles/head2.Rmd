@@ -35,27 +35,27 @@ mat1 # diagonal matrix 20 * 20 with row names and column names
 ### Simple examples
 
 ```{r}
-head(data1 = vec1) # head() works like utils::head() on non 2D objects
-head(data1 = mat1)
+head2(data1 = vec1) # head2() works like utils::head() on non 2D objects
+head2(data1 = mat1)
 ```
 <br>
 
 ### Argument n
 
 ```{r}
-head(data1 = mat1, n = 5) # number of dimension to print (5 means 5 rows and columns)
+head2(data1 = mat1, n = 5) # number of dimension to print (5 means 5 rows and columns)
 ```
 <br>
 
 ### Argument side
 ```{r}
-head(data1 = mat1, side = "r") # left or right side of the 2D object (only for matrix, data frame or table)
+head2(data1 = mat1, side = "r") # left or right side of the 2D object (only for matrix, data frame or table)
 ```
 <br>
 
 ### All the arguments
 ```{r}
-head(
+head2(
     data1 = mat1, 
     n = 6, 
     side = "l"
