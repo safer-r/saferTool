@@ -1,5 +1,5 @@
 
-# cuteDev <a href="">[<img src="man/figures/logo.png" align="right" height="140" />](https://yushihn.github.io/cuteTool)</a>
+# cuteTool <a href="">[<img src="man/figures/logo.png" align="right" height="140" />](https://yushihn.github.io/cuteTool)</a>
 
 <!-- badges: start -->
 
