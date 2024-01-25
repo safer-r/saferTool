@@ -1,6 +1,6 @@
 #' @title head2
 #' @description
-#' As head2() but display the left or right head of big 2D objects.
+#' As utils::head() but display the left or right head of big 2D objects.
 #' @param data1 Any object but more dedicated for matrix, data frame or table.
 #' @param n As in head2() but for for matrix, data frame or table, number of dimension to print (10 means 10 rows and columns).
 #' @param side Either "l" or "r" for the left or right side of the 2D object (only for matrix, data frame or table).
