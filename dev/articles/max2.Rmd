@@ -61,14 +61,17 @@ tab1 # 1D table
 max2(x = vec1) # vector of integers
 max2(x = vec2) # vector of proportions
 max2(x = vec3) # vector of integers but stored as "double", with NA and Inf
+max2(x = vec4) # vector of proportions
+max2(x = vec5) # vector of integers but stored as "double", with NA and Inf
 max2(x = log1) # vector of characters
 max2(x = log2) # vector of characters with NA
-max2(x = cpx) # 1D matrix of integers
-max2(x = mat1) # 2D matrix of floats with NA
-max2(x = mat2) # data.frame
-max2(x = mat3) # data.frame
-max2(x = fac1) # data.frame
-max2(x = tab1) # data.frame
+max2(x = cpx) # complex vector
+max2(x = mat1) # 1D matrix of integers
+max2(x = mat2) # 1D matrix of integers, NA and Inf
+max2(x = mat3) # 1D matrix of logical values
+max2(x = mat4) # 1D matrix of logical values and NA
+max2(x = fac1) # 1D factor
+max2(x = tab1) # 1D table
 ```
 <br>
 
