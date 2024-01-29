@@ -1,17 +1,17 @@
 
-# cuteTool <a href="">[<img src="man/figures/logo.png" align="right" height="140" />](https://yushihn.github.io/cuteTool)</a>
+# saferTool <a href="">[<img src="man/figures/saferTool.png" align="right" height="140" />](https://safer-r.github.io/saferTool)</a>
 
 <br />
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/yushiHn/cuteTool/workflows/R-CMD-check/badge.svg)](https://github.com/yushiHn/cuteTool/actions)
+[![R-CMD-check](https://github.com/safer-r/saferTool/workflows/R-CMD-check/badge.svg)](https://github.com/safer-r/saferTool/actions)
 
-[![Codecov test coverage](https://codecov.io/github/yushiHn/cuteTool/coverage.svg?branch=master)](https://app.codecov.io/github/yushiHn/cuteTool?branch=master)
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/cuteTool)](https://cran.r-project.org/package=cuteTool)
-[![downloads](https://cranlogs.r-pkg.org/badges/cuteTool)](https://www.rdocumentation.org/trends)
+[![Codecov test coverage](https://codecov.io/github/yushiHn/saferTool/coverage.svg?branch=master)](https://app.codecov.io/github/yushiHn/saferTool?branch=master)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/saferTool)](https://cran.r-project.org/package=saferTool)
+[![downloads](https://cranlogs.r-pkg.org/badges/saferTool)](https://www.rdocumentation.org/trends)
 [![](https://img.shields.io/badge/license-GPL3.0-green.svg)](https://opensource.org/licenses/MITgpl-3-0)
-[![rworkflows](https://github.com/yushiHn/cuteTool/actions/workflows/rworkflows.yml/badge.svg)](https://github.com/yushiHn/cuteTool/actions/workflows/rworkflows.yml)
+[![rworkflows](https://github.com/safer-r/saferTool/actions/workflows/rworkflows.yml/badge.svg)](https://github.com/safer-r/saferTool/actions/workflows/rworkflows.yml)
 <!-- badges: end -->
 
 <br />
@@ -31,7 +31,7 @@
 
 ## Description
 
-Set of R functions for the development of R functions, written according to the [cute_project](https://github.com/gael-millot/cute_project) specifications.
+Set of R functions for the development of R functions, written according to the [safer project](https://github.com/safer-r) specifications.
 
 <br />
 
@@ -55,30 +55,30 @@ Set of R functions for the development of R functions, written according to the 
 
 <br />
 
-Read `vignette("cuteTool")` for more details.
+Read `vignette("saferTool")` for more details.
 
 <br />
 
 ## Versions
 
-The different *cuteTool* releases are tagged [here](https://github.com/yushiHn/cuteTool/tags).
+The different *saferTool* releases are tagged [here](https://github.com/safer-r/saferTool/tags).
 
 <br />
 
 ## Installation
 
-*cuteTool* can be currently be installed from GitHub:
+*saferTool* can be currently be installed from GitHub:
 
 ```r
 install.packages("remotes")
-remotes::install_github("https://github.com/yushiHn/cuteTool")
+remotes::install_github("https://github.com/safer-r/saferTool")
 ```
 
 Older versions can be installed like this:
 
 ```r
 v <- "v1.0" # desired tag version
-remotes::install_github(paste0("https://github.com/yushiHn/cuteTool/tree/", v))
+remotes::install_github(paste0("https://github.com/safer-r/saferTool/tree/", v))
 ```
 
 <br />
@@ -93,10 +93,10 @@ See the GNU General Public License for more details at https://www.gnu.org/licen
 
 ## Citation
 
-If you are using functions of *cuteTool*, please cite: 
+If you are using functions of *saferTool*, please cite: 
 
-> Han Y, Serizay J, Millot GA (2023). _The R cuteTool package_.
-> <https://github.com/yushiHn/cuteTool/>.
+> Han Y, Serizay J, Millot GA (2023). _The R saferTool package_.
+> <https://github.com/safer-r/saferTool/>.
 
 <br />
 
@@ -106,11 +106,15 @@ If you are using functions of *cuteTool*, please cite:
 
 [Jacques Serizai](https://github.com/js2264), Spatial Regulation of Genomes team, Institut Pasteur, Paris, France
 
-[Gael A. Millot](https://gitlab.pasteur.fr/gmillot), Bioinformatics and Biostatistics Hub, Institut Pasteur, Paris, France
+[Gael A. Millot](https://github.com/gael-millot), Bioinformatics and Biostatistics Hub, Institut Pasteur, Paris, France
 
 <br />
 
 ## Acknowledgements
 
-The developers & maintainers of [R](https://www.r-project.org/) as well as packages used in the *cuteTool* functions.
+The developers & maintainers of the mentioned softwares and packages, including:
+
+- [R](https://www.r-project.org/)
+- [Git](https://git-scm.com/)
+- [Github](https://github.com/)
 
