@@ -13,70 +13,107 @@ comp_2d(data1, data2)
 }
 \value{
 A list containing:
+
 - $same.class: logical. Are classes identical ?
+
 - $class: identical class of the 2 datasets (NULL otherwise).
+
 - $same.mode: logical. Are modes identical ?
+
 - $mode: identical mode of the 2 datasets (NULL otherwise).
+
 - $same.type: logical. Are types identical ?
+
 - $type: identical type of the 2 datasets (NULL otherwise).
+
 - $same.dim: logical. Are dimension identical ?
+
 - $dim: dimension of the 2 datasets (NULL otherwise).
+
 - $same.row.nb: logical. Are number of rows identical ?
+
 - $row.nb: nb of rows of the 2 datasets if identical (NULL otherwise).
+
 - $same.col.nb: logical. Are number of columns identical ?
+
 - $col.nb: nb of columns of the 2 datasets if identical (NULL otherwise).
+
 - $same.row.name: logical. Are row names identical ? NULL if no row names in the two 2D datasets.
+
 - $row.name: name of rows of the 2 datasets if identical (NULL otherwise).
+
 - $any.id.row.name: logical. Is there any row names identical ? NULL if no row names in the two 2D datasets.
+
 - $same.row.names.pos1: positions, in data1, of the row names identical in data2.
+
 - $same.row.names.pos2: positions, in data2, of the row names identical in data1.
+
 - $same.row.names.match1: positions, in data2, of the row names that match the row names in data1, as given by match(data1, data2) (NULL otherwise).
+
 - $same.row.names.match2: positions, in data1, of the row names that match the row names in data2, as given by match(data1, data2) (NULL otherwise).
+
 - $common.row.names: common row names between data1 and data2 (can be a subset of $name or not). NULL if no common row names.
+
 - $same.col.name: logical. Are column names identical ? NULL if no col names in the two 2D datasets.
+
 - $col.name: name of columns of the 2 datasets if identical (NULL otherwise).
+
 - $any.id.col.name: logical. Is there any column names identical ? NULL if no col names in the two 2D datasets.
+
 - $same.col.names.pos1: positions, in data1, of the column names identical in data2.
+
 - $same.col.names.pos2: positions, in data2, of the column names identical in data1.
+
 - $same.col.names.match1: positions, in data2, of the column names that match the column names in data1, as given by match(data1, data2) (NULL otherwise).
+
 - $same.col.names.match2: positions, in data1, of the column names that match the column names in data2, as given by match(data1, data2) (NULL otherwise).
+
 - $common.col.names: common column names between data1 and data2 (can be a subset of $name or not). NULL if no common column names.
+
 - $any.id.row: logical. is there identical rows (not considering row names)? NULL if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+
 - $same.row.pos1: positions, in data1, of the rows identical in data2 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+
 - $same.row.pos2: positions, in data2, of the rows identical in data1 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+
 - $same.row.match1: positions, in data2, of the rows that match the rows in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+
 - $same.row.match2: positions, in data1, of the rows that match the rows in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+
 - $any.id.col: logical. is there identical columns (not considering column names)? NULL if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+
 - $same.col.pos1: position in data1 of the cols identical in data2 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+
 - $same.col.pos2: position in data2 of the cols identical in data1 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+
 - $same.col.match1: positions, in data2, of the columns that match the columns in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+
 - $same.row.match2: positions, in data1, of the columns that match the columns in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+
 - $identical.content: logical. Are contents identical ? Row and column names are not considered. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character).
+
 - $identical: logical. Idem as $identical.content but including row & column names.
 }
 \description{
 Compare two 2D datasets of the same class or not. Check and report in a list if the 2 datasets have:
 
 - same class
+
 - same type
+
 - common row names
+
 - common column names
+
 - same row number
+
 - same column number
+
 - potential identical rows between the 2 datasets
+
 - potential identical columns between the 2 datasets
 }
 \details{
-REQUIRED PACKAGES
-
-none
-
-
-REQUIRED FUNCTIONS FROM THE cute PACKAGE
-
-none
-
-
 WARNINGS
 
 The results in:

@@ -20,16 +20,6 @@ The modified vector.
 Round a vector of values, if decimal, with the desired number of decimal digits after the decimal leading zeros.
 }
 \details{
-REQUIRED PACKAGES
-
-cuteDev
-
-
-REQUIRED FUNCTIONS FROM THE cute PACKAGE
-
-arg_check()
-
-
 WARNINGS
 
 Work well with numbers as character strings, but not always with numerical numbers because of the floating point.

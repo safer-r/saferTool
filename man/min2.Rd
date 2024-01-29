@@ -19,16 +19,6 @@ The minimum value of the given arguments.
 \description{
 Find and return the minimum value of a set of data.
 }
-\details{
-REQUIRED PACKAGES
-
-none
-
-
-REQUIRED FUNCTIONS FROM THE cute PACKAGE
-
-none
-}
 \examples{
 vec <- c(1:3) ; min2(x = vec)
 

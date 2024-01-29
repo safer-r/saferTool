@@ -22,16 +22,6 @@ If the data frame is made of n numeric columns, a new data frame is created, wit
 
 If the data frame is made of one numeric column and one character or factor column, a new data frame is created, with the new columns corresponding to the split numeric values (according to the character column). NA are added a the end of each column to have the same number of rows. BEWARE: in such data frame, rows are not individuals. This means that in the example below, values 10 and 20 are associated on the same row but that means nothing in term of association.
 }
-\details{
-REQUIRED PACKAGES
-
-cuteDev
-
-
-REQUIRED FUNCTIONS FROM THE cute PACKAGE
-
-arg_check()
-}
 \examples{
 obs <- data.frame(col1 = (1:4)*10, col2 = c("A", "B", "A", "A"), stringsAsFactors = TRUE) ; 
 obs ; 

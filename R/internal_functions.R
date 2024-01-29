@@ -35,7 +35,7 @@
     # main code
     tempo.log <- grepl(x = fun, pattern = "^.+::.+$")
     if( ! all(tempo.log)){
-        tempo.cat <- paste0("ERROR IN THE CODE OF THE ", external.function.name, " OF THE cuteTool PACKAGE.\nTHE STRING IN fun ARGUMENT MUST CONTAIN \"::\":\n", paste(fun[ ! tempo.log], collapse = "\n"))
+        tempo.cat <- paste0("ERROR IN THE CODE OF THE ", external.function.name, " OF THE saferTool PACKAGE.\nTHE STRING IN fun ARGUMENT MUST CONTAIN \"::\":\n", paste(fun[ ! tempo.log], collapse = "\n"))
         stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     pkg.fun.name.list <- base::strsplit(fun, "::") # package in 1 and function in 2
@@ -46,7 +46,7 @@
         tempo.cat <- paste0(
             "ERROR IN ", 
             external.function.name, 
-            " OF THE cuteTool PACKAGE. REQUIRED PACKAGE", 
+            " OF THE saferTool PACKAGE. REQUIRED PACKAGE", 
             ifelse(length(tempo) == 1L, paste0(":\n", tempo), paste0("S:\n", paste(tempo, collapse = "\n"))), 
             "\nMUST BE INSTALLED IN", 
             ifelse(length(lib.path) == 1L, "", " ONE OF THESE FOLDERS"), 
@@ -61,7 +61,7 @@
         tempo.cat <- paste0(
             "ERROR IN ", 
             external.function.name, 
-            " OF THE cuteTool PACKAGE. REQUIRED FUNCTION",
+            " OF THE saferTool PACKAGE. REQUIRED FUNCTION",
             ifelse(length(tempo) == 1L, " IS ", "S ARE "), 
             "MISSING IN THE INSTALLED PACKAGE", 
             ifelse(length(tempo) == 1L, paste0(":\n", tempo), paste0("S:\n", paste(tempo, collapse = "\n")))
@@ -91,7 +91,7 @@
 #' .arguments_check(x = c(Inf, NA), na.rm = TRUE, finite = TRUE)
 #' }
 #' @keywords internal
-#' @importFrom cuteDev arg_check
+#' @importFrom saferDev arg_check
 #' @rdname internal_function_backbone
 .arguments_check <- function(
         x,
@@ -114,7 +114,7 @@
     # check of the required function from the required packages
     .pack_and_function_check(
         fun = c(
-            "cuteDev::arg_check"
+            "saferDev::arg_check"
         ),
         lib.path = NULL, # no lib.path for the functions using .arguments_check()
         external.function.name = external.function.name
@@ -138,15 +138,15 @@
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- expression(argum.check = c(argum.check, tempo$problem) , text.check = c(text.check, tempo$text) , checked.arg.names = c(checked.arg.names, tempo$object.name))
-    tempo <- cuteDev::arg_check(data = na.rm, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name) ; eval(ee)
-    tempo <- cuteDev::arg_check(data = finite, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name) ; eval(ee)
-    tempo1 <- cuteDev::arg_check(data = x, class = "vector", mode = "numeric", na.contain = TRUE, fun.name = external.function.name)
-    tempo2 <- cuteDev::arg_check(data = x, class = "vector", mode = "logical", na.contain = TRUE, fun.name = external.function.name)
-    tempo3 <- cuteDev::arg_check(data = x, class = "vector", mode = "complex", na.contain = TRUE, fun.name = external.function.name)
-    tempo4 <- cuteDev::arg_check(data = x, class = "matrix", mode = "numeric", na.contain = TRUE, fun.name = external.function.name)
-    tempo5 <- cuteDev::arg_check(data = x, class = "matrix", mode = "logical", na.contain = TRUE, fun.name = external.function.name)
-    tempo6 <- cuteDev::arg_check(data = x, class = "matrix", mode = "complex", na.contain = TRUE, fun.name = external.function.name)
-    tempo7 <- cuteDev::arg_check(data = x, class = "table", mode = "numeric", na.contain = TRUE, fun.name = external.function.name)
+    tempo <- saferDev::arg_check(data = na.rm, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name) ; eval(ee)
+    tempo <- saferDev::arg_check(data = finite, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name) ; eval(ee)
+    tempo1 <- saferDev::arg_check(data = x, class = "vector", mode = "numeric", na.contain = TRUE, fun.name = external.function.name)
+    tempo2 <- saferDev::arg_check(data = x, class = "vector", mode = "logical", na.contain = TRUE, fun.name = external.function.name)
+    tempo3 <- saferDev::arg_check(data = x, class = "vector", mode = "complex", na.contain = TRUE, fun.name = external.function.name)
+    tempo4 <- saferDev::arg_check(data = x, class = "matrix", mode = "numeric", na.contain = TRUE, fun.name = external.function.name)
+    tempo5 <- saferDev::arg_check(data = x, class = "matrix", mode = "logical", na.contain = TRUE, fun.name = external.function.name)
+    tempo6 <- saferDev::arg_check(data = x, class = "matrix", mode = "complex", na.contain = TRUE, fun.name = external.function.name)
+    tempo7 <- saferDev::arg_check(data = x, class = "table", mode = "numeric", na.contain = TRUE, fun.name = external.function.name)
     
     if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE & tempo5$problem == TRUE& tempo6$problem == TRUE & tempo7$problem == TRUE){
         tempo.cat <- paste0("ERROR IN ", external.function.name, " OF THE", package.name, " PACKAGE: x ARGUMENT MUST BE A VECTOR, MATRIX OR TABLE OF NUMERIC OR LOGICAL VALUES")

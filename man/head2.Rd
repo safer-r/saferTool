@@ -17,19 +17,9 @@ head2(data1, n = 6, side = "l")
 The head.
 }
 \description{
-As head2() but display the left or right head of big 2D objects.
+As utils::head() but display the left or right head of big 2D objects.
 }
 \details{
-REQUIRED PACKAGES
-
-cuteDev
-
-
-REQUIRED FUNCTIONS FROM THE cute PACKAGE
-
-arg_check()
-
-
 BEWARE
 
 Other arguments of head() not used.

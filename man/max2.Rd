@@ -19,16 +19,6 @@ The maximum value of the given arguments.
 \description{
 Find and return the maximum value of a set of data.
 }
-\details{
-REQUIRED PACKAGES
-
-none
-
-
-REQUIRED FUNCTIONS FROM THE cute PACKAGE
-
-none
-}
 \examples{
 vec <- c(1:3) ; max2(x = vec)
 

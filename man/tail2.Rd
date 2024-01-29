@@ -20,16 +20,6 @@ The tail.
 As utils::tail() but display the left or right head of big 2D objects.
 }
 \details{
-REQUIRED PACKAGES
-
-cuteDev
-
-
-REQUIRED FUNCTIONS FROM THE cute PACKAGE
-
-arg_check()
-
-
 BEWARE
 
 Other arguments of tail() not used.

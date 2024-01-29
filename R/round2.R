@@ -6,16 +6,6 @@
 #' @param after.lead.zero Single logical value. If FALSE, rounding is performed for all the decimal numbers, whatever the leading zeros (e.g., 0.123 -> 0.12 and 0.00128 -> 0.00). If TRUE, dec.nb are taken after the leading zeros (e.g., 0.123 -> 0.12 and 0.00128 -> 0.0013).
 #' @returns The modified vector.
 #' @details 
-#' REQUIRED PACKAGES
-#' 
-#' cuteDev
-#' 
-#' 
-#' REQUIRED FUNCTIONS FROM THE cute PACKAGE
-#' 
-#' arg_check()
-#' 
-#' 
 #' WARNINGS
 #' 
 #' Work well with numbers as character strings, but not always with numerical numbers because of the floating point.
@@ -46,7 +36,7 @@
 #' options(digits = 8) ; 
 #' cat(round2(data = c(NA, "10", "100.001", "333.0001254", "12312.1235"), dec.nb = 2, after.lead.zero = TRUE), "\n\n") ; 
 #' options(digits = ini.options)
-#' @importFrom cuteDev arg_check
+#' @importFrom saferDev arg_check
 #' @export
 round2 <- function(
         data, 
@@ -58,7 +48,7 @@ round2 <- function(
     # data = data = c(10, 100.001, 333.0001254, 12312.1235) ; dec.nb = 2 ; after.lead.zero = FALSE # # for function debugging
     # data = data = c("10", "100.001", "333.0001254", "12312.1235") ; dec.nb = 2 ; after.lead.zero = TRUE # # for function debugging
     # package name
-    package.name <- "cuteTool"
+    package.name <- "saferTool"
     # end package name
     # function name
    ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
@@ -76,7 +66,7 @@ round2 <- function(
     # check of the required function from the required packages
     .pack_and_function_check(
         fun = c(
-            "cuteDev::arg_check"
+            "saferDev::arg_check"
         ),
         lib.path = NULL,
         external.function.name = function.name
@@ -102,9 +92,9 @@ round2 <- function(
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- expression(arg.check <- c(arg.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
-    tempo <- cuteDev::arg_check(data = data, class = "vector", na.contain = TRUE, fun.name = function.name) ; eval(ee)
-    tempo <- cuteDev::arg_check(data = dec.nb, class = "vector", typeof = "integer", length = 1, double.as.integer.allowed = TRUE, neg.values = FALSE, fun.name = function.name) ; eval(ee)
-    tempo <- cuteDev::arg_check(data = after.lead.zero, class = "logical", length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- saferDev::arg_check(data = data, class = "vector", na.contain = TRUE, fun.name = function.name) ; eval(ee)
+    tempo <- saferDev::arg_check(data = dec.nb, class = "vector", typeof = "integer", length = 1, double.as.integer.allowed = TRUE, neg.values = FALSE, fun.name = function.name) ; eval(ee)
+    tempo <- saferDev::arg_check(data = after.lead.zero, class = "logical", length = 1, fun.name = function.name) ; eval(ee)
     if( ! is.null(arg.check)){
         if(any(arg.check, na.rm = TRUE) == TRUE){
             stop(paste0("\n\n================\n\n", paste(text.check[arg.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #

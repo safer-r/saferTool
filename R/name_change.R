@@ -6,18 +6,12 @@
 #' @param added.string Single character string added at the end of the modified string in data1 if present in data2.
 #' @returns
 #' A list containing :
+#' 
 #' - $data: the modified data1 (in the same order as in the initial data1).
+#' 
 #' - $ini: the initial elements before modification. NULL if no modification.
+#' 
 #' - $post: the modified elements in the same order as in ini. NULL if no modification.
-#' @details 
-#' REQUIRED PACKAGES
-#' 
-#' cuteDev
-#' 
-#' 
-#' REQUIRED FUNCTIONS FROM THE cute PACKAGE
-#' 
-#' arg_check()
 #' @examples
 #' obs1 <- c("A", "B", "C", "D") ; 
 #' obs2 <- c("A", "C") ; 
@@ -28,7 +22,7 @@
 #' obs2 <- c("A", "A_modif1", "C") ; 
 #' name_change(obs1, obs2) 
 #' # the function checks that the new names are neither in obs1 nor in obs2 (increment the number after the added string)
-#' @importFrom cuteDev arg_check
+#' @importFrom saferDev arg_check
 #' @export
 name_change <- function(
         data1, 
@@ -39,7 +33,7 @@ name_change <- function(
     # DEBUGGING
     # data1 = c("A", "B", "C", "D") ; data2 <- c("A", "C") ; added.string = "_modif" # for function debugging
     # package name
-    package.name <- "cuteTool"
+    package.name <- "saferTool"
     # end package name
     # function name
     ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
@@ -57,7 +51,7 @@ name_change <- function(
     # check of the required function from the required packages
     .pack_and_function_check(
         fun = c(
-            "cuteDev::arg_check"
+            "saferDev::arg_check"
         ),
         lib.path = NULL,
         external.function.name = function.name
@@ -83,9 +77,9 @@ name_change <- function(
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- expression(argum.check <- c(argum.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
-    tempo <- cuteDev::arg_check(data = data1, class = "vector", mode = "character", fun.name = function.name) ; eval(ee)
-    tempo <- cuteDev::arg_check(data = data2, class = "vector", mode = "character", fun.name = function.name) ; eval(ee)
-    tempo <- cuteDev::arg_check(data = added.string, class = "vector", mode = "character", length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- saferDev::arg_check(data = data1, class = "vector", mode = "character", fun.name = function.name) ; eval(ee)
+    tempo <- saferDev::arg_check(data = data2, class = "vector", mode = "character", fun.name = function.name) ; eval(ee)
+    tempo <- saferDev::arg_check(data = added.string, class = "vector", mode = "character", length = 1, fun.name = function.name) ; eval(ee)
     if( ! is.null(argum.check)){
         if(any(argum.check, na.rm = TRUE) == TRUE){
             stop(paste0("\n\n================\n\n", paste(text.check[argum.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #

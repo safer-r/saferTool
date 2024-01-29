@@ -19,16 +19,6 @@ The sum of the given arguments. Returns NA if the input contains NA and the argu
 \description{
 Calculate the sum of numeric and logical value.
 }
-\details{
-REQUIRED PACKAGES
-
-none
-
-
-REQUIRED FUNCTIONS FROM THE cute PACKAGE
-
-none
-}
 \examples{
 vec <- c(1:3) ; sum2(x = vec)
 

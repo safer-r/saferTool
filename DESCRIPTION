@@ -1,6 +1,6 @@
 Package: cuteTool
 Type: Package
-Title: Basis functions for object analysis
+Title: Basic tools
 Version: 1.0
 Date: 2023-12-06
 Authors@R: c(
@@ -10,14 +10,14 @@ Authors@R: c(
 Encoding: UTF-8
 Author: Yushi Han [aut], Gaël Millot [aut, cre]
 Maintainer: Gaël Millot <gael.millot@pasteur.fr>
-Description: Functions for object analysis and object modification.
+Description: Basic tools for object analysis and object modification.
 License: GPL-3
 RoxygenNote: 7.2.3
-Imports: 
-    cuteDev (>= 1.0)
 Suggests: 
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Imports: 
+    saferDev (>= 1.0)
 Remotes:  
-    yushiHn/cuteDev
+    safer-r/saferDev

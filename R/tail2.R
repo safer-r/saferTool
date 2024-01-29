@@ -6,16 +6,6 @@
 #' @param side Either "l" or "r" for the left or right side of the 2D object (only for matrix, data frame or table).
 #' @returns The tail.
 #' @details 
-#' REQUIRED PACKAGES
-#' 
-#' cuteDev
-#' 
-#' 
-#' REQUIRED FUNCTIONS FROM THE cute PACKAGE
-#' 
-#' arg_check()
-#'
-#'
 #' BEWARE
 #' 
 #' Other arguments of tail() not used.
@@ -23,7 +13,7 @@
 #' obs1 = matrix(1:30, ncol = 5, dimnames = list(letters[1:6], LETTERS[1:5])) ; 
 #' obs1 ; 
 #' tail2(obs1, 3, "r")
-#' @importFrom cuteDev arg_check
+#' @importFrom saferDev arg_check
 #' @export
 tail2 <- function(
         data1, 
@@ -33,7 +23,7 @@ tail2 <- function(
     # DEBUGGING
     # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) # for function debugging
     # package name
-    package.name <- "cuteTool"
+    package.name <- "saferTool"
     # end package name
     # function name
     ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
@@ -50,7 +40,7 @@ tail2 <- function(
     # check of the required function from the required packages
     .pack_and_function_check(
         fun = c(
-            "cuteDev::arg_check"
+            "saferDev::arg_check"
         ),
         lib.path = NULL,
         external.function.name = function.name
@@ -75,8 +65,8 @@ tail2 <- function(
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- expression(argum.check <- c(argum.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
-    tempo <- cuteDev::arg_check(data = n, class = "vector", typeof = "integer", double.as.integer.allowed = TRUE, length = 1, fun.name = function.name) ; eval(ee)
-    tempo <- cuteDev::arg_check(data = side, options = c("l", "r"), length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- saferDev::arg_check(data = n, class = "vector", typeof = "integer", double.as.integer.allowed = TRUE, length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- saferDev::arg_check(data = side, options = c("l", "r"), length = 1, fun.name = function.name) ; eval(ee)
     if( ! is.null(argum.check)){
         if(any(argum.check, na.rm = TRUE) == TRUE){
             stop(paste0("\n\n================\n\n", paste(text.check[argum.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #

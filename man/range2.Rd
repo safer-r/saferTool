@@ -19,16 +19,6 @@ The minimum value and the maximum value of the given arguments.
 \description{
 Find and return the minimum value and the maximum value of a set of data.
 }
-\details{
-REQUIRED PACKAGES
-
-none
-
-
-REQUIRED FUNCTIONS FROM THE cute PACKAGE
-
-none
-}
 \examples{
 vec <- c(1:3) ; range2(x = vec)
 

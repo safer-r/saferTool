@@ -6,27 +6,43 @@
 #' @param warn.print Single logical value. Print potential warnings at the end of the execution? If FALSE the warning messages are added in the output list as an additional compartment (or NULL if no message).
 #' @returns
 #' A list containing information, depending on the class and type of data. The backbone is generally:
+#' 
 #' - $NAME: name of the object.
+#' 
 #' - $CLASS: class of the object (class() value).
+#' 
 #' - $TYPE: type of the object (typeof() value).
+#' 
 #' - $LENGTH: length of the object (length() value).
+#' 
 #' - $NA.NB: number of NA and NaN (only for type "logical", "integer", "double", "complex", "character" or "list").
+#' 
 #' - $HEAD: head of the object (head() value).
+#' 
 #' - $TAIL: tail of the object (tail() value).
+#' 
 #' - $DIMENSION: dimension (only for object with dimensions).
+#' 
 #' - $SUMMARY: object summary (summary() value).
+#' 
 #' - $STRUCTURE: object structure (str() value).
+#' 
 #' - $WARNING: warning messages (only if the warn.print argument is FALSE).
 #' 
 #' If data is made of numerics, provide also:
+#' 
 #' - $INF.NB: number of Inf and -Inf.
+#' 
 #' - $RANGE: range after removing Inf and NA.
+#' 
 #' - $SUM: sum after removing Inf and NA.
+#' 
 #' - $MEAN: mean after removing Inf and NA.
 #' 
 #' If data is a 2D object, provide also:
 #' 
 #' - $ROW_NAMES: row names.
+#' 
 #' - $COL_NAMES: column names.
 #' 
 #' If data is a data frame, provide also:
@@ -36,27 +52,12 @@
 #' If data is a list, provide also:
 #' 
 #' - $COMPARTMENT_NAMES: names of the comprtments.
+#' 
 #' - $COMPARTMENT_TYPE: type of each compartment (typeof() value).
-#' @details 
-#' REQUIRED PACKAGES
-#' 
-#' cuteDev
-#' 
-#' 
-#' REQUIRED FUNCTIONS FROM THE cute PACKAGE
-#' 
-#' arg_check()
-#' 
-#' get_message()
-#'
-#'
-#' WARNINGS
-#' 
-#' None
 #' @examples
 #' info(data = 1:3)
-#' @importFrom cuteDev arg_check
-#' @importFrom cuteDev get_message
+#' @importFrom saferDev arg_check
+#' @importFrom saferDev get_message
 #' @export
 info <- function(
         data, 
@@ -66,7 +67,7 @@ info <- function(
     # DEBUGGING
     # mat1 <- matrix(1:3) ; data = mat1 ; n = NULL ; warn.print = TRUE # for function debugging
     # package name
-    package.name <- "cuteTool"
+    package.name <- "saferTool"
     # end package name
     # function name
     ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
@@ -84,8 +85,8 @@ info <- function(
     # check of the required function from the required packages
     .pack_and_function_check(
         fun = c(
-            "cuteDev::arg_check",
-            "cuteDev::get_message"
+            "saferDev::arg_check",
+            "saferDev::get_message"
         ),
         lib.path = NULL,
         external.function.name = function.name
@@ -110,13 +111,13 @@ info <- function(
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- expression(argum.check <- c(argum.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
     if( ! is.null(n)){
-        tempo <- cuteDev::arg_check(data = n, class = "vector", typeof = "integer", length = 1, double.as.integer.allowed = TRUE, fun.name = function.name) ; eval(ee)
+        tempo <- saferDev::arg_check(data = n, class = "vector", typeof = "integer", length = 1, double.as.integer.allowed = TRUE, fun.name = function.name) ; eval(ee)
     }else{
         # no arg_check test here, it is just for checked.arg.names
-        tempo <- cuteDev::arg_check(data = n, class = "vector")
+        tempo <- saferDev::arg_check(data = n, class = "vector")
         checked.arg.names <- c(checked.arg.names, tempo$object.name)
     }
-    tempo <- cuteDev::arg_check(data = warn.print, class = "logical", length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- saferDev::arg_check(data = warn.print, class = "logical", length = 1, fun.name = function.name) ; eval(ee)
     if( ! is.null(argum.check)){
         if(any(argum.check) == TRUE){
             stop(paste0("\n\n================\n\n", paste(text.check[argum.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
@@ -185,17 +186,17 @@ info <- function(
     # end new environment
     data.name <- deparse(substitute(data))
     output <- list("NAME" = data.name)
-    tempo.try.error <- cuteDev::get_message(data = "class(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "class(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
     if(is.null(tempo.try.error)){
         tempo <- list("CLASS" = class(data))
         output <- c(output, tempo)
     }
-    tempo.try.error <- cuteDev::get_message(data = "typeof(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "typeof(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
     if(is.null(tempo.try.error)){
         tempo <- list("TYPE" = typeof(data))
         output <- c(output, tempo)
     }
-    tempo.try.error <- cuteDev::get_message(data = "length(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "length(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
     if(is.null(tempo.try.error)){
         tempo <- list("LENGTH" = length(data))
         output <- c(output, tempo)
@@ -211,20 +212,20 @@ info <- function(
         output <- c(output, tempo)
     }
     if(all(typeof(data) %in% c("logical", "integer", "double", "complex", "character", "list"))){ # all() without na.rm -> ok because typeof(NA) is "logical"
-        tempo.try.error <- cuteDev::get_message(data = "is.na(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
+        tempo.try.error <- saferDev::get_message(data = "is.na(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
         if(is.null(tempo.try.error)){
             tempo <- list("NA.NB" = base::sum(is.na(data)))
             output <- c(output, tempo)
         }
     }
-    tempo.try.error <- cuteDev::get_message(data = "head(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "head(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
     if(is.null(tempo.try.error)){
         tempo <- list("HEAD" = head(data))
         output <- c(output, tempo)
         tempo <- list("TAIL" = tail(data)) # no reason that tail() does not work if head() works
         output <- c(output, tempo)
     }
-    tempo.try.error <- cuteDev::get_message(data = "dim(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "dim(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
     if(is.null(tempo.try.error)){
         if(length(dim(data)) > 0){
             tempo <- list("DIMENSION" = dim(data))
@@ -242,12 +243,12 @@ info <- function(
             output <- c(output, tempo)
         }
     }
-    tempo.try.error <- cuteDev::get_message(data = "summary(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "summary(data)", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
     if(is.null(tempo.try.error)){
         tempo <- list("SUMMARY" = summary(data))
         output <- c(output, tempo)
     }
-    tempo.try.error <- cuteDev::get_message(data = "noquote(matrix(utils::capture.output(utils::str(data))))", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "noquote(matrix(utils::capture.output(utils::str(data))))", kind = "error", header = FALSE, env = get(env.name, envir = sys.nframe(), inherits = FALSE))
     if(is.null(tempo.try.error)){
         tempo <- utils::capture.output(utils::str(data))
         tempo <- list("STRUCTURE" = noquote(matrix(tempo, dimnames = list(rep("", length(tempo)), "")))) # str() print automatically, ls.str() not but does not give the order of the data.frame

@@ -15,22 +15,15 @@ name_change(data1, data2, added.string = "_modif")
 }
 \value{
 A list containing :
+
 - $data: the modified data1 (in the same order as in the initial data1).
+
 - $ini: the initial elements before modification. NULL if no modification.
+
 - $post: the modified elements in the same order as in ini. NULL if no modification.
 }
 \description{
 This function allow to check if a vector of character strings, like column names of a data frame, has elements present in another vector (vector of reserved words or column names of another data frame before merging).
-}
-\details{
-REQUIRED PACKAGES
-
-cuteDev
-
-
-REQUIRED FUNCTIONS FROM THE cute PACKAGE
-
-arg_check()
 }
 \examples{
 obs1 <- c("A", "B", "C", "D") ; 

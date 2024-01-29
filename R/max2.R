@@ -5,15 +5,6 @@
 #' @param na.rm Single logical value. Should missing values (NA and NaN) be removed ?
 #' @param finite Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.
 #' @returns The maximum value of the given arguments. 
-#' @details
-#' REQUIRED PACKAGES
-#' 
-#' none
-#' 
-#' 
-#' REQUIRED FUNCTIONS FROM THE cute PACKAGE
-#' 
-#' none
 #' @examples
 #' vec <- c(1:3) ; max2(x = vec)
 #' 
@@ -35,7 +26,7 @@ max2 <- function(
     # DEBUGGING
     # vec <- c(1,3,5,TRUE) ; max2(x = vec) # for function debugging
     # package name
-    package.name <- "cuteTool"
+    package.name <- "saferTool"
     # end package name
     # function name
     function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.

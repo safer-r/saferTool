@@ -1,34 +1,40 @@
 #' @title comp_list
 #' @description
 #' Compare two lists. Check and report in a list if the 2 datasets have:
+#' 
 #' - same length
+#' 
 #' - common names
+#' 
 #' - common compartments
 #' @param data1 List.
 #' @param data2 List.
 #' @returns 
 #' A list containing:
+#' 
 #' - $same.length: logical. Are number of elements identical?
+#' 
 #' - $length: number of elements in the 2 datasets (NULL otherwise).
+#' 
 #' - $same.names: logical. Are element names identical ?
+#' 
 #' - $name: name of elements of the 2 datasets if identical (NULL otherwise).
+#' 
 #' - $any.id.name: logical. Is there any element names identical ?
+#' 
 #' - $same.names.pos1: positions, in data1, of the element names identical in data2.
+#' 
 #' - $same.names.pos2: positions, in data2, of the compartment names identical in data1.
+#' 
 #' - $any.id.compartment: logical. is there any identical compartments ?
+#' 
 #' - $same.compartment.pos1: positions, in data1, of the compartments identical in data2.
+#' 
 #' - $same.compartment.pos2: positions, in data2, of the compartments identical in data1.
+#' 
 #' - $identical.object: logical. Are objects identical (kind of object, compartment names and content)?
+#' 
 #' - $identical.content: logical. Are content objects identical (identical compartments excluding compartment names)?
-#' @details 
-#' REQUIRED PACKAGES
-#' 
-#' none
-#' 
-#' 
-#' REQUIRED FUNCTIONS FROM THE cute PACKAGE
-#' 
-#' none
 #' @examples
 #' obs1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; 
 #' obs2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; 
@@ -58,7 +64,7 @@ comp_list <- function(
     # data1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) # for function debugging
     # data1 = list(a = 1:5, b = LETTERS[1:2]) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) # for function debugging
     # package name
-    package.name <- "cuteTool"
+    package.name <- "saferTool"
     # end package name
     # function name
     ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())

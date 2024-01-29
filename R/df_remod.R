@@ -8,15 +8,6 @@
 #' @param quanti.col.name Single character string. Optional name for the quanti column of the new data frame.
 #' @param quali.col.name Single character string. Optional name for the quali column of the new data frame.
 #' @returns The modified data frame.
-#' @details 
-#' REQUIRED PACKAGES
-#' 
-#' cuteDev
-#' 
-#' 
-#' REQUIRED FUNCTIONS FROM THE cute PACKAGE
-#' 
-#' arg_check()
 #' @examples
 #' obs <- data.frame(col1 = (1:4)*10, col2 = c("A", "B", "A", "A"), stringsAsFactors = TRUE) ; 
 #' obs ; 
@@ -32,7 +23,7 @@
 #' rownames(obs) <- paste0("row", 1:4) ; 
 #' obs ;
 #' df_remod(obs, quanti.col.name = "quanti", quali.col.name = "quali")
-#' @importFrom cuteDev arg_check
+#' @importFrom saferDev arg_check
 #' @export
 df_remod <- function(
         data, 
@@ -47,7 +38,7 @@ df_remod <- function(
     # data = data.frame(b = letters[1:3], a = 1:3, stringsAsFactors = TRUE) ; quanti.col.name = "quanti" ; quali.col.name = "quali" # for function debugging
     # data = data.frame(b = c("e", "e", "h"), a = 1:3, stringsAsFactors = TRUE) ; quanti.col.name = "quanti" ; quali.col.name = "quali" # for function debugging
     # package name
-    package.name <- "cuteTool"
+    package.name <- "saferTool"
     # end package name
     # function name
     ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
@@ -65,7 +56,7 @@ df_remod <- function(
     # check of the required function from the required packages
     .pack_and_function_check(
         fun = c(
-            "cuteDev::arg_check"
+            "saferDev::arg_check"
         ),
         lib.path = NULL,
         external.function.name = function.name
@@ -85,19 +76,19 @@ df_remod <- function(
     }
     # end arg with no default values
     
-    # argument checking with cuteDev::arg_check()
+    # argument checking with saferDev::arg_check()
     argum.check <- NULL #
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- expression(argum.check <- c(argum.check, tempo$problem) , text.check <- c(text.check, tempo$text) , checked.arg.names <- c(checked.arg.names, tempo$object.name))
-    tempo <- cuteDev::arg_check(data = quanti.col.name, class = "character", length = 1, fun.name = function.name) ; eval(ee)
-    tempo <- cuteDev::arg_check(data = quali.col.name, class = "character", length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- saferDev::arg_check(data = quanti.col.name, class = "character", length = 1, fun.name = function.name) ; eval(ee)
+    tempo <- saferDev::arg_check(data = quali.col.name, class = "character", length = 1, fun.name = function.name) ; eval(ee)
     if( ! is.null(argum.check)){
         if(any(argum.check, na.rm = TRUE) == TRUE){
             stop(paste0("\n\n================\n\n", paste(text.check[argum.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
         }
     }
-    # end argument checking with cuteDev::arg_check()
+    # end argument checking with saferDev::arg_check()
     # check with r_debugging_tools
     # source("C:/Users/yhan/Documents/Git_projects/debugging_tools_for_r_dev/r_debugging_tools.R") ; eval(parse(text = str_basic_arg_check_dev)) ; eval(parse(text = str_arg_check_with_fun_check_dev)) # activate this line and use the function (with no arguments left as NULL) to check arguments status and if they have been checked using arg_check()
     # end check with r_debugging_tools
