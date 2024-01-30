@@ -1,5 +1,5 @@
 ---
-title: "cuteTool"
+title: "saferTool"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{cuteTool}

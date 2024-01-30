@@ -4,19 +4,23 @@
 \alias{name_change}
 \title{name_change}
 \usage{
-name_change(data1, data2, added.string = "_modif")
+name_change(data1, data2, added.string = "_modif", duplicate = TRUE)
 }
 \arguments{
 \item{data1}{Vector of character strings to check and modify.}
 
-\item{data2}{Reference vector of character strings.}
+\item{data2}{Reference vector of character strings (duplicated elemetns not authorized).}
 
-\item{added.string}{Single character string added at the end of the modified string in data1 if present in data2.}
+\item{added.string}{Single character string added at the end of the modified string in elements of data1 if present in data2.}
+
+\item{duplicate}{Single logical value. Return the elements of data1 still with duplicated elements? Defaut to TRUE, i.e., duplicated elements remain duplicated.}
 }
 \value{
 A list containing :
 
 - $data: the modified data1 (in the same order as in the initial data1).
+
+- $posi: the modified positions in data1. NULL if no modification.
 
 - $ini: the initial elements before modification. NULL if no modification.
 
@@ -25,8 +29,13 @@ A list containing :
 \description{
 This function allow to check if a vector of character strings, like column names of a data frame, has elements present in another vector (vector of reserved words or column names of another data frame before merging).
 }
+\details{
+- If elements are duplicated in data1 and match an element of data2, then the value of added.string is added at the end of the matched element of data1.
+ - If the same occurs with the argument duplicate = FALSE, then value of added.string is added at the end of the matched element of data1, together with an incremented number so that elements in data1 are not anymore duplicated.
+ - An error message is returned if any of the data1 elements end with the string in added.string.
+}
 \examples{
-obs1 <- c("A", "B", "C", "D") ; 
+obs1 <- c("A", "B", "C", "A", "D") ; 
 obs2 <- c("A", "C") ; 
 name_change(obs1, obs2)
 }
