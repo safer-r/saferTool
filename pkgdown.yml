@@ -2,6 +2,19 @@ pandoc: 3.1.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  comp_1d: comp_1d.html
+  comp_2d: comp_2d.html
+  comp_list: comp_list.html
+  df_mod: df_mod.html
+  head2: head2.html
+  info: info.html
+  max2: max2.html
+  min2: min2.html
+  name_change: name_change.html
+  range2: range2.html
+  round2: round2.html
+  sum2: sum2.html
+  tail2: tail2.html
   saferTool: saferTool.html
-last_built: 2024-01-30T13:43Z
+last_built: 2024-01-30T17:34Z
 

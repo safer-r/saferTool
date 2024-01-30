@@ -4,10 +4,49 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/articles/comp_1d.html</loc>
+  </url>
+  <url>
+    <loc>/articles/comp_2d.html</loc>
+  </url>
+  <url>
+    <loc>/articles/comp_list.html</loc>
+  </url>
+  <url>
+    <loc>/articles/df_mod.html</loc>
+  </url>
+  <url>
+    <loc>/articles/head2.html</loc>
+  </url>
+  <url>
     <loc>/articles/index.html</loc>
   </url>
   <url>
+    <loc>/articles/info.html</loc>
+  </url>
+  <url>
+    <loc>/articles/max2.html</loc>
+  </url>
+  <url>
+    <loc>/articles/min2.html</loc>
+  </url>
+  <url>
+    <loc>/articles/name_change.html</loc>
+  </url>
+  <url>
+    <loc>/articles/range2.html</loc>
+  </url>
+  <url>
+    <loc>/articles/round2.html</loc>
+  </url>
+  <url>
     <loc>/articles/saferTool.html</loc>
+  </url>
+  <url>
+    <loc>/articles/sum2.html</loc>
+  </url>
+  <url>
+    <loc>/articles/tail2.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>
