@@ -18,24 +18,6 @@
 #' options(digits = 8) ; 
 #' cat(round2(data = c(NA, 10, 100.001, 333.0001254, 12312.1235), dec.nb = 2, after.lead.zero = FALSE), "\n\n") ; 
 #' options(digits = ini.options)
-#' 
-#' 
-#' ini.options <- options()$digits ; 
-#' options(digits = 8) ; 
-#' cat(round2(data = c(NA, 10, 100.001, 333.0001254, 12312.1235), dec.nb = 2, after.lead.zero = TRUE), "\n\n") ; 
-#' options(digits = ini.options)
-#' 
-#' 
-#' ini.options <- options()$digits ; 
-#' options(digits = 8) ; 
-#' cat(round2(data = c(NA, "10", "100.001", "333.0001254", "12312.1235"), dec.nb = 2, after.lead.zero = FALSE), "\n\n") ; 
-#' options(digits = ini.options)
-#' 
-#' 
-#' ini.options <- options()$digits ; 
-#' options(digits = 8) ; 
-#' cat(round2(data = c(NA, "10", "100.001", "333.0001254", "12312.1235"), dec.nb = 2, after.lead.zero = TRUE), "\n\n") ; 
-#' options(digits = ini.options)
 #' @importFrom saferDev arg_check
 #' @export
 round2 <- function(

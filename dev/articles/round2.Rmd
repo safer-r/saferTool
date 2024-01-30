@@ -13,3 +13,74 @@ knitr::opts_chunk$set(
 library(saferTool)
 ```
 <br>
+
+### Datasets
+
+```{r}
+vec1 <- 1:3 / 3 # vector of proportions
+vec2 <- c(NA, 10, 100.001, 333.0001254, 12312.1235) # vector of integer, double and NA
+vec3 <- c(NA, "10", "100.001", "333.0001254", "12312.1235") # vector of character values and NA
+```
+
+### Datasets info
+
+```{r}
+vec1 # vector of proportions
+vec2 # vector of integer, double and NA
+```
+<br>
+
+### Simple examples
+
+```{r}
+round2(data = vec1) # vector of proportions
+round2(data = vec2) # vector of integer, double and NA
+round2(data = vec3) # vector of character values and NA
+```
+<br>
+
+### Argument dec.nb
+```{r}
+cat(round2(data = vec1, dec.nb = 2), "\n\n")
+
+cat(round2(data = vec1, dec.nb = 3), "\n\n")
+
+cat(round2(data = vec2, dec.nb = 2), "\n\n")
+
+cat(round2(data = vec2, dec.nb = 3), "\n\n")
+
+cat(round2(data = vec3, dec.nb = 2), "\n\n")
+
+cat(round2(data = vec3, dec.nb = 3), "\n\n")
+```
+
+### Argument after.lead.zero
+```{r}
+cat(round2(data = vec2, after.lead.zero = TRUE), "\n\n")
+
+cat(round2(data = vec2, after.lead.zero = FALSE), "\n\n")
+
+cat(round2(data = vec3, after.lead.zero = TRUE), "\n\n")
+
+cat(round2(data = vec3, after.lead.zero = FALSE), "\n\n")
+```
+
+### All the arguments
+```{r}
+ini.options <- options()$digits ; 
+options(digits = 8) ; 
+cat(round2(data = vec2, "\n\n")) ; 
+options(digits = ini.options)
+
+
+ini.options <- options()$digits ; 
+options(digits = 8) ; 
+cat(round2(data = vec3, dec.nb = 2, after.lead.zero = FALSE), "\n\n") ; 
+options(digits = ini.options)
+
+
+ini.options <- options()$digits ; 
+options(digits = 8) ; 
+cat(round2(data = c(NA, "10", "100.001", "333.0001254", "12312.1235"), dec.nb = 2, after.lead.zero = TRUE), "\n\n") ; 
+options(digits = ini.options)
+```
