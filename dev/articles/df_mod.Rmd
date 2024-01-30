@@ -17,12 +17,8 @@ library(saferTool)
 ### Datasets
 
 ```{r}
-vec1 <- 1:5 # vector of integers
-vec2 <- 3:6 # vector of integers
-fac1 <- factor(LETTERS[1:5]) # 1D factor
-fac2 <- factor(LETTERS[4:7]) # 1D factor
-fac3 <- factor(LETTERS[10:11]) # 1D factor
-tab1 <- as.table(1:5) # 1D table
+dataframe1 <- data.frame(col1 = (1:4)*10, col2 = c("A", "B", "A", "A"), stringsAsFactors = TRUE)
+dataframe2 <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE)
 ```
 
 <br>
@@ -30,29 +26,42 @@ tab1 <- as.table(1:5) # 1D table
 ### Datasets info
 
 ```{r}
-vec1 # vector of integers
-vec2 # vector of integers
-fac1 # 1D factor
-fac2 # 1D factor
-tab1 # 1D table
+dataframe1
+dataframe2
 ```
+
+### Simple examples
+
+```{r}
+df_remod(dataframe1)
+df_remod(dataframe2)
+```
+
+### Argument quanti.col.name
+```{r}
+df_remod(dataframe1, quanti.col.name = "quanti")
+df_remod(dataframe1, quanti.col.name = "quantity")
+df_remod(dataframe2, quanti.col.name = "quanti")
+df_remod(dataframe2, quanti.col.name = "quantity")
+```
+
+
+### Argument quali.col.name
+```{r}
+df_remod(dataframe1, quali.col.name = "quali")
+df_remod(dataframe1, quali.col.name = "quality")
+df_remod(dataframe2, quali.col.name = "quali")
+df_remod(dataframe2, quali.col.name = "quality")
+```
+
 
 ### All the arguments
 ```{r}
-names(vec1) <- LETTERS[1:5] ; 
-comp_1d(vec1, vec2)
+df_remod(dataframe1, quanti.col.name = "quanti", quali.col.name = "quali")
 
-names(vec1) <- LETTERS[1:5] ; 
-names(vec2) <- LETTERS[1:4] ; 
-comp_1d(vec1, vec2)
+df_remod(dataframe1, quanti.col.name = "quantity", quali.col.name = "quality")
 
-comp_1d(fac1, fac2)
+df_remod(dataframe2, quanti.col.name = "quanti", quali.col.name = "quali")
 
-comp_1d(fac1, fac3)
-
-comp_1d(vec1, fac1)
-
-comp_1d(tab1, tab1)
-
-comp_1d(tab1, vec1)
+df_remod(dataframe2, quanti.col.name = "quantity", quali.col.name = "quality")
 ```

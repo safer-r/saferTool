@@ -9,16 +9,6 @@
 #' @param quali.col.name Single character string. Optional name for the quali column of the new data frame.
 #' @returns The modified data frame.
 #' @examples
-#' obs <- data.frame(col1 = (1:4)*10, col2 = c("A", "B", "A", "A"), stringsAsFactors = TRUE) ; 
-#' obs ; 
-#' df_remod(obs)
-#' 
-#' 
-#' obs <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE) ; 
-#' obs ; 
-#' df_remod(obs, quanti.col.name = "quanti", quali.col.name = "quali")
-#' 
-#' 
 #' obs <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE) ; 
 #' rownames(obs) <- paste0("row", 1:4) ; 
 #' obs ;
