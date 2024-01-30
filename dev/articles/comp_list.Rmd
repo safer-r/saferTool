@@ -13,3 +13,32 @@ knitr::opts_chunk$set(
 library(saferTool)
 ```
 <br>
+
+### Datasets
+
+```{r}
+list1 <- list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) # 2D list
+list2 <- list(1:5, LETTERS[1:2]) # 2D list
+list3 <- list(a = 1:5, b = LETTERS[1:2]) # 2D list
+list4 <- list(LETTERS[5:9], matrix(1:6), 1:5) # 2D list
+```
+
+<br>
+
+### Datasets info
+
+```{r}
+list1 # 2D list
+list2 # 2D list
+list3 # 2D list
+list4 # 2D list
+```
+
+### All the arguments
+```{r}
+comp_list(list1, list1)
+
+comp_list(list1, list3)
+
+comp_list(list2, list4)
+```
