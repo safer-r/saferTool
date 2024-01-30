@@ -21,7 +21,6 @@ library(saferTool)
 vec1 <- 1:100 # vector of integers
 mat1 <- diag(1:20) ;  dimnames(mat1) <- list(letters[1:20], LETTERS[1:20]) # diagonal matrix 20 * 20 with row names and column names
 ```
-
 <br>
 
 ### Datasets info

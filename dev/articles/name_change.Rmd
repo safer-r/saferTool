@@ -22,7 +22,6 @@ char2 <- c("A", "C", "E") # vector of character strings
 char3 <- c("A", "B", "C", "C_modif1", "D") # vector of character strings
 char4 <- c("A", "A_modif1", "C") # vector of character strings
 ```
-
 <br>
 
 ### Datasets info
@@ -33,12 +32,14 @@ char2 # vector of character strings
 char3 # vector of character strings
 char4 # vector of character strings
 ```
+<br>
 
 ### Simple examples
 
 ```{r}
 name_change(char1,char2)
 ```
+<br>
 
 ### All the arguments
 ```{r}

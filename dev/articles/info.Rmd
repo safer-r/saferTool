@@ -39,7 +39,6 @@ env1 <- new.env() # environment
 s4 <- show # S4 object
 call1 <- call("call1") # object of class "call", mode "call" & type "language"
 ```
-
 <br>
 
 ### Datasets info

@@ -27,7 +27,6 @@ dataframe1 <- as.data.frame(matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list
 dataframe2 <- as.data.frame(matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4])))) # 2D dataframe
 dataframe3 <- as.data.frame(matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("x", "z", "y"), c(LETTERS[1:2], "k", LETTERS[5:4])))) # 2D dataframe
 ```
-
 <br>
 
 ### Datasets info
@@ -43,6 +42,7 @@ dataframe1 # 2D dataframe
 dataframe2 # 2D dataframe
 dataframe3 # 2D dataframe
 ```
+<br>
 
 ### All the arguments
 ```{r}

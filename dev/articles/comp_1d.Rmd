@@ -24,7 +24,6 @@ fac2 <- factor(LETTERS[4:7]) # 1D factor
 fac3 <- factor(LETTERS[10:11]) # 1D factor
 tab1 <- as.table(1:5) # 1D table
 ```
-
 <br>
 
 ### Datasets info

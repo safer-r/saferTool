@@ -32,7 +32,6 @@ mat4 <- matrix(log2) # 1D matrix of logical values and NA
 fac1 <- factor(vec5) # 1D factor
 tab1 <- table(fac1) # 1D table
 ```
-
 <br>
 
 ### Datasets info
@@ -102,6 +101,7 @@ min2(
     na.rm = TRUE
 )
 ```
+<br>
 
 ### Argument finite
 ```{r}
@@ -115,6 +115,7 @@ min2(
     finite = TRUE
 )
 ```
+<br>
 
 ### All the arguments
 ```{r}
