@@ -23,16 +23,6 @@ If the data frame is made of n numeric columns, a new data frame is created, wit
 If the data frame is made of one numeric column and one character or factor column, a new data frame is created, with the new columns corresponding to the split numeric values (according to the character column). NA are added a the end of each column to have the same number of rows. BEWARE: in such data frame, rows are not individuals. This means that in the example below, values 10 and 20 are associated on the same row but that means nothing in term of association.
 }
 \examples{
-obs <- data.frame(col1 = (1:4)*10, col2 = c("A", "B", "A", "A"), stringsAsFactors = TRUE) ; 
-obs ; 
-df_remod(obs)
-
-
-obs <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE) ; 
-obs ; 
-df_remod(obs, quanti.col.name = "quanti", quali.col.name = "quali")
-
-
 obs <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE) ; 
 rownames(obs) <- paste0("row", 1:4) ; 
 obs ;

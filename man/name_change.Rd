@@ -29,10 +29,4 @@ This function allow to check if a vector of character strings, like column names
 obs1 <- c("A", "B", "C", "D") ; 
 obs2 <- c("A", "C") ; 
 name_change(obs1, obs2)
-
-
-obs1 <- c("A", "B", "C", "C_modif1", "D") ; 
-obs2 <- c("A", "A_modif1", "C") ; 
-name_change(obs1, obs2) 
-# the function checks that the new names are neither in obs1 nor in obs2 (increment the number after the added string)
 }

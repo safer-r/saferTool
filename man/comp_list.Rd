@@ -48,22 +48,7 @@ Compare two lists. Check and report in a list if the 2 datasets have:
 - common compartments
 }
 \examples{
-obs1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; 
-obs2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; 
-comp_list(obs1, obs2)
-
-
 obs1 = list(1:5, LETTERS[1:2]) ; 
 obs2 = list(a = 1:5, b = LETTERS[1:2]) ; 
-comp_list(obs1, obs2)
-
-
-obs1 = list(b = 1:5, c = LETTERS[1:2]) ; 
-obs2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; 
-comp_list(obs1, obs2)
-
-
-obs1 = list(b = 1:5, c = LETTERS[1:2]) ; 
-obs2 = list(LETTERS[5:9], matrix(1:6), 1:5) ; 
 comp_list(obs1, obs2)
 }

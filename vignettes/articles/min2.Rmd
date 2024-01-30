@@ -1,0 +1,129 @@
+---
+title: "min2"
+---
+<br>
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "> "
+)
+```
+
+```{r setup}
+library(saferTool)
+```
+<br>
+
+### Datasets
+
+```{r}
+vec1 <- -1:3 # vector of integers
+vec2 <- c(1:3, NA) # vector of integers with NA
+vec3 <- c(1:3, Inf) # vector of integers with Inf
+vec4 <- 1:3 / 3 # vector of proportions
+vec5 <- c(1, 2, NA, -Inf) # vector of integers but stored as "double", with NA and Inf
+log1 <- c(TRUE, FALSE, NA) # logical vector with NA
+log2 <- c(TRUE, FALSE, FALSE) # logical vector                    
+mat1 <- matrix(vec1) # 1D matrix of integers
+mat2 <- matrix(vec5) # 1D matrix of integers, NA and Inf
+mat3 <- matrix(log1) # 1D matrix of logical values
+mat4 <- matrix(log2) # 1D matrix of logical values and NA
+fac1 <- factor(vec5) # 1D factor
+tab1 <- table(fac1) # 1D table
+```
+<br>
+
+### Datasets info
+
+```{r}
+vec1 # vector of integers
+vec2 # vector of integers with NA
+vec3 # vector of integers with Inf
+vec4 # vector of proportions
+vec5 # vector of integers but stored as "double", with NA and Inf
+log1 # logical vector with NA
+log2 # logical vector                    
+mat1 # 1D matrix of integers
+mat2 # 1D matrix of integers, NA and Inf
+mat3 # 1D matrix of logical values
+mat4 # 1D matrix of logical values and NA
+fac1 # 1D factor
+tab1 # 1D table
+```
+<br>
+
+### Simple examples
+
+```{r}
+min2(x = vec1) # vector of integers
+min2(x = vec2) # vector of proportions
+min2(x = vec3) # vector of integers but stored as "double", with NA and Inf
+min2(x = vec4) # vector of proportions
+min2(x = vec5) # vector of integers but stored as "double", with NA and Inf
+min2(x = log1) # vector of characters
+min2(x = log2) # vector of characters with NA
+min2(x = mat1) # 1D matrix of integers
+min2(x = mat2) # 1D matrix of integers, NA and Inf
+min2(x = mat3) # 1D matrix of logical values
+min2(x = mat4) # 1D matrix of logical values and NA
+min2(x = tab1) # 1D table
+```
+<br>
+
+### Argument na.rm
+```{r}
+min2(
+    x = vec1, 
+    na.rm = TRUE
+)
+
+min2(
+    x = vec2, 
+    na.rm = TRUE
+)
+
+min2(
+    x = log2, 
+    na.rm = TRUE
+)
+
+min2(
+    x = log1, 
+    na.rm = TRUE
+)
+
+min2(
+    x = mat3, 
+    na.rm = TRUE
+)
+```
+<br>
+
+### Argument finite
+```{r}
+min2(
+    x = vec1,
+    finite = TRUE
+)
+
+min2(
+    x = vec3,
+    finite = TRUE
+)
+```
+<br>
+
+### All the arguments
+```{r}
+min2(
+    x = vec5,
+    na.rm = TRUE,
+    finite  = FALSE
+)
+
+min2(
+    x = mat4,
+    na.rm = TRUE,
+    finite  = FALSE
+)
+```

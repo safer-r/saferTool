@@ -1,0 +1,77 @@
+---
+title: "comp_2d"
+---
+<br>
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "> "
+)
+```
+
+```{r setup}
+library(saferTool)
+```
+<br>
+
+### Datasets
+
+```{r}
+mat1 <- matrix(1:1e6, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) # 2D large matrix
+mat2 <- matrix(as.integer((1:1e6)+1e6/5), ncol = 5, dimnames = list(NULL, LETTERS[1:5])) # 2D large matrix
+mat3 <- matrix((1:1e6)+1e6/5, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) # 2D large matrix
+mat4 <- matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) # 2D matrix
+mat5 <- matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4]))) # 2D matrix
+mat6 <- matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("x", "z", "y"), c(LETTERS[1:2], "k", LETTERS[5:4]))) # 2D matrix
+dataframe1 <- as.data.frame(matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5]))) # 2D dataframe
+dataframe2 <- as.data.frame(matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4])))) # 2D dataframe
+dataframe3 <- as.data.frame(matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("x", "z", "y"), c(LETTERS[1:2], "k", LETTERS[5:4])))) # 2D dataframe
+```
+<br>
+
+### Datasets info
+
+```{r}
+mat1 # 2D large matrix
+mat2 # 2D large matrix
+mat3 # 2D large matrix
+mat4 # 2D matrix
+mat5 # 2D matrix
+mat6 # 2D matrix
+dataframe1 # 2D dataframe
+dataframe2 # 2D dataframe
+dataframe3 # 2D dataframe
+```
+<br>
+
+### All the arguments
+```{r}
+# large matrices
+head(mat1) ; 
+head(mat2) ; 
+comp_2d(mat1, mat2)
+
+head(mat1) ; 
+head(mat3) ; 
+comp_2d(mat1, mat3)
+
+# Matrices: same row content and same row names
+comp_2d(mat4, mat5)
+
+# Matrices: same row content but not same row names
+comp_2d(mat4, mat6)
+
+# Data frames: same row content and same row names, not same mode between columns
+dataframe1[, 5] <- as.character(dataframe1[, 5]) ; 
+dataframe2[, 5] <- as.character(dataframe2[, 5]) ; 
+str(dataframe1) ; 
+str(dataframe2) ; 
+comp_2d(dataframe1, dataframe2)
+
+# Data frames: same row content but not same row names
+dataframe1[, 5] <- as.character(dataframe1[, 5]) ; 
+dataframe3[, 5] <- as.character(dataframe3[, 5]) ; 
+str(dataframe1) ; 
+str(dataframe3) ; 
+comp_2d(dataframe1, dataframe3)
+```

@@ -1,0 +1,64 @@
+---
+title: "df_mod"
+---
+<br>
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "> "
+)
+```
+
+```{r setup}
+library(saferTool)
+```
+<br>
+
+### Datasets
+
+```{r}
+dataframe1 <- data.frame(col1 = (1:4)*10, col2 = c("A", "B", "A", "A"), stringsAsFactors = TRUE)
+dataframe2 <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE)
+```
+<br>
+
+### Datasets info
+
+```{r}
+dataframe1
+dataframe2
+```
+<br>
+
+### Simple examples
+
+```{r}
+df_remod(dataframe1)
+df_remod(dataframe2)
+```
+<br>
+
+### Argument quanti.col.name
+```{r}
+df_remod(dataframe1, quanti.col.name = "quanti")
+df_remod(dataframe2, quanti.col.name = "quanti")
+df_remod(dataframe2, quanti.col.name = "quantity")
+```
+<br>
+
+### Argument quali.col.name
+```{r}
+df_remod(dataframe1, quali.col.name = "quali")
+df_remod(dataframe2, quali.col.name = "quali")
+df_remod(dataframe2, quali.col.name = "quality")
+```
+<br>
+
+### All the arguments
+```{r}
+df_remod(dataframe1, quanti.col.name = "quanti", quali.col.name = "quali")
+
+df_remod(dataframe2, quanti.col.name = "quanti", quali.col.name = "quali")
+
+df_remod(dataframe2, quanti.col.name = "quantity", quali.col.name = "quality")
+```

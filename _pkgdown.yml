@@ -1,0 +1,56 @@
+url: ~
+
+template:
+  bootstrap: 5
+  bslib:
+        primary: "#0054AD"
+        border-radius: 0.5rem
+        btn-border-radius: 0.25rem
+
+authors:
+    Yushi Han:
+        href: https://github.com/yushiHn
+    Gaël Millot:
+        href: https://github.com/gael-millot
+    
+
+reference:
+- title: "comp_1d"
+  contents: 
+  - comp_1d
+- title: "comp_2d"
+  contents: 
+  - comp_2d
+- title: "comp_list"
+  contents: 
+  - comp_list
+- title: "df_remod"
+  contents: 
+  - df_remod
+- title: "head2"
+  contents: 
+  - head2
+- title: "info"
+  contents: 
+  - info
+- title: "max2"
+  contents: 
+  - max2
+- title: "min2"
+  contents: 
+  - min2
+- title: "name_change"
+  contents: 
+  - name_change
+- title: "range2"
+  contents: 
+  - range2
+- title: "round2"
+  contents: 
+  - round2
+- title: "sum2"
+  contents: 
+  - sum2
+- title: "tail2"
+  contents: 
+  - tail2

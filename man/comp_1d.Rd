@@ -89,14 +89,7 @@ Compare two 1D datasets (vector or factor or 1D table, or 1D matrix or 1D array)
 }
 \examples{
 obs1 = 1:5 ; obs2 = 1:5 ; names(obs1) <- LETTERS[1:5] ; names(obs2) <- LETTERS[1:5] ; comp_1d(obs1, obs2)
-obs1 = 1:5 ; obs2 = 1:5 ; names(obs1) <- LETTERS[1:5] ; comp_1d(obs1, obs2)
-obs1 = 1:5 ; obs2 = 3:6 ; names(obs1) <- LETTERS[1:5] ; names(obs2) <- LETTERS[1:4] ; comp_1d(obs1, obs2)
 obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[1:5]) ; comp_1d(obs1, obs2)
-obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[10:11]) ; comp_1d(obs1, obs2)
-obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[4:7]) ; comp_1d(obs1, obs2)
 obs1 = factor(c(LETTERS[1:4], "E")) ; obs2 = factor(c(LETTERS[1:4], "F")) ; comp_1d(obs1, obs2)
-obs1 = 1:5 ; obs2 = factor(LETTERS[1:5]) ; comp_1d(obs1, obs2)
 obs1 = 1:5 ; obs2 = 1.1:6.1 ; comp_1d(obs1, obs2)
-obs1 = as.table(1:5); obs2 = as.table(1:5) ; comp_1d(obs1, obs2)
-obs1 = as.table(1:5); obs2 = 1:5 ; comp_1d(obs1, obs2)
 }
