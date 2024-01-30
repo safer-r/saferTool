@@ -139,31 +139,7 @@
 #' "TOO BIG FOR EVALUATION" returned in $same.col.pos1, $ame.col.pos2, $same.col.match1 and $same.col.match2 when ncol(data1) * ncol(data2) > 1e6 and $any.id.col is returned NULL.
 #' @examples
 #' obs1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; 
-#' obs2 = as.data.frame(matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])), stringsAsFactors = TRUE) ; 
-#' obs1 ; 
-#' obs2 ; 
-#' comp_2d(obs1, obs2)
-#' 
-#' 
-#' # large matrices
-#' 
-#' obs1 = matrix(1:1e6, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; 
-#' obs2 = matrix(as.integer((1:1e6)+1e6/5), ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; 
-#' head(obs1) ; 
-#' head(obs2) ; 
-#' comp_2d(obs1, obs2)
-#' 
-#' obs1 = matrix(1:1e6, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; 
-#' obs2 = matrix((1:1e6)+1e6/5, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; 
-#' head(obs1) ; 
-#' head(obs2) ; 
-#' comp_2d(obs1, obs2)
-#' 
-#' 
-#' # Matrices: same row content and same row names
-#' 
-#' obs1 = matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; 
-#' obs2 = matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4]))) ; 
+#' obs2 = as.data.frame(matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])), stringsAsFactors = TRUE) ;
 #' obs1 ; 
 #' obs2 ; 
 #' comp_2d(obs1, obs2)
@@ -171,42 +147,10 @@
 #' 
 #' # Matrices: same row content but not same row names
 #' 
-#' obs1 = matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; 
-#' obs2 = matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("x", "z", "y"), c(LETTERS[1:2], "k", LETTERS[5:4]))) ; 
-#' obs1 ; 
-#' obs2 ; 
-#' comp_2d(obs1, obs2)
-#' 
 #' obs1 = t(matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5]))) ; 
 #' obs2 = t(matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4])))) ; 
 #' obs1 ; 
 #' obs2 ; 
-#' comp_2d(obs1, obs2)
-#' 
-#' 
-#' # Data frames: same row content and same row names, not same mode between columns
-#' 
-#' obs1 = as.data.frame(matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5]))) ; 
-#' obs2 = as.data.frame(matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4])))) ; 
-#' obs1[, 5] <- as.character(obs1[, 5]) ; 
-#' obs2[, 5] <- as.character(obs2[, 5]) ; 
-#' obs1 ; 
-#' obs2 ; 
-#' str(obs1) ; 
-#' str(obs2) ; 
-#' comp_2d(obs1, obs2)
-#' 
-#' 
-#' # Data frames: same row content but not same row names
-#' 
-#' obs1 = as.data.frame(matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5]))) ; 
-#' obs2 = as.data.frame(matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("x", "z", "y"), c(LETTERS[1:2], "k", LETTERS[5:4])))) ; 
-#' obs1[, 5] <- as.character(obs1[, 5]) ; 
-#' obs2[, 5] <- as.character(obs2[, 5]) ; 
-#' obs1 ; 
-#' obs2 ; 
-#' str(obs1) ; 
-#' str(obs2) ; 
 #' comp_2d(obs1, obs2)
 #' @export
 comp_2d <- function(
