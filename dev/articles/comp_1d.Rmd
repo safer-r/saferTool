@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(cuteTool)
+library(saferTool)
 ```
 <br>
 
@@ -49,6 +49,11 @@ comp_1d(vec1, vec2)
 
 comp_1d(fac1, fac2)
 
-comp_1d(tab1, tab2)
+comp_1d(fac1, fac3)
 
+comp_1d(vec1, fac1)
+
+comp_1d(tab1, tab1)
+
+comp_1d(tab1, vec1)
 ```
