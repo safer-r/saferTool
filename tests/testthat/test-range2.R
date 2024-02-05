@@ -16,15 +16,15 @@ test_that("range2 function works correctly", {
     
     # Test cases
     expect_equal(range2(x = vec1), c(-1, 3))
-    expect_equal(range2(x = vec2), c(NA, NA))
+    expect_equal(range2(x = vec2), as.integer(c(NA, NA)))
     expect_equal(range2(x = vec3), c(1, Inf))
     expect_equal(range2(x = vec4), c(0.33333333, 1))
-    expect_equal(range2(x = vec5), c(NA, NA))
-    expect_equal(range2(x = log1), c(NA, NA))
+    expect_equal(range2(x = vec5), as.double(c(NA, NA)))
+    expect_equal(range2(x = log1), as.integer(c(NA, NA)))
     expect_equal(range2(x = log2), c(0,1))
     expect_equal(range2(x = mat1), c(-1, 3))
-    expect_equal(range2(x = mat2), c(NA, NA))
-    expect_equal(range2(x = mat3), c(NA, NA))
+    expect_equal(range2(x = mat2), as.double(c(NA, NA)))
+    expect_equal(range2(x = mat3), as.integer(c(NA, NA)))
     expect_equal(range2(x = mat4), c(0, 1))
     expect_equal(range2(x = tab1), c(1, 1))
     

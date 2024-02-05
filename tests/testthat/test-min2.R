@@ -16,13 +16,13 @@ test_that("min2 function works correctly", {
     
     expect_equal(min2(x = vec1), -1)
     
-    expect_equal(min2(x = vec2), NA)
+    expect_equal(min2(x = vec2), as.integer(NA))
     
     expect_equal(min2(x = vec3), 1)
     
     expect_equal(min2(x = vec4), 1/3)
     
-    expect_equal(min2(x = vec5), NA)
+    expect_equal(min2(x = vec5), as.double(NA))
     
     expect_no_error(min2(x = log1))
     
@@ -30,7 +30,7 @@ test_that("min2 function works correctly", {
     
     expect_equal(min2(x = mat1), -1)
     
-    expect_equal(min2(x = mat2), NA)
+    expect_equal(min2(x = mat2), as.double(NA))
     
     expect_no_error(min2(x = mat3))
     

@@ -26,7 +26,7 @@ test_that("sum2 function works correctly", {
     expect_equal(sum2(x = mat2), sum(vec5))
     expect_equal(sum2(x = mat3), sum(as.numeric(log1)))
     expect_equal(sum2(x = mat4), sum(as.numeric(log2)))
-    expect_equal(sum2(x = tab1), sum(as.numeric(vec5)))
+    expect_equal(sum2(x = tab1), 3)
     
     
     # Test argument na.rm

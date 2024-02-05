@@ -18,13 +18,13 @@ test_that("max2 function works correctly", {
     
     expect_equal(max2(x = vec1), 3)
     
-    expect_equal(max2(x = vec2), NA)
+    expect_equal(max2(x = vec2), as.integer(NA))
     
     expect_equal(max2(x = vec3), Inf)
     
     expect_equal(max2(x = vec4), 1)
     
-    expect_equal(max2(x = vec5), NA)
+    expect_equal(max2(x = vec5), as.double(NA))
     
     expect_no_error(max2(x = log1))
     
@@ -32,7 +32,7 @@ test_that("max2 function works correctly", {
     
     expect_equal(max2(x = mat1), 3)
     
-    expect_equal(max2(x = mat2), NA)
+    expect_equal(max2(x = mat2), as.double(NA))
     
     expect_no_error(max2(x = mat3))
     
