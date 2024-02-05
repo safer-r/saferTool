@@ -1,3 +1,26 @@
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
+test_that("head2 function works correctly", {
+  # Example datasets
+  mat1 <- diag(1:20)
+  dimnames(mat1) <- list(letters[1:20], LETTERS[1:20]) # diagonal matrix 20 * 20 with row names and column names
+
+  # Test cases
+  # Simple examples
+  test_that("handles simple examples", {
+    expect_no_error(head2(data1 = mat1))
+  })
+
+  # Test n argument
+  test_that("handles n argument", {
+    expect_no_error(head2(data1 = mat1, n = 5))
+  })
+
+  # Test side argument
+  test_that("handles side argument", {
+    expect_no_error(head2(data1 = mat1, side = "r"))
+  })
+
+  # Test all arguments
+  test_that("handles all arguments", {
+    expect_no_error(head2(data1 = mat1, n = 6, side = "l"))
+  })
 })
