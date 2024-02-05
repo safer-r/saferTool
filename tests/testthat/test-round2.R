@@ -14,7 +14,7 @@ test_that("round2 function works correctly", {
     expect_equal(round2(data = vec1, dec.nb = 2), c(0.33, 0.67, 1))
     expect_equal(round2(data = vec1, dec.nb = 3), c(0.333, 0.667, 1))
     expect_equal(round2(data = vec2, dec.nb = 2), c(NA, 10, 100.00100, 333.00013, 12312.12))
-    expect_equal(round2(data = vec2, dec.nb = 3), c(NA, 10, 100.001, 333.00013, 12312.1230))
+    expect_equal(round2(data = vec2, dec.nb = 3), c(NA, 10, 100.001, 333.000125, 12312.1230))
     expect_equal(round2(data = vec3, dec.nb = 2), c(NA, "10", "100.001", "333.00013", "12312.12"))
     expect_equal(round2(data = vec3, dec.nb = 3), c(NA, "10", "100.001", "333.000125", "12312.123"))
     
