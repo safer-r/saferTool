@@ -15,9 +15,11 @@ License: GPL-3
 RoxygenNote: 7.2.3
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Imports: 
     saferDev (>= 1.0)
-Remotes:  
+Remotes: 
     safer-r/saferDev
+Config/testthat/edition: 3
