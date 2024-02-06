@@ -14,8 +14,8 @@ test_that("comp_1d function works correctly", {
     
     names(vec1) <- LETTERS[1:5]
     names(vec2) <- LETTERS[1:4]
-    expect_no_error(comp_1d(vec1, vec2))
     
+    expect_no_error(comp_1d(vec1, vec2))
     expect_no_error(comp_1d(fac1, fac2))
     expect_no_error(comp_1d(fac1, fac3))
     expect_no_error(comp_1d(vec1, fac1))
