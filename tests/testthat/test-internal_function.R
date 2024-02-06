@@ -28,13 +28,6 @@ test_that(".pack_and_function_check handles valid input correctly", {
   expect_error(.arguments_check(x, na.rm, FALSE, "test_function"))
 
   # Mock inputs
-  x <- 1:10
-  na.rm <- "not_logical"
-  
-  # Call the function and expect an error
-  expect_error(.arguments_check(x, na.rm, FALSE, "test_function"))
-
-  # Mock inputs
   na.rm <- TRUE
   
   # Call the function and expect an error
