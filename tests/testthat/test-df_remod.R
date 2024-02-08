@@ -5,29 +5,26 @@ test_that("df_remod function works correctly", {
 
   # Test cases
   # Simple examples
-  test_that("handles simple examples", {
+  # handles simple examples
     expect_no_error(df_remod(dataframe1))
     expect_no_error(df_remod(dataframe2))
-  })
 
   # Test quanti.col.name argument
-  test_that("handles quanti.col.name argument", {
+  # handles quanti.col.name argument
     expect_no_error(df_remod(dataframe1, quanti.col.name = "quanti"))
     expect_no_error(df_remod(dataframe2, quanti.col.name = "quanti"))
     expect_no_error(df_remod(dataframe2, quanti.col.name = "quantity"))
-  })
 
   # Test quali.col.name argument
-  test_that("handles quali.col.name argument", {
+  # handles quali.col.name argument
     expect_no_error(df_remod(dataframe1, quali.col.name = "quali"))
     expect_no_error(df_remod(dataframe2, quali.col.name = "quali"))
     expect_no_error(df_remod(dataframe2, quali.col.name = "quality"))
-  })
 
   # Test all arguments
-  test_that("handles all arguments", {
+  # handles all arguments
     expect_no_error(df_remod(dataframe1, quanti.col.name = "quanti", quali.col.name = "quali"))
     expect_no_error(df_remod(dataframe2, quanti.col.name = "quanti", quali.col.name = "quali"))
     expect_no_error(df_remod(dataframe2, quanti.col.name = "quantity", quali.col.name = "quality"))
-  })
+
 })
