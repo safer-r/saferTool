@@ -34,9 +34,10 @@ Set of R functions for the development of R functions, written according to the 
 <br />
 
 ## Content
+<br />
 
 | Function | Description |
-| --- | --- |
+| :--- | :--- |
 | **comp_1d()** | Compare two 1D datasets (vector or factor or 1D table, or 1D matrix or 1D array) of the same class or not. Check and report in a list if the 2 datasets have: 1. same class 2. common elements 3. common element names (except factors) 4. common levels (factors only) |
 | **comp_2d()** | Compare two 2D datasets of the same class or not. Check and report in a list if the 2 datasets have: 1. same class 2. same type 3. common row names 4. common column names 5. same row number 6. same column number 7. potential identical rows between the 2 datasets 8. potential identical columns between the 2 datasets |
 | **comp_list()** | Compare two lists. Check and report in a list if the 2 datasets have: 1. same length 2. common names 3. common compartments |
