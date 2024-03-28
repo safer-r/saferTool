@@ -91,13 +91,13 @@ comp_1d <- function(
     package.name <- "saferTool"
     # end package name
     # function name
-    ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
-    function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
+    ini <- base::match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
+    function.name <- base::paste0(base::as.list(base::match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
     if(function.name[1] == "::()"){
         function.name <- function.name[3]
     }
-    arg.names <- names(formals(fun = sys.function(sys.parent(n = 2)))) # names of all the arguments
-    arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
+    arg.names <- base::names(base::formals(fun = base::sys.function(base::sys.parent(n = 2)))) # names of all the arguments
+    arg.user.setting <- base::as.list(base::match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
     
     # package checking
@@ -111,14 +111,14 @@ comp_1d <- function(
     
     # argument primary checking
     # arg with no default values
-    mandat.args <- c(
+    mandat.args <- base::c(
         "data1", 
         "data2"
     )
-    tempo <- eval(parse(text = paste0("c(missing(", paste0(mandat.args, collapse = "),missing("), "))")))
-    if(any(tempo)){ # normally no NA for missing() output
-        tempo.cat <- paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE\nFOLLOWING ARGUMENT", ifelse(sum(tempo, na.rm = TRUE) > 1, "S HAVE", " HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", paste0(mandat.args, collapse = "\n"))
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    tempo <- base::eval(base::parse(text = base::paste0("base::c(base::missing(", base::paste0(mandat.args, collapse = "),base::missing("), "))")))
+    if(base::any(tempo)){ # normally no NA for missing() output
+        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE\nFOLLOWING ARGUMENT", base::ifelse(base::sum(tempo, na.rm = TRUE) > 1, "S HAVE", " HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", base::paste0(mandat.args, collapse = "\n"))
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end arg with no default values
     # argument checking with arg_check()
@@ -130,26 +130,28 @@ comp_1d <- function(
     # end argument primary checking
     
     # second round of checking and data preparation
+    # reserved words (to avoid bugs)
+    # end reserved words (to avoid bugs)
     # management of NA arguments
-    if( ! (all(class(arg.user.setting) == "list", na.rm = TRUE) & length(arg.user.setting) == 0)){
-        tempo.arg <- names(arg.user.setting) # values provided by the user
-        tempo.log <- suppressWarnings(sapply(lapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = is.na), FUN = any)) & lapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = length) == 1L # no argument provided by the user can be just NA
-        if(any(tempo.log) == TRUE){ # normally no NA because is.na() used here
-            tempo.cat <- paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE\n", ifelse(sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS", "THIS ARGUMENT"), " CANNOT JUST BE NA:", paste0(tempo.arg[tempo.log], collapse = "\n"))
-            stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    if( ! (base::all(base::class(arg.user.setting) == "list", na.rm = TRUE) & base::length(arg.user.setting) == 0)){
+        tempo.arg <- base::names(arg.user.setting) # values provided by the user
+        tempo.log <- base::suppressWarnings(base::sapply(base::lapply(base::lapply(tempo.arg, FUN = get, env = base::sys.nframe(), inherit = FALSE), FUN = is.na), FUN = any)) & base::lapply(base::lapply(tempo.arg, FUN = get, env = base::sys.nframe(), inherit = FALSE), FUN = length) == 1L # no argument provided by the user can be just NA
+        if(base::any(tempo.log) == TRUE){ # normally no NA because is.na() used here
+            tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE\n", base::ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS", "THIS ARGUMENT"), " CANNOT JUST BE NA:", base::paste0(tempo.arg[tempo.log], collapse = "\n"))
+            base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
         }
     }
     # end management of NA arguments
     
     # management of NULL arguments
-    tempo.arg <-c(
+    tempo.arg <-base::c(
         "data1", 
         "data2"
     )
-    tempo.log <- sapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = is.null)
-    if(any(tempo.log) == TRUE){# normally no NA with is.null()
-        tempo.cat <- paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE:\n", ifelse(sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS\n", "THIS ARGUMENT\n"), paste0(tempo.arg[tempo.log], collapse = "\n"),"\nCANNOT BE NULL")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    tempo.log <- base::sapply(base::lapply(tempo.arg, FUN = get, env = base::sys.nframe(), inherit = FALSE), FUN = is.null)
+    if(base::any(tempo.log) == TRUE){# normally no NA with is.null()
+        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE:\n", base::ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS\n", "THIS ARGUMENT\n"), base::paste0(tempo.arg[tempo.log], collapse = "\n"),"\nCANNOT BE NULL")
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end management of NULL arguments
     
@@ -160,22 +162,22 @@ comp_1d <- function(
     # end warning initiation
     
     # other checkings
-    if( ! any(class(data1) %in% c("logical", "integer", "numeric", "character", "factor", "table"))){
-        tempo.cat <- paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data1 ARGUMENT MUST BE A NON NULL VECTOR, FACTOR OR 1D TABLE")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
-    }else if(all(class(data1) %in% "table")){
-        if(length(dim(data1)) > 1){
-            tempo.cat <- paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data1 ARGUMENT MUST BE A 1D TABLE")
-            stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    if( ! base::any(base::class(data1) %in% c("logical", "integer", "numeric", "character", "factor", "table"))){
+        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data1 ARGUMENT MUST BE A NON NULL VECTOR, FACTOR OR 1D TABLE")
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }else if(base::all(base::class(data1) %in% "table")){
+        if(base::length(base::dim(data1)) > 1){
+            tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data1 ARGUMENT MUST BE A 1D TABLE")
+            base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
         }
     }
-    if( ! any(class(data2) %in% c("logical", "integer", "numeric", "character", "factor", "table"))){
-        tempo.cat <- paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data2 ARGUMENT MUST BE A NON NULL VECTOR, FACTOR OR 1D TABLE")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
-    }else if(all(class(data2) %in% "table")){
-        if(length(dim(data2)) > 1){
-            tempo.cat <- paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data2 ARGUMENT MUST BE A 1D TABLE")
-            stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    if( ! base::any(base::class(data2) %in% base::c("logical", "integer", "numeric", "character", "factor", "table"))){
+        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data2 ARGUMENT MUST BE A NON NULL VECTOR, FACTOR OR 1D TABLE")
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    }else if(base::all(base::class(data2) %in% "table")){
+        if(base::length(base::dim(data2)) > 1){
+            tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data2 ARGUMENT MUST BE A 1D TABLE")
+            base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
         }
     }
     # end other checkings
@@ -216,128 +218,128 @@ comp_1d <- function(
     order2 <- NULL
     identical.object <- FALSE
     identical.content <- FALSE
-    if(identical(data1, data2)){
+    if(base::identical(data1, data2)){
         same.class <- TRUE
-        class <- class(data1)
+        class <- base::class(data1)
         same.length <- TRUE
-        length <- length(data1)
-        if(any(class(data1) %in% "factor")){
+        length <- base::length(data1)
+        if(base::any(base::class(data1) %in% "factor")){
             same.levels <- TRUE
-            levels <- levels(data1)
+            levels <- base::levels(data1)
             any.id.levels <- TRUE
-            same.levels.pos1 <- 1:length(levels(data1))
-            same.levels.pos2 <- 1:length(levels(data2))
-            same.levels.match1 <- 1:length(levels(data1))
-            same.levels.match2 <- 1:length(levels(data2))
-            common.levels <- levels(data1)
+            same.levels.pos1 <- 1:base::length(base::levels(data1))
+            same.levels.pos2 <- 1:base::length(base::levels(data2))
+            same.levels.match1 <- 1:base::length(base::levels(data1))
+            same.levels.match2 <- 1:base::length(base::levels(data2))
+            common.levels <- base::levels(data1)
         }
-        if( ! is.null(names(data1))){
+        if( ! base::is.null(base::names(data1))){
             same.names <- TRUE
-            name <- names(data1)
+            name <- base::names(data1)
             any.id.name <- TRUE
-            same.names.pos1 <- 1:length(data1)
-            same.names.pos2 <- 1:length(data2)
-            same.names.match1 <- 1:length(data1)
-            same.names.match2 <- 1:length(data2)
-            common.names <- names(data1)
+            same.names.pos1 <- 1:base::length(data1)
+            same.names.pos2 <- 1:base::length(data2)
+            same.names.match1 <- 1:base::length(data1)
+            same.names.match2 <- 1:base::length(data2)
+            common.names <- base::names(data1)
         }
         any.id.element <- TRUE
-        same.elements.pos1 <- 1:length(data1)
-        same.elements.pos2 <- 1:length(data2)
-        same.elements.match1 <- 1:length(data1)
-        same.elements.match2 <- 1:length(data2)
+        same.elements.pos1 <- 1:base::length(data1)
+        same.elements.pos2 <- 1:base::length(data2)
+        same.elements.match1 <- 1:base::length(data1)
+        same.elements.match2 <- 1:base::length(data2)
         common.elements <- data1
         same.order <- TRUE
-        order1 <- order(data1)
-        order2 <- order(data2)
+        order1 <- base::order(data1)
+        order2 <- base::order(data2)
         identical.object <- TRUE
         identical.content <- TRUE
     }else{
-        if(identical(class(data1), class(data2))){
+        if(base::identical(base::class(data1), base::class(data2))){
             same.class <- TRUE
-            class <- class(data1)
+            class <- base::class(data1)
         }
-        if(identical(length(data1), length(data2))){
+        if(base::identical(base::length(data1), base::length(data2))){
             same.length<- TRUE
-            length <- length(data1)
+            length <- base::length(data1)
         }
-        if(any(class(data1) %in% "factor") & any(class(data2) %in% "factor")){
-            if(identical(levels(data1), levels(data2))){
+        if(base::any(base::class(data1) %in% "factor") & base::any(base::class(data2) %in% "factor")){
+            if(base::identical(base::levels(data1), base::levels(data2))){
                 same.levels <- TRUE
-                levels <- levels(data1)
+                levels <- base::levels(data1)
             }else{
                 same.levels <- FALSE
             }
-            if(any(levels(data1) %in% levels(data2))){
+            if(base::any(base::levels(data1) %in% base::levels(data2))){
                 any.id.levels <- TRUE
-                same.levels.pos1 <- which(levels(data1) %in% levels(data2))
-                same.levels.match1 <- match(levels(data1), levels(data2))
+                same.levels.pos1 <- base::which(base::levels(data1) %in% base::levels(data2))
+                same.levels.match1 <- base::match(base::levels(data1), base::levels(data2))
             }
-            if(any(levels(data2) %in% levels(data1))){
+            if(base::any(base::levels(data2) %in% base::levels(data1))){
                 any.id.levels <- TRUE
-                same.levels.pos2 <- which(levels(data2) %in% levels(data1))
-                same.levels.match2 <- match(levels(data2), levels(data1))
+                same.levels.pos2 <- base::which(base::levels(data2) %in% base::levels(data1))
+                same.levels.match2 <- base::match(base::levels(data2), base::levels(data1))
             }
             if(any.id.levels == TRUE){
-                common.levels <- unique(c(levels(data1)[same.levels.pos1], levels(data2)[same.levels.pos2]))
+                common.levels <- base::unique(base::c(base::levels(data1)[same.levels.pos1], base::levels(data2)[same.levels.pos2]))
             }
         }
-        if(any(class(data1) %in% "factor")){ # to compare content
-            data1 <- as.character(data1)
+        if(base::any(base::class(data1) %in% "factor")){ # to compare content
+            data1 <- base::as.character(data1)
         }
-        if(any(class(data2) %in% "factor")){ # to compare content
-            data2 <- as.character(data2)
+        if(base::any(base::class(data2) %in% "factor")){ # to compare content
+            data2 <- base::as.character(data2)
         }
-        if( ! (is.null(names(data1)) & is.null(names(data2)))){
-            if(identical(names(data1), names(data2))){
+        if( ! (base::is.null(base::names(data1)) & base::is.null(base::names(data2)))){
+            if(base::identical(base::names(data1), base::names(data2))){
                 same.names <- TRUE
-                name <- names(data1)
+                name <- base::names(data1)
             }else{
                 same.names <- FALSE
             }
-            if(any(names(data1) %in% names(data2))){
+            if(base::any(base::names(data1) %in% base::names(data2))){
                 any.id.name <- TRUE
-                same.names.pos1 <- which(names(data1) %in% names(data2))
-                same.names.match1 <- match(names(data1), names(data2))
+                same.names.pos1 <- base::which(base::names(data1) %in% base::names(data2))
+                same.names.match1 <- base::match(base::names(data1), base::names(data2))
             }
-            if(any(names(data2) %in% names(data1))){
+            if(base::any(base::names(data2) %in% base::names(data1))){
                 any.id.name <- TRUE
-                same.names.pos2 <- which(names(data2) %in% names(data1))
-                same.names.match2 <- match(names(data2), names(data1))
+                same.names.pos2 <- base::which(base::names(data2) %in% base::names(data1))
+                same.names.match2 <- base::match(base::names(data2), base::names(data1))
             }
             if(any.id.name == TRUE){
-                common.names <- unique(c(names(data1)[same.names.pos1], names(data2)[same.names.pos2]))
+                common.names <- base::unique(base::c(base::names(data1)[same.names.pos1], base::names(data2)[same.names.pos2]))
             }
         }
-        names(data1) <- NULL # names solved -> to do not be disturbed by names
-        names(data2) <- NULL # names solved -> to do not be disturbed by names
-        if(any(data1 %in% data2)){
+        base::names(data1) <- NULL # names solved -> to do not be disturbed by names
+        base::names(data2) <- NULL # names solved -> to do not be disturbed by names
+        if(base::any(data1 %in% data2)){
             any.id.element <- TRUE
-            same.elements.pos1 <- which(data1 %in% data2)
-            same.elements.match1 <- match(data1, data2)
+            same.elements.pos1 <- base::which(data1 %in% data2)
+            same.elements.match1 <- base::match(data1, data2)
         }
-        if(any(data2 %in% data1)){
+        if(base::any(data2 %in% data1)){
             any.id.element <- TRUE
-            same.elements.pos2 <- which(data2 %in% data1)
-            same.elements.match2 <- match(data2, data1)
+            same.elements.pos2 <- base::which(data2 %in% data1)
+            same.elements.match2 <- base::match(data2, data1)
         }
         if(any.id.element == TRUE){
-            common.elements <- unique(c(data1[same.elements.pos1], data2[same.elements.pos2]))
+            common.elements <- base::unique(base::c(data1[same.elements.pos1], data2[same.elements.pos2]))
         }
-        if(identical(data1, data2)){
+        if(base::identical(data1, data2)){
             identical.content <- TRUE
             same.order <- TRUE
-        }else if(identical(sort(data1), sort(data2))){
+        }else if(base::identical(base::sort(data1), base::sort(data2))){
             same.order <- FALSE
-            order1 <- order(data1)
-            order2 <- order(data2)
+            order1 <- base::order(data1)
+            order2 <- base::order(data2)
         }
     }
     # output
     # warning output
     # end warning output
-    output <- list(same.class = same.class, class = class, same.length = same.length, length = length, same.levels = same.levels, levels = levels, any.id.levels = any.id.levels, same.levels.pos1 = same.levels.pos1, same.levels.pos2 = same.levels.pos2, same.levels.match1 = same.levels.match1, same.levels.match2 = same.levels.match2, common.levels = common.levels, same.names = same.names, name = name, any.id.name = any.id.name, same.names.pos1 = same.names.pos1, same.names.pos2 = same.names.pos2, same.names.match1 = same.names.match1, same.names.match2 = same.names.match2, common.names = common.names, any.id.element = any.id.element, same.elements.pos1 = same.elements.pos1, same.elements.pos2 = same.elements.pos2, same.elements.match1 = same.elements.match1, same.elements.match2 = same.elements.match2, common.elements = common.elements, same.order = same.order, order1 = order1, order2 = order2, identical.object = identical.object, identical.content = identical.content)
-    return(output)
+    output <- base::list(same.class = same.class, class = class, same.length = same.length, length = length, same.levels = same.levels, levels = levels, any.id.levels = any.id.levels, same.levels.pos1 = same.levels.pos1, same.levels.pos2 = same.levels.pos2, same.levels.match1 = same.levels.match1, same.levels.match2 = same.levels.match2, common.levels = common.levels, same.names = same.names, name = name, any.id.name = any.id.name, same.names.pos1 = same.names.pos1, same.names.pos2 = same.names.pos2, same.names.match1 = same.names.match1, same.names.match2 = same.names.match2, common.names = common.names, any.id.element = any.id.element, same.elements.pos1 = same.elements.pos1, same.elements.pos2 = same.elements.pos2, same.elements.match1 = same.elements.match1, same.elements.match2 = same.elements.match2, common.elements = common.elements, same.order = same.order, order1 = order1, order2 = order2, identical.object = identical.object, identical.content = identical.content)
+    base::return(output)
     # end output
     # end main code
 }
