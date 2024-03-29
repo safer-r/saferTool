@@ -86,7 +86,9 @@ info <- function(
     .pack_and_function_check(
         fun = base::c(
             "saferDev::arg_check",
-            "saferDev::get_message"
+            "saferDev::get_message",
+            "utils::head",
+            "utils::tail"
         ),
         lib.path = NULL,
         external.function.name = function.name
@@ -220,11 +222,11 @@ info <- function(
             output <- base::c(output, tempo)
         }
     }
-    tempo.try.error <- saferDev::get_message(data = "base::head(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "utils::head(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
     if(base::is.null(tempo.try.error)){
-        tempo <- base::list("HEAD" = base::head(data))
+        tempo <- base::list("HEAD" = utils::head(data))
         output <- base::c(output, tempo)
-        tempo <- base::list("TAIL" = base::tail(data)) # no reason that tail() does not work if head() works
+        tempo <- base::list("TAIL" = utils::tail(data)) # no reason that tail() does not work if head() works
         output <- base::c(output, tempo)
     }
     tempo.try.error <- saferDev::get_message(data = "base::dim(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
@@ -285,7 +287,7 @@ info <- function(
         output <- base::c(output, tempo)
     }
     if( ! base::is.null(n)){
-        output[base::names(output) != "STRUCTURE"] <- base::lapply(X = output[base::names(output) != "STRUCTURE"], FUN = head, n = n, simplify = FALSE)
+        output[base::names(output) != "STRUCTURE"] <- base::lapply(X = output[base::names(output) != "STRUCTURE"], FUN = utils::head, n = n, simplify = FALSE)
     }
     # output
     # warning output
