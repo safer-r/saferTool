@@ -52,13 +52,13 @@ comp_list <- function(
     package.name <- "saferTool"
     # end package name
     # function name
-    ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
-    function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
+    ini <- base::match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
+    function.name <- base::paste0(base::as.list(base::match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
     if(function.name[1] == "::()"){
         function.name <- function.name[3]
     }
-    arg.names <- names(formals(fun = sys.function(sys.parent(n = 2)))) # names of all the arguments
-    arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
+    arg.names <- base::names(base::formals(fun = base::sys.function(base::sys.parent(n = 2)))) # names of all the arguments
+    arg.user.setting <- base::as.list(base::match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
     
     # package checking
@@ -71,14 +71,14 @@ comp_list <- function(
     
     # argument primary checking
     # arg with no default values
-    mandat.args <- c(
+    mandat.args <- base::c(
         "data1", 
         "data2"
     )
-    tempo <- eval(parse(text = paste0("c(missing(", paste0(mandat.args, collapse = "),missing("), "))")))
-    if(any(tempo)){ # normally no NA for missing() output
-        tempo.cat <- paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: \nFOLLOWING ARGUMENT", ifelse(sum(tempo, na.rm = TRUE) > 1, "S HAVE", " HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", paste0(mandat.args, collapse = "\n"))
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    tempo <- base::eval(base::parse(text = base::paste0("base::c(base::missing(", base::paste0(mandat.args, collapse = "),base::missing("), "))")))
+    if(base::any(tempo)){ # normally no NA for missing() output
+        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: \nFOLLOWING ARGUMENT", base::ifelse(base::sum(tempo, na.rm = TRUE) > 1, "S HAVE", " HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", base::paste0(mandat.args, collapse = "\n"))
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end arg with no default values
     # argument checking with arg_check()
@@ -89,26 +89,28 @@ comp_list <- function(
     # end argument primary checking
     
     # second round of checking and data preparation
+    # reserved word checking to avoid bugs
+    # end reserved word checking to avoid bugs
     # management of NA arguments
-    if( ! (all(class(arg.user.setting) == "list", na.rm = TRUE) & length(arg.user.setting) == 0)){
-        tempo.arg <- names(arg.user.setting) # values provided by the user
-        tempo.log <- suppressWarnings(sapply(lapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = is.na), FUN = any)) & lapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = length) == 1L # no argument provided by the user can be just NA
-        if(any(tempo.log) == TRUE){ # normally no NA because is.na() used here
-            tempo.cat <- paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: \n", ifelse(sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS", "THIS ARGUMENT"), " CANNOT JUST BE NA:", paste0(tempo.arg[tempo.log], collapse = "\n"))
-            stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    if( ! (base::all(base::class(arg.user.setting) == "list", na.rm = TRUE) & base::length(arg.user.setting) == 0)){
+        tempo.arg <- base::names(arg.user.setting) # values provided by the user
+        tempo.log <- base::suppressWarnings(base::sapply(base::lapply(base::lapply(tempo.arg, FUN = base::get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.na), FUN = base::any)) & base::lapply(base::lapply(tempo.arg, FUN = base::get, env = base::sys.nframe(), inherit = FALSE), FUN = base::length) == 1L # no argument provided by the user can be just NA
+        if(base::any(tempo.log) == TRUE){ # normally no NA because is.na() used here
+            tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: \n", base::ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS", "THIS ARGUMENT"), " CANNOT JUST BE NA:", base::paste0(tempo.arg[tempo.log], collapse = "\n"))
+            base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
         }
     }
     # end management of NA arguments
     
     # management of NULL arguments
-    tempo.arg <-c(
+    tempo.arg <-base::c(
         "data1", 
         "data2"
     )
-    tempo.log <- sapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = is.null)
-    if(any(tempo.log) == TRUE){# normally no NA with is.null()
-        tempo.cat <- paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE:\n", ifelse(sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS\n", "THIS ARGUMENT\n"), paste0(tempo.arg[tempo.log], collapse = "\n"),"\nCANNOT BE NULL")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    tempo.log <- base::sapply(base::lapply(tempo.arg, FUN = get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.null)
+    if(base::any(tempo.log) == TRUE){# normally no NA with is.null()
+        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE:\n", base::ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS\n", "THIS ARGUMENT\n"), base::paste0(tempo.arg[tempo.log], collapse = "\n"),"\nCANNOT BE NULL")
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end management of NULL arguments
     
@@ -119,18 +121,15 @@ comp_list <- function(
     # end warning initiation
     
     # other checkings
-    if( ! any(class(data1) %in% "list")){
-        tempo.cat <- paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data1 ARGUMENT MUST BE A LIST")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    if( ! base::any(base::class(data1) %in% "list")){
+        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data1 ARGUMENT MUST BE A LIST")
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
-    if( ! any(class(data2) %in% "list")){
-        tempo.cat <- paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data2 ARGUMENT MUST BE A LIST")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    if( ! base::any(base::class(data2) %in% "list")){
+        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data2 ARGUMENT MUST BE A LIST")
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end other checkings
-    
-    # reserved word checking to avoid bugs
-    # end reserved word checking to avoid bugs
     # end second round of checking and data preparation
     
     # main code
@@ -146,59 +145,59 @@ comp_list <- function(
     same.compartment.pos2 <- NULL
     identical.object <- NULL
     identical.content <- NULL
-    if(identical(data1, data2)){
+    if(base::identical(data1, data2)){
         same.length <- TRUE
-        length <- length(data1)
-        if( ! is.null(names(data1))){
+        length <- base::length(data1)
+        if( ! base::is.null(base::names(data1))){
             same.names <- TRUE
-            name <- names(data1)
+            name <- base::names(data1)
             any.id.name <- TRUE
-            same.names.pos1 <- 1:length(data1)
-            same.names.pos2 <- 1:length(data2)
+            same.names.pos1 <- 1:base::length(data1)
+            same.names.pos2 <- 1:base::length(data2)
         }
         any.id.compartment <- TRUE
-        same.compartment.pos1 <- 1:length(data1)
-        same.compartment.pos2 <- 1:length(data2)
+        same.compartment.pos1 <- 1:base::length(data1)
+        same.compartment.pos2 <- 1:base::length(data2)
         identical.object <- TRUE
         identical.content <- TRUE
     }else{
         identical.object <- FALSE
-        if( ! identical(length(data1), length(data2))){
+        if( ! base::identical(base::length(data1), base::length(data2))){
             same.length<- FALSE
         }else{
             same.length<- TRUE
-            length <- length(data1)
+            length <- base::length(data1)
         }
-        if( ! (is.null(names(data1)) & is.null(names(data2)))){
-            if( ! identical(names(data1), names(data2))){
+        if( ! (base::is.null(base::names(data1)) & base::is.null(base::names(data2)))){
+            if( ! base::identical(base::names(data1), base::names(data2))){
                 same.names <- FALSE
             }else{
                 same.names <- TRUE
-                name <- names(data1)
+                name <- base::names(data1)
             }
             any.id.name <- FALSE
-            if(any(names(data1) %in% names(data2))){
+            if(base::any(base::names(data1) %in% base::names(data2))){
                 any.id.name <- TRUE
-                same.names.pos1 <- which(names(data1) %in% names(data2))
+                same.names.pos1 <- base::which(base::names(data1) %in% base::names(data2))
             }
-            if(any(names(data2) %in% names(data1))){
+            if(base::any(base::names(data2) %in% base::names(data1))){
                 any.id.name <- TRUE
-                same.names.pos2 <- which(names(data2) %in% names(data1))
+                same.names.pos2 <- base::which(base::names(data2) %in% base::names(data1))
             }
         }
-        names(data1) <- NULL
-        names(data2) <- NULL
+        base::names(data1) <- NULL
+        base::names(data2) <- NULL
         any.id.compartment <- FALSE
-        if(any(data1 %in% data2)){
+        if(base::any(data1 %in% data2)){
             any.id.compartment <- TRUE
-            same.compartment.pos1 <- which(data1 %in% data2)
+            same.compartment.pos1 <- base::which(data1 %in% data2)
         }
-        if(any(data2 %in% data1)){
+        if(base::any(data2 %in% data1)){
             any.id.compartment <- TRUE
-            same.compartment.pos2 <- which(data2 %in% data1)
+            same.compartment.pos2 <- base::which(data2 %in% data1)
         }
-        if(same.length == TRUE & ! all(is.null(same.compartment.pos1), is.null(same.compartment.pos2), na.rm = TRUE)){
-            if(identical(same.compartment.pos1, same.compartment.pos2)){
+        if(same.length == TRUE & ! base::all(base::is.null(same.compartment.pos1), base::is.null(same.compartment.pos2), na.rm = TRUE)){
+            if(base::identical(same.compartment.pos1, same.compartment.pos2)){
                 identical.content <- TRUE
             }else{
                 identical.content <- FALSE
@@ -207,11 +206,11 @@ comp_list <- function(
             identical.content <- FALSE
         }
     }
-    output <- list(same.length = same.length, length = length, same.names = same.names, name = name, any.id.name = any.id.name, same.names.pos1 = same.names.pos1, same.names.pos2 = same.names.pos2, any.id.compartment = any.id.compartment, same.compartment.pos1 = same.compartment.pos1, same.compartment.pos2 = same.compartment.pos2, identical.object = identical.object, identical.content = identical.content)
+    output <- base::list(same.length = same.length, length = length, same.names = same.names, name = name, any.id.name = any.id.name, same.names.pos1 = same.names.pos1, same.names.pos2 = same.names.pos2, any.id.compartment = any.id.compartment, same.compartment.pos1 = same.compartment.pos1, same.compartment.pos2 = same.compartment.pos2, identical.object = identical.object, identical.content = identical.content)
     # output
     # warning output
     # end warning output
-    return(output)
+    base::return(output)
     # end output
     # end main code
 }
