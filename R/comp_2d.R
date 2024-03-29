@@ -198,9 +198,9 @@ comp_2d <- function(
         "data1", 
         "data2"
     )
-    tempo <- base::eval(base::parse(text = base::paste0("c(missing(", base::paste0(mandat.args, collapse = "),missing("), "))")))
+    tempo <- base::eval(base::parse(text = base::paste0("base::c(base::missing(", base::paste0(mandat.args, collapse = "),base::missing("), "))")))
     if(base::any(tempo)){ # normally no NA for missing() output
-        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: \nFOLLOWING ARGUMENT", base::ifelse(sum(tempo, na.rm = TRUE) > 1, "S HAVE", " HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", base::paste0(mandat.args, collapse = "\n"))
+        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: \nFOLLOWING ARGUMENT", base::ifelse(base::sum(tempo, na.rm = TRUE) > 1, "S HAVE", " HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", base::paste0(mandat.args, collapse = "\n"))
         base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end arg with no default values
@@ -230,7 +230,7 @@ comp_2d <- function(
         "data1", 
         "data2"
     )
-    tempo.log <- base::sapply(base::lapply(tempo.arg, FUN = get, env = base::sys.nframe(), inherit = FALSE), FUN = is.null)
+    tempo.log <- base::sapply(base::lapply(tempo.arg, FUN = get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.null)
     if(base::any(tempo.log) == TRUE){# normally no NA with is.null()
         tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE:\n", base::ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS\n", "THIS ARGUMENT\n"), base::paste0(tempo.arg[tempo.log], collapse = "\n"),"\nCANNOT BE NULL")
         base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
@@ -392,7 +392,7 @@ comp_2d <- function(
             same.row.name <- NULL # but already NULL
             same.col.name <- NULL # but already NULL
             # other row names param remain NULL
-        }else if((base::is.null(base::dimnames(data1)) & ! base::is.null(base::dimnames(data2))) | ( ! base::is.null(dimnames(data1)) & base::is.null(base::dimnames(data2)))){
+        }else if((base::is.null(base::dimnames(data1)) & ! base::is.null(base::dimnames(data2))) | ( ! base::is.null(base::dimnames(data1)) & base::is.null(base::dimnames(data2)))){
             same.row.name <- FALSE
             same.col.name <- FALSE
             any.id.row.name <- FALSE
@@ -437,7 +437,7 @@ comp_2d <- function(
             if(base::is.null(base::dimnames(data1)[[2]]) & base::is.null(base::dimnames(data2)[[2]])){
                 same.col.name <- NULL # but already NULL
                 # other col names param remain NULL
-            }else if((base::is.null(base::dimnames(data1)[[2]]) & ! base::is.null(base::dimnames(data2)[[2]])) | ( ! base::is.null(base::dimnames(data1)[[2]]) & is.null(dimnames(data2)[[2]]))){
+            }else if((base::is.null(base::dimnames(data1)[[2]]) & ! base::is.null(base::dimnames(data2)[[2]])) | ( ! base::is.null(base::dimnames(data1)[[2]]) & base::is.null(base::dimnames(data2)[[2]]))){
                 same.col.name <- FALSE
                 any.id.col.name <- FALSE
                 # other col names param remain NULL
@@ -503,7 +503,7 @@ comp_2d <- function(
             # same.row.pos1 and 2 remain NULL
         }
         if(same.row.nb == TRUE){ # because if not the same row nb, the col cannot be identical
-            if(base::as.double(ncol(data1)) * base::as.double(base::ncol(data2)) <= 1e6){
+            if(base::as.double(base::ncol(data1)) * base::as.double(base::ncol(data2)) <= 1e6){
                 tempo1 <- base::c(base::as.data.frame(data1, stringsAsFactors = FALSE))
                 tempo2 <- base::c(base::as.data.frame(data2, stringsAsFactors = FALSE))
                 same.col.pos1 <- base::which(tempo1 %in% tempo2)
