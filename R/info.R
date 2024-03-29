@@ -188,7 +188,7 @@ info <- function(
     # end new environment
     data.name <- base::deparse(base::substitute(data))
     output <- base::list("NAME" = data.name)
-    tempo.try.error <- saferDev::get_message(data = "base::class(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = sbase::ys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "base::class(data)", kind = "error", header = FALSE, env = base::get(env.name, envir =base::sys.nframe(), inherits = FALSE))
     if(base::is.null(tempo.try.error)){
         tempo <- base::list("CLASS" = base::class(data))
         output <- base::c(output, tempo)
@@ -198,7 +198,7 @@ info <- function(
         tempo <- base::list("TYPE" = base::typeof(data))
         output <- base::c(output, tempo)
     }
-    tempo.try.error <- saferDev::get_message(data = "base::length(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "length(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
     if(base::is.null(tempo.try.error)){
         tempo <- base::list("LENGTH" = base::length(data))
         output <- base::c(output, tempo)
