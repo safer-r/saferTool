@@ -188,7 +188,7 @@ info <- function(
     # end new environment
     data.name <- base::deparse(base::substitute(data))
     output <- base::list("NAME" = data.name)
-    tempo.try.error <- saferDev::get_message(data = "class(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = sbase::ys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "base::class(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = sbase::ys.nframe(), inherits = FALSE))
     if(base::is.null(tempo.try.error)){
         tempo <- base::list("CLASS" = base::class(data))
         output <- base::c(output, tempo)
@@ -214,13 +214,13 @@ info <- function(
         output <- base::c(output, tempo)
     }
     if(base::all(base::typeof(data) %in% base::c("logical", "integer", "double", "complex", "character", "list"))){ # all() without na.rm -> ok because typeof(NA) is "logical"
-        tempo.try.error <- saferDev::get_message(data = "is.na(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+        tempo.try.error <- saferDev::get_message(data = "base::is.na(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
         if(base::is.null(tempo.try.error)){
             tempo <- base::list("NA.NB" = base::sum(base::is.na(data)))
             output <- base::c(output, tempo)
         }
     }
-    tempo.try.error <- saferDev::get_message(data = "head(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "base::head(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
     if(base::is.null(tempo.try.error)){
         tempo <- base::list("HEAD" = base::head(data))
         output <- base::c(output, tempo)
@@ -245,12 +245,12 @@ info <- function(
             output <- base::c(output, tempo)
         }
     }
-    tempo.try.error <- saferDev::get_message(data = "summary(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "base::summary(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
     if(base::is.null(tempo.try.error)){
         tempo <- base::list("SUMMARY" = base::summary(data))
         output <- base::c(output, tempo)
     }
-    tempo.try.error <- saferDev::get_message(data = "noquote(matrix(utils::capture.output(utils::str(data))))", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "base::noquote(base::matrix(utils::capture.output(utils::str(data))))", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
     if(base::is.null(tempo.try.error)){
         tempo <- utils::capture.output(utils::str(data))
         tempo <- base::list("STRUCTURE" = base::noquote(base::matrix(tempo, dimnames = base::list(base::rep("", base::length(tempo)), "")))) # str() print automatically, ls.str() not but does not give the order of the data.frame
