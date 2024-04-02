@@ -163,6 +163,7 @@ name_change <- function(
         }
         posi <- base::which( ! data1 %in% data)
     }
+
     # output
     # warning output
     # end warning output
