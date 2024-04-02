@@ -25,7 +25,7 @@ min2 <- function(
     package.name <- "saferTool"
     # end package name
     # function name
-    function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
+    function.name <- base::paste0(base::as.list(base::match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
     if(function.name[1] == "::()"){
         function.name <- function.name[3]
     }
@@ -38,13 +38,13 @@ min2 <- function(
     )
     # main code
     if(finite == TRUE){
-        x <- x[ ! x %in% c(Inf, -Inf)]
+        x <- x[ ! x %in% base::c(Inf, -Inf)]
     }
     output <- base::min(x, na.rm = na.rm)
     # end main code
     # output
     # warning output
     # end warning output
-    return(output)
+    base::return(output)
     # end output
 }
