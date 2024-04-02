@@ -33,7 +33,7 @@
     # check of lib.path
     # already done in the main function
     if(base::is.null(lib.path)){
-        lib.path <- .libPaths() # .libPaths(new = lib.path) # or .libPaths(new = c(.libPaths(), lib.path))
+        lib.path <- base::.libPaths() # .libPaths(new = lib.path) # or .libPaths(new = c(.libPaths(), lib.path))
     }
     # end check of lib.path
     # main code
@@ -66,7 +66,7 @@
             "ERROR IN ", 
             external.function.name, 
             " OF THE saferTool PACKAGE. REQUIRED FUNCTION",
-            base::ifelse(length(tempo) == 1L, " IS ", "S ARE "), 
+            base::ifelse(base::length(tempo) == 1L, " IS ", "S ARE "), 
             "MISSING IN THE INSTALLED PACKAGE", 
             base::ifelse(base::length(tempo) == 1L, base::paste0(":\n", tempo), base::paste0("S:\n", base::paste(tempo, collapse = "\n")))
         )
@@ -107,20 +107,20 @@
     package.name <- "saferTool"
     # end package name
     # function name
-    ini <- match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
-    function.name <- paste0(as.list(match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
+    ini <- base::match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
+    function.name <- base::paste0(base::as.list(base::match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
     if(function.name[1] == "::()"){
         function.name <- function.name[3]
     }
-    arg.names <- names(formals(fun = sys.function(sys.parent(n = 2)))) # names of all the arguments
-    arg.user.setting <- as.list(match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
+    arg.names <- base::names(base::formals(fun = base::sys.function(base::sys.parent(n = 2)))) # names of all the arguments
+    arg.user.setting <- base::as.list(base::match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
     # package checking
     # check of lib.path
     # end check of lib.path
     # check of the required function from the required packages
     .pack_and_function_check(
-        fun = c(
+        fun = base::c(
             "saferDev::arg_check"
         ),
         lib.path = NULL, # no lib.path for the functions using .arguments_check()
@@ -131,22 +131,22 @@
     
     # argument primary checking
     # arg with no default values
-    mandat.args <- c(
+    mandat.args <- base::c(
         "x"
     )
-    tempo <- eval(parse(text = paste0("missing(", paste0(mandat.args, collapse = ") | missing("), ")")))
-    if(any(tempo)){ # normally no NA for missing() output
-        tempo.cat <- paste0("ERROR IN ", external.function.name, " OF THE ", package.name, " PACKAGE: \nFOLLOWING ARGUMENT", ifelse(base::sum(tempo, na.rm = TRUE) > 1, "S HAVE", " HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", paste0(mandat.args, collapse = "\n"))
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    tempo <- base::eval(base::parse(text = base::paste0("base::missing(", base::paste0(mandat.args, collapse = ") | base::missing("), ")")))
+    if(base::any(tempo)){ # normally no NA for missing() output
+        tempo.cat <- base::paste0("ERROR IN ", external.function.name, " OF THE ", package.name, " PACKAGE: \nFOLLOWING ARGUMENT", base::ifelse(base::sum(tempo, na.rm = TRUE) > 1, "S HAVE", " HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", base::paste0(mandat.args, collapse = "\n"))
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end arg with no default values
     # argument checking with arg_check()
     argum.check <- NULL #
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
-    ee <- expression(argum.check = c(argum.check, tempo$problem) , text.check = c(text.check, tempo$text) , checked.arg.names = c(checked.arg.names, tempo$object.name))
-    tempo <- saferDev::arg_check(data = na.rm, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name) ; eval(ee)
-    tempo <- saferDev::arg_check(data = finite, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name) ; eval(ee)
+    ee <- base::expression(argum.check = base::c(argum.check, tempo$problem) , text.check = base::c(text.check, tempo$text) , checked.arg.names = base::c(checked.arg.names, tempo$object.name))
+    tempo <- saferDev::arg_check(data = na.rm, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name) ; base::eval(ee)
+    tempo <- saferDev::arg_check(data = finite, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name) ; base::eval(ee)
     tempo1 <- saferDev::arg_check(data = x, class = "vector", mode = "numeric", na.contain = TRUE, fun.name = external.function.name)
     tempo2 <- saferDev::arg_check(data = x, class = "vector", mode = "logical", na.contain = TRUE, fun.name = external.function.name)
     tempo3 <- saferDev::arg_check(data = x, class = "vector", mode = "complex", na.contain = TRUE, fun.name = external.function.name)
@@ -156,13 +156,13 @@
     tempo7 <- saferDev::arg_check(data = x, class = "table", mode = "numeric", na.contain = TRUE, fun.name = external.function.name)
     
     if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE & tempo5$problem == TRUE& tempo6$problem == TRUE & tempo7$problem == TRUE){
-        tempo.cat <- paste0("ERROR IN ", external.function.name, " OF THE", package.name, " PACKAGE: x ARGUMENT MUST BE A VECTOR, MATRIX OR TABLE OF NUMERIC OR LOGICAL VALUES")
-        text.check <- c(text.check, tempo.cat)
-        argum.check <- c(argum.check, TRUE)
+        tempo.cat <- base::paste0("ERROR IN ", external.function.name, " OF THE", package.name, " PACKAGE: x ARGUMENT MUST BE A VECTOR, MATRIX OR TABLE OF NUMERIC OR LOGICAL VALUES")
+        text.check <- base::c(text.check, tempo.cat)
+        argum.check <- base::c(argum.check, TRUE)
     }
-    if( ! is.null(argum.check)){
-        if(any(argum.check, na.rm = TRUE) == TRUE){
-            stop(paste0("\n\n================\n\n", paste(text.check[argum.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
+    if( ! base::is.null(argum.check)){
+        if(base::any(argum.check, na.rm = TRUE) == TRUE){
+            base::stop(base::paste0("\n\n================\n\n", base::paste(text.check[argum.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
         }
     }
     # end argument checking with arg_check()
@@ -172,25 +172,25 @@
     # end argument primary checking
     # second round of checking and data preparation
     # management of NA arguments
-    if( ! (all(class(arg.user.setting) == "list", na.rm = TRUE) & length(arg.user.setting) == 0)){
-        tempo.arg <- names(arg.user.setting) # values provided by the user
-        tempo.log <- suppressWarnings(sapply(lapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = is.na), FUN = any)) & lapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = length) == 1L # no argument provided by the user can be just NA
-        if(any(tempo.log) == TRUE){ # normally no NA because is.na() used here
-            tempo.cat <- paste0("ERROR IN ", external.function.name, " OF THE", package.name, " PACKAGE:\n", ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS", "THIS ARGUMENT"), " CANNOT JUST BE NA:\n", paste0(tempo.arg[tempo.log], collapse = "\n"))
-            stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    if( ! (base::all(base::class(arg.user.setting) == "list", na.rm = TRUE) & base::length(arg.user.setting) == 0)){
+        tempo.arg <- base::names(arg.user.setting) # values provided by the user
+        tempo.log <- base::suppressWarnings(base::sapply(base::lapply(base::lapply(tempo.arg, FUN = base::get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.na), FUN = base::any)) & base::lapply(base::lapply(tempo.arg, FUN = base::get, env = base::sys.nframe(), inherit = FALSE), FUN = base::length) == 1L # no argument provided by the user can be just NA
+        if(base::any(tempo.log) == TRUE){ # normally no NA because is.na() used here
+            tempo.cat <- base::paste0("ERROR IN ", external.function.name, " OF THE", package.name, " PACKAGE:\n", base::ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS", "THIS ARGUMENT"), " CANNOT JUST BE NA:\n", base::paste0(tempo.arg[tempo.log], collapse = "\n"))
+            base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
         }
     }
     # end management of NA arguments
     # management of NULL arguments
-    tempo.arg <- c(
+    tempo.arg <- base::c(
         "x",
         "na.rm",
         "finite"
     )
-    tempo.log <- sapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = is.null)
-    if(any(tempo.log) == TRUE){# normally no NA with is.null()
-        tempo.cat <- paste0("ERROR IN ", external.function.name, " OF THE", package.name, " PACKAGE:\n", ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS\n", "THIS ARGUMENT\n"), paste0(tempo.arg[tempo.log], collapse = "\n"),"\nCANNOT BE NULL")
-        stop(paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+    tempo.log <- base::sapply(base::lapply(tempo.arg, FUN = get, env = base::sys.nframe(), inherit = FALSE), FUN = is.null)
+    if(base::any(tempo.log) == TRUE){# normally no NA with is.null()
+        tempo.cat <- base::paste0("ERROR IN ", external.function.name, " OF THE", package.name, " PACKAGE:\n", base::ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS\n", "THIS ARGUMENT\n"), base::paste0(tempo.arg[tempo.log], collapse = "\n"),"\nCANNOT BE NULL")
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
     # end management of NULL arguments
     
