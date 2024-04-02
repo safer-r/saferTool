@@ -107,10 +107,8 @@ tail2 <- function(
     
     # code that protects set.seed() in the global environment
     # end code that protects set.seed() in the global environment
-    
     # warning initiation
     # end warning initiation
-    
     # other checkings
     # end other checkings
     # end second round of checking and data preparation
