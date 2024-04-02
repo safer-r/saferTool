@@ -28,6 +28,7 @@ max2 <- function(
     # package name
     package.name <- "saferTool"
     # end package name
+
     # function name
     function.name <- base::paste0(base::as.list(base::match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
     if(function.name[1] == "::()"){
@@ -46,6 +47,7 @@ max2 <- function(
     }
     output <- base::max(x, na.rm = na.rm)
     # end main code
+    
     # output
     # warning output
     # end warning output
