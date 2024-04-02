@@ -31,6 +31,7 @@ range2 <- function(
         function.name <- function.name[3]
     }
     # end function name
+    
     .arguments_check(
         x = x,
         na.rm = na.rm,
