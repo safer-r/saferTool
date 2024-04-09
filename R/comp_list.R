@@ -9,6 +9,7 @@
 #' - common compartments
 #' @param data1 List.
 #' @param data2 List.
+#' @param safer_check Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.
 #' @returns 
 #' A list containing:
 #' 
@@ -42,12 +43,13 @@
 #' @export
 comp_list <- function(
         data1, 
-        data2
+        data2,
+        safer_check = TRUE
 ){
     
     # DEBUGGING
-    # data1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) # for function debugging
-    # data1 = list(a = 1:5, b = LETTERS[1:2]) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) # for function debugging
+    # data1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; safer_check = TRUE # for function debugging
+    # data1 = list(a = 1:5, b = LETTERS[1:2]) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; safer_check = TRUE# for function debugging
     # package name
     package.name <- "saferTool"
     # end package name
@@ -105,7 +107,8 @@ comp_list <- function(
     # management of NULL arguments
     tempo.arg <-base::c(
         "data1", 
-        "data2"
+        "data2",
+        "safer_check"
     )
     tempo.log <- base::sapply(base::lapply(tempo.arg, FUN = base::get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.null)
     if(base::any(tempo.log) == TRUE){# normally no NA with is.null()
