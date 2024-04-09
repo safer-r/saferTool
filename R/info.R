@@ -4,6 +4,7 @@
 #' @param data Object to analyse.
 #' @param n Single positive integer value indicating the n first number of elements to display per compartment of the output list (i.e., head(..., n)). Write NULL to return all the elements. Does not apply for the $STRUCTURE compartment output.
 #' @param warn.print Single logical value. Print potential warnings at the end of the execution? If FALSE the warning messages are added in the output list as an additional compartment (or NULL if no message).
+#' @param safer_check Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.
 #' @returns
 #' A list containing information, depending on the class and type of data. The backbone is generally:
 #' 
@@ -62,10 +63,11 @@
 info <- function(
         data, 
         n = NULL, 
-        warn.print = TRUE
+        warn.print = TRUE,
+        safer_check = TRUE
 ){
     # DEBUGGING
-    # mat1 <- matrix(1:3) ; data = mat1 ; n = NULL ; warn.print = TRUE # for function debugging
+    # mat1 <- matrix(1:3) ; data = mat1 ; n = NULL ; warn.print = TRUE ; safer_check = TRUE# for function debugging
     # package name
     package.name <- "saferTool"
     # end package name
@@ -83,7 +85,8 @@ info <- function(
     # end check of lib.path
     
     # check of the required function from the required packages
-    .pack_and_function_check(
+    if(safer_check == TRUE){
+        .pack_and_function_check(
         fun = base::c(
             "saferDev::arg_check",
             "saferDev::get_message",
@@ -93,6 +96,7 @@ info <- function(
         lib.path = NULL,
         external.function.name = function.name
     )
+    }
     # end check of the required function from the required packages
     # end package checking
     
@@ -113,13 +117,13 @@ info <- function(
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- base::expression(argum.check <- c(argum.check, tempo$problem) , text.check <- base::c(text.check, tempo$text) , checked.arg.names <- base::c(checked.arg.names, tempo$object.name))
     if( ! base::is.null(n)){
-        tempo <- saferDev::arg_check(data = n, class = "vector", typeof = "integer", length = 1, double.as.integer.allowed = TRUE, fun.name = function.name) ; base::eval(ee)
+        tempo <- saferDev::arg_check(data = n, class = "vector", typeof = "integer", length = 1, double.as.integer.allowed = TRUE, fun.name = function.name, safer_check = FALSE) ; base::eval(ee)
     }else{
         # no arg_check test here, it is just for checked.arg.names
-        tempo <- saferDev::arg_check(data = n, class = "vector")
+        tempo <- saferDev::arg_check(data = n, class = "vector", safer_check = FALSE)
         checked.arg.names <- base::c(checked.arg.names, tempo$object.name)
     }
-    tempo <- saferDev::arg_check(data = warn.print, class = "logical", length = 1, fun.name = function.name) ; base::eval(ee)
+    tempo <- saferDev::arg_check(data = warn.print, class = "logical", length = 1, fun.name = function.name, safer_check = FALSE) ; base::eval(ee)
     if( ! base::is.null(argum.check)){
         if(base::any(argum.check) == TRUE){
             base::stop(base::paste0("\n\n================\n\n", base::paste(text.check[argum.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
@@ -147,7 +151,8 @@ info <- function(
     tempo.arg <-base::c(
         "data", 
         # "n", # because can be NULL
-        "warn.print"
+        "warn.print",
+        "safer_check"
     )
     tempo.log <- base::sapply(base::lapply(tempo.arg, FUN = get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.null)
     if(base::any(tempo.log) == TRUE){# normally no NA with is.null()
@@ -190,17 +195,17 @@ info <- function(
     # end new environment
     data.name <- base::deparse(base::substitute(data))
     output <- base::list("NAME" = data.name)
-    tempo.try.error <- saferDev::get_message(data = "base::class(data)", kind = "error", header = FALSE, env = base::get(env.name, envir =base::sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "base::class(data)", kind = "error", header = FALSE, env = base::get(env.name, envir =base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
     if(base::is.null(tempo.try.error)){
         tempo <- base::list("CLASS" = base::class(data))
         output <- base::c(output, tempo)
     }
-    tempo.try.error <- saferDev::get_message(data = "base::typeof(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "base::typeof(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
     if(base::is.null(tempo.try.error)){
         tempo <- base::list("TYPE" = base::typeof(data))
         output <- base::c(output, tempo)
     }
-    tempo.try.error <- saferDev::get_message(data = "length(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "length(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
     if(base::is.null(tempo.try.error)){
         tempo <- base::list("LENGTH" = base::length(data))
         output <- base::c(output, tempo)
@@ -216,20 +221,20 @@ info <- function(
         output <- base::c(output, tempo)
     }
     if(base::all(base::typeof(data) %in% base::c("logical", "integer", "double", "complex", "character", "list"))){ # all() without na.rm -> ok because typeof(NA) is "logical"
-        tempo.try.error <- saferDev::get_message(data = "base::is.na(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+        tempo.try.error <- saferDev::get_message(data = "base::is.na(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
         if(base::is.null(tempo.try.error)){
             tempo <- base::list("NA.NB" = base::sum(base::is.na(data)))
             output <- base::c(output, tempo)
         }
     }
-    tempo.try.error <- saferDev::get_message(data = "utils::head(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "utils::head(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
     if(base::is.null(tempo.try.error)){
         tempo <- base::list("HEAD" = utils::head(data))
         output <- base::c(output, tempo)
         tempo <- base::list("TAIL" = utils::tail(data)) # no reason that tail() does not work if head() works
         output <- base::c(output, tempo)
     }
-    tempo.try.error <- saferDev::get_message(data = "base::dim(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "base::dim(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
     if(base::is.null(tempo.try.error)){
         if(base::length(base::dim(data)) > 0){
             tempo <- base::list("DIMENSION" = base::dim(data))
@@ -247,12 +252,12 @@ info <- function(
             output <- base::c(output, tempo)
         }
     }
-    tempo.try.error <- saferDev::get_message(data = "base::summary(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "base::summary(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
     if(base::is.null(tempo.try.error)){
         tempo <- base::list("SUMMARY" = base::summary(data))
         output <- base::c(output, tempo)
     }
-    tempo.try.error <- saferDev::get_message(data = "base::noquote(base::matrix(utils::capture.output(utils::str(data))))", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE))
+    tempo.try.error <- saferDev::get_message(data = "base::noquote(base::matrix(utils::capture.output(utils::str(data))))", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
     if(base::is.null(tempo.try.error)){
         tempo <- utils::capture.output(utils::str(data))
         tempo <- base::list("STRUCTURE" = base::noquote(base::matrix(tempo, dimnames = base::list(base::rep("", base::length(tempo)), "")))) # str() print automatically, ls.str() not but does not give the order of the data.frame
