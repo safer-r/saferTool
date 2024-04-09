@@ -5,6 +5,7 @@
 #' @param data2 Reference vector of character strings (duplicated elemetns not authorized).
 #' @param added.string Single character string added at the end of the modified string in elements of data1 if present in data2.
 #' @param duplicate Single logical value. Return the elements of data1 still with duplicated elements? Defaut to TRUE, i.e., duplicated elements remain duplicated.
+#' @param safer_check Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.
 #' @returns
 #' A list containing :
 #' 
@@ -29,10 +30,11 @@ name_change <- function(
         data1, 
         data2, 
         added.string = "_modif",
-        duplicate = TRUE
+        duplicate = TRUE,
+        safer_check = TRUE
 ){
     # DEBUGGING
-    # data1 = c("A", "A", "B", "C", "A", "D") ; data2 <- c("A", "C") ; added.string = "_modif" ; duplicate = TRUE # for function debugging
+    # data1 = c("A", "A", "B", "C", "A", "D") ; data2 <- c("A", "C") ; added.string = "_modif" ; duplicate = TRUE ; safer_check = TRUE# for function debugging
     # package name
     package.name <- "saferTool"
     # end package name
@@ -50,13 +52,15 @@ name_change <- function(
     # end check of lib.path
     
     # check of the required function from the required packages
-    .pack_and_function_check(
+    if(safer_check == TRUE){
+        .pack_and_function_check(
         fun = base::c(
             "saferDev::arg_check"
         ),
         lib.path = NULL,
         external.function.name = function.name
     )
+    }
     # end check of the required function from the required packages
     # end package checking
     
@@ -78,10 +82,10 @@ name_change <- function(
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- base::expression(argum.check <- base::c(argum.check, tempo$problem) , text.check <- base::c(text.check, tempo$text) , checked.arg.names <- base::c(checked.arg.names, tempo$object.name))
-    tempo <- saferDev::arg_check(data = data1, class = "vector", mode = "character", fun.name = function.name) ; base::eval(ee)
-    tempo <- saferDev::arg_check(data = data2, class = "vector", mode = "character", fun.name = function.name) ; base::eval(ee)
-    tempo <- saferDev::arg_check(data = added.string, class = "vector", mode = "character", length = 1, fun.name = function.name) ; base::eval(ee)
-    tempo <- saferDev::arg_check(data = duplicate, class = "vector", mode = "logical", length = 1, fun.name = function.name) ; base::eval(ee)
+    tempo <- saferDev::arg_check(data = data1, class = "vector", mode = "character", fun.name = function.name, safer_check = FALSE) ; base::eval(ee)
+    tempo <- saferDev::arg_check(data = data2, class = "vector", mode = "character", fun.name = function.name, safer_check = FALSE) ; base::eval(ee)
+    tempo <- saferDev::arg_check(data = added.string, class = "vector", mode = "character", length = 1, fun.name = function.name, safer_check = FALSE) ; base::eval(ee)
+    tempo <- saferDev::arg_check(data = duplicate, class = "vector", mode = "logical", length = 1, fun.name = function.name, safer_check = FALSE) ; base::eval(ee)
     if( ! base::is.null(argum.check)){
         if(base::any(argum.check, na.rm = TRUE) == TRUE){
             base::stop(base::paste0("\n\n================\n\n", base::paste(text.check[argum.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
@@ -112,7 +116,8 @@ name_change <- function(
         "data1", 
         "data2", 
         "added.string",
-        "duplicate"
+        "duplicate",
+        "safer_check"
     )
     tempo.log <- base::sapply(base::lapply(tempo.arg, FUN = get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.null)
     if(base::any(tempo.log) == TRUE){# normally no NA with is.null()
