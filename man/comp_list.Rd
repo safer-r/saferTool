@@ -4,12 +4,14 @@
 \alias{comp_list}
 \title{comp_list}
 \usage{
-comp_list(data1, data2)
+comp_list(data1, data2, safer_check = TRUE)
 }
 \arguments{
 \item{data1}{List.}
 
 \item{data2}{List.}
+
+\item{safer_check}{Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.}
 }
 \value{
 A list containing:
