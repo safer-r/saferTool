@@ -4,7 +4,12 @@
 \alias{df_remod}
 \title{df_remod}
 \usage{
-df_remod(data, quanti.col.name = "quanti", quali.col.name = "quali")
+df_remod(
+  data,
+  quanti.col.name = "quanti",
+  quali.col.name = "quali",
+  safer_check = TRUE
+)
 }
 \arguments{
 \item{data}{Data frame to convert.}
@@ -12,6 +17,8 @@ df_remod(data, quanti.col.name = "quanti", quali.col.name = "quali")
 \item{quanti.col.name}{Single character string. Optional name for the quanti column of the new data frame.}
 
 \item{quali.col.name}{Single character string. Optional name for the quali column of the new data frame.}
+
+\item{safer_check}{Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.}
 }
 \value{
 The modified data frame.
