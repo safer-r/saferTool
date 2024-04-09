@@ -4,12 +4,14 @@
 \alias{comp_1d}
 \title{comp_1d}
 \usage{
-comp_1d(data1, data2)
+comp_1d(data1, data2, safer_check = TRUE)
 }
 \arguments{
 \item{data1}{Vector or factor or 1D table, or 1D matrix or 1D array.}
 
 \item{data2}{Vector or factor or 1D table, or 1D matrix or 1D array.}
+
+\item{safer_check}{Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.}
 }
 \value{
 A list containing:
