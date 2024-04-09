@@ -4,7 +4,7 @@
 \alias{round2}
 \title{round2}
 \usage{
-round2(data, dec.nb = 2, after.lead.zero = TRUE)
+round2(data, dec.nb = 2, after.lead.zero = TRUE, safer_check = TRUE)
 }
 \arguments{
 \item{data}{A vector of numbers (numeric or character mode).}
@@ -12,6 +12,8 @@ round2(data, dec.nb = 2, after.lead.zero = TRUE)
 \item{dec.nb}{Single numeric value. Number of required decimal digits.}
 
 \item{after.lead.zero}{Single logical value. If FALSE, rounding is performed for all the decimal numbers, whatever the leading zeros (e.g., 0.123 -> 0.12 and 0.00128 -> 0.00). If TRUE, dec.nb are taken after the leading zeros (e.g., 0.123 -> 0.12 and 0.00128 -> 0.0013).}
+
+\item{safer_check}{Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.}
 }
 \value{
 The modified vector.
