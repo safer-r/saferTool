@@ -4,7 +4,7 @@
 \alias{tail2}
 \title{tail2}
 \usage{
-tail2(data1, n = 6, side = "l")
+tail2(data1, n = 6, side = "l", safer_check = TRUE)
 }
 \arguments{
 \item{data1}{Any object but more dedicated for matrix, data frame or table.}
@@ -12,6 +12,8 @@ tail2(data1, n = 6, side = "l")
 \item{n}{As in utils::tail() but for for matrix, data frame or table, number of dimension to print (10 means 10 rows and columns).}
 
 \item{side}{Either "l" or "r" for the left or right side of the 2D object (only for matrix, data frame or table).}
+
+\item{safer_check}{Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.}
 }
 \value{
 The tail.
