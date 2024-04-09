@@ -4,6 +4,7 @@
 #' @param data A vector of numbers (numeric or character mode).
 #' @param dec.nb Single numeric value. Number of required decimal digits.
 #' @param after.lead.zero Single logical value. If FALSE, rounding is performed for all the decimal numbers, whatever the leading zeros (e.g., 0.123 -> 0.12 and 0.00128 -> 0.00). If TRUE, dec.nb are taken after the leading zeros (e.g., 0.123 -> 0.12 and 0.00128 -> 0.0013).
+#' @param safer_check Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.
 #' @returns The modified vector.
 #' @details 
 #' WARNINGS
@@ -23,12 +24,13 @@
 round2 <- function(
         data, 
         dec.nb = 2, 
-        after.lead.zero = TRUE
+        after.lead.zero = TRUE,
+        safer_check = TRUE
 ){
     
     # DEBUGGING
-    # data = data = c(10, 100.001, 333.0001254, 12312.1235) ; dec.nb = 2 ; after.lead.zero = FALSE # # for function debugging
-    # data = data = c("10", "100.001", "333.0001254", "12312.1235") ; dec.nb = 2 ; after.lead.zero = TRUE # # for function debugging
+    # data = data = c(10, 100.001, 333.0001254, 12312.1235) ; dec.nb = 2 ; after.lead.zero = FALSE ; safer_check = TRUE # for function debugging
+    # data = data = c("10", "100.001", "333.0001254", "12312.1235") ; dec.nb = 2 ; after.lead.zero = TRUE ; safer_check = TRUE # # for function debugging
     # package name
     package.name <- "saferTool"
     # end package name
@@ -46,13 +48,15 @@ round2 <- function(
     # end check of lib.path
 
     # check of the required function from the required packages
-    .pack_and_function_check(
+    if(safer_check == TRUE){
+        .pack_and_function_check(
         fun = base::c(
             "saferDev::arg_check"
         ),
         lib.path = NULL,
         external.function.name = function.name
     )
+    }
     # end check of the required function from the required packages
     # end package checking
 
@@ -106,7 +110,8 @@ round2 <- function(
     tempo.arg <-c(
         "data", 
         "dec.nb", 
-        "after.lead.zero"
+        "after.lead.zero",
+        "safer_check"
     )
     tempo.log <- sapply(lapply(tempo.arg, FUN = get, env = sys.nframe(), inherit = FALSE), FUN = is.null)
     if(any(tempo.log) == TRUE){# normally no NA with is.null()
