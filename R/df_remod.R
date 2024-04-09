@@ -7,6 +7,7 @@
 #' @param data Data frame to convert.
 #' @param quanti.col.name Single character string. Optional name for the quanti column of the new data frame.
 #' @param quali.col.name Single character string. Optional name for the quali column of the new data frame.
+#' @param safer_check Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.
 #' @returns The modified data frame.
 #' @examples
 #' obs <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE) ; 
@@ -18,15 +19,16 @@
 df_remod <- function(
         data, 
         quanti.col.name = "quanti", 
-        quali.col.name = "quali"
+        quali.col.name = "quali",
+        safer_check = TRUE
 ){
     # DEBUGGING
-    # data = data.frame(a = 1:3, b = 4:6, stringsAsFactors = TRUE) ; quanti.col.name = "quanti" ; quali.col.name = "quali" # for function debugging
-    # data = data.frame(a = 1:3, b = 4:6, c = 11:13, stringsAsFactors = TRUE) ; quanti.col.name = "quanti" ; quali.col.name = "quali" # for function debugging
-    # data = data.frame(a = 1:3, b = letters[1:3], stringsAsFactors = TRUE) ; quanti.col.name = "quanti" ; quali.col.name = "quali" # for function debugging
-    # data = data.frame(a = 1:3, b = letters[1:3], stringsAsFactors = TRUE) ; quanti.col.name = "TEST" ; quali.col.name = "quali" # for function debugging
-    # data = data.frame(b = letters[1:3], a = 1:3, stringsAsFactors = TRUE) ; quanti.col.name = "quanti" ; quali.col.name = "quali" # for function debugging
-    # data = data.frame(b = c("e", "e", "h"), a = 1:3, stringsAsFactors = TRUE) ; quanti.col.name = "quanti" ; quali.col.name = "quali" # for function debugging
+    # data = data.frame(a = 1:3, b = 4:6, stringsAsFactors = TRUE) ; quanti.col.name = "quanti" ; quali.col.name = "quali" ; safer_check = TRUE # for function debugging
+    # data = data.frame(a = 1:3, b = 4:6, c = 11:13, stringsAsFactors = TRUE) ; quanti.col.name = "quanti" ; quali.col.name = "quali" ; safer_check = TRUE # for function debugging
+    # data = data.frame(a = 1:3, b = letters[1:3], stringsAsFactors = TRUE) ; quanti.col.name = "quanti" ; quali.col.name = "quali" ; safer_check = TRUE # for function debugging
+    # data = data.frame(a = 1:3, b = letters[1:3], stringsAsFactors = TRUE) ; quanti.col.name = "TEST" ; quali.col.name = "quali" ; safer_check = TRUE # for function debugging
+    # data = data.frame(b = letters[1:3], a = 1:3, stringsAsFactors = TRUE) ; quanti.col.name = "quanti" ; quali.col.name = "quali" ; safer_check = TRUE # for function debugging
+    # data = data.frame(b = c("e", "e", "h"), a = 1:3, stringsAsFactors = TRUE) ; quanti.col.name = "quanti" ; quali.col.name = "quali" ; safer_check = TRUE # for function debugging
     # package name
     package.name <- "saferTool"
     # end package name
@@ -39,18 +41,22 @@ df_remod <- function(
     arg.names <- base::names(base::formals(fun = base::sys.function(base::sys.parent(n = 2)))) # names of all the arguments
     arg.user.setting <- base::as.list(base::match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
-    
+    # critical operator checking 
+     # end critical operator checking
+
     # package checking
     # check of lib.path
     # end check of lib.path
     # check of the required function from the required packages
-    .pack_and_function_check(
+    if(safer_check == TRUE){
+        .pack_and_function_check(
         fun = base::c(
             "saferDev::arg_check"
         ),
         lib.path = NULL,
         external.function.name = function.name
     )
+    }
     # end check of the required function from the required packages
     # end package checking
     
@@ -71,8 +77,8 @@ df_remod <- function(
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- base::expression(argum.check <- base::c(argum.check, tempo$problem) , text.check <- base::c(text.check, tempo$text) , checked.arg.names <- base::c(checked.arg.names, tempo$object.name))
-    tempo <- saferDev::arg_check(data = quanti.col.name, class = "character", length = 1, fun.name = function.name) ; base::eval(ee)
-    tempo <- saferDev::arg_check(data = quali.col.name, class = "character", length = 1, fun.name = function.name) ; base::eval(ee)
+    tempo <- saferDev::arg_check(data = quanti.col.name, class = "character", length = 1, fun.name = function.name, safer_check = FALSE) ; base::eval(ee)
+    tempo <- saferDev::arg_check(data = quali.col.name, class = "character", length = 1, fun.name = function.name, safer_check = FALSE) ; base::eval(ee)
     if( ! base::is.null(argum.check)){
         if(base::any(argum.check, na.rm = TRUE) == TRUE){
             base::stop(base::paste0("\n\n================\n\n", base::paste(text.check[argum.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
@@ -102,7 +108,8 @@ df_remod <- function(
     tempo.arg <-base::c(
         "data", 
         "quanti.col.name", 
-        "quali.col.name"
+        "quali.col.name",
+        "safer_check"
     )
     tempo.log <- base::sapply(base::lapply(tempo.arg, FUN = base::get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.null)
     if(base::any(tempo.log) == TRUE){# normally no NA with is.null()
