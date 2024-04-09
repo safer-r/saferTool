@@ -4,6 +4,7 @@
 #' @param x Numeric or logical vector or matrix or numeric table where find the initial values to use.
 #' @param na.rm Single logical value. Should missing values (NA and NaN) be removed ?
 #' @param finite Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.
+#' @param safer_check Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.
 #' @returns The maximum value of the given arguments. 
 #' @examples
 #' vec <- c(1:3) ; max2(x = vec)
@@ -20,7 +21,8 @@
 max2 <- function(
         x,
         na.rm = FALSE,
-        finite = FALSE
+        finite = FALSE,
+        safer_check = TRUE
         
 ){
     # DEBUGGING
