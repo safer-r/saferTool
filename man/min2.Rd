@@ -4,7 +4,7 @@
 \alias{min2}
 \title{min2}
 \usage{
-min2(x, na.rm = FALSE, finite = FALSE)
+min2(x, na.rm = FALSE, finite = FALSE, safer_check = TRUE)
 }
 \arguments{
 \item{x}{Numeric or logical vector or matrix or numeric table where find the initial values to use.}
@@ -12,6 +12,8 @@ min2(x, na.rm = FALSE, finite = FALSE)
 \item{na.rm}{Single logical value. Should missing values (NA and NaN) be removed ?}
 
 \item{finite}{Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.}
+
+\item{safer_check}{Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.}
 }
 \value{
 The minimum value of the given arguments.
