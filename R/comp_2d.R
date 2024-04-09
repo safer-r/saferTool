@@ -19,6 +19,7 @@
 #' - potential identical columns between the 2 datasets
 #' @param data1 Matrix, data frame or table.
 #' @param data2 Matrix, data frame or table.
+#' @param safer_check Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.
 #' @returns 
 #' A list containing:
 #' 
@@ -155,22 +156,23 @@
 #' @export
 comp_2d <- function(
         data1, 
-        data2
+        data2,
+        safer_check = TRUE
 ){
     # DEBUGGING
-    # data1 = matrix(1:10, ncol = 5) ; data2 = matrix(1:10, ncol = 5) # for function debugging
-    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) # for function debugging
-    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5) # for function debugging
-    # data1 = matrix(1:15, byrow = TRUE, ncol = 5, dimnames = list(letters[1:3], LETTERS[1:5])) ; data2 = matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) # for function debugging
-    # data1 = matrix(1:15, ncol = 5, dimnames = list(letters[1:3], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) # for function debugging
-    # data1 = matrix(1:15, ncol = 5, dimnames = list(paste0("A", letters[1:3]), LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) # for function debugging
-    # data1 = matrix(1:15, ncol = 5, dimnames = list(letters[1:3], LETTERS[1:5])) ; data2 = matrix(1:12, ncol = 4, dimnames = list(letters[1:3], LETTERS[1:4])) # for function debugging
-    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(101:110, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) # for function debugging
-    # data1 = data.frame(a = 1:3, b= letters[1:3], row.names = LETTERS[1:3], stringsAsFactors = TRUE) ; data2 = data.frame(A = 1:3, B= letters[1:3], stringsAsFactors = TRUE) # for function debugging
-    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = as.data.frame(matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])), stringsAsFactors = TRUE) # for function debugging
-    # data1 = matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4]))) # for function debugging
-    # data1 = table(Exp1 = c("A", "A", "A", "B", "B", "B"), Exp2 = c("A1", "B1", "A1", "C1", "C1", "B1")) ; data2 = data.frame(A = 1:3, B= letters[1:3], stringsAsFactors = TRUE) # for function debugging
-    # data1 = matrix(1:1e6, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; data2 = matrix((1:1e6)+1e6/5, ncol = 5, dimnames = list(NULL, LETTERS[1:5]))
+    # data1 = matrix(1:10, ncol = 5) ; data2 = matrix(1:10, ncol = 5) ; safer_check = TRUE # for function debugging
+    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; safer_check = TRUE # for function debugging
+    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5) ;safer_check = TRUE # for function debugging
+    # data1 = matrix(1:15, byrow = TRUE, ncol = 5, dimnames = list(letters[1:3], LETTERS[1:5])) ; data2 = matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ;safer_check = TRUE # for function debugging
+    # data1 = matrix(1:15, ncol = 5, dimnames = list(letters[1:3], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; safer_check = TRUE# for function debugging
+    # data1 = matrix(1:15, ncol = 5, dimnames = list(paste0("A", letters[1:3]), LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; safer_check = TRUE # for function debugging
+    # data1 = matrix(1:15, ncol = 5, dimnames = list(letters[1:3], LETTERS[1:5])) ; data2 = matrix(1:12, ncol = 4, dimnames = list(letters[1:3], LETTERS[1:4])) ; safer_check = TRUE ; safer_check = TRUE # for function debugging
+    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(101:110, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; safer_check = TRUE # for function debugging
+    # data1 = data.frame(a = 1:3, b= letters[1:3], row.names = LETTERS[1:3], stringsAsFactors = TRUE) ; data2 = data.frame(A = 1:3, B= letters[1:3], stringsAsFactors = TRUE) ; safer_check = TRUE # for function debugging
+    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = as.data.frame(matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])), stringsAsFactors = TRUE) ; safer_check = TRUE # for function debugging
+    # data1 = matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4]))) ; safer_check = TRUE # for function debugging
+    # data1 = table(Exp1 = c("A", "A", "A", "B", "B", "B"), Exp2 = c("A1", "B1", "A1", "C1", "C1", "B1")) ; data2 = data.frame(A = 1:3, B= letters[1:3], stringsAsFactors = TRUE) ; safer_check = TRUE # for function debugging
+    # data1 = matrix(1:1e6, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; data2 = matrix((1:1e6)+1e6/5, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; safer_check = TRUE
     # package name
     package.name <- "saferTool"
     # end package name
@@ -228,7 +230,8 @@ comp_2d <- function(
     # management of NULL arguments
     tempo.arg <-base::c(
         "data1", 
-        "data2"
+        "data2",
+        "safer_check"
     )
     tempo.log <- base::sapply(base::lapply(tempo.arg, FUN = base::get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.null)
     if(base::any(tempo.log) == TRUE){# normally no NA with is.null()
