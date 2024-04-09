@@ -4,7 +4,13 @@
 \alias{name_change}
 \title{name_change}
 \usage{
-name_change(data1, data2, added.string = "_modif", duplicate = TRUE)
+name_change(
+  data1,
+  data2,
+  added.string = "_modif",
+  duplicate = TRUE,
+  safer_check = TRUE
+)
 }
 \arguments{
 \item{data1}{Vector of character strings to check and modify.}
@@ -14,6 +20,8 @@ name_change(data1, data2, added.string = "_modif", duplicate = TRUE)
 \item{added.string}{Single character string added at the end of the modified string in elements of data1 if present in data2.}
 
 \item{duplicate}{Single logical value. Return the elements of data1 still with duplicated elements? Defaut to TRUE, i.e., duplicated elements remain duplicated.}
+
+\item{safer_check}{Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.}
 }
 \value{
 A list containing :
