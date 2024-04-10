@@ -247,7 +247,7 @@ comp_2d <- function(
     # end warning initiation
     
     # other checkings
-    if( ! (base::any(base::class(data1) %in% c("data.frame", "table")) | base::all(base::class(data1) %in% base::c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data1) %in% c("matrix", "data.frame", "table"))
+    if( ! (base::any(base::class(data1) %in% base::c("data.frame", "table")) | base::all(base::class(data1) %in% base::c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data1) %in% c("matrix", "data.frame", "table"))
         tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data1 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
         base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }
@@ -479,7 +479,7 @@ comp_2d <- function(
         if(same.col.nb == TRUE){ # because if not the same col nb, the row cannot be identical
             if(base::as.double(base::nrow(data1)) * base::as.double(base::nrow(data2)) <= 1e6){
                 tempo1 <- base::c(base::as.data.frame(base::t(data1), stringsAsFactors = FALSE)) # conversion into list. This work fast with characters
-                tempo2 <- base::c(base::as.data.frame(t(data2), stringsAsFactors = FALSE)) # conversion into list. This work fast with characters
+                tempo2 <- base::c(base::as.data.frame(base::t(data2), stringsAsFactors = FALSE)) # conversion into list. This work fast with characters
                 same.row.pos1 <- base::which(tempo1 %in% tempo2)
                 same.row.pos2 <- base::which(tempo2 %in% tempo1)
                 if((base::length(same.row.pos1) == 0L & base::length(same.row.pos2) == 0L) | base::all(base::is.na(same.row.pos1)) | base::all(base::is.na(same.row.pos2))){
