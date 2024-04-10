@@ -58,7 +58,8 @@ name_change <- function(
             "saferDev::arg_check"
         ),
         lib.path = NULL,
-        external.function.name = function.name
+        external.function.name = function.name,
+        external.package.name = package.name
     )
     }
     # end check of the required function from the required packages
