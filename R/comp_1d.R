@@ -165,7 +165,7 @@ comp_1d <- function(
     # end warning initiation
     
     # other checkings
-    if( ! base::any(base::class(data1) %in% c("logical", "integer", "numeric", "character", "factor", "table"))){
+    if( ! base::any(base::class(data1) %in% base::c("logical", "integer", "numeric", "character", "factor", "table"))){
         tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data1 ARGUMENT MUST BE A NON NULL VECTOR, FACTOR OR 1D TABLE")
         base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
     }else if(base::all(base::class(data1) %in% "table")){
