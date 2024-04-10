@@ -5,6 +5,7 @@
 #' @param fun Character vector of the names of the required functions, preceded by the name of the package they belong to and a double colon. Example: c("ggplot2::geom_point", "grid::gpar").
 #' @param lib.path Character vector specifying the absolute pathways of the directories containing the listed packages in the fun argument, if not in the default directories. If NULL, the function checks only in the .libPaths() default R library folders.
 #' @param external.function.name Name of the function using the .pack_and_function_check() function.
+#' @param external.package.name Name of the package of the function using the .pack_and_function_check() function.
 #' @returns An error message if at least one of the checked packages is missing in lib.path, or if at least one of the checked functions is missing in the required package, nothing otherwise.
 #' @details
 #' WARNING
@@ -26,7 +27,8 @@
 .pack_and_function_check <- function(
         fun, 
         lib.path,
-        external.function.name
+        external.function.name,
+        external.package.name
 ){
     # DEBUGGING
     # fun = "ggplot2::geom_point" ; lib.path = "C:/Program Files/R/R-4.3.1/library" ; external.function.name = "fun1"
@@ -83,6 +85,7 @@
 #' @param na.rm Single logical value. Should missing values (NA and NaN) be removed ?
 #' @param finite Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.
 #' @param external.function.name Name of the function using the .arguments_check() function.
+#' @param external.package.name Name of the package of the function using the .pack_and_function_check() function.
 #' @returns An error message if the type of input is not correct, or input missed, nothing otherwise.
 #' @details
 #' WARNING
@@ -102,7 +105,8 @@
         x,
         na.rm,
         finite,
-        external.function.name
+        external.function.name,
+        external.package.name
 ){
     # package name
     package.name <- "saferTool"
@@ -146,15 +150,15 @@
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
     ee <- base::expression(argum.check = base::c(argum.check, tempo$problem) , text.check = base::c(text.check, tempo$text) , checked.arg.names = base::c(checked.arg.names, tempo$object.name))
-    tempo <- saferDev::arg_check(data = na.rm, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name) ; base::eval(ee)
-    tempo <- saferDev::arg_check(data = finite, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name) ; base::eval(ee)
-    tempo1 <- saferDev::arg_check(data = x, class = "vector", mode = "numeric", na.contain = TRUE, fun.name = external.function.name)
-    tempo2 <- saferDev::arg_check(data = x, class = "vector", mode = "logical", na.contain = TRUE, fun.name = external.function.name)
-    tempo3 <- saferDev::arg_check(data = x, class = "vector", mode = "complex", na.contain = TRUE, fun.name = external.function.name)
-    tempo4 <- saferDev::arg_check(data = x, class = "matrix", mode = "numeric", na.contain = TRUE, fun.name = external.function.name)
-    tempo5 <- saferDev::arg_check(data = x, class = "matrix", mode = "logical", na.contain = TRUE, fun.name = external.function.name)
-    tempo6 <- saferDev::arg_check(data = x, class = "matrix", mode = "complex", na.contain = TRUE, fun.name = external.function.name)
-    tempo7 <- saferDev::arg_check(data = x, class = "table", mode = "numeric", na.contain = TRUE, fun.name = external.function.name)
+    tempo <- saferDev::arg_check(data = na.rm, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name, safer_check = FALSE) ; base::eval(ee)
+    tempo <- saferDev::arg_check(data = finite, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name, safer_check = FALSE) ; base::eval(ee)
+    tempo1 <- saferDev::arg_check(data = x, class = "vector", mode = "numeric", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
+    tempo2 <- saferDev::arg_check(data = x, class = "vector", mode = "logical", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
+    tempo3 <- saferDev::arg_check(data = x, class = "vector", mode = "complex", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
+    tempo4 <- saferDev::arg_check(data = x, class = "matrix", mode = "numeric", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
+    tempo5 <- saferDev::arg_check(data = x, class = "matrix", mode = "logical", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
+    tempo6 <- saferDev::arg_check(data = x, class = "matrix", mode = "complex", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
+    tempo7 <- saferDev::arg_check(data = x, class = "table", mode = "numeric", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
     
     if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE & tempo5$problem == TRUE& tempo6$problem == TRUE & tempo7$problem == TRUE){
         tempo.cat <- base::paste0("ERROR IN ", external.function.name, " OF THE", package.name, " PACKAGE: x ARGUMENT MUST BE A VECTOR, MATRIX OR TABLE OF NUMERIC OR LOGICAL VALUES")
