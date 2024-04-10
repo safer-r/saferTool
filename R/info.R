@@ -84,7 +84,7 @@ info <- function(
     # check of lib.path
     # end check of lib.path
     
-    # check of the required function from the required packages
+    # two function from the required packages
     if(safer_check == TRUE){
         .pack_and_function_check(
         fun = base::c(
@@ -115,7 +115,7 @@ info <- function(
     argum.check <- NULL #
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
-    ee <- base::expression(argum.check <- c(argum.check, tempo$problem) , text.check <- base::c(text.check, tempo$text) , checked.arg.names <- base::c(checked.arg.names, tempo$object.name))
+    ee <- base::expression(argum.check <- base::c(argum.check, tempo$problem) , text.check <- base::c(text.check, tempo$text) , checked.arg.names <- base::c(checked.arg.names, tempo$object.name))
     if( ! base::is.null(n)){
         tempo <- saferDev::arg_check(data = n, class = "vector", typeof = "integer", length = 1, double.as.integer.allowed = TRUE, fun.name = function.name, safer_check = FALSE) ; base::eval(ee)
     }else{
@@ -205,12 +205,12 @@ info <- function(
         tempo <- base::list("TYPE" = base::typeof(data))
         output <- base::c(output, tempo)
     }
-    tempo.try.error <- saferDev::get_message(data = "length(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
+    tempo.try.error <- saferDev::get_message(data = "base::length(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
     if(base::is.null(tempo.try.error)){
         tempo <- base::list("LENGTH" = base::length(data))
         output <- base::c(output, tempo)
     }
-    if(base::all(base::typeof(data) %in% c("integer", "numeric", "double")) & ! base::any(base::class(data) %in% "factor")){ # all() without na.rm -> ok because typeof(NA) is "logical" # any() without na.rm -> ok because class(NA) is "logical"
+    if(base::all(base::typeof(data) %in% base::c("integer", "numeric", "double")) & ! base::any(base::class(data) %in% "factor")){ # all() without na.rm -> ok because typeof(NA) is "logical" # any() without na.rm -> ok because class(NA) is "logical"
         tempo <- base::list("INF.NB" = base::sum(base::is.infinite(data)))
         output <- base::c(output, tempo)
         tempo <- base::list("RANGE" = base::range(data[ ! base::is.infinite(data)], na.rm = TRUE))
