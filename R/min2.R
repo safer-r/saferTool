@@ -32,6 +32,16 @@ min2 <- function(
         function.name <- function.name[3]
     }
     # end function name
+    # critical operator checking
+    if(safer_check == TRUE){
+        .base_op_check(
+            external.function.name = function.name,
+            external.package.name = package.name
+    )
+    }
+    # end critical operator checking
+
+
     .arguments_check(
         x = x,
         na.rm = na.rm,
