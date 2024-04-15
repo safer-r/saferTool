@@ -59,6 +59,8 @@
 #' info(data = 1:3)
 #' @importFrom saferDev arg_check
 #' @importFrom saferDev get_message
+#' @importFrom utils head
+#' @importFrom utils tail
 #' @export
 info <- function(
         data, 
