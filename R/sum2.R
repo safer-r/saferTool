@@ -23,7 +23,7 @@ sum2 <- function(
         safer_check = TRUE
 ){
     # DEBUGGING
-    # vec <- c(1,3,5,TRUE) ; sum2(x = vec) # for function debugging
+    # vec <- c(1,3,5,TRUE) ; sum2(x = vec) ; safer_check = TRUE # for function debugging
     # package name
     package.name <- "saferTool"
     # end package name
@@ -33,6 +33,15 @@ sum2 <- function(
         function.name <- function.name[3]
     }
     # end function name
+    # critical operator checking
+    if(safer_check == TRUE){
+        .base_op_check(
+            external.function.name = function.name,
+            external.package.name = package.name
+    )
+    }
+    # end critical operator checking
+
     
     .arguments_check(
         x = x,
