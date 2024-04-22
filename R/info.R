@@ -59,8 +59,6 @@
 #' info(data = 1:3)
 #' @importFrom saferDev arg_check
 #' @importFrom saferDev get_message
-#' @importFrom utils head
-#' @importFrom utils tail
 #' @export
 info <- function(
         data, 
@@ -101,9 +99,7 @@ info <- function(
         .pack_and_function_check(
         fun = base::c(
             "saferDev::arg_check",
-            "saferDev::get_message",
-            "utils::head",
-            "utils::tail"
+            "saferDev::get_message"
         ),
         lib.path = NULL,
         external.function.name = function.name
