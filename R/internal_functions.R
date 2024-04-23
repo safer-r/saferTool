@@ -156,7 +156,7 @@
     tempo2 <- saferDev::arg_check(data = x, class = "vector", mode = "logical", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
     tempo3 <- saferDev::arg_check(data = x, class = "vector", mode = "complex", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
     tempo4 <- saferDev::arg_check(data = x, class = "matrix", mode = "numeric", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
-    tempo5 <- saferDev::arg_check(data = x, class = "matrix", mode = "logical", na.contain = TRUE, fun.name = external.function.name,)
+    tempo5 <- saferDev::arg_check(data = x, class = "matrix", mode = "logical", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
     tempo6 <- saferDev::arg_check(data = x, class = "matrix", mode = "complex", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
     tempo7 <- saferDev::arg_check(data = x, class = "table", mode = "numeric", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
     
