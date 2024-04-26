@@ -118,12 +118,14 @@ sum2(
 sum2(
     x = vec5,
     na.rm = TRUE,
-    finite  = FALSE
+    finite  = FALSE,
+    safer_check = TRUE
 )
 
 sum2(
     x = mat4,
     na.rm = TRUE,
-    finite  = FALSE
+    finite  = FALSE,
+    safer_check = TRUE
 )
 ```

@@ -53,7 +53,8 @@ tail2(data1 = mat1, side = "r") # left or right side of the 2D object (only for 
 tail2(
     data1 = mat1, 
     n = 6, 
-    side = "l"
+    side = "l",
+    safer_check = TRUE
 )
 ```
 

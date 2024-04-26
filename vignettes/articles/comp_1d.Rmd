@@ -40,19 +40,19 @@ tab1 # 1D table
 ### All the arguments
 ```{r}
 names(vec1) <- LETTERS[1:5] ; 
-comp_1d(vec1, vec2)
+comp_1d(vec1, vec2, safer_check = TRUE)
 
 names(vec1) <- LETTERS[1:5] ; 
 names(vec2) <- LETTERS[1:4] ; 
-comp_1d(vec1, vec2)
+comp_1d(vec1, vec2, safer_check = TRUE)
 
-comp_1d(fac1, fac2)
+comp_1d(fac1, fac2, safer_check = TRUE)
 
-comp_1d(fac1, fac3)
+comp_1d(fac1, fac3, safer_check = TRUE)
 
-comp_1d(vec1, fac1)
+comp_1d(vec1, fac1, safer_check = TRUE)
 
-comp_1d(tab1, tab1)
+comp_1d(tab1, tab1, safer_check = TRUE)
 
-comp_1d(tab1, vec1)
+comp_1d(tab1, vec1, safer_check = TRUE)
 ```

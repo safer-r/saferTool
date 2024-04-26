@@ -49,6 +49,12 @@ head2(data1 = mat1, side = "r") # left or right side of the 2D object (only for 
 ```
 <br>
 
+### Argument safer_check
+```{r}
+head2(data1 = mat1, safer_check = TRUE) # safer_check = TRUE, checkings are performed before main code running
+```
+<br>
+
 ### All the arguments
 ```{r}
 head2(
