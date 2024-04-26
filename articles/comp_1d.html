@@ -124,7 +124,7 @@
 <h3 id="all-the-arguments">All the arguments<a class="anchor" aria-label="anchor" href="#all-the-arguments"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">names</span>(vec1) <span class="ot">&lt;-</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] ; </span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">comp_1d</span>(vec1, vec2)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">comp_1d</span>(vec1, vec2, <span class="at">safer_check =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="er">$</span>same.class</span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="sc">&gt;</span>  [<span class="dv">1</span>] <span class="cn">TRUE</span></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="sc">&gt;</span>  </span>
@@ -220,7 +220,7 @@
 <span id="cb4-95"><a href="#cb4-95" tabindex="-1"></a></span>
 <span id="cb4-96"><a href="#cb4-96" tabindex="-1"></a><span class="fu">names</span>(vec1) <span class="ot">&lt;-</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] ; </span>
 <span id="cb4-97"><a href="#cb4-97" tabindex="-1"></a><span class="fu">names</span>(vec2) <span class="ot">&lt;-</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] ; </span>
-<span id="cb4-98"><a href="#cb4-98" tabindex="-1"></a><span class="fu">comp_1d</span>(vec1, vec2)</span>
+<span id="cb4-98"><a href="#cb4-98" tabindex="-1"></a><span class="fu">comp_1d</span>(vec1, vec2, <span class="at">safer_check =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb4-99"><a href="#cb4-99" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="er">$</span>same.class</span>
 <span id="cb4-100"><a href="#cb4-100" tabindex="-1"></a><span class="sc">&gt;</span>  [<span class="dv">1</span>] <span class="cn">TRUE</span></span>
 <span id="cb4-101"><a href="#cb4-101" tabindex="-1"></a><span class="sc">&gt;</span>  </span>
@@ -314,7 +314,7 @@
 <span id="cb4-189"><a href="#cb4-189" tabindex="-1"></a><span class="er">&gt;</span>  <span class="er">$</span>identical.content</span>
 <span id="cb4-190"><a href="#cb4-190" tabindex="-1"></a><span class="sc">&gt;</span>  [<span class="dv">1</span>] <span class="cn">FALSE</span></span>
 <span id="cb4-191"><a href="#cb4-191" tabindex="-1"></a></span>
-<span id="cb4-192"><a href="#cb4-192" tabindex="-1"></a><span class="fu">comp_1d</span>(fac1, fac2)</span>
+<span id="cb4-192"><a href="#cb4-192" tabindex="-1"></a><span class="fu">comp_1d</span>(fac1, fac2, <span class="at">safer_check =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb4-193"><a href="#cb4-193" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="er">$</span>same.class</span>
 <span id="cb4-194"><a href="#cb4-194" tabindex="-1"></a><span class="sc">&gt;</span>  [<span class="dv">1</span>] <span class="cn">TRUE</span></span>
 <span id="cb4-195"><a href="#cb4-195" tabindex="-1"></a><span class="sc">&gt;</span>  </span>
@@ -408,7 +408,7 @@
 <span id="cb4-283"><a href="#cb4-283" tabindex="-1"></a><span class="er">&gt;</span>  <span class="er">$</span>identical.content</span>
 <span id="cb4-284"><a href="#cb4-284" tabindex="-1"></a><span class="sc">&gt;</span>  [<span class="dv">1</span>] <span class="cn">FALSE</span></span>
 <span id="cb4-285"><a href="#cb4-285" tabindex="-1"></a></span>
-<span id="cb4-286"><a href="#cb4-286" tabindex="-1"></a><span class="fu">comp_1d</span>(fac1, fac3)</span>
+<span id="cb4-286"><a href="#cb4-286" tabindex="-1"></a><span class="fu">comp_1d</span>(fac1, fac3, <span class="at">safer_check =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb4-287"><a href="#cb4-287" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="er">$</span>same.class</span>
 <span id="cb4-288"><a href="#cb4-288" tabindex="-1"></a><span class="sc">&gt;</span>  [<span class="dv">1</span>] <span class="cn">TRUE</span></span>
 <span id="cb4-289"><a href="#cb4-289" tabindex="-1"></a><span class="sc">&gt;</span>  </span>
@@ -502,7 +502,7 @@
 <span id="cb4-377"><a href="#cb4-377" tabindex="-1"></a><span class="er">&gt;</span>  <span class="er">$</span>identical.content</span>
 <span id="cb4-378"><a href="#cb4-378" tabindex="-1"></a><span class="sc">&gt;</span>  [<span class="dv">1</span>] <span class="cn">FALSE</span></span>
 <span id="cb4-379"><a href="#cb4-379" tabindex="-1"></a></span>
-<span id="cb4-380"><a href="#cb4-380" tabindex="-1"></a><span class="fu">comp_1d</span>(vec1, fac1)</span>
+<span id="cb4-380"><a href="#cb4-380" tabindex="-1"></a><span class="fu">comp_1d</span>(vec1, fac1, <span class="at">safer_check =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb4-381"><a href="#cb4-381" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="er">$</span>same.class</span>
 <span id="cb4-382"><a href="#cb4-382" tabindex="-1"></a><span class="sc">&gt;</span>  [<span class="dv">1</span>] <span class="cn">FALSE</span></span>
 <span id="cb4-383"><a href="#cb4-383" tabindex="-1"></a><span class="sc">&gt;</span>  </span>
@@ -596,7 +596,7 @@
 <span id="cb4-471"><a href="#cb4-471" tabindex="-1"></a><span class="er">&gt;</span>  <span class="er">$</span>identical.content</span>
 <span id="cb4-472"><a href="#cb4-472" tabindex="-1"></a><span class="sc">&gt;</span>  [<span class="dv">1</span>] <span class="cn">FALSE</span></span>
 <span id="cb4-473"><a href="#cb4-473" tabindex="-1"></a></span>
-<span id="cb4-474"><a href="#cb4-474" tabindex="-1"></a><span class="fu">comp_1d</span>(tab1, tab1)</span>
+<span id="cb4-474"><a href="#cb4-474" tabindex="-1"></a><span class="fu">comp_1d</span>(tab1, tab1, <span class="at">safer_check =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb4-475"><a href="#cb4-475" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="er">$</span>same.class</span>
 <span id="cb4-476"><a href="#cb4-476" tabindex="-1"></a><span class="sc">&gt;</span>  [<span class="dv">1</span>] <span class="cn">TRUE</span></span>
 <span id="cb4-477"><a href="#cb4-477" tabindex="-1"></a><span class="sc">&gt;</span>  </span>
@@ -691,7 +691,7 @@
 <span id="cb4-566"><a href="#cb4-566" tabindex="-1"></a><span class="er">&gt;</span>  <span class="er">$</span>identical.content</span>
 <span id="cb4-567"><a href="#cb4-567" tabindex="-1"></a><span class="sc">&gt;</span>  [<span class="dv">1</span>] <span class="cn">TRUE</span></span>
 <span id="cb4-568"><a href="#cb4-568" tabindex="-1"></a></span>
-<span id="cb4-569"><a href="#cb4-569" tabindex="-1"></a><span class="fu">comp_1d</span>(tab1, vec1)</span>
+<span id="cb4-569"><a href="#cb4-569" tabindex="-1"></a><span class="fu">comp_1d</span>(tab1, vec1, <span class="at">safer_check =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb4-570"><a href="#cb4-570" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="er">$</span>same.class</span>
 <span id="cb4-571"><a href="#cb4-571" tabindex="-1"></a><span class="sc">&gt;</span>  [<span class="dv">1</span>] <span class="cn">FALSE</span></span>
 <span id="cb4-572"><a href="#cb4-572" tabindex="-1"></a><span class="sc">&gt;</span>  </span>
