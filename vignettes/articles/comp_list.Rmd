@@ -34,12 +34,6 @@ list4 # 2D list
 ```
 <br>
 
-### Argument safer_check
-```{r}
-comp_list(data1 = list1, data2 = list3, safer_check = TRUE) # safer_check = TRUE, checkings are performed before main code running
-```
-<br>
-
 ### All the arguments
 ```{r}
 comp_list(list1, list2, safer_check = TRUE)
