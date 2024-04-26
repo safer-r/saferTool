@@ -6,11 +6,16 @@ test_that("name_change function works correctly", {
     char4 <- c("A", "A_modif1", "C")
     
     # Test cases
-    
+    # Simple example
     expect_no_error(name_change(char1, char2))
     
     # Test all arguments
-    
-    expect_no_error(name_change(char3, char4))
+    expect_no_error(name_change(
+        char3, 
+        char4,
+        added.string = "_modif",
+        duplicate = TRUE,
+        safer_check = TRUE
+    ))
     
 })

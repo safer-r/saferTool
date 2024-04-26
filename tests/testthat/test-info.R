@@ -49,6 +49,6 @@ test_that("info function works correctly", {
 
   # Test all arguments
   test_that("handles all arguments", {
-    expect_no_error(info(data = vec1, n = 1, warn.print = FALSE))
+    expect_no_error(info(data = vec1, n = 1, warn.print = FALSE, safer_check = TRUE))
   })
 })

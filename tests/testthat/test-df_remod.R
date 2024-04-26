@@ -9,22 +9,22 @@ test_that("df_remod function works correctly", {
     expect_no_error(df_remod(dataframe1))
     expect_no_error(df_remod(dataframe2))
 
-  # Test quanti.col.name argument
-  # handles quanti.col.name argument
+  # Test argument quanti.col.name
+  # handles argument quanti.col.name
     expect_no_error(df_remod(dataframe1, quanti.col.name = "quanti"))
     expect_no_error(df_remod(dataframe2, quanti.col.name = "quanti"))
     expect_no_error(df_remod(dataframe2, quanti.col.name = "quantity"))
 
-  # Test quali.col.name argument
-  # handles quali.col.name argument
+  # Test argument quali.col.name
+  # handles argument quali.col.name
     expect_no_error(df_remod(dataframe1, quali.col.name = "quali"))
     expect_no_error(df_remod(dataframe2, quali.col.name = "quali"))
     expect_no_error(df_remod(dataframe2, quali.col.name = "quality"))
 
   # Test all arguments
   # handles all arguments
-    expect_no_error(df_remod(dataframe1, quanti.col.name = "quanti", quali.col.name = "quali"))
-    expect_no_error(df_remod(dataframe2, quanti.col.name = "quanti", quali.col.name = "quali"))
-    expect_no_error(df_remod(dataframe2, quanti.col.name = "quantity", quali.col.name = "quality"))
+    expect_no_error(df_remod(dataframe1, quanti.col.name = "quanti", quali.col.name = "quali", safer_check = TRUE))
+    expect_no_error(df_remod(dataframe2, quanti.col.name = "quanti", quali.col.name = "quali", safer_check = TRUE))
+    expect_no_error(df_remod(dataframe2, quanti.col.name = "quantity", quali.col.name = "quality", safer_check = TRUE))
 
 })

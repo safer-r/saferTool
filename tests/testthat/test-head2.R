@@ -9,18 +9,18 @@ test_that("head2 function works correctly", {
     expect_no_error(head2(data1 = mat1))
   })
 
-  # Test n argument
+  # Test argument n
   test_that("handles n argument", {
     expect_no_error(head2(data1 = mat1, n = 5))
   })
 
-  # Test side argument
+  # Test argument side
   test_that("handles side argument", {
     expect_no_error(head2(data1 = mat1, side = "r"))
   })
 
   # Test all arguments
   test_that("handles all arguments", {
-    expect_no_error(head2(data1 = mat1, n = 6, side = "l"))
+    expect_no_error(head2(data1 = mat1, n = 6, side = "l", safer_check = TRUE))
   })
 })
