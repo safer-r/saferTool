@@ -56,7 +56,7 @@ df_remod(dataframe2, quali.col.name = "quality")
 
 ### Argument safer_check
 ```{r}
-head2(data1 = mat1, safer_check = TRUE) # safer_check = TRUE, checkings are performed before main code running
+df_remod(data1 = dataframe1, safer_check = TRUE) # safer_check = TRUE, checkings are performed before main code running
 ```
 <br>
 
