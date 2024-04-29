@@ -113,6 +113,20 @@ sum2(
 ```
 <br>
 
+### Argument safer_check
+```{r}
+sum2(
+    x = vec1,
+    safer_check = TRUE
+)
+
+sum2(
+    x = tab1,
+    safer_check = TRUE
+)
+```
+<br>
+
 ### All the arguments
 ```{r}
 sum2(

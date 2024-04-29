@@ -108,7 +108,21 @@ range2(
 
 range2(
     x = vec3,
-    finite = TRUE
+    safer_check = TRUE
+)
+```
+<br>
+
+### Argument safer_check
+```{r}
+range2(
+    x = mat3,
+    safer_check = TRUE
+)
+
+range2(
+    x = vec3,
+    safer_check = TRUE
 )
 ```
 <br>

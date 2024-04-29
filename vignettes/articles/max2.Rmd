@@ -113,6 +113,20 @@ max2(
 ```
 <br>
 
+### Argument safer_check
+```{r}
+max2(
+    x = vec1,
+    safer_check = TRUE
+)
+
+max2(
+    x = mat2,
+    safer_check = TRUE
+)
+```
+<br>
+
 ### All the arguments
 ```{r}
 max2(

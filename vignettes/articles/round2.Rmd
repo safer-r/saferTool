@@ -69,6 +69,14 @@ cat(round2(data = vec3, after.lead.zero = FALSE), "\n\n")
 ```
 <br>
 
+### Argument safer_check
+```{r}
+round2(data = vec1, safer_check = TRUE)
+
+round2(data = vec2, safer_check = TRUE)
+```
+<br>
+
 ### All the arguments
 ```{r}
 ini.options <- options()$digits ; 
