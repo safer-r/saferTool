@@ -76,6 +76,9 @@
 #' - $identical.object: logical. Are objects identical (kind of object, element names, content, including content order)?
 #'
 #' - $identical.content: logical. Are content objects identical (identical elements, including order, excluding kind of object and element names)?
+#' @author Gael Millot <gael.millot@pasteur.fr>
+#' @author Yushi Han <yushi.han2000@gmail.com>
+#' @author Haiding Wang <wanghaiding442@gmail.com>
 #' @examples
 #' obs1 = 1:5 ; obs2 = 1:5 ; names(obs1) <- LETTERS[1:5] ; names(obs2) <- LETTERS[1:5] ; comp_1d(obs1, obs2)
 #' obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[1:5]) ; comp_1d(obs1, obs2)

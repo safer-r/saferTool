@@ -35,3 +35,10 @@ rownames(obs) <- paste0("row", 1:4) ;
 obs ;
 df_remod(obs, quanti.col.name = "quanti", quali.col.name = "quali")
 }
+\author{
+Gael Millot <gael.millot@pasteur.fr>
+
+Yushi Han <yushi.han2000@gmail.com>
+
+Haiding Wang <wanghaiding442@gmail.com>
+}

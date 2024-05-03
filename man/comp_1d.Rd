@@ -95,3 +95,10 @@ obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[1:5]) ; comp_1d(obs1, obs2)
 obs1 = factor(c(LETTERS[1:4], "E")) ; obs2 = factor(c(LETTERS[1:4], "F")) ; comp_1d(obs1, obs2)
 obs1 = 1:5 ; obs2 = 1.1:6.1 ; comp_1d(obs1, obs2)
 }
+\author{
+Gael Millot <gael.millot@pasteur.fr>
+
+Yushi Han <yushi.han2000@gmail.com>
+
+Haiding Wang <wanghaiding442@gmail.com>
+}

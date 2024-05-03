@@ -33,3 +33,10 @@ vec <- c(1,3,5,TRUE, FALSE, NA) ; max2(x = vec, na.rm = TRUE)
 # This example returns an error because of the argument na.rm, when the function max2() of the package base doesn't return an error
 # vec <- c(1,3,5,TRUE) ; max2(x = vec, na.rn = TRUE)
 }
+\author{
+Gael Millot <gael.millot@pasteur.fr>
+
+Yushi Han <yushi.han2000@gmail.com>
+
+Haiding Wang <wanghaiding442@gmail.com>
+}

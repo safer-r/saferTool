@@ -10,6 +10,9 @@
 #' BEWARE
 #' 
 #' Other arguments of head() not used.
+#' @author Gael Millot <gael.millot@pasteur.fr>
+#' @author Yushi Han <yushi.han2000@gmail.com>
+#' @author Haiding Wang <wanghaiding442@gmail.com>
 #' @examples
 #' obs1 = matrix(1:30, ncol = 5, dimnames = list(letters[1:6], LETTERS[1:5])) ; 
 #' obs1 ; 

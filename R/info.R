@@ -55,6 +55,9 @@
 #' - $COMPARTMENT_NAMES: names of the comprtments.
 #' 
 #' - $COMPARTMENT_TYPE: type of each compartment (typeof() value).
+#' @author Gael Millot <gael.millot@pasteur.fr>
+#' @author Yushi Han <yushi.han2000@gmail.com>
+#' @author Haiding Wang <wanghaiding442@gmail.com>
 #' @examples
 #' info(data = 1:3)
 #' @importFrom saferDev arg_check

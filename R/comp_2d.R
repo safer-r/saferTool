@@ -138,6 +138,9 @@
 #' 
 #' 
 #' "TOO BIG FOR EVALUATION" returned in $same.col.pos1, $ame.col.pos2, $same.col.match1 and $same.col.match2 when ncol(data1) * ncol(data2) > 1e6 and $any.id.col is returned NULL.
+#' @author Gael Millot <gael.millot@pasteur.fr>
+#' @author Yushi Han <yushi.han2000@gmail.com>
+#' @author Haiding Wang <wanghaiding442@gmail.com>
 #' @examples
 #' obs1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; 
 #' obs2 = as.data.frame(matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])), stringsAsFactors = TRUE) ;

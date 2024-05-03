@@ -20,6 +20,9 @@
 #'  - If elements are duplicated in data1 and match an element of data2, then the value of added.string is added at the end of the matched element of data1.
 #'  - If the same occurs with the argument duplicate = FALSE, then value of added.string is added at the end of the matched element of data1, together with an incremented number so that elements in data1 are not anymore duplicated.
 #'  - An error message is returned if any of the data1 elements end with the string in added.string.
+#' @author Gael Millot <gael.millot@pasteur.fr>
+#' @author Yushi Han <yushi.han2000@gmail.com>
+#' @author Haiding Wang <wanghaiding442@gmail.com>
 #' @examples
 #' obs1 <- c("A", "B", "C", "A", "D") ; 
 #' obs2 <- c("A", "C") ; 

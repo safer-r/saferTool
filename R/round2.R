@@ -14,6 +14,9 @@
 #' Numeric values are really truncated from a part of their decimal digits, whatever options(digits) settings.
 #' 
 #' See ?.Machine or https://stackoverflow.com/questions/5173692/how-to-return-number-of-decimal-places-in-r, with the interexting formula: abs(x - round(x)) > .Machine$double.eps^0.5.
+#' @author Gael Millot <gael.millot@pasteur.fr>
+#' @author Yushi Han <yushi.han2000@gmail.com>
+#' @author Haiding Wang <wanghaiding442@gmail.com>
 #' @examples
 #' ini.options <- options()$digits ; 
 #' options(digits = 8) ; 

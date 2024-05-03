@@ -36,6 +36,9 @@
 #' - $identical.object: logical. Are objects identical (kind of object, compartment names and content)?
 #' 
 #' - $identical.content: logical. Are content objects identical (identical compartments excluding compartment names)?
+#' @author Gael Millot <gael.millot@pasteur.fr>
+#' @author Yushi Han <yushi.han2000@gmail.com>
+#' @author Haiding Wang <wanghaiding442@gmail.com>
 #' @examples
 #' obs1 = list(1:5, LETTERS[1:2]) ; 
 #' obs2 = list(a = 1:5, b = LETTERS[1:2]) ; 
