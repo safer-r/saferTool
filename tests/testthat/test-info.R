@@ -24,7 +24,6 @@ test_that("info function works correctly", {
 
   # Test cases
   # Simple examples
-  test_that("handles simple examples", {
     expect_no_error(info(data = vec1))
     expect_no_error(info(data = vec2))
     expect_no_error(info(data = vec3))
@@ -45,10 +44,9 @@ test_that("info function works correctly", {
     expect_no_error(info(data = env1))
     expect_no_error(info(data = s4))
     expect_no_error(info(data = call1))
-  })
+
 
   # Test all arguments
-  test_that("handles all arguments", {
     expect_no_error(info(data = vec1, n = 1, warn.print = FALSE, safer_check = TRUE))
-  })
+
 })
