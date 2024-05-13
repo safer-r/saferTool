@@ -30,6 +30,9 @@ vec <- c(1,3,5,TRUE) ; range2(x = vec)
 # This example returns an error because of the character in the vector
 # vec <- c(1,3,5,TRUE,"apple") ; range2(x = vec)
 }
+\seealso{
+\code{\link{range}}
+}
 \author{
 Gael Millot <gael.millot@pasteur.fr>
 

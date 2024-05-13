@@ -10,6 +10,7 @@
 #' BEWARE
 #' 
 #' Other arguments of tail() not used.
+#' @seealso \code{\link[utils]{tail}}
 #' @author Gael Millot <gael.millot@pasteur.fr>
 #' @author Yushi Han <yushi.han2000@gmail.com>
 #' @author Haiding Wang <wanghaiding442@gmail.com>
