@@ -10,6 +10,7 @@
 #' BEWARE
 #' 
 #' Other arguments of head() not used.
+#' @seealso \code{\link[utils]{head}}
 #' @author Gael Millot <gael.millot@pasteur.fr>
 #' @author Yushi Han <yushi.han2000@gmail.com>
 #' @author Haiding Wang <wanghaiding442@gmail.com>
