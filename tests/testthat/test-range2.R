@@ -44,7 +44,7 @@ test_that("range2 function works correctly", {
     
     
     # Test all arguments
-      expect_equal(range2(x = vec5, na.rm = TRUE, finite = FALSE), c(-Inf, 2))
-      expect_equal(range2(x = mat4, na.rm = TRUE, finite = FALSE), c(0,1))
+      expect_equal(range2(x = vec5, na.rm = TRUE, finite = FALSE, safer_check = TRUE), c(-Inf, 2))
+      expect_equal(range2(x = mat4, na.rm = TRUE, finite = FALSE, safer_check = TRUE), c(0,1))
     
 })
