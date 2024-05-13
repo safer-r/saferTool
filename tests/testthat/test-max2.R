@@ -35,6 +35,7 @@ test_that("max2 function works correctly", {
     # Test argument na.rm
       expect_equal(max2(x = vec1, na.rm = TRUE), 3)
       expect_equal(max2(x = vec2, na.rm = TRUE), 3)
+      
       expect_no_error(max2(x = log2, na.rm = TRUE))
       expect_no_error(max2(x = log1, na.rm = TRUE))
       expect_no_error(max2(x = mat3, na.rm = TRUE))

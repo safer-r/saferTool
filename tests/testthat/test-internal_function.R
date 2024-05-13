@@ -4,20 +4,20 @@ test_that(".pack_and_function_check handles valid input correctly", {
   fun <- "geom_point"  # incorrect input
   
   # Call the function and expect an error
-  expect_error(.pack_and_function_check(fun, "path/to/library", "fun1"))
+    expect_error(.pack_and_function_check(fun, "path/to/library", "fun1"))
 
   # Mock inputs
   fun <- "ggplot2::geom_point"
   lib.path <- "path/to/nonexistent/library"  # incorrect library path
   
   # Call the function and expect an error
-  expect_error(.pack_and_function_check(fun, lib.path, "fun1"))
+    expect_error(.pack_and_function_check(fun, lib.path, "fun1"))
 
   # Mock inputs
   fun <- "ggplot2::non_existent_function"  # incorrect function name
   
   # Call the function and expect an error
-  expect_error(.pack_and_function_check(fun, "path/to/library", "fun1"))
+    expect_error(.pack_and_function_check(fun, "path/to/library", "fun1"))
 
 
   # Mock inputs
@@ -25,11 +25,11 @@ test_that(".pack_and_function_check handles valid input correctly", {
   na.rm <- TRUE
   
   # Call the function and expect an error
-  expect_error(.arguments_check(x, na.rm, FALSE, "test_function"))
+    expect_error(.arguments_check(x, na.rm, FALSE, "test_function"))
 
   # Mock inputs
   na.rm <- TRUE
   
   # Call the function and expect an error
-  expect_error(.arguments_check(NULL, na.rm, FALSE, "test_function"))
+    expect_error(.arguments_check(NULL, na.rm, FALSE, "test_function"))
 })

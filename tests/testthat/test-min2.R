@@ -35,6 +35,7 @@ test_that("min2 function works correctly", {
     # Test argument na.rm
       expect_equal(min2(x = vec1, na.rm = TRUE), -1)
       expect_equal(min2(x = vec2, na.rm = TRUE), 1)
+      
       expect_no_error(min2(x = log2, na.rm = TRUE))
       expect_no_error(min2(x = log1, na.rm = TRUE))
       expect_no_error(min2(x = mat3, na.rm = TRUE))
