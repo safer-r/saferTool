@@ -7,10 +7,10 @@ test_that("name_change function works correctly", {
     
     # Test cases
     # Simple example
-    expect_no_error(name_change(char1, char2))
+      expect_no_error(name_change(char1, char2))
     
     # Test all arguments
-    expect_no_error(name_change(
+      expect_no_error(name_change(
         char3, 
         char4,
         added.string = "_modif",

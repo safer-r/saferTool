@@ -33,18 +33,18 @@ test_that("max2 function works correctly", {
       expect_no_error(max2(x = tab1))
     
     # Test argument na.rm
-    expect_equal(max2(x = vec1, na.rm = TRUE), 3)
-    expect_equal(max2(x = vec2, na.rm = TRUE), 3)
-    expect_no_error(max2(x = log2, na.rm = TRUE))
-    expect_no_error(max2(x = log1, na.rm = TRUE))
-    expect_no_error(max2(x = mat3, na.rm = TRUE))
+      expect_equal(max2(x = vec1, na.rm = TRUE), 3)
+      expect_equal(max2(x = vec2, na.rm = TRUE), 3)
+      expect_no_error(max2(x = log2, na.rm = TRUE))
+      expect_no_error(max2(x = log1, na.rm = TRUE))
+      expect_no_error(max2(x = mat3, na.rm = TRUE))
     
     # Test argument finite
-    expect_equal(max2(x = vec1, finite = TRUE), 3)
-    expect_no_error(max2(x = vec3, finite = TRUE))
+      expect_equal(max2(x = vec1, finite = TRUE), 3)
+      expect_no_error(max2(x = vec3, finite = TRUE))
     
     # Test all arguments
-    expect_no_error(max2(x = vec5, na.rm = TRUE, finite = FALSE, safer_check = TRUE))
-    expect_no_error(max2(x = mat4, na.rm = TRUE, finite = FALSE, safer_check = TRUE))
+      expect_no_error(max2(x = vec5, na.rm = TRUE, finite = FALSE, safer_check = TRUE))
+      expect_no_error(max2(x = mat4, na.rm = TRUE, finite = FALSE, safer_check = TRUE))
     
 })

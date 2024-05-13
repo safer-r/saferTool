@@ -7,15 +7,15 @@ test_that("comp_list function works correctly", {
 
   # Test cases
   # Test lists with the same content
-  expect_no_error(comp_list(list1, list1, safer_check = TRUE))
+    expect_no_error(comp_list(list1, list1, safer_check = TRUE))
   
   # Test lists with different content
-  expect_no_error(comp_list(list1, list3, safer_check = TRUE))
+    expect_no_error(comp_list(list1, list3, safer_check = TRUE))
 
   # Test lists with different lengths
-  expect_no_error(comp_list(list2, list4, safer_check = TRUE))
+    expect_no_error(comp_list(list2, list4, safer_check = TRUE))
 
   # Test lists with same lengths
-  expect_no_error(comp_list(list1, list4, safer_check = TRUE))
+    expect_no_error(comp_list(list1, list4, safer_check = TRUE))
   
 })

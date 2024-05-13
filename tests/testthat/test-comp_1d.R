@@ -11,13 +11,13 @@ test_that("comp_1d function works correctly", {
   names(vec2) <- LETTERS[1:4]
 
   # All the arguments
-  expect_no_error(comp_1d(vec1, vec2, safer_check = TRUE))
-  expect_no_error(comp_1d(fac1, fac2, safer_check = TRUE))
-  expect_no_error(comp_1d(fac1, fac3, safer_check = TRUE))
-  expect_no_error(comp_1d(vec1, fac1, safer_check = TRUE))
-  expect_no_error(comp_1d(tab1, tab1, safer_check = TRUE))
-  expect_no_error(comp_1d(tab1, tab2, safer_check = TRUE))
-  expect_no_error(comp_1d(tab1, vec1, safer_check = TRUE))
-  expect_no_error(comp_1d(tab1, fac1, safer_check = TRUE))
+    expect_no_error(comp_1d(vec1, vec2, safer_check = TRUE))
+    expect_no_error(comp_1d(fac1, fac2, safer_check = TRUE))
+    expect_no_error(comp_1d(fac1, fac3, safer_check = TRUE))
+    expect_no_error(comp_1d(vec1, fac1, safer_check = TRUE))
+    expect_no_error(comp_1d(tab1, tab1, safer_check = TRUE))
+    expect_no_error(comp_1d(tab1, tab2, safer_check = TRUE))
+    expect_no_error(comp_1d(tab1, vec1, safer_check = TRUE))
+    expect_no_error(comp_1d(tab1, fac1, safer_check = TRUE))
 
 })
