@@ -117,9 +117,9 @@ info <- function(
         "data"
     )
     tempo <- base::eval(base::parse(text = base::paste0("base::c(base::missing(", base::paste0(mandat.args, collapse = "),base::missing("), "))")))
-    if(base::any(tempo)){ # normally no NA for missing() output
+    if(base::any(tempo)){ # normally no NA for base::missing() output
         tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE\nFOLLOWING ARGUMENT", base::ifelse(base::sum(tempo, na.rm = TRUE) > 1, "S HAVE", " HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", base::paste0(mandat.args, collapse = "\n"))
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
     }
     # end arg with no default values
     # argument checking with arg_check()
@@ -154,7 +154,7 @@ info <- function(
         tempo.log <- base::suppressWarnings(base::sapply(base::lapply(base::lapply(tempo.arg, FUN = base::get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.na), FUN = base::any)) & base::lapply(base::lapply(tempo.arg, FUN = base::get, env = base::sys.nframe(), inherit = FALSE), FUN = base::length) == 1L # no argument provided by the user can be just NA
         if(base::any(tempo.log) == TRUE){
             tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE\n", base::ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS", "THIS ARGUMENT"), " CANNOT JUST BE NA:", base::paste0(tempo.arg[tempo.log], collapse = "\n"))
-            base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+            base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
         }
     }
     # end management of NA arguments
@@ -166,9 +166,9 @@ info <- function(
         "safer_check"
     )
     tempo.log <- base::sapply(base::lapply(tempo.arg, FUN = get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.null)
-    if(base::any(tempo.log) == TRUE){# normally no NA with is.null()
+    if(base::any(tempo.log) == TRUE){# normally no NA with base::is.null()
         tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE:\n", base::ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS\n", "THIS ARGUMENT\n"), base::paste0(tempo.arg[tempo.log], collapse = "\n"),"\nCANNOT BE NULL")
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
     }
     # end management of NULL arguments
     # code that protects set.seed() in the global environment
@@ -198,7 +198,7 @@ info <- function(
     env.name <- base::paste0("env", base::as.numeric(base::Sys.time()))
     if(base::exists(env.name, where = -1)){ # verify if still ok when info() is inside a function
         tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: ENVIRONMENT env.name ALREADY EXISTS. PLEASE RERUN ONCE")
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
     }else{
         base::assign(env.name, base::new.env())
         base::assign("data", data, envir = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE)) # data assigned in a new envir for test
@@ -221,7 +221,7 @@ info <- function(
         tempo <- base::list("LENGTH" = base::length(data))
         output <- base::c(output, tempo)
     }
-    if(base::all(base::typeof(data) %in% base::c("integer", "numeric", "double")) & ! base::any(base::class(data) %in% "factor")){ # all() without na.rm -> ok because typeof(NA) is "logical" # any() without na.rm -> ok because class(NA) is "logical"
+    if(base::all(base::typeof(data) %in% base::c("integer", "numeric", "double")) & ! base::any(base::class(data) %in% "factor")){ # base::all() without na.rm -> ok because base::typeof(NA) is "logical" # base::any() without na.rm -> ok because base::class(NA) is "logical"
         tempo <- base::list("INF.NB" = base::sum(base::is.infinite(data)))
         output <- base::c(output, tempo)
         tempo <- base::list("RANGE" = base::range(data[ ! base::is.infinite(data)], na.rm = TRUE))
@@ -231,7 +231,7 @@ info <- function(
         tempo <- base::list("MEAN" = base::mean(data[ ! base::is.infinite(data)], na.rm = TRUE))
         output <- base::c(output, tempo)
     }
-    if(base::all(base::typeof(data) %in% base::c("logical", "integer", "double", "complex", "character", "list"))){ # all() without na.rm -> ok because typeof(NA) is "logical"
+    if(base::all(base::typeof(data) %in% base::c("logical", "integer", "double", "complex", "character", "list"))){ # base::all() without na.rm -> ok because base::typeof(NA) is "logical"
         tempo.try.error <- saferDev::get_message(data = "base::is.na(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
         if(base::is.null(tempo.try.error)){
             tempo <- base::list("NA.NB" = base::sum(base::is.na(data)))
@@ -242,7 +242,7 @@ info <- function(
     if(base::is.null(tempo.try.error)){
         tempo <- base::list("HEAD" = utils::head(data))
         output <- base::c(output, tempo)
-        tempo <- base::list("TAIL" = utils::tail(data)) # no reason that tail() does not work if head() works
+        tempo <- base::list("TAIL" = utils::tail(data)) # no reason that utils::tail() does not work if utils::head() works
         output <- base::c(output, tempo)
     }
     tempo.try.error <- saferDev::get_message(data = "base::dim(data)", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
@@ -255,7 +255,7 @@ info <- function(
             output <- base::c(output, tempo)
         }
     }
-    if(base::all(base::class(data) == "data.frame") | base::all(base::class(data) %in% base::c("matrix", "array")) | base::all(base::class(data) == "table")){ # all() without na.rm -> ok because typeof(NA) is "logical"
+    if(base::all(base::class(data) == "data.frame") | base::all(base::class(data) %in% base::c("matrix", "array")) | base::all(base::class(data) == "table")){ # base::all() without na.rm -> ok because base::typeof(NA) is "logical"
         if(base::length(base::dim(data)) > 1){ # to avoid 1D table
             tempo <- base::list("ROW_NAMES" = base::dimnames(data)[[1]])
             output <- base::c(output, tempo)
@@ -271,14 +271,14 @@ info <- function(
     tempo.try.error <- saferDev::get_message(data = "base::noquote(base::matrix(utils::capture.output(utils::str(data))))", kind = "error", header = FALSE, env = base::get(env.name, envir = base::sys.nframe(), inherits = FALSE), safer_check = FALSE)
     if(base::is.null(tempo.try.error)){
         tempo <- utils::capture.output(utils::str(data))
-        tempo <- base::list("STRUCTURE" = base::noquote(base::matrix(tempo, dimnames = base::list(base::rep("", base::length(tempo)), "")))) # str() print automatically, ls.str() not but does not give the order of the data.frame
+        tempo <- base::list("STRUCTURE" = base::noquote(base::matrix(tempo, dimnames = base::list(base::rep("", base::length(tempo)), "")))) # utils::str() print automatically, utils::ls.str() not but does not give the order of the data.frame
         output <- base::c(output, tempo)
     }
-    if(base::all(base::class(data) == "data.frame")){ # all() without na.rm -> ok because class(NA) is "logical"
+    if(base::all(base::class(data) == "data.frame")){ # base::all() without na.rm -> ok because base::class(NA) is "logical"
         tempo <- base::list("COLUMN_TYPE" = base::sapply(data, FUN = "typeof"))
-        if(base::any(base::sapply(data, FUN = "class") %in% "factor")){ # if an ordered factor is present, then sapply(data, FUN = "class") return a list but works with any(sapply(data, FUN = "class") %in% "factor") # any() without na.rm -> ok because class(NA) is "logical"
+        if(base::any(base::sapply(data, FUN = "class") %in% "factor")){ # if an ordered factor is present, then base::sapply(data, FUN = "class") return a list but works with base::any(base::sapply(data, FUN = "class") %in% "factor") # base::any() without na.rm -> ok because base::class(NA) is "logical"
             tempo.class <- base::sapply(data, FUN = "class")
-            if(base::any(base::unlist(tempo.class) %in% "ordered")){ # any() without na.rm -> ok because class(NA) is "logical"
+            if(base::any(base::unlist(tempo.class) %in% "ordered")){ # base::any() without na.rm -> ok because base::class(NA) is "logical"
                 tempo2 <- base::sapply(tempo.class, paste, collapse = " ") # paste the "ordered" factor" in "ordered factor"
             }else{
                 tempo2 <- base::unlist(tempo.class)
@@ -287,13 +287,13 @@ info <- function(
         }
         output <- base::c(output, tempo)
     }
-    if(base::all(base::class(data) == "list")){ # all() without na.rm -> ok because class(NA) is "logical"
+    if(base::all(base::class(data) == "list")){ # base::all() without na.rm -> ok because base::class(NA) is "logical"
         tempo <- base::list("COMPARTMENT_NAMES" = base::names(data))
         output <- base::c(output, tempo)
         tempo <- base::list("COMPARTMENT_TYPE" = base::sapply(data, FUN = "typeof"))
-        if(base::any(base::unlist(base::sapply(data, FUN = "class")) %in% "factor")){ # if an ordered factor is present, then sapply(data, FUN = "class") return a list but works with any(sapply(data, FUN = "class") %in% "factor")  # any() without na.rm -> ok because class(NA) is "logical"
+        if(base::any(base::unlist(base::sapply(data, FUN = "class")) %in% "factor")){ # if an ordered factor is present, then base::sapply(data, FUN = "class") return a list but works with base::any(base::sapply(data, FUN = "class") %in% "factor")  # base::any() without na.rm -> ok because base::class(NA) is "logical"
             tempo.class <- base::sapply(data, FUN = "class")
-            if(base::any(base::unlist(tempo.class) %in% "ordered")){ # any() without na.rm -> ok because class(NA) is "logical"
+            if(base::any(base::unlist(tempo.class) %in% "ordered")){ # base::any() without na.rm -> ok because base::class(NA) is "logical"
                 tempo2 <- base::sapply(tempo.class, paste, collapse = " ") # paste the "ordered" factor" in "ordered factor"
             }else{
                 tempo2 <- base::unlist(tempo.class)
