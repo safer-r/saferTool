@@ -213,9 +213,9 @@ comp_2d <- function(
         "data2"
     )
     tempo <- base::eval(base::parse(text = base::paste0("base::c(base::missing(", base::paste0(mandat.args, collapse = "),base::missing("), "))")))
-    if(base::any(tempo)){ # normally no NA for missing() output
+    if(base::any(tempo)){ # normally no NA for base::missing() output
         tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: \nFOLLOWING ARGUMENT", base::ifelse(base::sum(tempo, na.rm = TRUE) > 1, "S HAVE", " HAS"), " NO DEFAULT VALUE AND REQUIRE ONE:\n", base::paste0(mandat.args, collapse = "\n"))
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
     }
     # end arg with no default values
     # argument checking with arg_check()
@@ -232,9 +232,9 @@ comp_2d <- function(
     if( ! (base::all(base::class(arg.user.setting) %in% base::c("list", "NULL"), na.rm = TRUE) & base::length(arg.user.setting) == 0)){
         tempo.arg <- base::names(arg.user.setting) # values provided by the user
         tempo.log <- base::suppressWarnings(base::sapply(base::lapply(base::lapply(tempo.arg, FUN = base::get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.na), FUN = base::any)) & base::lapply(base::lapply(tempo.arg, FUN = base::get, env = base::sys.nframe(), inherit = FALSE), FUN = base::length) == 1L # no argument provided by the user can be just NA
-        if(base::any(tempo.log) == TRUE){ # normally no NA because is.na() used here
+        if(base::any(tempo.log) == TRUE){ # normally no NA because base::is.na() used here
             tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE\n", base::ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS", "THIS ARGUMENT"), " CANNOT JUST BE NA:", base::paste0(tempo.arg[tempo.log], collapse = "\n"))
-            base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+            base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
         }
     }
     # end management of NA arguments
@@ -246,9 +246,9 @@ comp_2d <- function(
         "safer_check"
     )
     tempo.log <- base::sapply(base::lapply(tempo.arg, FUN = base::get, env = base::sys.nframe(), inherit = FALSE), FUN = base::is.null)
-    if(base::any(tempo.log) == TRUE){# normally no NA with is.null()
+    if(base::any(tempo.log) == TRUE){# normally no NA with base::is.null()
         tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE:\n", base::ifelse(base::sum(tempo.log, na.rm = TRUE) > 1, "THESE ARGUMENTS\n", "THIS ARGUMENT\n"), base::paste0(tempo.arg[tempo.log], collapse = "\n"),"\nCANNOT BE NULL")
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
     }
     # end management of NULL arguments
     
@@ -259,21 +259,21 @@ comp_2d <- function(
     # end warning initiation
     
     # other checkings
-    if( ! (base::any(base::class(data1) %in% base::c("data.frame", "table")) | base::all(base::class(data1) %in% base::c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data1) %in% c("matrix", "data.frame", "table"))
+    if( ! (base::any(base::class(data1) %in% base::c("data.frame", "table")) | base::all(base::class(data1) %in% base::c("matrix", "array")))){ # before R4.0.0, it was  ! base::any(base::class(data1) %in% base::c("matrix", "data.frame", "table"))
         tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data1 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
     }
-    if( ! (base::any(base::class(data2) %in% base::c("data.frame", "table")) | base::all(base::class(data2) %in% base::c("matrix", "array")))){ # before R4.0.0, it was  ! any(class(data2) %in% c("matrix", "data.frame", "table"))
+    if( ! (base::any(base::class(data2) %in% base::c("data.frame", "table")) | base::all(base::class(data2) %in% base::c("matrix", "array")))){ # before R4.0.0, it was  ! base::any(base::class(data2) %in% base::c("matrix", "data.frame", "table"))
         tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data2 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
     }
-    if(base::all(base::class(data1) == "table") & base::length(base::dim(data1)) == 1L){ # class() cannot return NA
+    if(base::all(base::class(data1) == "table") & base::length(base::dim(data1)) == 1L){ # base::class() cannot return NA
         tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data1 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION")
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
     }
     if(base::all(base::class(data2) == "table", na.rm = TRUE) & base::length(base::dim(data2)) == 1L){
         tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE: THE data2 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION")
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in stop() to be able to add several messages between ==
+        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
     }
     # end other checkings
     # end second round of checking and data preparation
@@ -359,19 +359,19 @@ comp_2d <- function(
     # end structure
     # conversion of object into matrix and content into characters
     if(base::all(base::class(data1) %in% base::c("data.frame"))){
-        data1 <- base::apply(data1, 2, function(x){base::gsub('\\s+', '',x)}) # convert into matrix of character whitout space in the character strings, since as.matrix use format() to convert into characters
+        data1 <- base::apply(data1, 2, function(x){base::gsub('\\s+', '',x)}) # convert into matrix of character whitout space in the character strings, since as.matrix use base::format() to convert into characters
     }else if(base::all(base::class(data1) %in% base::c("table"))){
         data1 <- base::matrix(data1, ncol = base::ncol(data1), dimnames = base::dimnames(data1))
         base::mode(data1) <- "character"
     }
     if(base::all(base::class(data2) %in% base::c("data.frame"))){
-        data2 <- base::apply(data2, 2, function(x){base::gsub('\\s+', '',x)}) # convert into matrix of character whitout space in the character strings, since as.matrix use format() to convert into characters
+        data2 <- base::apply(data2, 2, function(x){base::gsub('\\s+', '',x)}) # convert into matrix of character whitout space in the character strings, since as.matrix use base::format() to convert into characters
     }else if(base::all(base::class(data2) %in% base::c("table"))){
         data2 <- base::matrix(data2, ncol = base::ncol(data2), dimnames = base::dimnames(data2))
         base::mode(data2) <- "character"
     }
     # end conversion of object into matrix and content into characters
-    if(base::identical(data1, data2)){ # before R4.0.0, it was  ! any(class(data1) %in% c("matrix", "data.frame", "table"))
+    if(base::identical(data1, data2)){ # before R4.0.0, it was  ! base::any(base::class(data1) %in% base::c("matrix", "data.frame", "table"))
         same.row.name <- TRUE
         row.name <- base::dimnames(data1)[[1]]
         any.id.row.name <- TRUE
