@@ -54,3 +54,10 @@ obs1 = list(1:5, LETTERS[1:2]) ;
 obs2 = list(a = 1:5, b = LETTERS[1:2]) ; 
 comp_list(obs1, obs2)
 }
+\author{
+Gael Millot <gael.millot@pasteur.fr>
+
+Yushi Han <yushi.han2000@gmail.com>
+
+Haiding Wang <wanghaiding442@gmail.com>
+}

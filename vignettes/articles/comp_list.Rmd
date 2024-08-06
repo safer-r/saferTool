@@ -36,9 +36,9 @@ list4 # 2D list
 
 ### All the arguments
 ```{r}
-comp_list(list1, list1)
+comp_list(list1, list2, safer_check = TRUE)
 
-comp_list(list1, list3)
+comp_list(list1, list3, safer_check = TRUE)
 
-comp_list(list2, list4)
+comp_list(list2, list4, safer_check = TRUE)
 ```

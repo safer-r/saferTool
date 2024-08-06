@@ -31,3 +31,13 @@ obs1 = matrix(1:30, ncol = 5, dimnames = list(letters[1:6], LETTERS[1:5])) ;
 obs1 ; 
 tail2(obs1, 3, "r")
 }
+\seealso{
+\code{\link[utils]{tail}}
+}
+\author{
+Gael Millot <gael.millot@pasteur.fr>
+
+Yushi Han <yushi.han2000@gmail.com>
+
+Haiding Wang <wanghaiding442@gmail.com>
+}

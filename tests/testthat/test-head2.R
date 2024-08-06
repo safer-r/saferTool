@@ -5,22 +5,18 @@ test_that("head2 function works correctly", {
 
   # Test cases
   # Simple examples
-  test_that("handles simple examples", {
     expect_no_error(head2(data1 = mat1))
-  })
 
-  # Test n argument
-  test_that("handles n argument", {
+  # Test argument n
     expect_no_error(head2(data1 = mat1, n = 5))
-  })
 
-  # Test side argument
-  test_that("handles side argument", {
+  # Test argument side
     expect_no_error(head2(data1 = mat1, side = "r"))
-  })
 
   # Test all arguments
-  test_that("handles all arguments", {
-    expect_no_error(head2(data1 = mat1, n = 6, side = "l"))
-  })
+    expect_no_error(head2(
+      data1 = mat1, 
+      n = 6, 
+      side = "l", 
+      safer_check = TRUE))
 })

@@ -48,12 +48,19 @@ tail2(data1 = mat1, side = "r") # left or right side of the 2D object (only for 
 ```
 <br>
 
+### Argument safer_check
+```{r}
+tail2(data1 = mat1, safer_check = TRUE) # left or right side of the 2D object (only for matrix, data frame or table)
+```
+<br>
+
 ### All the arguments
 ```{r}
 tail2(
     data1 = mat1, 
     n = 6, 
-    side = "l"
+    side = "l",
+    safer_check = TRUE
 )
 ```
 

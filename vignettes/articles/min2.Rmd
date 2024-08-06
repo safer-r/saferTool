@@ -113,17 +113,33 @@ min2(
 ```
 <br>
 
+### Argument safer_check
+```{r}
+min2(
+    x = vec2,
+    safer_check = TRUE
+)
+
+min2(
+    x = tab1,
+    safer_check = TRUE
+)
+```
+<br>
+
 ### All the arguments
 ```{r}
 min2(
     x = vec5,
     na.rm = TRUE,
-    finite  = FALSE
+    finite  = FALSE,
+    safer_check = TRUE
 )
 
 min2(
     x = mat4,
     na.rm = TRUE,
-    finite  = FALSE
+    finite  = FALSE,
+    safer_check = TRUE
 )
 ```

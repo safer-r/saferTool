@@ -36,3 +36,13 @@ options(digits = 8) ;
 cat(round2(data = c(NA, 10, 100.001, 333.0001254, 12312.1235), dec.nb = 2, after.lead.zero = FALSE), "\n\n") ; 
 options(digits = ini.options)
 }
+\seealso{
+\code{\link{round}}
+}
+\author{
+Gael Millot <gael.millot@pasteur.fr>
+
+Yushi Han <yushi.han2000@gmail.com>
+
+Haiding Wang <wanghaiding442@gmail.com>
+}

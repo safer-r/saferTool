@@ -72,3 +72,10 @@ Provide a broad description of an object.
 \examples{
 info(data = 1:3)
 }
+\author{
+Gael Millot <gael.millot@pasteur.fr>
+
+Yushi Han <yushi.han2000@gmail.com>
+
+Haiding Wang <wanghaiding442@gmail.com>
+}

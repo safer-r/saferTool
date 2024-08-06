@@ -113,17 +113,33 @@ max2(
 ```
 <br>
 
+### Argument safer_check
+```{r}
+max2(
+    x = vec1,
+    safer_check = TRUE
+)
+
+max2(
+    x = mat2,
+    safer_check = TRUE
+)
+```
+<br>
+
 ### All the arguments
 ```{r}
 max2(
     x = vec5,
     na.rm = TRUE,
-    finite  = FALSE
+    finite  = FALSE,
+    safer_check = TRUE
 )
 
 max2(
     x = mat4,
     na.rm = TRUE,
-    finite  = FALSE
+    finite  = FALSE,
+    safer_check = TRUE
 )
 ```

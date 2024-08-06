@@ -5,14 +5,14 @@ test_that("tail2 function works correctly", {
     
     # Test cases
     # Test without arguments
-    expect_no_error(tail2(data1 = mat1))
+      expect_no_error(tail2(data1 = mat1))
     
     # Test with n argument
-    expect_no_error(tail2(data1 = mat1, n = 5))
+      expect_no_error(tail2(data1 = mat1, n = 5))
     
     # Test with side argument
-    expect_no_error(tail2(data1 = mat1, side = "r"))
+      expect_no_error(tail2(data1 = mat1, side = "r"))
     
     # Test with all arguments
-    expect_no_error(tail2(data1 = mat1, n = 6, side = "l"))
+      expect_no_error(tail2(data1 = mat1, n = 6, side = "l", safer_check = TRUE))
 })

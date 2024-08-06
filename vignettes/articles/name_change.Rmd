@@ -43,5 +43,5 @@ name_change(char1,char2)
 
 ### All the arguments
 ```{r}
-name_change(char3, char4) # the function checks that the new names are neither in obs1 nor in obs2 (increment the number after the added string)
+name_change(char3, char4, safer_check = TRUE) # the function checks that the new names are neither in obs1 nor in obs2 (increment the number after the added string)
 ```

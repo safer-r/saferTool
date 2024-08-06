@@ -12,6 +12,9 @@
 #' 
 #' arguments of the .pack_and_function_check() function are not checked, so use carefully inside other functions
 #' 
+#' @author Gael Millot <gael.millot@pasteur.fr>
+#' @author Yushi Han <yushi.han2000@gmail.com>
+#' @author Haiding Wang <wanghaiding442@gmail.com>
 #' @examples
 #' \dontrun{
 #' # Example that shouldn't be run because this is an internal function

@@ -49,29 +49,29 @@ dataframe3 # 2D dataframe
 # large matrices
 head(mat1) ; 
 head(mat2) ; 
-comp_2d(mat1, mat2)
+comp_2d(mat1, mat2, safer_check = TRUE)
 
 head(mat1) ; 
 head(mat3) ; 
-comp_2d(mat1, mat3)
+comp_2d(mat1, mat3, safer_check = TRUE)
 
 # Matrices: same row content and same row names
-comp_2d(mat4, mat5)
+comp_2d(mat4, mat5, safer_check = TRUE)
 
 # Matrices: same row content but not same row names
-comp_2d(mat4, mat6)
+comp_2d(mat4, mat6, safer_check = TRUE)
 
 # Data frames: same row content and same row names, not same mode between columns
 dataframe1[, 5] <- as.character(dataframe1[, 5]) ; 
 dataframe2[, 5] <- as.character(dataframe2[, 5]) ; 
 str(dataframe1) ; 
 str(dataframe2) ; 
-comp_2d(dataframe1, dataframe2)
+comp_2d(dataframe1, dataframe2, safer_check = TRUE)
 
 # Data frames: same row content but not same row names
 dataframe1[, 5] <- as.character(dataframe1[, 5]) ; 
 dataframe3[, 5] <- as.character(dataframe3[, 5]) ; 
 str(dataframe1) ; 
 str(dataframe3) ; 
-comp_2d(dataframe1, dataframe3)
+comp_2d(dataframe1, dataframe3, safer_check = TRUE)
 ```

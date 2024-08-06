@@ -168,3 +168,10 @@ obs1 ;
 obs2 ; 
 comp_2d(obs1, obs2)
 }
+\author{
+Gael Millot <gael.millot@pasteur.fr>
+
+Yushi Han <yushi.han2000@gmail.com>
+
+Haiding Wang <wanghaiding442@gmail.com>
+}

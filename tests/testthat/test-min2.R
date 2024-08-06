@@ -14,41 +14,37 @@ test_that("min2 function works correctly", {
     fac1 <- factor(vec5)
     tab1 <- table(fac1)
     
-    expect_equal(min2(x = vec1), -1)
+    # Test cases
+    # Test argument x
+      expect_equal(min2(x = vec1), -1)
+      expect_equal(min2(x = vec2), as.integer(NA))
+      expect_equal(min2(x = vec3), 1)
+      expect_equal(min2(x = vec4), 1/3)
+      expect_equal(min2(x = vec5), as.double(NA))
     
-    expect_equal(min2(x = vec2), as.integer(NA))
+      expect_no_error(min2(x = log1))
+      expect_no_error(min2(x = log2))
     
-    expect_equal(min2(x = vec3), 1)
+      expect_equal(min2(x = mat1), -1)
+      expect_equal(min2(x = mat2), as.double(NA))
+
+      expect_no_error(min2(x = mat3))
+      expect_no_error(min2(x = mat4))
+      expect_no_error(min2(x = tab1))
     
-    expect_equal(min2(x = vec4), 1/3)
+    # Test argument na.rm
+      expect_equal(min2(x = vec1, na.rm = TRUE), -1)
+      expect_equal(min2(x = vec2, na.rm = TRUE), 1)
+      
+      expect_no_error(min2(x = log2, na.rm = TRUE))
+      expect_no_error(min2(x = log1, na.rm = TRUE))
+      expect_no_error(min2(x = mat3, na.rm = TRUE))
     
-    expect_equal(min2(x = vec5), as.double(NA))
+    # Test argument finite
+      expect_equal(min2(x = vec1, finite = TRUE), -1)
+      expect_no_error(min2(x = vec3, finite = TRUE))
     
-    expect_no_error(min2(x = log1))
-    
-    expect_no_error(min2(x = log2))
-    
-    expect_equal(min2(x = mat1), -1)
-    
-    expect_equal(min2(x = mat2), as.double(NA))
-    
-    expect_no_error(min2(x = mat3))
-    
-    expect_no_error(min2(x = mat4))
-    
-    expect_no_error(min2(x = tab1))
-    
-    # Test arguments
-    expect_equal(min2(x = vec1, na.rm = TRUE), -1)
-    expect_equal(min2(x = vec2, na.rm = TRUE), 1)
-    expect_no_error(min2(x = log2, na.rm = TRUE))
-    expect_no_error(min2(x = log1, na.rm = TRUE))
-    expect_no_error(min2(x = mat3, na.rm = TRUE))
-    
-    expect_equal(min2(x = vec1, finite = TRUE), -1)
-    expect_no_error(min2(x = vec3, finite = TRUE))
-    
-    
-    expect_no_error(min2(x = vec5, na.rm = TRUE, finite = FALSE))
-    expect_no_error(min2(x = mat4, na.rm = TRUE, finite = FALSE))
+    # Test all arguments
+      expect_no_error(min2(x = vec5, na.rm = TRUE, finite = FALSE, safer_check = TRUE))
+      expect_no_error(min2(x = mat4, na.rm = TRUE, finite = FALSE, safer_check = TRUE))
 })
