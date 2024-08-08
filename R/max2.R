@@ -55,7 +55,8 @@ max2 <- function(
         x = x,
         na.rm = na.rm,
         finite = finite,
-        external.function.name = function.name
+        external.function.name = function.name,
+        external.package.name = package.name
     )
     # main code
     if(finite == TRUE){
