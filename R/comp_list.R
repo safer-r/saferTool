@@ -148,7 +148,7 @@ comp_list <- function(
     
     # main code
     same.length <- NULL
-    length <- NULL
+    length2 <- NULL
     same.names <- NULL
     name <- NULL
     any.id.name <- NULL
@@ -161,7 +161,7 @@ comp_list <- function(
     identical.content <- NULL
     if(base::identical(data1, data2)){
         same.length <- TRUE
-        length <- base::length(data1)
+        length2 <- base::length(data1)
         if( ! base::is.null(base::names(data1))){
             same.names <- TRUE
             name <- base::names(data1)
@@ -180,7 +180,7 @@ comp_list <- function(
             same.length<- FALSE
         }else{
             same.length<- TRUE
-            length <- base::length(data1)
+            length2 <- base::length(data1)
         }
         if( ! (base::is.null(base::names(data1)) & base::is.null(base::names(data2)))){
             if( ! base::identical(base::names(data1), base::names(data2))){
@@ -211,7 +211,7 @@ comp_list <- function(
             same.compartment.pos2 <- base::which(data2 %in% data1)
         }
         if(same.length == TRUE & ! base::all(base::is.null(same.compartment.pos1), base::is.null(same.compartment.pos2), na.rm = TRUE)){
-            if(base::identical(same.compartment.pos1, same.compartment.pos2)){
+            if(identical(same.compartment.pos1 %in% 1:length2) & identical(same.compartment.pos2 %in% 1:length2)){
                 identical.content <- TRUE
             }else{
                 identical.content <- FALSE
@@ -220,7 +220,7 @@ comp_list <- function(
             identical.content <- FALSE
         }
     }
-    output <- base::list(same.length = same.length, length = length, same.names = same.names, name = name, any.id.name = any.id.name, same.names.pos1 = same.names.pos1, same.names.pos2 = same.names.pos2, any.id.compartment = any.id.compartment, same.compartment.pos1 = same.compartment.pos1, same.compartment.pos2 = same.compartment.pos2, identical.object = identical.object, identical.content = identical.content)
+    output <- base::list(same.length = same.length, length = length2, same.names = same.names, name = name, any.id.name = any.id.name, same.names.pos1 = same.names.pos1, same.names.pos2 = same.names.pos2, any.id.compartment = any.id.compartment, same.compartment.pos1 = same.compartment.pos1, same.compartment.pos2 = same.compartment.pos2, identical.object = identical.object, identical.content = identical.content)
     # output
     # warning output
     # end warning output
