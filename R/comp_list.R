@@ -45,7 +45,7 @@
 #' 
 #' - $common.compartments: common compartments between data1 and data2. NULL if no common compartments.
 #' 
-#' - $same.order: logical. Are all compartments in the same order? TRUE or FALSE if compartments of data1 and data2 are identical but not necessary in the same order. NULL otherwise (different length for instance).
+#' - $same.order: logical. Are all compartments in the same order? TRUE if compartments of data1 and data2 are identical. FALSE if compartments of data1 and data2 are made of the same compartments but not in the same order. NULL otherwise (different length for instance).
 #' 
 #' - $identical.object: logical. Are lists identical (compartment names, content, including content order)?
 #'
@@ -56,7 +56,9 @@
 #' @examples
 #' obs1 = list(1:5, LETTERS[1:2]) ; 
 #' obs2 = list(a = 1:5, b = LETTERS[1:2]) ; 
-#' comp_list(obs1, obs2)
+#' obs3 = list(LETTERS[1:2], 1:5) ; 
+#' comp_list(obs1, obs2) ;
+#' comp_list(obs1, obs3)
 #' @export
 comp_list <- function(
         data1, 
@@ -68,6 +70,7 @@ comp_list <- function(
     # data1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; safer_check = TRUE # for function debugging
     # data1 = list(a = 1:5, b = LETTERS[1:2]) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; safer_check = TRUE # for function debugging
     # data1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; data2 = list(LETTERS[5:9], matrix(1:6), 1:5) ; safer_check = TRUE # for function debugging
+    # data1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; data2 = list(a = 1:5, b = LETTERS[1:2], e = matrix(1:6)) ; safer_check = TRUE # for function debugging
     # data1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; data2 = list(a = 1:5, b = LETTERS[1:2], e = matrix(1:6)) ; safer_check = TRUE # for function debugging
     # package name
     package.name <- "saferTool"
@@ -206,7 +209,7 @@ comp_list <- function(
         identical.content <- TRUE
     }else{
         if(base::identical(base::length(data1), base::length(data2))){
-            same.length<- TRUE
+            same.length <- TRUE
             length2 <- base::length(data1)
         }
         if( ! (base::is.null(base::names(data1)) & base::is.null(base::names(data2)))){
@@ -248,8 +251,8 @@ comp_list <- function(
         if(base::identical(data1, data2)){
             identical.content <- TRUE
             same.order <- TRUE
-        }else if(base::identical(base::sort(data1), base::sort(data2))){
-            same.order <- FALSE
+        }else if(same.length == TRUE & all( ! is.na(same.compartments.match1)) & all( ! is.na(same.compartments.match2))){
+                same.order <- FALSE
         }
     }
     # output
