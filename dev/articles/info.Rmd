@@ -98,6 +98,7 @@ info(data = call1) # object of class "call", mode "call" &  type "language"
 info(
     data = vec1, 
     n = 1, # number of element to display per compartment of the output list (i.e., head(..., n))
-    warn.print = FALSE
+    warn.print = FALSE,
+    safer_check = TRUE
 )
 ```

@@ -69,22 +69,30 @@ cat(round2(data = vec3, after.lead.zero = FALSE), "\n\n")
 ```
 <br>
 
+### Argument safer_check
+```{r}
+round2(data = vec1, safer_check = TRUE)
+
+round2(data = vec2, safer_check = TRUE)
+```
+<br>
+
 ### All the arguments
 ```{r}
 ini.options <- options()$digits ; 
 options(digits = 8) ; 
-cat(round2(data = vec2, "\n\n")) ; 
+cat(round2(data = vec2, dec.nb = 2, after.lead.zero = FALSE, safer_check = TRUE), "\n\n") ; 
 options(digits = ini.options)
 
 
 ini.options <- options()$digits ; 
 options(digits = 8) ; 
-cat(round2(data = vec3, dec.nb = 2, after.lead.zero = FALSE), "\n\n") ; 
+cat(round2(data = vec3, dec.nb = 2, after.lead.zero = FALSE, safer_check = TRUE), "\n\n") ; 
 options(digits = ini.options)
 
 
 ini.options <- options()$digits ; 
 options(digits = 8) ; 
-cat(round2(data = c(NA, "10", "100.001", "333.0001254", "12312.1235"), dec.nb = 2, after.lead.zero = TRUE), "\n\n") ; 
+cat(round2(data = c(NA, "10", "100.001", "333.0001254", "12312.1235"), dec.nb = 2, after.lead.zero = TRUE, safer_check = TRUE), "\n\n") ; 
 options(digits = ini.options)
 ```

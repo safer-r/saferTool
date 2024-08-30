@@ -13,29 +13,43 @@
 #' @returns 
 #' A list containing:
 #' 
-#' - $same.length: logical. Are number of elements identical?
+#' - $same.length: logical. Are number of compartments identical?
 #' 
-#' - $length: number of elements in the 2 datasets (NULL otherwise).
+#' - $length: number of compartments in the 2 datasets (NULL otherwise).
 #' 
-#' - $same.names: logical. Are element names identical ?
+#' - $same.names: logical. Are compartment names identical? NULL if data1 and data2 have no names.
 #' 
-#' - $name: name of elements of the 2 datasets if identical (NULL otherwise).
+#' - $name: name of compartments of the 2 datasets if identical (NULL otherwise).
 #' 
-#' - $any.id.name: logical. Is there any element names identical ?
+#' - $any.id.names: logical. Is there any compartment names identical ?
 #' 
-#' - $same.names.pos1: positions, in data1, of the element names identical in data2.
+#' - $same.names.pos1: positions, in data1, of the compartment names identical in data2. NULL if no identical names.
 #' 
-#' - $same.names.pos2: positions, in data2, of the compartment names identical in data1.
+#' - $same.names.pos2: positions, in data2, of the compartment names identical in data1. NULL if no identical names.
 #' 
-#' - $any.id.compartment: logical. is there any identical compartments ?
+#' - $same.names.match1: positions, in data2, of the names that match the names in data1, as given by match(data1, data2) (NULL otherwise).
 #' 
-#' - $same.compartment.pos1: positions, in data1, of the compartments identical in data2.
+#' - $same.names.match2: positions, in data1, of the names that match the names in data2, as given by match(data1, data2) (NULL otherwise).
 #' 
-#' - $same.compartment.pos2: positions, in data2, of the compartments identical in data1.
+#' - $common.names: common compartment names between data1 and data2 (can be a subset of $name or not). NULL if no common compartment names.
 #' 
-#' - $identical.object: logical. Are objects identical (kind of object, compartment names and content)?
+#' - $any.id.compartments: logical. is there any identical compartments ?
 #' 
-#' - $identical.content: logical. Are content objects identical (identical compartments excluding compartment names)?
+#' - $same.compartments.pos1: positions, in data1, of the compartments identical in data2. NULL if no identical compartments.
+#' 
+#' - $same.compartments.pos2: positions, in data2, of the compartments identical in data1. NULL if no identical compartments.
+#' 
+#' - $same.compartments.match1: positions, in data2, of the compartments that match the compartments in data1, as given by match(data1, data2) (NULL otherwise).
+#' 
+#' - $same.compartments.match2: positions, in data1, of the compartments that match the compartments in data2, as given by match(data1, data2) (NULL otherwise).
+#' 
+#' - $common.compartments: common compartments between data1 and data2. NULL if no common compartments.
+#' 
+#' - $same.order: logical. Are all compartments in the same order? TRUE or FALSE if compartments of data1 and data2 are identical but not necessary in the same order. NULL otherwise (different length for instance).
+#' 
+#' - $identical.object: logical. Are lists identical (compartment names, content, including content order)?
+#'
+#' - $identical.content: logical. Are content list identical (identical compartments, including order, excluding kind of object and compartment names)?
 #' @author Gael Millot <gael.millot@pasteur.fr>
 #' @author Yushi Han <yushi.han2000@gmail.com>
 #' @author Haiding Wang <wanghaiding442@gmail.com>
@@ -52,7 +66,9 @@ comp_list <- function(
     
     # DEBUGGING
     # data1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; safer_check = TRUE # for function debugging
-    # data1 = list(a = 1:5, b = LETTERS[1:2]) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; safer_check = TRUE# for function debugging
+    # data1 = list(a = 1:5, b = LETTERS[1:2]) ; data2 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; safer_check = TRUE # for function debugging
+    # data1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; data2 = list(LETTERS[5:9], matrix(1:6), 1:5) ; safer_check = TRUE # for function debugging
+    # data1 = list(a = 1:5, b = LETTERS[1:2], d = matrix(1:6)) ; data2 = list(a = 1:5, b = LETTERS[1:2], e = matrix(1:6)) ; safer_check = TRUE # for function debugging
     # package name
     package.name <- "saferTool"
     # end package name
@@ -147,38 +163,49 @@ comp_list <- function(
     # end second round of checking and data preparation
     
     # main code
-    same.length <- NULL
+    same.length <- FALSE
     length2 <- NULL
-    same.names <- NULL
+    same.names <- NULL # not FALSE to deal with absence of name
     name <- NULL
-    any.id.name <- NULL
+    any.id.names <- FALSE
     same.names.pos1 <- NULL
     same.names.pos2 <- NULL
-    any.id.compartment <- NULL
-    same.compartment.pos1 <- NULL
-    same.compartment.pos2 <- NULL
-    identical.object <- NULL
-    identical.content <- NULL
+    same.names.match1 <- NULL
+    same.names.match2 <- NULL
+    common.names <- NULL
+    any.id.compartments <- FALSE
+    same.compartments.pos1 <- NULL
+    same.compartments.pos2 <- NULL
+    same.compartments.match1 <- NULL
+    same.compartments.match2 <- NULL
+    common.compartments <- NULL
+    same.order <- NULL
+    identical.object <- FALSE
+    identical.content <- FALSE
     if(base::identical(data1, data2)){
         same.length <- TRUE
         length2 <- base::length(data1)
         if( ! base::is.null(base::names(data1))){
             same.names <- TRUE
             name <- base::names(data1)
-            any.id.name <- TRUE
+            any.id.names <- TRUE
             same.names.pos1 <- 1:base::length(data1)
             same.names.pos2 <- 1:base::length(data2)
+            same.names.match1 <- 1:base::length(data1)
+            same.names.match2 <- 1:base::length(data2)
+            common.names <- base::names(data1)
         }
-        any.id.compartment <- TRUE
-        same.compartment.pos1 <- 1:base::length(data1)
-        same.compartment.pos2 <- 1:base::length(data2)
+        any.id.compartments <- TRUE
+        same.compartments.pos1 <- 1:base::length(data1)
+        same.compartments.pos2 <- 1:base::length(data2)
+        same.compartments.match1 <- 1:base::length(data1)
+        same.compartments.match2 <- 1:base::length(data2)
+        common.compartments <- data1
+        same.order <- TRUE
         identical.object <- TRUE
         identical.content <- TRUE
     }else{
-        identical.object <- FALSE
-        if( ! base::identical(base::length(data1), base::length(data2))){
-            same.length<- FALSE
-        }else{
+        if(base::identical(base::length(data1), base::length(data2))){
             same.length<- TRUE
             length2 <- base::length(data1)
         }
@@ -189,41 +216,46 @@ comp_list <- function(
                 same.names <- TRUE
                 name <- base::names(data1)
             }
-            any.id.name <- FALSE
             if(base::any(base::names(data1) %in% base::names(data2))){
-                any.id.name <- TRUE
+                any.id.names <- TRUE
                 same.names.pos1 <- base::which(base::names(data1) %in% base::names(data2))
+                same.names.match1 <- base::match(base::names(data1), base::names(data2))
             }
             if(base::any(base::names(data2) %in% base::names(data1))){
-                any.id.name <- TRUE
+                any.id.names <- TRUE
                 same.names.pos2 <- base::which(base::names(data2) %in% base::names(data1))
+                same.names.match2 <- base::match(base::names(data2), base::names(data1))
+            }
+            if(any.id.names == TRUE){
+                common.names <- base::unique(base::c(base::names(data1)[same.names.pos1], base::names(data2)[same.names.pos2]))
             }
         }
-        base::names(data1) <- NULL
-        base::names(data2) <- NULL
-        any.id.compartment <- FALSE
+        base::names(data1) <- NULL # names solved -> to do not be disturbed by names
+        base::names(data2) <- NULL # names solved -> to do not be disturbed by names
         if(base::any(data1 %in% data2)){
-            any.id.compartment <- TRUE
-            same.compartment.pos1 <- base::which(data1 %in% data2)
+            any.id.compartments <- TRUE
+            same.compartments.pos1 <- base::which(data1 %in% data2)
+            same.compartments.match1 <- base::match(data1, data2)
         }
         if(base::any(data2 %in% data1)){
-            any.id.compartment <- TRUE
-            same.compartment.pos2 <- base::which(data2 %in% data1)
+            any.id.compartments <- TRUE
+            same.compartments.pos2 <- base::which(data2 %in% data1)
+            same.compartments.match2 <- base::match(data2, data1)
         }
-        if(same.length == TRUE & ! base::all(base::is.null(same.compartment.pos1), base::is.null(same.compartment.pos2), na.rm = TRUE)){
-            if(identical(same.compartment.pos1 %in% 1:length2) & identical(same.compartment.pos2 %in% 1:length2)){
-                identical.content <- TRUE
-            }else{
-                identical.content <- FALSE
-            }
-        }else{
-            identical.content <- FALSE
+        if(any.id.compartments == TRUE){
+            common.compartments <- base::unique(base::c(data1[same.compartments.pos1], data2[same.compartments.pos2]))
+        }
+        if(base::identical(data1, data2)){
+            identical.content <- TRUE
+            same.order <- TRUE
+        }else if(base::identical(base::sort(data1), base::sort(data2))){
+            same.order <- FALSE
         }
     }
-    output <- base::list(same.length = same.length, length = length2, same.names = same.names, name = name, any.id.name = any.id.name, same.names.pos1 = same.names.pos1, same.names.pos2 = same.names.pos2, any.id.compartment = any.id.compartment, same.compartment.pos1 = same.compartment.pos1, same.compartment.pos2 = same.compartment.pos2, identical.object = identical.object, identical.content = identical.content)
     # output
     # warning output
     # end warning output
+    output <- base::list(same.length = same.length, length = length2, same.names = same.names, name = name, any.id.names = any.id.names, same.names.pos1 = same.names.pos1, same.names.pos2 = same.names.pos2, same.names.match1 = same.names.match1, same.names.match2 = same.names.match2, common.names = common.names, any.id.compartments = any.id.compartments, same.compartments.pos1 = same.compartments.pos1, same.compartments.pos2 = same.compartments.pos2, same.compartments.match1 = same.compartments.match1, same.compartments.match2 = same.compartments.match2, common.compartments = common.compartments, same.order = same.order, identical.object = identical.object, identical.content = identical.content)
     base::return(output)
     # end output
     # end main code

@@ -41,7 +41,6 @@ df_remod(dataframe2)
 ### Argument quanti.col.name
 ```{r}
 df_remod(dataframe1, quanti.col.name = "quanti")
-df_remod(dataframe1, quanti.col.name = "quantity")
 df_remod(dataframe2, quanti.col.name = "quanti")
 df_remod(dataframe2, quanti.col.name = "quantity")
 ```
@@ -50,19 +49,22 @@ df_remod(dataframe2, quanti.col.name = "quantity")
 ### Argument quali.col.name
 ```{r}
 df_remod(dataframe1, quali.col.name = "quali")
-df_remod(dataframe1, quali.col.name = "quality")
 df_remod(dataframe2, quali.col.name = "quali")
 df_remod(dataframe2, quali.col.name = "quality")
 ```
 <br>
 
+### Argument safer_check
+```{r}
+df_remod(dataframe1, safer_check = TRUE) # safer_check = TRUE, checkings are performed before main code running
+```
+<br>
+
 ### All the arguments
 ```{r}
-df_remod(dataframe1, quanti.col.name = "quanti", quali.col.name = "quali")
+df_remod(dataframe1, quanti.col.name = "quanti", quali.col.name = "quali", safer_check = TRUE)
 
-df_remod(dataframe1, quanti.col.name = "quantity", quali.col.name = "quality")
+df_remod(dataframe2, quanti.col.name = "quanti", quali.col.name = "quali", safer_check = TRUE)
 
-df_remod(dataframe2, quanti.col.name = "quanti", quali.col.name = "quali")
-
-df_remod(dataframe2, quanti.col.name = "quantity", quali.col.name = "quality")
+df_remod(dataframe2, quanti.col.name = "quantity", quali.col.name = "quality", safer_check = TRUE)
 ```

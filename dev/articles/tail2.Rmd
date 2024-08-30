@@ -17,7 +17,6 @@ library(saferTool)
 ### Datasets
 
 ```{r}
-vec1 <- 1:100 # vector of integers
 mat1 <- diag(1:20) ;  dimnames(mat1) <- list(letters[1:20], LETTERS[1:20]) # diagonal matrix 20 * 20 with row names and column names
 ```
 <br>
@@ -25,7 +24,6 @@ mat1 <- diag(1:20) ;  dimnames(mat1) <- list(letters[1:20], LETTERS[1:20]) # dia
 ### Datasets info
 
 ```{r}
-vec1 # vector of integers
 mat1 # diagonal matrix 20 * 20 with row names and column names
 ```
 <br>
@@ -33,7 +31,6 @@ mat1 # diagonal matrix 20 * 20 with row names and column names
 ### Simple examples
 
 ```{r}
-tail2(data1 = vec1) # tail2() works like utils::tail() on non 2D objects
 tail2(data1 = mat1)
 ```
 <br>
@@ -51,12 +48,19 @@ tail2(data1 = mat1, side = "r") # left or right side of the 2D object (only for 
 ```
 <br>
 
+### Argument safer_check
+```{r}
+tail2(data1 = mat1, safer_check = TRUE) # left or right side of the 2D object (only for matrix, data frame or table)
+```
+<br>
+
 ### All the arguments
 ```{r}
 tail2(
     data1 = mat1, 
     n = 6, 
-    side = "l"
+    side = "l",
+    safer_check = TRUE
 )
 ```
 
