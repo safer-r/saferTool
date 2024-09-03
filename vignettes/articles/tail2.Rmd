@@ -32,6 +32,7 @@ mat1 # diagonal matrix 20 * 20 with row names and column names
 
 ```{r}
 tail2(data1 = mat1)
+tail2(letters, 3)
 ```
 <br>
 

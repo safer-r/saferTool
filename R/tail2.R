@@ -18,6 +18,7 @@
 #' obs1 = matrix(1:30, ncol = 5, dimnames = list(letters[1:6], LETTERS[1:5])) ; 
 #' obs1 ; 
 #' tail2(obs1, 3, "r")
+#' tail2(letters, 3)
 #' @importFrom saferDev arg_check
 #' @export
 tail2 <- function(
@@ -42,7 +43,7 @@ tail2 <- function(
     # end function name
     # critical operator checking
     if(safer_check == TRUE){
-        .base_op_check(
+        saferTool:::.base_op_check(
             external.function.name = function.name,
             external.package.name = package.name
     )
@@ -55,7 +56,7 @@ tail2 <- function(
     # end check of lib.path
     # check of the required function from the required packages
     if(safer_check == TRUE){
-        .pack_and_function_check(
+        saferTool:::.pack_and_function_check(
         fun = base::c(
             "saferDev::arg_check"
         ),
@@ -138,7 +139,7 @@ tail2 <- function(
     # warning output
     # end warning output
     if( ! (base::any(base::class(data1) %in% base::c("data.frame", "table")) | base::all(base::class(data1) %in% base::c("matrix", "array")))){ # before R4.0.0, it was  ! base::any(base::class(data1) %in% c("matrix", "data.frame", "table"))
-        base::return(tail2(data1, n))
+        base::return(utils::tail(data1, n))
     }else{
         obs.dim <- base::dim(data1)
         row <- base::ifelse(obs.dim[1] < n, 1, obs.dim[1] - n + 1):obs.dim[1]

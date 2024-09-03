@@ -85,7 +85,7 @@ info <- function(
     # end function name
     # critical operator checking
     if(safer_check == TRUE){
-        .base_op_check(
+        saferTool:::.base_op_check(
             external.function.name = function.name,
             external.package.name = package.name
     )
@@ -99,7 +99,7 @@ info <- function(
     
     # two function from the required packages
     if(safer_check == TRUE){
-        .pack_and_function_check(
+        saferTool:::.pack_and_function_check(
         fun = base::c(
             "saferDev::arg_check",
             "saferDev::get_message"

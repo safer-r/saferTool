@@ -33,6 +33,7 @@ mat1 # diagonal matrix 20 * 20 with row names and column names
 
 ```{r}
 head2(data1 = mat1)
+head2(letters, 8)
 ```
 <br>
 

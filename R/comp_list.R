@@ -86,7 +86,7 @@ comp_list <- function(
     # end function name
     # critical operator checking
     if(safer_check == TRUE){
-        .base_op_check(
+        saferTool:::.base_op_check(
             external.function.name = function.name,
             external.package.name = package.name)
     }
@@ -251,7 +251,7 @@ comp_list <- function(
         if(base::identical(data1, data2)){
             identical.content <- TRUE
             same.order <- TRUE
-        }else if(same.length == TRUE & all( ! is.na(same.compartments.match1)) & all( ! is.na(same.compartments.match2))){
+        }else if(same.length == TRUE & base::all( ! base::is.na(same.compartments.match1)) & base::all( ! base::is.na(same.compartments.match2))){
                 same.order <- FALSE
         }
     }

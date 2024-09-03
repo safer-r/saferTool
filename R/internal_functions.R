@@ -149,7 +149,7 @@
     # check of lib.path
     # end check of lib.path
     # check of the required function from the required packages
-    .pack_and_function_check(
+    saferTool:::.pack_and_function_check(
         fun = base::c(
             "saferDev::arg_check"
         ),

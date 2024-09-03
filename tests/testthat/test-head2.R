@@ -6,6 +6,7 @@ test_that("head2 function works correctly", {
   # Test cases
   # Simple examples
     expect_no_error(head2(data1 = mat1))
+    expect_no_error(head2(letters, 8))
 
   # Test argument n
     expect_no_error(head2(data1 = mat1, n = 5))

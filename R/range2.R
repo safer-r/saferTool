@@ -39,7 +39,7 @@ range2 <- function(
     # end function name
     # critical operator checking
     if(safer_check == TRUE){
-        .base_op_check(
+        saferTool:::.base_op_check(
             external.function.name = function.name,
             external.package.name = package.name
     )
@@ -47,7 +47,7 @@ range2 <- function(
     # end critical operator checking
 
     
-    .arguments_check(
+    saferTool:::.arguments_check(
         x = x,
         na.rm = na.rm,
         finite = finite,

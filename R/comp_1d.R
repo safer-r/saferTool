@@ -106,7 +106,7 @@ comp_1d <- function(
     # end function name
     # critical operator checking
     if(safer_check == TRUE){
-        .base_op_check(
+        saferTool:::.base_op_check(
             external.function.name = function.name,
             external.package.name = package.name
     )
