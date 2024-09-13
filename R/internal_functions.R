@@ -116,6 +116,7 @@
         x,
         na.rm,
         finite,
+        safer_check, 
         external.function.name,
         external.package.name
 ){
