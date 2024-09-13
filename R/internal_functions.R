@@ -98,6 +98,7 @@
 #' @param x Numeric or logical vector or matrix or numeric table where find the initial values to calculate.
 #' @param na.rm Single logical value. Should missing values (NA and NaN) be removed ?
 #' @param finite Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.
+#' @param safer_check Single logical value. Perform some "safer" checks (see https://github.com/safer-r)?
 #' @param external.function.name Name of the function using the .safer_backone_check() function.
 #' @param external.package.name Name of the package of the function using the .pack_and_function_check() function.
 #' @returns An error message if the type of input is not correct, or input missed, nothing otherwise.
@@ -128,6 +129,7 @@
     # x: x argument of the above function
     # na.rm: Single logical value. Should missing values (NA and NaN) be removed ?
     # finite: Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.
+    # safer_check: Single logical value. Perform some "safer" checks (see https://github.com/safer-r)?
     # external.function.name: function name
     # external.package.name: package name
     # RETURN
