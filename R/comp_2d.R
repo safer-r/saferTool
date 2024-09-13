@@ -193,7 +193,7 @@ comp_2d <- function(
         saferTool:::.base_op_check(
             external.function.name = function.name,
             external.package.name = package.name
-    )
+        )
     }
     # end critical operator checking
 

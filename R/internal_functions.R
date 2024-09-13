@@ -92,30 +92,27 @@
 }
 
 
-#' @title .arguments_check
+#' @title .safer_backone_check
 #' @description
 #' Check if 1) the types of input are correct and 2) an input is missed.
 #' @param x Numeric or logical vector or matrix or numeric table where find the initial values to calculate.
 #' @param na.rm Single logical value. Should missing values (NA and NaN) be removed ?
 #' @param finite Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.
-#' @param external.function.name Name of the function using the .arguments_check() function.
+#' @param external.function.name Name of the function using the .safer_backone_check() function.
 #' @param external.package.name Name of the package of the function using the .pack_and_function_check() function.
 #' @returns An error message if the type of input is not correct, or input missed, nothing otherwise.
 #' @details
-#' WARNING
-#' 
-#' arguments of the .arguments_check() function are not checked, so use carefully inside other functions
+#' WARNING: arguments of the .safer_backone_check() function are not checked, so use carefully inside other functions
 #' @examples
 #' \dontrun{
 #' # Example that shouldn't be run because this is an internal function
-#' .arguments_check(x = 1:3, na.rm = TRUE)
-#' 
-#' .arguments_check(x = c(Inf, NA), na.rm = TRUE, finite = TRUE)
+#' .safer_backone_check(x = 1:3, na.rm = TRUE)
+#' .safer_backone_check(x = c(Inf, NA), na.rm = TRUE, finite = TRUE)
 #' }
 #' @keywords internal
 #' @importFrom saferDev arg_check
 #' @rdname internal_function_backbone
-.arguments_check <- function(
+.safer_backone_check <- function(
         x,
         na.rm,
         finite,
@@ -145,17 +142,28 @@
     arg.names <- base::names(base::formals(fun = base::sys.function(base::sys.parent(n = 2)))) # names of all the arguments
     arg.user.setting <- base::as.list(base::match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
+    #### critical operator checking
+    if(safer_check == TRUE){
+        saferTool:::.base_op_check(
+            external.function.name = function.name,
+            external.package.name = package.name
+        )
+    }
+    #### end critical operator checking
     # package checking
     # check of lib.path
     # end check of lib.path
     # check of the required function from the required packages
-    saferTool:::.pack_and_function_check(
-        fun = base::c(
-            "saferDev::arg_check"
-        ),
-        lib.path = NULL, # no lib.path for the functions using .arguments_check()
-        external.function.name = external.function.name
-    )
+    if(safer_check == TRUE){
+        saferTool:::.pack_and_function_check(
+            fun = base::c(
+                "saferDev::arg_check"
+            ),
+            lib.path = NULL, # no lib.path for the functions using .safer_backone_check()
+            external.function.name = function.name,
+            external.package.name = package.name
+        )
+    }
     # end check of the required function from the required packages
     # end package checking
     

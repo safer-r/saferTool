@@ -36,20 +36,11 @@ min2 <- function(
         function.name <- function.name[3]
     }
     # end function name
-    # critical operator checking
-    if(safer_check == TRUE){
-        saferTool:::.base_op_check(
-            external.function.name = function.name,
-            external.package.name = package.name
-    )
-    }
-    # end critical operator checking
-
-
-    saferTool:::.arguments_check(
+    saferTool:::.safer_backone_check(
         x = x,
         na.rm = na.rm,
         finite = finite,
+        safer_check = safer_check,
         external.function.name = function.name,
         external.package.name = package.name
     )

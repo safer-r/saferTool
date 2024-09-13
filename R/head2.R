@@ -47,7 +47,7 @@ head2 <- function(
         saferTool:::.base_op_check(
             external.function.name = function.name,
             external.package.name = package.name
-    )
+        )
     }
     # end critical operator checking
 
@@ -59,13 +59,13 @@ head2 <- function(
     # check of the required function from the required packages
     if(safer_check == TRUE){
         saferTool:::.pack_and_function_check(
-        fun = base::c(
-            "saferDev::arg_check"
-        ),
-        lib.path = NULL,
-        external.function.name = function.name,
-        external.package.name = package.name
-    )
+            fun = base::c(
+                "saferDev::arg_check"
+            ),
+            lib.path = NULL,
+            external.function.name = function.name,
+            external.package.name = package.name
+        )
     }
     # end check of the required function from the required packages
     # end package checking
