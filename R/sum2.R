@@ -15,8 +15,6 @@
 #' 
 #' vec <- c(1,3,5,TRUE) ; sum2(x = vec)
 #' 
-#' 
-#' 
 #' # This example returns an error because of the character in the vector
 #' # vec <- c(1,3,5,TRUE,"apple") ; sum2(x = vec)
 #' @export
@@ -41,7 +39,8 @@ sum2 <- function(
         x = x,
         na.rm = na.rm,
         finite = finite,
-        safer_check = safer_check,
+        safer_check = safer_check, 
+        arg.user.setting = arg.user.setting, 
         external.function.name = function.name,
         external.package.name = package.name
     )

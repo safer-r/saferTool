@@ -7,9 +7,7 @@
 #' @param safer_check Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Must be set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.
 #' @returns The head.
 #' @details 
-#' BEWARE
-#' 
-#' Other arguments of head() not used.
+#' Warning: other arguments of tail() not used.
 #' @seealso \code{\link[utils]{head}}
 #' @author Gael Millot <gael.millot@pasteur.fr>
 #' @author Yushi Han <yushi.han2000@gmail.com>
@@ -34,7 +32,6 @@ head2 <- function(
     package.name <- "saferTool"
     # end package name
     # function name
-    ini <- base::match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
     function.name <- base::paste0(base::as.list(base::match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
     if(function.name[1] == "::()"){
         function.name <- function.name[3]

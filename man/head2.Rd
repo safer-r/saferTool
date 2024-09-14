@@ -13,7 +13,7 @@ head2(data1, n = 6, side = "l", safer_check = TRUE)
 
 \item{side}{Either "l" or "r" for the left or right side of the 2D object (only for matrix, data frame or table).}
 
-\item{safer_check}{Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.}
+\item{safer_check}{Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Must be set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.}
 }
 \value{
 The head.
@@ -22,14 +22,16 @@ The head.
 As utils::head() but display the left or right head of big 2D objects.
 }
 \details{
-BEWARE
-
-Other arguments of head() not used.
+Warning: other arguments of tail() not used.
 }
 \examples{
 obs1 = matrix(1:30, ncol = 5, dimnames = list(letters[1:6], LETTERS[1:5])) ; 
 obs1 ; 
 head2(obs1, 3)
+head2(letters, 8)
+}
+\seealso{
+\code{\link[utils]{head}}
 }
 \author{
 Gael Millot <gael.millot@pasteur.fr>

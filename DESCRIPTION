@@ -13,14 +13,6 @@ Encoding: UTF-8
 Maintainer: Gael Millot <gael.millot@pasteur.fr>
 Description: Basic tools for object analysis and object modification.
 License: GPL-3
-RoxygenNote: 7.3.1
-Suggests: 
-    knitr,
-    rmarkdown,
-    testthat (>= 3.0.0)
-VignetteBuilder: knitr
+RoxygenNote: 7.2.3
 Imports: 
-    saferDev (>= 1.0)
-Remotes: 
-    safer-r/saferDev
-Config/testthat/edition: 3
+    saferDev

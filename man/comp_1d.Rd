@@ -11,7 +11,7 @@ comp_1d(data1, data2, safer_check = TRUE)
 
 \item{data2}{Vector or factor or 1D table, or 1D matrix or 1D array.}
 
-\item{safer_check}{Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.}
+\item{safer_check}{Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "<-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Must be set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.}
 }
 \value{
 A list containing:
@@ -44,11 +44,11 @@ A list containing:
 
 - $name: name of elements of the 2 datasets if identical (NULL otherwise).
 
-- $any.id.name: logical. Is there any element names identical ?
+- $any.id.names: logical. Is there any element names identical ?
 
 - $same.names.pos1: positions, in data1, of the element names identical in data2. NULL if no identical names.
 
-- $same.names.pos2: positions, in data2, of the elements names identical in data1. NULL if no identical names.
+- $same.names.pos2: positions, in data2, of the element names identical in data1. NULL if no identical names.
 
 - $same.names.match1: positions, in data2, of the names that match the names in data1, as given by match(data1, data2) (NULL otherwise).
 
@@ -56,7 +56,7 @@ A list containing:
 
 - $common.names: common element names between data1 and data2 (can be a subset of $name or not). NULL if no common element names.
 
-- $any.id.element: logical. is there any identical elements ?
+- $any.id.elements: logical. is there any identical elements ?
 
 - $same.elements.pos1: positions, in data1, of the elements identical in data2. NULL if no identical elements.
 
@@ -70,9 +70,9 @@ A list containing:
 
 - $same.order: logical. Are all elements in the same order? TRUE or FALSE if elements of data1 and data2 are identical but not necessary in the same order. NULL otherwise (different length for instance).
 
-- $order1: order of all elements of data1. NULL if $same.order is FALSE.
+- $order1: order of all elements of data1. NULL if $same.order is NULL.
 
-- $order2: order of all elements of data2. NULL if $same.order is FALSE.
+- $order2: order of all elements of data2. NULL if $same.order is NULL.
 
 - $identical.object: logical. Are objects identical (kind of object, element names, content, including content order)?
 

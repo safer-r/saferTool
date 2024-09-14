@@ -25,8 +25,6 @@
 #' }
 #' @keywords internal
 #' @rdname internal_function
-
-
 .pack_and_function_check <- function(
         fun, 
         lib.path,
@@ -99,6 +97,7 @@
 #' @param na.rm Single logical value. Should missing values (NA and NaN) be removed ?
 #' @param finite Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.
 #' @param safer_check Single logical value. Perform some "safer" checks (see https://github.com/safer-r)?
+#' @param arg.user.setting List of the argument user settings.
 #' @param external.function.name Name of the function using the .safer_backone_check() function.
 #' @param external.package.name Name of the package of the function using the .pack_and_function_check() function.
 #' @returns An error message if the type of input is not correct, or input missed, nothing otherwise.
@@ -118,6 +117,7 @@
         na.rm,
         finite,
         safer_check, 
+        arg.user.setting, 
         external.function.name,
         external.package.name
 ){
@@ -130,26 +130,22 @@
     # na.rm: Single logical value. Should missing values (NA and NaN) be removed ?
     # finite: Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.
     # safer_check: Single logical value. Perform some "safer" checks (see https://github.com/safer-r)?
+    # arg.user.setting List of the argument user settings.
     # external.function.name: function name
     # external.package.name: package name
     # RETURN
     # An error message or nothing 
     # DEBUGGING
     # fun = "ggplot2::geom_point" ; lib.path = "C:/Program Files/R/R-4.3.1/library" ; external.function.name = "fun1"
+    # package name
+    # end package name
     # function name
-    ini <- base::match.call(expand.dots = FALSE) # initial parameters (specific of arg_test())
-    function.name <- base::paste0(base::as.list(base::match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
-    if(function.name[1] == "::()"){
-        function.name <- function.name[3]
-    }
-    arg.names <- base::names(base::formals(fun = base::sys.function(base::sys.parent(n = 2)))) # names of all the arguments
-    arg.user.setting <- base::as.list(base::match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
     #### critical operator checking
     if(safer_check == TRUE){
         saferTool:::.base_op_check(
-            external.function.name = function.name,
-            external.package.name = package.name
+            external.function.name = external.function.name,
+            external.package.name = external.package.name
         )
     }
     #### end critical operator checking
@@ -163,8 +159,8 @@
                 "saferDev::arg_check"
             ),
             lib.path = NULL, # no lib.path for the functions using .safer_backone_check()
-            external.function.name = function.name,
-            external.package.name = package.name
+            external.function.name = external.function.name,
+            external.package.name = external.package.name
         )
     }
     # end check of the required function from the required packages

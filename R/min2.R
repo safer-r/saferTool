@@ -40,7 +40,8 @@ min2 <- function(
         x = x,
         na.rm = na.rm,
         finite = finite,
-        safer_check = safer_check,
+        safer_check = safer_check, 
+        arg.user.setting = arg.user.setting, 
         external.function.name = function.name,
         external.package.name = package.name
     )
