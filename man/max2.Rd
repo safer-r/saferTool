@@ -26,7 +26,6 @@ vec <- c(1:3) ; max2(x = vec)
 
 vec <- c(1,3,5,TRUE, FALSE, NA) ; max2(x = vec, na.rm = TRUE)
 
-
 # This example returns an error because of the character in the vector
 # vec <- c(1,3,5,TRUE,"apple") ; max2(x = vec)
 
