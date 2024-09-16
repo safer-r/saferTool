@@ -86,7 +86,7 @@
 
 
 <dt>safer_check</dt>
-<dd><p>Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "&lt;-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.</p></dd>
+<dd><p>Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "&lt;-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Must be set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -96,40 +96,61 @@
 <p>A list containing:</p>
 
 
-<p>- $same.length: logical. Are number of elements identical?</p>
+<p>- $same.length: logical. Are number of compartments identical?</p>
 
 
-<p>- $length: number of elements in the 2 datasets (NULL otherwise).</p>
+<p>- $length: number of compartments in the 2 datasets (NULL otherwise).</p>
 
 
-<p>- $same.names: logical. Are element names identical ?</p>
+<p>- $same.names: logical. Are compartment names identical? NULL if data1 and data2 have no names.</p>
 
 
-<p>- $name: name of elements of the 2 datasets if identical (NULL otherwise).</p>
+<p>- $name: name of compartments of the 2 datasets if identical (NULL otherwise).</p>
 
 
-<p>- $any.id.name: logical. Is there any element names identical ?</p>
+<p>- $any.id.names: logical. Is there any compartment names identical ?</p>
 
 
-<p>- $same.names.pos1: positions, in data1, of the element names identical in data2.</p>
+<p>- $same.names.pos1: positions, in data1, of the compartment names identical in data2. NULL if no identical names.</p>
 
 
-<p>- $same.names.pos2: positions, in data2, of the compartment names identical in data1.</p>
+<p>- $same.names.pos2: positions, in data2, of the compartment names identical in data1. NULL if no identical names.</p>
 
 
-<p>- $any.id.compartment: logical. is there any identical compartments ?</p>
+<p>- $same.names.match1: positions, in data2, of the names that match the names in data1, as given by match(data1, data2) (NULL otherwise).</p>
 
 
-<p>- $same.compartment.pos1: positions, in data1, of the compartments identical in data2.</p>
+<p>- $same.names.match2: positions, in data1, of the names that match the names in data2, as given by match(data1, data2) (NULL otherwise).</p>
 
 
-<p>- $same.compartment.pos2: positions, in data2, of the compartments identical in data1.</p>
+<p>- $common.names: common compartment names between data1 and data2 (can be a subset of $name or not). NULL if no common compartment names.</p>
 
 
-<p>- $identical.object: logical. Are objects identical (kind of object, compartment names and content)?</p>
+<p>- $any.id.compartments: logical. is there any identical compartments ?</p>
 
 
-<p>- $identical.content: logical. Are content objects identical (identical compartments excluding compartment names)?</p>
+<p>- $same.compartments.pos1: positions, in data1, of the compartments identical in data2. NULL if no identical compartments.</p>
+
+
+<p>- $same.compartments.pos2: positions, in data2, of the compartments identical in data1. NULL if no identical compartments.</p>
+
+
+<p>- $same.compartments.match1: positions, in data2, of the compartments that match the compartments in data1, as given by match(data1, data2) (NULL otherwise).</p>
+
+
+<p>- $same.compartments.match2: positions, in data1, of the compartments that match the compartments in data2, as given by match(data1, data2) (NULL otherwise).</p>
+
+
+<p>- $common.compartments: common compartments between data1 and data2. NULL if no common compartments.</p>
+
+
+<p>- $same.order: logical. Are all compartments in the same order? TRUE if compartments of data1 and data2 are identical. FALSE if compartments of data1 and data2 are made of the same compartments but not in the same order. NULL otherwise (different length for instance).</p>
+
+
+<p>- $identical.object: logical. Are lists identical (compartment names, content, including content order)?</p>
+
+
+<p>- $identical.content: logical. Are content list identical (identical compartments, including order, excluding kind of object and compartment names)?</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -142,7 +163,8 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">obs1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> ; </span></span>
 <span class="r-in"><span><span class="va">obs2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, b <span class="op">=</span> <span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> ; </span></span>
-<span class="r-in"><span><span class="fu">comp_list</span><span class="op">(</span><span class="va">obs1</span>, <span class="va">obs2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">obs3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> ; </span></span>
+<span class="r-in"><span><span class="fu">comp_list</span><span class="op">(</span><span class="va">obs1</span>, <span class="va">obs2</span><span class="op">)</span> ;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $same.length</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -204,6 +226,69 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $identical.content</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="fu">comp_list</span><span class="op">(</span><span class="va">obs1</span>, <span class="va">obs3</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $same.length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $length</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $same.names</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $any.id.names</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $same.names.pos1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $same.names.pos2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $same.names.match1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $same.names.match2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $common.names</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $any.id.compartments</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $same.compartments.pos1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $same.compartments.pos2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $same.compartments.match1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $same.compartments.match2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $common.compartments</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $common.compartments[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 3 4 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $common.compartments[[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "A" "B"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $same.order</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $identical.object</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $identical.content</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

@@ -89,7 +89,7 @@
 
 
 <dt>safer_check</dt>
-<dd><p>Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "&lt;-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.</p></dd>
+<dd><p>Single logical value. Perform some "safer" checks (see https://github.com/safer-r)? If TRUE, checkings are performed before main code running: 1) R classical operators (like "&lt;-") not overwritten by another package because of the R scope and 2) required functions and related packages effectively present in local R lybraries. Must be set to FALSE if this fonction is used inside another "safer" function to avoid pointless multiple checkings.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -141,13 +141,13 @@
 <p>- $name: name of elements of the 2 datasets if identical (NULL otherwise).</p>
 
 
-<p>- $any.id.name: logical. Is there any element names identical ?</p>
+<p>- $any.id.names: logical. Is there any element names identical ?</p>
 
 
 <p>- $same.names.pos1: positions, in data1, of the element names identical in data2. NULL if no identical names.</p>
 
 
-<p>- $same.names.pos2: positions, in data2, of the elements names identical in data1. NULL if no identical names.</p>
+<p>- $same.names.pos2: positions, in data2, of the element names identical in data1. NULL if no identical names.</p>
 
 
 <p>- $same.names.match1: positions, in data2, of the names that match the names in data1, as given by match(data1, data2) (NULL otherwise).</p>
@@ -159,7 +159,7 @@
 <p>- $common.names: common element names between data1 and data2 (can be a subset of $name or not). NULL if no common element names.</p>
 
 
-<p>- $any.id.element: logical. is there any identical elements ?</p>
+<p>- $any.id.elements: logical. is there any identical elements ?</p>
 
 
 <p>- $same.elements.pos1: positions, in data1, of the elements identical in data2. NULL if no identical elements.</p>
@@ -180,10 +180,10 @@
 <p>- $same.order: logical. Are all elements in the same order? TRUE or FALSE if elements of data1 and data2 are identical but not necessary in the same order. NULL otherwise (different length for instance).</p>
 
 
-<p>- $order1: order of all elements of data1. NULL if $same.order is FALSE.</p>
+<p>- $order1: order of all elements of data1. NULL if $same.order is NULL.</p>
 
 
-<p>- $order2: order of all elements of data2. NULL if $same.order is FALSE.</p>
+<p>- $order2: order of all elements of data2. NULL if $same.order is NULL.</p>
 
 
 <p>- $identical.object: logical. Are objects identical (kind of object, element names, content, including content order)?</p>
