@@ -15,7 +15,6 @@
 #' 
 #' vec <- c(1,3,5,TRUE, FALSE, NA) ; max2(x = vec, na.rm = TRUE)
 #' 
-#' 
 #' # This example returns an error because of the character in the vector
 #' # vec <- c(1,3,5,TRUE,"apple") ; max2(x = vec)
 #' 
@@ -34,12 +33,13 @@ max2 <- function(
     # package name
     package.name <- "saferTool"
     # end package name
-
     # function name
     function.name <- base::paste0(base::as.list(base::match.call(expand.dots = FALSE))[[1]], "()") # function name with "()" paste, which split into a vector of three: c("::()", "package()", "function()") if "package::function()" is used.
     if(function.name[1] == "::()"){
         function.name <- function.name[3]
     }
+    arg.names <- base::names(base::formals(fun = base::sys.function(base::sys.parent(n = 2)))) # names of all the arguments
+    arg.user.setting <- base::as.list(base::match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
     saferTool:::.safer_backone_check(
         x = x,

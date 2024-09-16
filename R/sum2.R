@@ -34,6 +34,8 @@ sum2 <- function(
     if(function.name[1] == "::()"){
         function.name <- function.name[3]
     }
+    arg.names <- base::names(base::formals(fun = base::sys.function(base::sys.parent(n = 2)))) # names of all the arguments
+    arg.user.setting <- base::as.list(base::match.call(expand.dots = FALSE))[-1] # list of the argument settings (excluding default values not provided by the user)
     # end function name
     saferTool:::.safer_backone_check(
         x = x,

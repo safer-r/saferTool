@@ -124,9 +124,9 @@
     # AIM
     # Check the arguments of a function using saferDev::arg_check (safer-r backbone)
     # WARNING
-    # arguments of the .pack_and_function_check() function are not checked, so use carefully inside other functions
+    # arguments of the .base_op_check() and .pack_and_function_check() function are not checked, so use carefully inside other functions
     # ARGUMENTS
-    # x: x argument of the above function
+    # x: x argument of the above function, of numerics
     # na.rm: Single logical value. Should missing values (NA and NaN) be removed ?
     # finite: Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na.rm argument.
     # safer_check: Single logical value. Perform some "safer" checks (see https://github.com/safer-r)?
@@ -136,7 +136,8 @@
     # RETURN
     # An error message or nothing 
     # DEBUGGING
-    # fun = "ggplot2::geom_point" ; lib.path = "C:/Program Files/R/R-4.3.1/library" ; external.function.name = "fun1"
+    # x <- 1:3 ; na.rm <- TRUE ; finite <- TRUE ; safer_check <- TRUE ; arg.user.setting =  list(x = x, na.rm = na.rm, finite = finite, safer_check = safer_check) ; external.function.name = "FUN1" ; external.package.name = "P1" # no error example
+    # x <- "a" ; na.rm <- "a" ; finite <- "b" ; safer_check <- "d" ;  arg.user.setting =  list(x = x, na.rm = na.rm, finite = finite, safer_check = safer_check) ; external.function.name = "FUN1" ; external.package.name = "P1" # error example
     # package name
     # end package name
     # function name
@@ -165,7 +166,6 @@
     }
     # end check of the required function from the required packages
     # end package checking
-    
     # argument primary checking
     # arg with no default values
     mandat.args <- base::c(
@@ -181,9 +181,7 @@
     argum.check <- NULL #
     text.check <- NULL #
     checked.arg.names <- NULL # for function debbuging: used by r_debugging_tools
-    ee <- base::expression(argum.check = base::c(argum.check, tempo$problem) , text.check = base::c(text.check, tempo$text) , checked.arg.names = base::c(checked.arg.names, tempo$object.name))
-    tempo <- saferDev::arg_check(data = na.rm, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name, safer_check = FALSE) ; base::eval(ee)
-    tempo <- saferDev::arg_check(data = finite, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name, safer_check = FALSE) ; base::eval(ee)
+    ee <- base::expression(argum.check <- base::c(argum.check, tempo$problem) , text.check <- base::c(text.check, tempo$text) , checked.arg.names <- base::c(checked.arg.names, tempo$object.name))
     tempo1 <- saferDev::arg_check(data = x, class = "vector", mode = "numeric", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
     tempo2 <- saferDev::arg_check(data = x, class = "vector", mode = "logical", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
     tempo3 <- saferDev::arg_check(data = x, class = "vector", mode = "complex", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
@@ -191,12 +189,20 @@
     tempo5 <- saferDev::arg_check(data = x, class = "matrix", mode = "logical", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
     tempo6 <- saferDev::arg_check(data = x, class = "matrix", mode = "complex", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
     tempo7 <- saferDev::arg_check(data = x, class = "table", mode = "numeric", na.contain = TRUE, fun.name = external.function.name, safer_check = FALSE)
-    
     if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE & tempo5$problem == TRUE& tempo6$problem == TRUE & tempo7$problem == TRUE){
         tempo.cat <- base::paste0("ERROR IN ", external.function.name, " OF THE ", external.package.name, " PACKAGE\nx ARGUMENT MUST BE A VECTOR, MATRIX OR TABLE OF NUMERIC OR LOGICAL VALUES")
         text.check <- base::c(text.check, tempo.cat)
         argum.check <- base::c(argum.check, TRUE)
+        checked.arg.names <- base::c(checked.arg.names, tempo1$object.name)
+    }else{
+        tempo.cat <- paste0("IN ", external.function.name, "\nNO PROBLEM DETECTED FOR THE ", tempo1$object.name, " OBJECT")
+        text.check <- base::c(text.check, tempo.cat)
+        argum.check <- base::c(argum.check, FALSE)
+        checked.arg.names <- base::c(checked.arg.names, tempo1$object.name)
     }
+    tempo <- saferDev::arg_check(data = na.rm, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name, safer_check = FALSE) ; base::eval(ee)
+    tempo <- saferDev::arg_check(data = finite, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name, safer_check = FALSE) ; base::eval(ee)
+    tempo <- saferDev::arg_check(data = safer_check, class = "vector", typeof = "logical", length = 1, fun.name = external.function.name, safer_check = FALSE) ; base::eval(ee) # even if already used above
     if( ! base::is.null(argum.check)){
         if(base::any(argum.check, na.rm = TRUE) == TRUE){
             base::stop(base::paste0("\n\n================\n\n", base::paste(text.check[argum.check], collapse = "\n"), "\n\n================\n\n"), call. = FALSE) #
