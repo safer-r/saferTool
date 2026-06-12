@@ -167,20 +167,20 @@ comp_2d <- function(
     error_text = ""
 ){
     # DEBUGGING
-    # data1 = matrix(1:10, ncol = 5) ; data2 = matrix(1:10, ncol = 5) ; safer_check = TRUE # for function debugging
-    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; safer_check = TRUE # for function debugging
-    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5) ;safer_check = TRUE # for function debugging
-    # data1 = matrix(1:15, byrow = TRUE, ncol = 5, dimnames = list(letters[1:3], LETTERS[1:5])) ; data2 = matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ;safer_check = TRUE # for function debugging
-    # data1 = matrix(1:15, ncol = 5, dimnames = list(letters[1:3], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; safer_check = TRUE# for function debugging
-    # data1 = matrix(1:15, ncol = 5, dimnames = list(paste0("A", letters[1:3]), LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; safer_check = TRUE # for function debugging
-    # data1 = matrix(1:15, ncol = 5, dimnames = list(letters[1:3], LETTERS[1:5])) ; data2 = matrix(1:12, ncol = 4, dimnames = list(letters[1:3], LETTERS[1:4])) ; safer_check = TRUE ; safer_check = TRUE # for function debugging
-    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(101:110, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; safer_check = TRUE # for function debugging
-    # data1 = data.frame(a = 1:3, b= letters[1:3], row.names = LETTERS[1:3], stringsAsFactors = TRUE) ; data2 = data.frame(A = 1:3, B= letters[1:3], stringsAsFactors = TRUE) ; safer_check = TRUE # for function debugging
-    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = as.data.frame(matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])), stringsAsFactors = TRUE) ; safer_check = TRUE # for function debugging
-    # data1 = matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4]))) ; safer_check = TRUE # for function debugging
-    # data1 = table(Exp1 = c("A", "A", "A", "B", "B", "B"), Exp2 = c("A1", "B1", "A1", "C1", "C1", "B1")) ; data2 = data.frame(A = 1:3, B= letters[1:3], stringsAsFactors = TRUE) ; safer_check = TRUE # for function debugging
-    # data1 = matrix(1:1e6, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; data2 = matrix((1:1e6)+1e6/5, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; safer_check = TRUE
-
+    # data1 = matrix(1:10, ncol = 5) ; data2 = matrix(1:10, ncol = 5) ; safer_check = TRUE ; lib_path = NULL ; error_text = "" # for function debugging
+    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; safer_check = TRUE ; lib_path = NULL ; error_text = "" # for function debugging
+    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5) ;safer_check = TRUE ; lib_path = NULL ; error_text = "" # for function debugging
+    # data1 = matrix(1:15, byrow = TRUE, ncol = 5, dimnames = list(letters[1:3], LETTERS[1:5])) ; data2 = matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ;safer_check = TRUE ; lib_path = NULL ; error_text = "" # for function debugging
+    # data1 = matrix(1:15, ncol = 5, dimnames = list(letters[1:3], LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; safer_check = TRUE ; lib_path = NULL ; error_text = ""# for function debugging
+    # data1 = matrix(1:15, ncol = 5, dimnames = list(paste0("A", letters[1:3]), LETTERS[1:5])) ; data2 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; safer_check = TRUE ; lib_path = NULL ; error_text = "" # for function debugging
+    # data1 = matrix(1:15, ncol = 5, dimnames = list(letters[1:3], LETTERS[1:5])) ; data2 = matrix(1:12, ncol = 4, dimnames = list(letters[1:3], LETTERS[1:4])) ; safer_check = TRUE ; lib_path = NULL ; error_text = "" ; safer_check = TRUE ; lib_path = NULL ; error_text = "" # for function debugging
+    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(101:110, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; safer_check = TRUE ; lib_path = NULL ; error_text = "" # for function debugging
+    # data1 = data.frame(a = 1:3, b= letters[1:3], row.names = LETTERS[1:3], stringsAsFactors = TRUE) ; data2 = data.frame(A = 1:3, B= letters[1:3], stringsAsFactors = TRUE) ; safer_check = TRUE ; lib_path = NULL ; error_text = "" # for function debugging
+    # data1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = as.data.frame(matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])), stringsAsFactors = TRUE) ; safer_check = TRUE ; lib_path = NULL ; error_text = "" # for function debugging
+    # data1 = matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; data2 = matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4]))) ; safer_check = TRUE ; lib_path = NULL ; error_text = "" # for function debugging
+    # data1 = table(Exp1 = c("A", "A", "A", "B", "B", "B"), Exp2 = c("A1", "B1", "A1", "C1", "C1", "B1")) ; data2 = data.frame(A = 1:3, B= letters[1:3], stringsAsFactors = TRUE) ; safer_check = TRUE ; lib_path = NULL ; error_text = "" # for function debugging
+    # data1 = matrix(1:1e6, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; data2 = matrix((1:1e6)+1e6/5, ncol = 5, dimnames = list(NULL, LETTERS[1:5])) ; safer_check = TRUE ; lib_path = NULL ; error_text = ""
+    # data1 = data.frame(1) ; data2 = data.frame(1:8) ; safer_check = TRUE ; lib_path = NULL ; error_text = ""
 
 
 
@@ -677,13 +677,20 @@ comp_2d <- function(
     # end structure
     # conversion of object into matrix and content into characters
     if(base::all(base::class(data1) %in% base::c("data.frame"))){
+        tempo_dim_names <- base::dimnames(data1)
         data1 <- base::apply(data1, 2, function(x){base::gsub('\\s+', '',x)}) # convert into matrix of character whitout space in the character strings, since as.matrix use base::format() to convert into characters
+        data1 <- base::as.matrix(data1)
+        base::dimnames(data1) <- tempo_dim_names
+
     }else if(base::all(base::class(data1) %in% base::c("table"))){
         data1 <- base::matrix(data1, ncol = base::ncol(data1), dimnames = base::dimnames(data1))
         base::mode(data1) <- "character"
     }
     if(base::all(base::class(data2) %in% base::c("data.frame"))){
+        tempo_dim_names <- base::dimnames(data2)
         data2 <- base::apply(data2, 2, function(x){base::gsub('\\s+', '',x)}) # convert into matrix of character whitout space in the character strings, since as.matrix use base::format() to convert into characters
+        data2 <- base::as.matrix(data2)
+        base::dimnames(data2) <- tempo_dim_names
     }else if(base::all(base::class(data2) %in% base::c("table"))){
         data2 <- base::matrix(data2, ncol = base::ncol(data2), dimnames = base::dimnames(data2))
         base::mode(data2) <- "character"
