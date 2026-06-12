@@ -2,4 +2,6 @@
 
 export(comp_2d)
 export(df_remod)
+export(name_change)
+export(round2)
 importFrom(saferDev,arg_check)
