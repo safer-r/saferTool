@@ -1,26 +1,24 @@
 Package: saferTool
 Type: Package
-Title: Basic tools
-Version: 1.0
-Date: 2023-12-06
+Title: Basic tools for object analysis and object modification.
+Version: 1.0.0
+Date: 2026-06-02
 Authors@R: c(
-    person(given = "Haiding", family = "Wang", email = "wanghaiding442@gmail.com", role = c("aut", "ctb"), comment = c(ORCID = "0009-0008-4831-2022")),
-    person(given = "Yushi", family = "Han",  email = "yushi.han2000@gmail.com", role = c("aut", "ctb"), comment = c(ORCID = "0009-0009-9908-1958")),
+    person(given = "Haiding", family = "Wang", role = "ctb"),
+    person(given = "Yushi", family = "Han", role = "ctb"),
+    person(given = "Mia", family = "Legras", role = "ctb"),
     person(given = "Gael", family = "Millot",  email = "gael.millot@pasteur.fr", role = c("cre", "aut", "ctb"), comment = c(ORCID = "0000-0002-0591-3509"))
   )
-Author: Haiding Wang [aut, ctb], Yushi Han [aut, ctb], Gael Millot [cre, aut, ctb]
 Encoding: UTF-8
 Maintainer: Gael Millot <gael.millot@pasteur.fr>
-Description: Basic tools for object analysis and object modification.
+Description: Set of functions that perform checks according to the safer-r project recommendations for R function development (see <https://github.com/safer-r>). This includes checking argument values, ensuring correct specification of all mandatory arguments for embedded functions, as well as their explicit package namespace qualification, among other things.
+URL: <https://github.com/safer-r/saferTool>, <https://safer-r.github.io/saferTool/>
 License: GPL-3
+Config/roxygen2/version: 8.0.0
+Imports: 
+    saferDev
 Suggests: 
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
-Imports: 
-    saferDev (>= 1.0)
-Remotes: 
-    safer-r/saferDev
-Config/testthat/edition: 3
-RoxygenNote: 7.2.3

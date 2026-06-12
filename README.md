@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Codecov test coverage](https://codecov.io/github/safer-r/saferTool/coverage.svg?branch=master)](https://app.codecov.io/github/safer-r/saferTool?branch=master)
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/saferTool)](https://cran.r-project.org/package=saferTool)
+[![CRAN status](https://img.shields.io/cran/v/saferTool.svg)](https://cran.r-project.org/package=saferTool)
 [![downloads](https://cranlogs.r-pkg.org/badges/saferTool)](https://www.rdocumentation.org/trends)
 [![](https://img.shields.io/badge/license-GPL3.0-green.svg)](https://opensource.org/licenses/MITgpl-3-0)
 [![rworkflows](https://github.com/safer-r/saferTool/actions/workflows/rworkflows.yml/badge.svg)](https://github.com/safer-r/saferTool/actions/workflows/rworkflows.yml)
@@ -30,7 +30,7 @@
 
 ## Description
 
-Set of R functions for the development of R functions, written according to the [safer project](https://github.com/safer-r) specifications.
+Set of R functions for the development of R functions, written according to the [safer-R project](https://github.com/safer-r) specifications.
 
 <br />
 
