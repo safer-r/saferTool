@@ -131,7 +131,7 @@ comp_1d <- function(
         arg_user_setting_eval <- NULL
     }
     # end evaluation of values if they are expression, call, etc.
-    arg_names <- base::names(x = base::formals(fun = base::sys.function(which = base::sys.parent(n = 2)), envir = base::parent.frame(n = 1))) # names of all the arguments
+    arg_names <- base::names(x = base::formals(fun = base::sys.function(which = base::sys.parent(n = 0)), envir = base::parent.frame(n = 1))) # names of all the arguments
     #### end arguments settings
 
     #### error_text initiation
@@ -431,35 +431,39 @@ comp_1d <- function(
     arg_check_error_text <- base::paste0("ERROR ", embed_error_text, "\n\n", collapse = NULL, recycle0 = FALSE) # must be used instead of error_text = embed_error_text when several arg_check are performed on the same argument (tempo1, tempo2, see below)
     ee <- base::expression(argum_check <- base::c(argum_check, tempo$problem) , text_check <- base::c(text_check, tempo$text) , checked_arg_names <- base::c(checked_arg_names, tempo$object.name))
     # copy - paste ththe line below as much, one for each of the arguments of your own function
-    tempo1 <- saferDev::arg_check(data = data1, class = "vector", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo2 <- saferDev::arg_check(data = data1, class = "factor", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo3 <- saferDev::arg_check(data = data1, class = "matrix", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo4 <- saferDev::arg_check(data = data1, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo5 <- saferDev::arg_check(data = data1, class = "array", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE & tempo5$problem == TRUE){
-        tempo.cat <- base::paste0(
+    tempo1 <- saferDev::arg_check(data = data1, class = NULL, typeof = NULL, mode = "numeric", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # covers numeric vectors (also factors and 1D tables/matrices/arrays of numbers, which all have mode "numeric")
+    tempo1b <- saferDev::arg_check(data = data1, class = NULL, typeof = NULL, mode = "character", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # covers character vectors
+    tempo1c <- saferDev::arg_check(data = data1, class = NULL, typeof = NULL, mode = "logical", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # covers logical vectors
+    tempo2 <- saferDev::arg_check(data = data1, class = "factor", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text)
+    tempo3 <- saferDev::arg_check(data = data1, class = "matrix", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # before R 4.0.0
+    tempo4 <- saferDev::arg_check(data = data1, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text)
+    tempo5 <- saferDev::arg_check(data = data1, class = "array", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # before R 4.0.0
+    if(tempo1$problem == TRUE & tempo1b$problem == TRUE & tempo1c$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE & tempo5$problem == TRUE){
+        tempo_cat <- base::paste0(
             arg_check_error_text, 
             "data1 ARGUMENT MUST BE A NON NULL VECTOR, FACTOR OR 1D TABLE/MATRIX/ARRAY.",
             collapse = NULL, 
             recycle0 = FALSE
         )
-        text_check <- base::c(text_check, tempo.cat)
+        text_check <- base::c(text_check, tempo_cat)
         argum_check <- base::c(argum_check, TRUE)
         checked_arg_names <- base::c(checked_arg_names, tempo1$object.name)
     }
-    tempo1 <- saferDev::arg_check(data = data2, class = "vector", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo2 <- saferDev::arg_check(data = data2, class = "factor", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo3 <- saferDev::arg_check(data = data2, class = "matrix", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo4 <- saferDev::arg_check(data = data2, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo5 <- saferDev::arg_check(data = data2, class = "array", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE & tempo5$problem == TRUE){
-        tempo.cat <- base::paste0(
+    tempo1 <- saferDev::arg_check(data = data2, class = NULL, typeof = NULL, mode = "numeric", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # covers numeric vectors (also factors and 1D tables/matrices/arrays of numbers, which all have mode "numeric")
+    tempo1b <- saferDev::arg_check(data = data2, class = NULL, typeof = NULL, mode = "character", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # covers character vectors
+    tempo1c <- saferDev::arg_check(data = data2, class = NULL, typeof = NULL, mode = "logical", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # covers logical vectors
+    tempo2 <- saferDev::arg_check(data = data2, class = "factor", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text)
+    tempo3 <- saferDev::arg_check(data = data2, class = "matrix", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # before R 4.0.0
+    tempo4 <- saferDev::arg_check(data = data2, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text)
+    tempo5 <- saferDev::arg_check(data = data2, class = "array", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # before R 4.0.0
+    if(tempo1$problem == TRUE & tempo1b$problem == TRUE & tempo1c$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE & tempo5$problem == TRUE){
+        tempo_cat <- base::paste0(
             arg_check_error_text, 
             "data2 ARGUMENT MUST BE A NON NULL VECTOR, FACTOR OR 1D TABLE/MATRIX/ARRAY.",
             collapse = NULL, 
             recycle0 = FALSE
         )
-        text_check <- base::c(text_check, tempo.cat)
+        text_check <- base::c(text_check, tempo_cat)
         argum_check <- base::c(argum_check, TRUE)
         checked_arg_names <- base::c(checked_arg_names, tempo1$object.name)
     }
@@ -495,24 +499,24 @@ comp_1d <- function(
     ######## other checkings
     if(base::any(base::c("table", "matrix", "array") %in% base::class(data1))){
         if(base::length(base::dim(data1)) > 1){
-            tempo.cat <- base::paste0(
+            tempo_cat <- base::paste0(
                 error_text_start, 
                 "THE data1 ARGUMENT MUST BE A 1D 1D TABLE/MATRIX/ARRAY.",
                 collapse = NULL, 
                 recycle0 = FALSE
             )
-            base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
+            base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
         }
     }
     if(base::any(base::c("table", "matrix", "array") %in% base::class(data2))){
         if(base::length(base::dim(data2)) > 1){
-            tempo.cat <- base::paste0(
+            tempo_cat <- base::paste0(
                 error_text_start, 
                 "THE data2 ARGUMENT MUST BE A 1D 1D TABLE/MATRIX/ARRAY.",
                 collapse = NULL, 
                 recycle0 = FALSE
             )
-            base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
+            base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
         }
     }
     ######## end other checkings

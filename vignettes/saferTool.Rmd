@@ -2,7 +2,7 @@
 title: "saferTool"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{cuteTool}
+  %\VignetteIndexEntry{saferTool}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

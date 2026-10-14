@@ -219,7 +219,7 @@ comp_2d <- function(
         arg_user_setting_eval <- NULL
     }
     # end evaluation of values if they are expression, call, etc.
-    arg_names <- base::names(x = base::formals(fun = base::sys.function(which = base::sys.parent(n = 2)), envir = base::parent.frame(n = 1))) # names of all the arguments
+    arg_names <- base::names(x = base::formals(fun = base::sys.function(which = base::sys.parent(n = 0)), envir = base::parent.frame(n = 1))) # names of all the arguments
     #### end arguments settings
 
     #### error_text initiation
@@ -327,7 +327,7 @@ comp_2d <- function(
         # "lib_path", # inactivated because can be NULL
         # "error_text" # inactivated because NULL converted to "" above
     )
-    tempo_log <- base::sapply(X = base::lapply(X = tempo_arg, FUN = function(x){base::get(x = x, pos = -1L, envir = base::parent.frame(n = 2), mode = "any", inherits = FALSE)}), FUN = function(x){base::is.null(x = x)}, simplify = TRUE, USE.NAMES = TRUE) # parent.frame(n = 2) because sapply(lapply())
+    tempo_log <- base::sapply(X = base::lapply(X = tempo_arg, FUN = function(x){base::get(x = x, pos = -1L, envir = base::parent.frame(n = 2), mode = "any", inherits = FALSE)}), FUN = function(x){base::is.null(x = x)}, simplify = TRUE, USE.NAMES = TRUE) # parent.frame(n = 2) because get() is evaluated inside the FUN closure of the inner lapply: parent.frame(n = 1) is lapply's frame, parent.frame(n = 2) is BACKBONE's frame.
     if(base::any(tempo_log, na.rm = TRUE)){ # normally no NA with base::is.null()
         tempo_cat <- base::paste0(
             error_text_start, 
@@ -378,7 +378,7 @@ comp_2d <- function(
     ######## end management of empty non NULL arguments
 
     ######## management of NA arguments
-    # Mandataory section : argument of safer-r functions cannot have NA as only value, to prevent all(, na.rm = TRUE) or any(, na.rm = TRUE) to return a logical value
+    # Mandatory section : argument of safer-r functions cannot have NA as only value, to prevent all(, na.rm = TRUE) or any(, na.rm = TRUE) to return a logical value
     if(base::length(x = arg_user_setting_eval) != 0){
         tempo_log <- base::suppressWarnings(
             expr = base::sapply(
@@ -518,31 +518,33 @@ comp_2d <- function(
     checked_arg_names <- NULL # for function debbuging: used by r_debugging_tools
     arg_check_error_text <- base::paste0("ERROR ", embed_error_text, "\n\n", collapse = NULL, recycle0 = FALSE) # must be used instead of error_text = embed_error_text when several arg_check are performed on the same argument (tempo1, tempo2, see below)
     ee <- base::expression(argum_check <- base::c(argum_check, tempo$problem) , text_check <- base::c(text_check, tempo$text) , checked_arg_names <- base::c(checked_arg_names, tempo$object.name))
-    tempo1 <- saferDev::arg_check(data = data1, class = "data.frame", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo2 <- saferDev::arg_check(data = data1, class = "matrix", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo3 <- saferDev::arg_check(data = data1, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE){
-        tempo.cat <- base::paste0(
+    tempo1 <- saferDev::arg_check(data = data1, class = "data.frame", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text)
+    tempo2 <- saferDev::arg_check(data = data1, class = "matrix", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # before R 4.0.0
+    tempo3 <- saferDev::arg_check(data = data1, class = c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # since R 4.0.0
+    tempo4 <- saferDev::arg_check(data = data1, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text)
+    if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE){
+        tempo_cat <- base::paste0(
             arg_check_error_text, 
             "data1 ARGUMENT MUST BE (1) A DATA FRAME, (2) A MATRIX OR (3) A TABLE",
             collapse = NULL, 
             recycle0 = FALSE
         )
-        text_check <- base::c(text_check, tempo.cat)
+        text_check <- base::c(text_check, tempo_cat)
         argum_check <- base::c(argum_check, TRUE)
         checked_arg_names <- base::c(checked_arg_names, tempo1$object.name)
     }
-    tempo1 <- saferDev::arg_check(data = data2, class = "data.frame", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo2 <- saferDev::arg_check(data = data2, class = "matrix", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo3 <- saferDev::arg_check(data = data2, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE){
-        tempo.cat <- base::paste0(
+    tempo1 <- saferDev::arg_check(data = data2, class = "data.frame", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text)
+    tempo2 <- saferDev::arg_check(data = data2, class = "matrix", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # before R 4.0.0
+    tempo3 <- saferDev::arg_check(data = data2, class = c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text) # since R 4.0.0
+    tempo4 <- saferDev::arg_check(data = data2, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = arg_check_error_text)
+    if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE){
+        tempo_cat <- base::paste0(
             arg_check_error_text, 
             "data2 ARGUMENT MUST BE (1) A DATA FRAME, (2) A MATRIX OR (3) A TABLE",
             collapse = NULL, 
             recycle0 = FALSE
         )
-        text_check <- base::c(text_check, tempo.cat)
+        text_check <- base::c(text_check, tempo_cat)
         argum_check <- base::c(argum_check, TRUE)
         checked_arg_names <- base::c(checked_arg_names, tempo1$object.name)
     }
@@ -577,20 +579,46 @@ comp_2d <- function(
 
     ######## other checkings
     if( ! (base::any(base::class(data1) %in% base::c("data.frame", "table")) | base::all(base::class(data1) %in% base::c("matrix", "array")))){ # before R4.0.0, it was  ! base::any(base::class(data1) %in% base::c("matrix", "data.frame", "table"))
-        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE\nTHE data1 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
+        # nocov start
+        # codecov inactivated because arg_check() above only allows data.frame/matrix/array/table classes, so this branch is unreachable with argument values.
+        tempo_cat <- base::paste0(
+            error_text_start, 
+            "THE data1 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE",
+            collapse = NULL, 
+            recycle0 = FALSE
+        )
+        base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
+        # nocov end
     }
     if( ! (base::any(base::class(data2) %in% base::c("data.frame", "table")) | base::all(base::class(data2) %in% base::c("matrix", "array")))){ # before R4.0.0, it was  ! base::any(base::class(data2) %in% base::c("matrix", "data.frame", "table"))
-        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE\nTHE data2 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE")
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
+        # nocov start
+        # codecov inactivated because arg_check() above only allows data.frame/matrix/array/table classes, so this branch is unreachable with argument values.
+        tempo_cat <- base::paste0(
+            error_text_start, 
+            "THE data2 ARGUMENT MUST BE A MATRIX, DATA FRAME OR TABLE",
+            collapse = NULL, 
+            recycle0 = FALSE
+        )
+        base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
+        # nocov end
     }
     if(base::all(base::class(data1) == "table") & base::length(base::dim(data1)) == 1L){ # base::class() cannot return NA
-        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE\nTHE data1 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION")
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
+        tempo_cat <- base::paste0(
+            error_text_start, 
+            "THE data1 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION",
+            collapse = NULL, 
+            recycle0 = FALSE
+        )
+        base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
     }
-    if(base::all(base::class(data2) == "table", na.rm = TRUE) & base::length(base::dim(data2)) == 1L){
-        tempo.cat <- base::paste0("ERROR IN ", function.name, " OF THE ", package.name, " PACKAGE\nTHE data2 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION")
-        base::stop(base::paste0("\n\n================\n\n", tempo.cat, "\n\n================\n\n"), call. = FALSE) # == in base::stop() to be able to add several messages between ==
+    if(base::all(base::class(data2) == "table", na.rm = TRUE) & base::length(base::dim(data2)) == 1L){ # base::class() cannot return NA
+        tempo_cat <- base::paste0(
+            error_text_start, 
+            "THE data2 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION",
+            collapse = NULL, 
+            recycle0 = FALSE
+        )
+        base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
     }
     ######## end other checkings
 

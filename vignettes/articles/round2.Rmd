@@ -41,31 +41,31 @@ round2(data = vec3) # vector of character values and NA
 ```
 <br>
 
-### Argument dec.nb
+### Argument dec_nb
 ```{r}
-cat(round2(data = vec1, dec.nb = 2), "\n\n")
+cat(round2(data = vec1, dec_nb = 2), "\n\n")
 
-cat(round2(data = vec1, dec.nb = 3), "\n\n")
+cat(round2(data = vec1, dec_nb = 3), "\n\n")
 
-cat(round2(data = vec2, dec.nb = 2), "\n\n")
+cat(round2(data = vec2, dec_nb = 2), "\n\n")
 
-cat(round2(data = vec2, dec.nb = 3), "\n\n")
+cat(round2(data = vec2, dec_nb = 3), "\n\n")
 
-cat(round2(data = vec3, dec.nb = 2), "\n\n")
+cat(round2(data = vec3, dec_nb = 2), "\n\n")
 
-cat(round2(data = vec3, dec.nb = 3), "\n\n")
+cat(round2(data = vec3, dec_nb = 3), "\n\n")
 ```
 <br>
 
-### Argument after.lead.zero
+### Argument after_lead_zero
 ```{r}
-cat(round2(data = vec2, after.lead.zero = TRUE), "\n\n")
+cat(round2(data = vec2, after_lead_zero = TRUE), "\n\n")
 
-cat(round2(data = vec2, after.lead.zero = FALSE), "\n\n")
+cat(round2(data = vec2, after_lead_zero = FALSE), "\n\n")
 
-cat(round2(data = vec3, after.lead.zero = TRUE), "\n\n")
+cat(round2(data = vec3, after_lead_zero = TRUE), "\n\n")
 
-cat(round2(data = vec3, after.lead.zero = FALSE), "\n\n")
+cat(round2(data = vec3, after_lead_zero = FALSE), "\n\n")
 ```
 <br>
 
@@ -81,18 +81,18 @@ round2(data = vec2, safer_check = TRUE)
 ```{r}
 ini.options <- options()$digits ; 
 options(digits = 8) ; 
-cat(round2(data = vec2, dec.nb = 2, after.lead.zero = FALSE, safer_check = TRUE), "\n\n") ; 
+cat(round2(data = vec2, dec_nb = 2, after_lead_zero = FALSE, safer_check = TRUE), "\n\n") ; 
 options(digits = ini.options)
 
 
 ini.options <- options()$digits ; 
 options(digits = 8) ; 
-cat(round2(data = vec3, dec.nb = 2, after.lead.zero = FALSE, safer_check = TRUE), "\n\n") ; 
+cat(round2(data = vec3, dec_nb = 2, after_lead_zero = FALSE, safer_check = TRUE), "\n\n") ; 
 options(digits = ini.options)
 
 
 ini.options <- options()$digits ; 
 options(digits = 8) ; 
-cat(round2(data = c(NA, "10", "100.001", "333.0001254", "12312.1235"), dec.nb = 2, after.lead.zero = TRUE, safer_check = TRUE), "\n\n") ; 
+cat(round2(data = c(NA, "10", "100.001", "333.0001254", "12312.1235"), dec_nb = 2, after_lead_zero = TRUE, safer_check = TRUE), "\n\n") ; 
 options(digits = ini.options)
 ```
