@@ -94,6 +94,9 @@ Compare two 1D datasets (vector or factor or 1D table, or 1D matrix or 1D array)
 - common levels (factors only)
 }
 \examples{
+# Warning: these examples may not work well when using the "Run examples" link 
+# because of a particular environment. Please, copy-paste in a local environment.
+# See also https://safer-r.github.io/saferTool/articles/comp_1d.html
 obs1 = 1:5 ; obs2 = 1:5 ; names(obs1) <- LETTERS[1:5] ; names(obs2) <- LETTERS[1:5] ; comp_1d(obs1, obs2)
 obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[1:5]) ; comp_1d(obs1, obs2)
 obs1 = factor(c(LETTERS[1:4], "E")) ; obs2 = factor(c(LETTERS[1:4], "F")) ; comp_1d(obs1, obs2)

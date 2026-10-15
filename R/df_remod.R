@@ -15,6 +15,9 @@
 #' @author Yushi Han <yushi.han2000@gmail.com>
 #' @author Haiding Wang <wanghaiding442@gmail.com>
 #' @examples
+#' # Warning: these examples may not work well when using the "Run examples" link 
+#' # because of a particular environment. Please, copy-paste in a local environment.
+#' # See also https://safer-r.github.io/saferTool/articles/df_remod.html
 #' obs <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE) ; 
 #' rownames(obs) <- paste0("row", 1:4) ; 
 #' obs ;
@@ -198,8 +201,7 @@ df_remod <- function(
     ######## management of empty non NULL arguments
     # # before NA checking because is.na(logical()) is logical(0) (but secured with & base::length(x = x) > 0)
     tempo_arg <-base::c(
-        "df", # inactivated because can be empty
-        "arg1",
+        "df",
         "quanti_col_name", 
         "quali_col_name", 
         "safer_check", 

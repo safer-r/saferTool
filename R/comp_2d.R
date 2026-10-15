@@ -144,6 +144,9 @@
 #' @author Yushi Han <yushi.han2000@gmail.com>
 #' @author Haiding Wang <wanghaiding442@gmail.com>
 #' @examples
+#' # Warning: these examples may not work well when using the "Run examples" link 
+#' # because of a particular environment. Please, copy-paste in a local environment.
+#' # See also https://safer-r.github.io/saferTool/articles/comp_2d.html
 #' obs1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; 
 #' obs2 = as.data.frame(matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])), stringsAsFactors = TRUE) ;
 #' obs1 ; 
@@ -158,6 +161,7 @@
 #' obs1 ; 
 #' obs2 ; 
 #' comp_2d(obs1, obs2)
+#' @importFrom saferDev arg_check
 #' @export
 comp_2d <- function(
     data1, 

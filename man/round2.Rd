@@ -42,6 +42,9 @@ Numeric values are really truncated from a part of their decimal digits, whateve
 See ?.Machine or https://stackoverflow.com/questions/5173692/how-to-return-number-of-decimal-places-in-r, with the interexting formula: abs(x - round(x)) > .Machine$double.eps^0.5.
 }
 \examples{
+# Warning: these examples may not work well when using the "Run examples" link 
+# because of a particular environment. Please, copy-paste in a local environment.
+# See also https://safer-r.github.io/saferTool/articles/round2.html
 ini.options <- options()$digits ; 
 options(digits = 8) ; 
 cat(round2(data = c(NA, 10, 100.001, 333.0001254, 12312.1235), dec_nb = 2, after_lead_zero = FALSE), "\n\n") ; 

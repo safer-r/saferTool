@@ -49,6 +49,9 @@ This function checks if a vector of character strings, like column names of a da
  - An error message is returned if any of the data1 elements end with the string in added_string.
 }
 \examples{
+# Warning: these examples may not work well when using the "Run examples" link 
+# because of a particular environment. Please, copy-paste in a local environment.
+# See also https://safer-r.github.io/saferTool/articles/name_change.html
 obs1 <- c("A", "B", "C", "A", "D") ; 
 obs2 <- c("A", "C") ; 
 name_change(obs1, obs2)

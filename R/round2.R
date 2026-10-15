@@ -21,6 +21,9 @@
 #' @author Yushi Han <yushi.han2000@gmail.com>
 #' @author Haiding Wang <wanghaiding442@gmail.com>
 #' @examples
+#' # Warning: these examples may not work well when using the "Run examples" link 
+#' # because of a particular environment. Please, copy-paste in a local environment.
+#' # See also https://safer-r.github.io/saferTool/articles/round2.html
 #' ini.options <- options()$digits ; 
 #' options(digits = 8) ; 
 #' cat(round2(data = c(NA, 10, 100.001, 333.0001254, 12312.1235), dec_nb = 2, after_lead_zero = FALSE), "\n\n") ; 
