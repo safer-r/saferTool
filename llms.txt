@@ -1,0 +1,154 @@
+# saferTool [](https://safer-r.github.io/saferTool)[![](reference/figures/new_saferTool.png)](https://safer-r.github.io/saferTool/)
+
+\
+
+\
+
+## Table of content
+
+- [Description](#description)
+- [Content](#content)
+- [Versions](#versions)
+- [Installation](#installation)
+- [Docker](#docker-image)
+- [Licence](#licence)
+- [Citations](#citations)
+- [Credits](#credits)
+- [acknowledgments](#acknowledgments)
+
+\
+
+## Description
+
+Set of R functions for the development of R functions, written according
+to the [safer-R project](https://github.com/safer-r) specifications.
+
+\
+
+## Content
+
+\
+
+| Function | Description |
+|:---|:---|
+| **comp_1d()** | Compare two 1D datasets (vector or factor or 1D table, or 1D matrix or 1D array) of the same class or not. Check and report in a list if the 2 datasets have: 1. same class 2. common elements 3. common element names (except factors) 4. common levels (factors only) |
+| **comp_2d()** | Compare two 2D datasets of the same class or not. Check and report in a list if the 2 datasets have: 1. same class 2. same type 3. common row names 4. common column names 5. same row number 6. same column number 7. potential identical rows between the 2 datasets 8. potential identical columns between the 2 datasets |
+| **df_remod()** | If the data frame is made of n numeric columns, a new data frame is created, with the 1st column gathering all the numeric values, and the 2nd column being the name of the columns of the initial data frame. If row names were present in the initial data frame, then a new ini_rowname column is added with the names of the rows. If the data frame is made of one numeric column and one character or factor column, a new data frame is created, with the new columns corresponding to the split numeric values (according to the character column). NA are added a the end of each column to have the same number of rows. |
+| **name_change()** | This function allow to check if a vector of character strings, like column names of a data frame, has elements present in another vector (vector of reserved words or column names of another data frame before merging). |
+| **round2()** | Round a vector of values, if decimal, with the desired number of decimal digits after the decimal leading zeros. |
+
+\
+
+Read [`vignette("saferTool")`](articles/saferTool.md) for more details.
+
+\
+
+## Versions
+
+The different *saferTool* releases are tagged
+[here](https://github.com/safer-r/saferTool/tags).
+
+\
+
+## Installation
+
+*saferTool* can be currently be installed from GitHub:
+
+``` r
+
+install.packages("remotes")
+remotes::install_github("https://github.com/safer-r/saferTool") # or open R as admin and remotes::install_github("https://github.com/safer-r/saferTool", lib = "C:/Program Files/R/R-4.5.2/library")
+```
+
+Older versions can be installed like this:
+
+``` r
+
+v <- "v1.0.0" # desired tag version
+remotes::install_github(paste0("https://github.com/safer-r/saferTool/tree/", v))
+```
+
+\
+
+## Licence
+
+This package can be redistributed and/or modified under the terms of the
+GNU General Public License as published by the Free Software Foundation,
+either version 3 of the License, or (at your option) any later version.
+Distributed in the hope that it will be useful, but without any
+warranty; without even the implied warranty of merchandability or
+fitness for a particular purpose. See the GNU General Public License for
+more details at <https://www.gnu.org/licenses> or in the Licence.txt
+attached file.
+
+\
+
+## Citation
+
+If you are using functions of *saferTool*, please cite:
+
+> Wang H, Han Y, Serizay J, Millot GA (2023). *The R saferTool package*.
+> <https://github.com/safer-r/saferTool/>.
+
+\
+
+## Credits
+
+[Haiding Wang](https://github.com/Tintin2710), Bioinformatics and
+Biostatistics Hub, Institut Pasteur, Paris, France
+
+[Yushi Han](https://github.com/yushiHn/), Bioinformatics and
+Biostatistics Hub, Institut Pasteur, Paris, France
+
+[Mia Legras](https://github.com/mialgrs), Bioinformatics and
+Biostatistics Hub, Institut Pasteur, Paris, France
+
+[Jacques Serizay](https://github.com/js2264), Spatial Regulation of
+Genomes team, Institut Pasteur, Paris, France
+
+[Gael A. Millot](https://github.com/gael-millot), Bioinformatics and
+Biostatistics Hub, Institut Pasteur, Paris, France
+
+\
+
+## Acknowledgements
+
+The developers & maintainers of the mentioned softwares and packages,
+including:
+
+- [R](https://www.r-project.org/)
+- [Git](https://git-scm.com/)
+- [Github](https://github.com/)
+
+# Package index
+
+## comp_1d
+
+- [`comp_1d()`](comp_1d.md) : comp_1d
+
+## comp_2d
+
+- [`comp_2d()`](comp_2d.md) : comp_2d
+
+## df_remod
+
+- [`df_remod()`](df_remod.md) : df_remod
+
+## name_change
+
+- [`name_change()`](name_change.md) : name_change
+
+## round2
+
+- [`round2()`](round2.md) : round2
+
+# Articles
+
+### All vignettes
+
+- [comp_1d](comp_1d.md):
+- [comp_2d](comp_2d.md):
+- [df_remod(): more examples](df_remod.md):
+- [name_change](name_change.md):
+- [round2](round2.md):
+- [saferTool](saferTool.md):
