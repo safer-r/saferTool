@@ -1,4 +1,4 @@
-# saferTool 2.0.0
+# saferTool 1.0.0
 
 * Migrated to the safer-r backbone v20.0: every function now follows the saferDev 2.0.0 structure, with arg_check() v2.0.0 semantics (exact class/typeof/mode comparison; class = c("matrix", "array") for matrices, mode = "numeric" preferred for numeric arguments).
 * All functions carry the mandatory lib_path, safer_check and error_text reserved arguments.

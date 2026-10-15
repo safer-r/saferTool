@@ -72,7 +72,7 @@ remotes::install_github("https://github.com/safer-r/saferTool") # or open R as a
 Older versions can be installed like this:
 
 ```r
-v <- "v1.0" # desired tag version
+v <- "v1.0.0" # desired tag version
 remotes::install_github(paste0("https://github.com/safer-r/saferTool/tree/", v))
 ```
 
