@@ -1,0 +1,71 @@
+---
+title: "df_remod(): more examples"
+---
+<br>
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE, 
+  collapse = FALSE,
+  comment = "##"
+)
+```
+
+```{r setup}
+library(saferTool)
+```
+<br>
+
+### Dataset
+
+```{r}
+df1 <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE) ; 
+rownames(df1) <- paste0("row", 1:4) # data frame of numeric columns with row names
+df2 <- data.frame(a = c("x", "x", "y"), b = c(1, 2, 3), stringsAsFactors = TRUE) # data frame made of one character column and one numeric column
+df3 <- data.frame(a = c("x", "x", "y"), b = c(1, 2), stringsAsFactors = TRUE) # unbalanced mixed data frame
+df4 <- data.frame(a = 1:2, b = 3:4, c = 5:6, stringsAsFactors = TRUE) # data frame of 3 numeric columns
+df5 <- data.frame(a = c("x", "y"), stringsAsFactors = TRUE) # data frame of a single character column
+```
+<br>
+
+### Dataset info
+
+```{r}
+df1 # data frame of numeric columns with row names
+df2 # data frame made of one character column and one numeric column
+df3 # unbalanced mixed data frame
+df4 # data frame of 3 numeric columns
+df5 # data frame of a single character column
+```
+<br>
+
+### Simple examples
+
+```{r}
+df_remod(df = df1) # transfo 1: all numeric columns, with row names -> quanti column + ini_rowname column
+df_remod(df = df2) # transfo 2: one numeric column and one character column -> split numeric values
+```
+<br>
+
+### Argument quanti_col_name and quali_col_name
+
+```{r}
+df_remod(df = df1, quanti_col_name = "numbers", quali_col_name = "source")
+df_remod(df = df2, quanti_col_name = "numbers", quali_col_name = "label")
+```
+<br>
+
+### Argument safer_check
+
+```{r}
+df_remod(df = df1, safer_check = TRUE) # checkings performed before main code running
+df_remod(df = df2, safer_check = FALSE) # checkings not performed (faster, but insecure)
+```
+<br>
+
+### All the arguments
+
+```{r}
+df_remod(df = df1, quanti_col_name = "quanti", quali_col_name = "quali", safer_check = TRUE, lib_path = NULL, error_text = "")
+
+df_remod(df = df2, quanti_col_name = "quanti", quali_col_name = "quali", safer_check = TRUE, lib_path = NULL, error_text = "")
+```
