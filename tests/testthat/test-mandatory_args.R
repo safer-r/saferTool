@@ -12,7 +12,16 @@ testthat::test_that("mandatory arg block of safer-r functions (public functions)
         comp_2d = base::quote(comp_2d(data1 = base::matrix(1:4, ncol = 2), data2 = base::matrix(1:4, ncol = 2), safer_check = FALSE, error_text = "")),
         df_remod = base::quote(df_remod(df = base::data.frame(a = 1:2, stringsAsFactors = TRUE), quanti_col_name = "quanti", quali_col_name = "quali", safer_check = FALSE, error_text = "")),
         name_change = base::quote(name_change(data1 = c("A", "B"), data2 = c("A"), added_string = "_modif", duplicate = TRUE, safer_check = FALSE, error_text = "")),
-        round2 = base::quote(round2(data = 1.5, dec_nb = 2, after_lead_zero = TRUE, safer_check = FALSE, error_text = ""))
+        round2 = base::quote(round2(data = 1.5, dec_nb = 2, after_lead_zero = TRUE, safer_check = FALSE, error_text = "")),
+        sample2 = base::quote(sample2(x = 1:3, size = 2, replace = FALSE, prob = NULL, set_seed = NULL, safer_check = FALSE, error_text = "")),
+        comp_list = base::quote(comp_list(data1 = list(a = 1:3), data2 = list(a = 1:3), safer_check = FALSE, error_text = "")),
+        head2 = base::quote(head2(data1 = base::matrix(1:4, ncol = 2), n = 2, side = "l", safer_check = FALSE, error_text = "")),
+        info = base::quote(info(data = 1:3, n = NULL, warn_print = FALSE, safer_check = FALSE, error_text = "")),
+        max2 = base::quote(max2(x = 1:3, na_rm = TRUE, finite = FALSE, safer_check = FALSE, error_text = "")),
+        min2 = base::quote(min2(x = 1:3, na_rm = TRUE, finite = FALSE, safer_check = FALSE, error_text = "")),
+        range2 = base::quote(range2(x = 1:3, na_rm = TRUE, finite = FALSE, safer_check = FALSE, error_text = "")),
+        sum2 = base::quote(sum2(x = 1:3, na_rm = TRUE, finite = FALSE, safer_check = FALSE, error_text = "")),
+        tail2 = base::quote(tail2(data1 = base::matrix(1:4, ncol = 2), n = 2, side = "l", safer_check = FALSE, error_text = ""))
     )
     ## end data argument values
 
