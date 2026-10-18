@@ -17,67 +17,67 @@
 #' @returns 
 #' A list containing:
 #' 
-#' - $same.class: logical. Are class identical?
+#' - $same_class: logical. Are class identical?
 #' 
 #' - $class: class of the 2 datasets (NULL otherwise).
 #' 
-#' - $same.length: logical. Are number of elements identical?
+#' - $same_length: logical. Are number of elements identical?
 #' 
 #' - $length: number of elements in the 2 datasets (NULL otherwise).
 #' 
-#' - $same.levels: logical. Are levels identical? NULL if data1 and data2 are not factors.
+#' - $same_levels: logical. Are levels identical? NULL if data1 and data2 are not factors.
 #' 
 #' - $levels: levels of the 2 datasets if identical (NULL otherwise or NULL if data1 and data2 are not factors).
 #' 
-#' - $any.id.levels: logical. Is there any identical levels? (NULL if data1 and data2 are not factors).
+#' - $any_id_levels: logical. Is there any identical levels? (NULL if data1 and data2 are not factors).
 #' 
-#' - $same.levels.pos1: positions, in data1, of the levels identical in data2 (NULL otherwise or NULL if data1 and data2 are not factors).
+#' - $same_levels_pos1: positions, in data1, of the levels identical in data2 (NULL otherwise or NULL if data1 and data2 are not factors).
 #' 
-#' - $same.levels.pos2: positions, in data2, of the levels identical in data1 (NULL otherwise or NULL if data1 and data2 are not factors).
+#' - $same_levels_pos2: positions, in data2, of the levels identical in data1 (NULL otherwise or NULL if data1 and data2 are not factors).
 #' 
-#' - $same.levels.match1: positions, in data2, of the levels that match the levels in data1, as given by match(data1, data2) (NULL otherwise or NULL if data1 and data2 are not factors).
+#' - $same_levels_match1: positions, in data2, of the levels that match the levels in data1, as given by match(data1, data2) (NULL otherwise or NULL if data1 and data2 are not factors).
 #' 
-#' - $same.levels.match2: positions, in data1, of the levels that match the levels in data2, as given by match(data1, data2) (NULL otherwise or NULL if data1 and data2 are not factors).
+#' - $same_levels_match2: positions, in data1, of the levels that match the levels in data2, as given by match(data1, data2) (NULL otherwise or NULL if data1 and data2 are not factors).
 #' 
-#' - $common.levels: common levels between data1 and data2 (can be a subset of $levels or not). NULL if no common levels or if data1 and data2 are not factors.
+#' - $common_levels: common levels between data1 and data2 (can be a subset of $levels or not). NULL if no common levels or if data1 and data2 are not factors.
 #' 
-#' - $same.names: logical. Are element names identical? NULL if data1 and data2 have no names.
+#' - $same_names: logical. Are element names identical? NULL if data1 and data2 have no names.
 #' 
 #' - $name: name of elements of the 2 datasets if identical (NULL otherwise).
 #' 
-#' - $any.id.names: logical. Is there any element names identical ?
+#' - $any_id_names: logical. Is there any element names identical ?
 #' 
-#' - $same.names.pos1: positions, in data1, of the element names identical in data2. NULL if no identical names.
+#' - $same_names_pos1: positions, in data1, of the element names identical in data2. NULL if no identical names.
 #' 
-#' - $same.names.pos2: positions, in data2, of the element names identical in data1. NULL if no identical names.
+#' - $same_names_pos2: positions, in data2, of the element names identical in data1. NULL if no identical names.
 #' 
-#' - $same.names.match1: positions, in data2, of the names that match the names in data1, as given by match(data1, data2) (NULL otherwise).
+#' - $same_names_match1: positions, in data2, of the names that match the names in data1, as given by match(data1, data2) (NULL otherwise).
 #' 
-#' - $same.names.match2: positions, in data1, of the names that match the names in data2, as given by match(data1, data2) (NULL otherwise).
+#' - $same_names_match2: positions, in data1, of the names that match the names in data2, as given by match(data1, data2) (NULL otherwise).
 #' 
-#' - $common.names: common element names between data1 and data2 (can be a subset of $name or not). NULL if no common element names.
+#' - $common_names: common element names between data1 and data2 (can be a subset of $name or not). NULL if no common element names.
 #' 
-#' - $any.id.elements: logical. is there any identical elements ?
+#' - $any_id_elements: logical. is there any identical elements ?
 #' 
-#' - $same.elements.pos1: positions, in data1, of the elements identical in data2. NULL if no identical elements.
+#' - $same_elements_pos1: positions, in data1, of the elements identical in data2. NULL if no identical elements.
 #' 
-#' - $same.elements.pos2: positions, in data2, of the elements identical in data1. NULL if no identical elements.
+#' - $same_elements_pos2: positions, in data2, of the elements identical in data1. NULL if no identical elements.
 #' 
-#' - $same.elements.match1: positions, in data2, of the elements that match the elements in data1, as given by match(data1, data2) (NULL otherwise).
+#' - $same_elements_match1: positions, in data2, of the elements that match the elements in data1, as given by match(data1, data2) (NULL otherwise).
 #' 
-#' - $same.elements.match2: positions, in data1, of the elements that match the elements in data2, as given by match(data1, data2) (NULL otherwise).
+#' - $same_elements_match2: positions, in data1, of the elements that match the elements in data2, as given by match(data1, data2) (NULL otherwise).
 #' 
-#' - $common.elements: common elements between data1 and data2. NULL if no common elements.
+#' - $common_elements: common elements between data1 and data2. NULL if no common elements.
 #' 
-#' - $same.order: logical. Are all elements in the same order? TRUE or FALSE if elements of data1 and data2 are identical but not necessary in the same order. NULL otherwise (different length for instance).
+#' - $same_order: logical. Are all elements in the same order? TRUE or FALSE if elements of data1 and data2 are identical but not necessary in the same order. NULL otherwise (different length for instance).
 #' 
-#' - $order1: order of all elements of data1. NULL if $same.order is NULL.
+#' - $order1: order of all elements of data1. NULL if $same_order is NULL.
 #' 
-#' - $order2: order of all elements of data2. NULL if $same.order is NULL.
+#' - $order2: order of all elements of data2. NULL if $same_order is NULL.
 #' 
-#' - $identical.object: logical. Are objects identical (kind of object, element names, content, including content order)?
+#' - $identical_object: logical. Are objects identical (kind of object, element names, content, including content order)?
 #'
-#' - $identical.content: logical. Are content objects identical (identical elements, including order, excluding kind of object and element names)?
+#' - $identical_content: logical. Are content objects identical (identical elements, including order, excluding kind of object and element names)?
 #' @author Gael Millot <gael.millot@pasteur.fr>
 #' @author Yushi Han <yushi.han2000@gmail.com>
 #' @author Haiding Wang <wanghaiding442@gmail.com>
@@ -672,7 +672,7 @@ comp_1d <- function(
             order2 <- base::order(data2)
         }
     }
-    output <- base::list(same.class = same_class, class = class, same.length = same_length, length = length, same.levels = same_levels, levels = levels, any.id.levels = any_id_levels, same.levels.pos1 = same_levels_pos1, same.levels.pos2 = same_levels_pos2, same.levels.match1 = same_levels_match1, same.levels.match2 = same_levels_match2, common.levels = common_levels, same.names = same_names, name = name, any.id.names = any_id_names, same.names.pos1 = same_names_pos1, same.names.pos2 = same_names_pos2, same.names.match1 = same_names_match1, same.names.match2 = same_names_match2, common.names = common_names, any.id.elements = any_id_elements, same.elements.pos1 = same_elements_pos1, same.elements.pos2 = same_elements_pos2, same.elements.match1 = same_elements_match1, same.elements.match2 = same_elements_match2, common.elements = common_elements, same.order = same_order, order1 = order1, order2 = order2, identical.object = identical_object, identical.content = identical_content)
+    output <- base::list(same_class = same_class, class = class, same_length = same_length, length = length, same_levels = same_levels, levels = levels, any_id_levels = any_id_levels, same_levels_pos1 = same_levels_pos1, same_levels_pos2 = same_levels_pos2, same_levels_match1 = same_levels_match1, same_levels_match2 = same_levels_match2, common_levels = common_levels, same_names = same_names, name = name, any_id_names = any_id_names, same_names_pos1 = same_names_pos1, same_names_pos2 = same_names_pos2, same_names_match1 = same_names_match1, same_names_match2 = same_names_match2, common_names = common_names, any_id_elements = any_id_elements, same_elements_pos1 = same_elements_pos1, same_elements_pos2 = same_elements_pos2, same_elements_match1 = same_elements_match1, same_elements_match2 = same_elements_match2, common_elements = common_elements, same_order = same_order, order1 = order1, order2 = order2, identical_object = identical_object, identical_content = identical_content)
     #### end main code
 
     #### warning output

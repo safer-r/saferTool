@@ -158,98 +158,98 @@ testthat::test_that("comp_1d()", {
     #### main code
     # identical objects: all fields filled
     result <- comp_1d(data1 = vec1, data2 = vec1, safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_true(object = result$same.class)
+    testthat::expect_true(object = result$same_class)
     testthat::expect_equal(object = result$class, expected = "integer")
-    testthat::expect_true(object = result$same.length)
+    testthat::expect_true(object = result$same_length)
     testthat::expect_equal(object = result$length, expected = 5)
-    testthat::expect_true(object = result$any.id.elements)
-    testthat::expect_equal(object = result$common.elements, expected = vec1)
-    testthat::expect_true(object = result$same.order)
-    testthat::expect_true(object = result$identical.object)
-    testthat::expect_true(object = result$identical.content)
+    testthat::expect_true(object = result$any_id_elements)
+    testthat::expect_equal(object = result$common_elements, expected = vec1)
+    testthat::expect_true(object = result$same_order)
+    testthat::expect_true(object = result$identical_object)
+    testthat::expect_true(object = result$identical_content)
     # identical but different lengths: no identical
     result2 <- comp_1d(data1 = vec1, data2 = 1:3, safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_false(object = result2$identical.object)
-    testthat::expect_false(object = result2$identical.content)
-    testthat::expect_true(object = result2$any.id.elements)
+    testthat::expect_false(object = result2$identical_object)
+    testthat::expect_false(object = result2$identical_content)
+    testthat::expect_true(object = result2$any_id_elements)
     # different classes
     result3 <- comp_1d(data1 = vec1, data2 = base::as.character(vec1), safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_false(object = result3$same.class)
+    testthat::expect_false(object = result3$same_class)
     testthat::expect_null(object = result3$class)
     # identical factors: levels filled
     result4 <- comp_1d(data1 = fac1, data2 = fac1, safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_true(object = result4$same.levels)
+    testthat::expect_true(object = result4$same_levels)
     testthat::expect_equal(object = result4$levels, expected = base::levels(x = fac1))
-    testthat::expect_true(object = result4$any.id.levels)
-    testthat::expect_true(object = result4$identical.object)
+    testthat::expect_true(object = result4$any_id_levels)
+    testthat::expect_true(object = result4$identical_object)
     # factors with identical levels but different content (non-identical objects: same.levels branch reached)
     fac4a <- base::factor(x = c("a", "b"), levels = c("a", "b"))
     fac4b <- base::factor(x = c("a", "a"), levels = c("a", "b"))
     result4b <- comp_1d(data1 = fac4a, data2 = fac4b, safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_true(object = result4b$same.levels)
+    testthat::expect_true(object = result4b$same_levels)
     testthat::expect_equal(object = result4b$levels, expected = c("a", "b"))
-    testthat::expect_false(object = result4b$identical.object)
+    testthat::expect_false(object = result4b$identical_object)
     # factors with different levels but common ones
     result5 <- comp_1d(data1 = fac1, data2 = fac2, safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_false(object = result5$same.levels)
-    testthat::expect_true(object = result5$any.id.levels)
-    testthat::expect_equal(object = base::sort(x = result5$common.levels), expected = c("D", "E"))
-    testthat::expect_true(object = base::is.null(x = result5$common.names)) # factors: names not compared
+    testthat::expect_false(object = result5$same_levels)
+    testthat::expect_true(object = result5$any_id_levels)
+    testthat::expect_equal(object = base::sort(x = result5$common_levels), expected = c("D", "E"))
+    testthat::expect_true(object = base::is.null(x = result5$common_names)) # factors: names not compared
     # factors without any common level
     result6 <- comp_1d(data1 = fac1, data2 = fac3, safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_false(object = result6$any.id.levels)
-    testthat::expect_true(object = base::is.null(x = result6$common.levels))
-    testthat::expect_false(object = result6$any.id.elements)
+    testthat::expect_false(object = result6$any_id_levels)
+    testthat::expect_true(object = base::is.null(x = result6$common_levels))
+    testthat::expect_false(object = result6$any_id_elements)
     # named vectors: same names
     result7 <- comp_1d(data1 = nvec1, data2 = nvec1, safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_true(object = result7$same.names)
+    testthat::expect_true(object = result7$same_names)
     testthat::expect_equal(object = result7$name, expected = base::LETTERS[1:5])
-    testthat::expect_true(object = result7$any.id.names)
-    testthat::expect_equal(object = result7$common.names, expected = base::LETTERS[1:5])
+    testthat::expect_true(object = result7$any_id_names)
+    testthat::expect_equal(object = result7$common_names, expected = base::LETTERS[1:5])
     # named vectors with identical names but different content (non-identical objects: same.names branch reached)
     nvec3 <- nvec1 ; base::names(nvec3) <- base::LETTERS[1:5]
     nvec4 <- c(9, 8, 7, 6, 5) ; base::names(nvec4) <- base::LETTERS[1:5]
     result7b <- comp_1d(data1 = nvec3, data2 = nvec4, safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_true(object = result7b$same.names)
+    testthat::expect_true(object = result7b$same_names)
     testthat::expect_equal(object = result7b$name, expected = base::LETTERS[1:5])
-    testthat::expect_false(object = result7b$identical.object)
+    testthat::expect_false(object = result7b$identical_object)
     # named vectors: partial common names, no identical order
     result8 <- comp_1d(data1 = nvec1, data2 = nvec2, safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_false(object = result8$same.names)
-    testthat::expect_true(object = result8$any.id.names)
-    testthat::expect_equal(object = base::sort(x = result8$common.names), expected = c("A", "B", "C", "D"))
-    testthat::expect_true(object = base::is.null(x = result8$same.order)) # same.order is NULL because identical.content is FALSE and sort(data1) != sort(data2)
+    testthat::expect_false(object = result8$same_names)
+    testthat::expect_true(object = result8$any_id_names)
+    testthat::expect_equal(object = base::sort(x = result8$common_names), expected = c("A", "B", "C", "D"))
+    testthat::expect_true(object = base::is.null(x = result8$same_order)) # same.order is NULL because identical.content is FALSE and sort(data1) != sort(data2)
     # named vs unnamed
     result9 <- comp_1d(data1 = nvec1, data2 = vec2, safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_false(object = result9$same.names)
-    testthat::expect_false(object = result9$any.id.names) # one side unnamed: no id names possible
+    testthat::expect_false(object = result9$same_names)
+    testthat::expect_false(object = result9$any_id_names) # one side unnamed: no id names possible
     # 1D tables
     result10 <- comp_1d(data1 = tab1, data2 = tab2, safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_true(object = result10$same.class)
-    testthat::expect_false(object = result10$same.length)
-    testthat::expect_true(object = result10$any.id.elements)
-    testthat::expect_true(object = base::is.null(x = result10$same.order)) # sort(tab1) != sort(tab2) and not identical
+    testthat::expect_true(object = result10$same_class)
+    testthat::expect_false(object = result10$same_length)
+    testthat::expect_true(object = result10$any_id_elements)
+    testthat::expect_true(object = base::is.null(x = result10$same_order)) # sort(tab1) != sort(tab2) and not identical
     # identical order but different content: sort-identical branch
     result11 <- comp_1d(data1 = c(1, 2, 3), data2 = c(3, 2, 1), safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_false(object = result11$same.order)
+    testthat::expect_false(object = result11$same_order)
     testthat::expect_equal(object = result11$order1, expected = c(1, 2, 3))
     testthat::expect_equal(object = result11$order2, expected = c(3, 2, 1))
-    testthat::expect_false(object = result11$identical.content)
+    testthat::expect_false(object = result11$identical_content)
     # no common elements
     result12 <- comp_1d(data1 = c(1, 2), data2 = c(3, 4), safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_false(object = result12$any.id.elements)
-    testthat::expect_true(object = base::is.null(x = result12$common.elements))
-    testthat::expect_true(object = result12$same.class)
-    testthat::expect_true(object = base::is.null(x = result12$same.order)) # same.length TRUE but sort() different: same.order NULL? no: identical(data1, data2) FALSE and sort identical? (1,2) vs (3,4): different -> NULL
+    testthat::expect_false(object = result12$any_id_elements)
+    testthat::expect_true(object = base::is.null(x = result12$common_elements))
+    testthat::expect_true(object = result12$same_class)
+    testthat::expect_true(object = base::is.null(x = result12$same_order)) # same.length TRUE but sort() different: same.order NULL? no: identical(data1, data2) FALSE and sort identical? (1,2) vs (3,4): different -> NULL
     # NA in data: na_contain = TRUE
     result13 <- comp_1d(data1 = c(1, NA), data2 = c(NA, 2), safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_true(object = result13$any.id.elements)
-    testthat::expect_equal(object = result13$same.elements.pos1, expected = 2)
-    testthat::expect_equal(object = result13$same.elements.match1, expected = c(NA, 1)) # match(c(1, NA), c(NA, 2)): 1 not in data2, NA matches the NA of data2
+    testthat::expect_true(object = result13$any_id_elements)
+    testthat::expect_equal(object = result13$same_elements_pos1, expected = 2)
+    testthat::expect_equal(object = result13$same_elements_match1, expected = c(NA, 1)) # match(c(1, NA), c(NA, 2)): 1 not in data2, NA matches the NA of data2
     # factor compared to character vector of same content: factor converted to character
     result14 <- comp_1d(data1 = fac1, data2 = base::as.character(LETTERS[1:5]), safer_check = TRUE, lib_path = NULL, error_text = "")
-    testthat::expect_false(object = result14$same.class)
-    testthat::expect_true(object = result14$identical.content) # factor converted to character for content comparison
+    testthat::expect_false(object = result14$same_class)
+    testthat::expect_true(object = result14$identical_content) # factor converted to character for content comparison
     #### end main code
 
     ## end tests (ordered by arg appearance and conditions in the code)

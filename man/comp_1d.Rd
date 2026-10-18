@@ -20,67 +20,67 @@ comp_1d(data1, data2, safer_check = TRUE, lib_path = NULL, error_text = "")
 \value{
 A list containing:
 
-- $same.class: logical. Are class identical?
+- $same_class: logical. Are class identical?
 
 - $class: class of the 2 datasets (NULL otherwise).
 
-- $same.length: logical. Are number of elements identical?
+- $same_length: logical. Are number of elements identical?
 
 - $length: number of elements in the 2 datasets (NULL otherwise).
 
-- $same.levels: logical. Are levels identical? NULL if data1 and data2 are not factors.
+- $same_levels: logical. Are levels identical? NULL if data1 and data2 are not factors.
 
 - $levels: levels of the 2 datasets if identical (NULL otherwise or NULL if data1 and data2 are not factors).
 
-- $any.id.levels: logical. Is there any identical levels? (NULL if data1 and data2 are not factors).
+- $any_id_levels: logical. Is there any identical levels? (NULL if data1 and data2 are not factors).
 
-- $same.levels.pos1: positions, in data1, of the levels identical in data2 (NULL otherwise or NULL if data1 and data2 are not factors).
+- $same_levels_pos1: positions, in data1, of the levels identical in data2 (NULL otherwise or NULL if data1 and data2 are not factors).
 
-- $same.levels.pos2: positions, in data2, of the levels identical in data1 (NULL otherwise or NULL if data1 and data2 are not factors).
+- $same_levels_pos2: positions, in data2, of the levels identical in data1 (NULL otherwise or NULL if data1 and data2 are not factors).
 
-- $same.levels.match1: positions, in data2, of the levels that match the levels in data1, as given by match(data1, data2) (NULL otherwise or NULL if data1 and data2 are not factors).
+- $same_levels_match1: positions, in data2, of the levels that match the levels in data1, as given by match(data1, data2) (NULL otherwise or NULL if data1 and data2 are not factors).
 
-- $same.levels.match2: positions, in data1, of the levels that match the levels in data2, as given by match(data1, data2) (NULL otherwise or NULL if data1 and data2 are not factors).
+- $same_levels_match2: positions, in data1, of the levels that match the levels in data2, as given by match(data1, data2) (NULL otherwise or NULL if data1 and data2 are not factors).
 
-- $common.levels: common levels between data1 and data2 (can be a subset of $levels or not). NULL if no common levels or if data1 and data2 are not factors.
+- $common_levels: common levels between data1 and data2 (can be a subset of $levels or not). NULL if no common levels or if data1 and data2 are not factors.
 
-- $same.names: logical. Are element names identical? NULL if data1 and data2 have no names.
+- $same_names: logical. Are element names identical? NULL if data1 and data2 have no names.
 
 - $name: name of elements of the 2 datasets if identical (NULL otherwise).
 
-- $any.id.names: logical. Is there any element names identical ?
+- $any_id_names: logical. Is there any element names identical ?
 
-- $same.names.pos1: positions, in data1, of the element names identical in data2. NULL if no identical names.
+- $same_names_pos1: positions, in data1, of the element names identical in data2. NULL if no identical names.
 
-- $same.names.pos2: positions, in data2, of the element names identical in data1. NULL if no identical names.
+- $same_names_pos2: positions, in data2, of the element names identical in data1. NULL if no identical names.
 
-- $same.names.match1: positions, in data2, of the names that match the names in data1, as given by match(data1, data2) (NULL otherwise).
+- $same_names_match1: positions, in data2, of the names that match the names in data1, as given by match(data1, data2) (NULL otherwise).
 
-- $same.names.match2: positions, in data1, of the names that match the names in data2, as given by match(data1, data2) (NULL otherwise).
+- $same_names_match2: positions, in data1, of the names that match the names in data2, as given by match(data1, data2) (NULL otherwise).
 
-- $common.names: common element names between data1 and data2 (can be a subset of $name or not). NULL if no common element names.
+- $common_names: common element names between data1 and data2 (can be a subset of $name or not). NULL if no common element names.
 
-- $any.id.elements: logical. is there any identical elements ?
+- $any_id_elements: logical. is there any identical elements ?
 
-- $same.elements.pos1: positions, in data1, of the elements identical in data2. NULL if no identical elements.
+- $same_elements_pos1: positions, in data1, of the elements identical in data2. NULL if no identical elements.
 
-- $same.elements.pos2: positions, in data2, of the elements identical in data1. NULL if no identical elements.
+- $same_elements_pos2: positions, in data2, of the elements identical in data1. NULL if no identical elements.
 
-- $same.elements.match1: positions, in data2, of the elements that match the elements in data1, as given by match(data1, data2) (NULL otherwise).
+- $same_elements_match1: positions, in data2, of the elements that match the elements in data1, as given by match(data1, data2) (NULL otherwise).
 
-- $same.elements.match2: positions, in data1, of the elements that match the elements in data2, as given by match(data1, data2) (NULL otherwise).
+- $same_elements_match2: positions, in data1, of the elements that match the elements in data2, as given by match(data1, data2) (NULL otherwise).
 
-- $common.elements: common elements between data1 and data2. NULL if no common elements.
+- $common_elements: common elements between data1 and data2. NULL if no common elements.
 
-- $same.order: logical. Are all elements in the same order? TRUE or FALSE if elements of data1 and data2 are identical but not necessary in the same order. NULL otherwise (different length for instance).
+- $same_order: logical. Are all elements in the same order? TRUE or FALSE if elements of data1 and data2 are identical but not necessary in the same order. NULL otherwise (different length for instance).
 
-- $order1: order of all elements of data1. NULL if $same.order is NULL.
+- $order1: order of all elements of data1. NULL if $same_order is NULL.
 
-- $order2: order of all elements of data2. NULL if $same.order is NULL.
+- $order2: order of all elements of data2. NULL if $same_order is NULL.
 
-- $identical.object: logical. Are objects identical (kind of object, element names, content, including content order)?
+- $identical_object: logical. Are objects identical (kind of object, element names, content, including content order)?
 
-- $identical.content: logical. Are content objects identical (identical elements, including order, excluding kind of object and element names)?
+- $identical_content: logical. Are content objects identical (identical elements, including order, excluding kind of object and element names)?
 }
 \description{
 Compare two 1D datasets (vector or factor or 1D table, or 1D matrix or 1D array) of the same class or not. Check and report in a list if the 2 datasets have:

@@ -20,43 +20,43 @@ comp_list(data1, data2, safer_check = TRUE, lib_path = NULL, error_text = "")
 \value{
 A list containing:
 
-- $same.length: logical. Are number of compartments identical?
+- $same_length: logical. Are number of compartments identical?
 
 - $length: number of compartments in the 2 datasets (NULL otherwise).
 
-- $same.names: logical. Are compartment names identical? NULL if data1 and data2 have no names.
+- $same_names: logical. Are compartment names identical? NULL if data1 and data2 have no names.
 
 - $name: name of compartments of the 2 datasets if identical (NULL otherwise).
 
-- $any.id.names: logical. Is there any compartment names identical ?
+- $any_id_names: logical. Is there any compartment names identical ?
 
-- $same.names.pos1: positions, in data1, of the compartment names identical in data2. NULL if no identical names.
+- $same_names_pos1: positions, in data1, of the compartment names identical in data2. NULL if no identical names.
 
-- $same.names.pos2: positions, in data2, of the compartment names identical in data1. NULL if no identical names.
+- $same_names_pos2: positions, in data2, of the compartment names identical in data1. NULL if no identical names.
 
-- $same.names.match1: positions, in data2, of the names that match the names in data1, as given by match(data1, data2) (NULL otherwise).
+- $same_names_match1: positions, in data2, of the names that match the names in data1, as given by match(data1, data2) (NULL otherwise).
 
-- $same.names.match2: positions, in data1, of the names that match the names in data2, as given by match(data1, data2) (NULL otherwise).
+- $same_names_match2: positions, in data1, of the names that match the names in data2, as given by match(data1, data2) (NULL otherwise).
 
-- $common.names: common compartment names between data1 and data2 (can be a subset of $name or not). NULL if no common compartment names.
+- $common_names: common compartment names between data1 and data2 (can be a subset of $name or not). NULL if no common compartment names.
 
-- $any.id.compartments: logical. is there any identical compartments ?
+- $any_id_compartments: logical. is there any identical compartments ?
 
-- $same.compartments.pos1: positions, in data1, of the compartments identical in data2. NULL if no identical compartments.
+- $same_compartments_pos1: positions, in data1, of the compartments identical in data2. NULL if no identical compartments.
 
-- $same.compartments.pos2: positions, in data2, of the compartments identical in data1. NULL if no identical compartments.
+- $same_compartments_pos2: positions, in data2, of the compartments identical in data1. NULL if no identical compartments.
 
-- $same.compartments.match1: positions, in data2, of the compartments that match the compartments in data1, as given by match(data1, data2) (NULL otherwise).
+- $same_compartments_match1: positions, in data2, of the compartments that match the compartments in data1, as given by match(data1, data2) (NULL otherwise).
 
-- $same.compartments.match2: positions, in data1, of the compartments that match the compartments in data2, as given by match(data1, data2) (NULL otherwise).
+- $same_compartments_match2: positions, in data1, of the compartments that match the compartments in data2, as given by match(data1, data2) (NULL otherwise).
 
-- $common.compartments: common compartments between data1 and data2. NULL if no common compartments.
+- $common_compartments: common compartments between data1 and data2. NULL if no common compartments.
 
-- $same.order: logical. Are all compartments in the same order? TRUE if compartments of data1 and data2 are identical. FALSE if compartments of data1 and data2 are made of the same compartments but not in the same order. NULL otherwise (different length or no common compartment for instance).
+- $same_order: logical. Are all compartments in the same order? TRUE if compartments of data1 and data2 are identical. FALSE if compartments of data1 and data2 are made of the same compartments but not in the same order. NULL otherwise (different length or no common compartment for instance).
 
-- $identical.object: logical. Are lists identical (compartment names, content, including content order)?
+- $identical_object: logical. Are lists identical (compartment names, content, including content order)?
 
-- $identical.content: logical. Are content list identical (identical compartments, including order, excluding kind of object and compartment names)?
+- $identical_content: logical. Are content list identical (identical compartments, including order, excluding kind of object and compartment names)?
 }
 \description{
 Compare two lists. Check and report in a list if the 2 datasets have:

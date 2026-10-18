@@ -25,121 +25,121 @@
 #' @returns 
 #' A list containing:
 #' 
-#' - $same.class: logical. Are classes identical ?
+#' - $same_class: logical. Are classes identical ?
 #' 
 #' - $class: identical class of the 2 datasets (NULL otherwise).
 #' 
-#' - $same.mode: logical. Are modes identical ?
+#' - $same_mode: logical. Are modes identical ?
 #' 
 #' - $mode: identical mode of the 2 datasets (NULL otherwise).
 #' 
-#' - $same.type: logical. Are types identical ?
+#' - $same_type: logical. Are types identical ?
 #' 
 #' - $type: identical type of the 2 datasets (NULL otherwise).
 #' 
-#' - $same.dim: logical. Are dimension identical ?
+#' - $same_dim: logical. Are dimension identical ?
 #' 
 #' - $dim: dimension of the 2 datasets (NULL otherwise).
 #' 
-#' - $same.row.nb: logical. Are number of rows identical ?
+#' - $same_row_nb: logical. Are number of rows identical ?
 #' 
-#' - $row.nb: nb of rows of the 2 datasets if identical (NULL otherwise).
+#' - $row_nb: nb of rows of the 2 datasets if identical (NULL otherwise).
 #' 
-#' - $same.col.nb: logical. Are number of columns identical ?
+#' - $same_col_nb: logical. Are number of columns identical ?
 #' 
-#' - $col.nb: nb of columns of the 2 datasets if identical (NULL otherwise).
+#' - $col_nb: nb of columns of the 2 datasets if identical (NULL otherwise).
 #' 
-#' - $same.row.name: logical. Are row names identical ? NULL if no row names in the two 2D datasets.
+#' - $same_row_name: logical. Are row names identical ? NULL if no row names in the two 2D datasets.
 #' 
-#' - $row.name: name of rows of the 2 datasets if identical (NULL otherwise).
+#' - $row_name: name of rows of the 2 datasets if identical (NULL otherwise).
 #' 
-#' - $any.id.row.name: logical. Is there any row names identical ? NULL if no row names in the two 2D datasets.
+#' - $any_id_row_name: logical. Is there any row names identical ? NULL if no row names in the two 2D datasets.
 #' 
-#' - $same.row.names.pos1: positions, in data1, of the row names identical in data2.
+#' - $same_row_names_pos1: positions, in data1, of the row names identical in data2.
 #' 
-#' - $same.row.names.pos2: positions, in data2, of the row names identical in data1.
+#' - $same_row_names_pos2: positions, in data2, of the row names identical in data1.
 #' 
-#' - $same.row.names.match1: positions, in data2, of the row names that match the row names in data1, as given by match(data1, data2) (NULL otherwise).
+#' - $same_row_names_match1: positions, in data2, of the row names that match the row names in data1, as given by match(data1, data2) (NULL otherwise).
 #' 
-#' - $same.row.names.match2: positions, in data1, of the row names that match the row names in data2, as given by match(data1, data2) (NULL otherwise).
+#' - $same_row_names_match2: positions, in data1, of the row names that match the row names in data2, as given by match(data1, data2) (NULL otherwise).
 #' 
-#' - $common.row.names: common row names between data1 and data2 (can be a subset of $name or not). NULL if no common row names.
+#' - $common_row_names: common row names between data1 and data2 (can be a subset of $name or not). NULL if no common row names.
 #' 
-#' - $same.col.name: logical. Are column names identical ? NULL if no col names in the two 2D datasets.
+#' - $same_col_name: logical. Are column names identical ? NULL if no col names in the two 2D datasets.
 #' 
-#' - $col.name: name of columns of the 2 datasets if identical (NULL otherwise).
+#' - $col_name: name of columns of the 2 datasets if identical (NULL otherwise).
 #' 
-#' - $any.id.col.name: logical. Is there any column names identical ? NULL if no col names in the two 2D datasets.
+#' - $any_id_col_name: logical. Is there any column names identical ? NULL if no col names in the two 2D datasets.
 #' 
-#' - $same.col.names.pos1: positions, in data1, of the column names identical in data2.
+#' - $same_col_names_pos1: positions, in data1, of the column names identical in data2.
 #' 
-#' - $same.col.names.pos2: positions, in data2, of the column names identical in data1.
+#' - $same_col_names_pos2: positions, in data2, of the column names identical in data1.
 #' 
-#' - $same.col.names.match1: positions, in data2, of the column names that match the column names in data1, as given by match(data1, data2) (NULL otherwise).
+#' - $same_col_names_match1: positions, in data2, of the column names that match the column names in data1, as given by match(data1, data2) (NULL otherwise).
 #' 
-#' - $same.col.names.match2: positions, in data1, of the column names that match the column names in data2, as given by match(data1, data2) (NULL otherwise).
+#' - $same_col_names_match2: positions, in data1, of the column names that match the column names in data2, as given by match(data1, data2) (NULL otherwise).
 #' 
-#' - $common.col.names: common column names between data1 and data2 (can be a subset of $name or not). NULL if no common column names.
+#' - $common_col_names: common column names between data1 and data2 (can be a subset of $name or not). NULL if no common column names.
 #' 
-#' - $any.id.row: logical. is there identical rows (not considering row names)? NULL if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $any_id_row: logical. is there identical rows (not considering row names)? NULL if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
 #' 
-#' - $same.row.pos1: positions, in data1, of the rows identical in data2 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same_row_pos1: positions, in data1, of the rows identical in data2 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
 #' 
-#' - $same.row.pos2: positions, in data2, of the rows identical in data1 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same_row_pos2: positions, in data2, of the rows identical in data1 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
 #' 
-#' - $same.row.match1: positions, in data2, of the rows that match the rows in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same_row_match1: positions, in data2, of the rows that match the rows in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
 #' 
-#' - $same.row.match2: positions, in data1, of the rows that match the rows in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same_row_match2: positions, in data1, of the rows that match the rows in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
 #' 
-#' - $any.id.col: logical. is there identical columns (not considering column names)? NULL if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $any_id_col: logical. is there identical columns (not considering column names)? NULL if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
 #' 
-#' - $same.col.pos1: position in data1 of the cols identical in data2 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same_col_pos1: position in data1 of the cols identical in data2 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
 #' 
-#' - $same.col.pos2: position in data2 of the cols identical in data1 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same_col_pos2: position in data2 of the cols identical in data1 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
 #' 
-#' - $same.col.match1: positions, in data2, of the columns that match the columns in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same_col_match1: positions, in data2, of the columns that match the columns in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
 #' 
-#' - $same.row.match2: positions, in data1, of the columns that match the columns in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#' - $same_row_match2: positions, in data1, of the columns that match the columns in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
 #' 
-#' - $identical.content: logical. Are contents identical ? Row and column names are not considered. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character).
+#' - $identical_content: logical. Are contents identical ? Row and column names are not considered. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character).
 #' 
-#' - $identical: logical. Idem as $identical.content but including row & column names.
+#' - $identical: logical. Idem as $identical_content but including row & column names.
 #' @details 
 #' WARNINGS
 #' 
 #' The results in:
 #' 
-#' $any.id.row,
+#' $any_id_row,
 #' 
-#' $same.row.pos1,
+#' $same_row_pos1,
 #' 
-#' $same.row.pos2,
+#' $same_row_pos2,
 #' 
-#' $same.row.match1,
+#' $same_row_match1,
 #' 
-#' $same.row.match2,
+#' $same_row_match2,
 #' 
-#' $any.id.col, 
+#' $any_id_col, 
 #' 
-#' $same.col.pos1,
+#' $same_col_pos1,
 #' 
-#' $same.col.pos2,
+#' $same_col_pos2,
 #' 
-#' $same.col.match1,
+#' $same_col_match1,
 #' 
-#' $same.col.match2,
+#' $same_col_match2,
 #' 
-#' $identical.content,
+#' $identical_content,
 #' 
 #' $identical
 #' 
-#' Does not take into account the mode and type (integer, double, character, etc.) of the matrix, data frame and table content. Indeed, comparisons are performed after conversion of the content into characters. This allows the 2 by 2 comparisons of data frame rows. However, the same mode and same type information is provided with the $same.mode and $same.type result, which is convenient when dealing with matrices and tables. But the different modes and types between column of a data frame is never considered. Thus, be careful when concluding that columns of two different data frames are the same, because the values can be identical but not the mode or type (integer in the first data frame column, and double in the second data frame column, for instance).
+#' Does not take into account the mode and type (integer, double, character, etc.) of the matrix, data frame and table content. Indeed, comparisons are performed after conversion of the content into characters. This allows the 2 by 2 comparisons of data frame rows. However, the same mode and same type information is provided with the $same_mode and $same_type result, which is convenient when dealing with matrices and tables. But the different modes and types between column of a data frame is never considered. Thus, be careful when concluding that columns of two different data frames are the same, because the values can be identical but not the mode or type (integer in the first data frame column, and double in the second data frame column, for instance).
 #' 
 #' 
-#' "TOO BIG FOR EVALUATION" returned in $same.row.pos1, $same.row.pos2, $same.row.match1 and $same.row.match2 when nrow(data1) * nrow(data2) > 1e6 and $any.id.row is returned NULL.
+#' "TOO BIG FOR EVALUATION" returned in $same_row_pos1, $same_row_pos2, $same_row_match1 and $same_row_match2 when nrow(data1) * nrow(data2) > 1e6 and $any_id_row is returned NULL.
 #' 
 #' 
-#' "TOO BIG FOR EVALUATION" returned in $same.col.pos1, $ame.col.pos2, $same.col.match1 and $same.col.match2 when ncol(data1) * ncol(data2) > 1e6 and $any.id.col is returned NULL.
+#' "TOO BIG FOR EVALUATION" returned in $same_col_pos1, $same_col_pos2, $same_col_match1 and $same_col_match2 when ncol(data1) * ncol(data2) > 1e6 and $any_id_col is returned NULL.
 #' @author Gael Millot <gael.millot@pasteur.fr>
 #' @author Yushi Han <yushi.han2000@gmail.com>
 #' @author Haiding Wang <wanghaiding442@gmail.com>
@@ -909,7 +909,7 @@ comp_2d <- function(
             identical_content <- FALSE
         }
     }
-    output <- base::list(same.class = same_class, class = class, same.mode = same_mode, mode = mode, same.type = same_type , type = type, same.dim = same_dim, dim = dim, same.row.nb = same_row_nb, row.nb = row_nb, same.col.nb = same_col_nb , col.nb = col_nb, same.row.name = same_row_name, row.name = row_name, any.id.row.name = any_id_row_name, same.row.names.pos1 = same_row_names_pos1, same.row.names.pos2 = same_row_names_pos2, same.row.names.match1 = same_row_names_match1, same.row.names.match2 = same_row_names_match2, common.row.names = common_row_names, same.col.name = same_col_name, col.name = col_name,any.id.col.name = any_id_col_name, same.col.names.pos1 = same_col_names_pos1, same.col.names.pos2 = same_col_names_pos2, same.col.names.match1 = same_col_names_match1, same.col.names.match2 = same_col_names_match2, common.col.names = common_col_names, any.id.row = any_id_row, same.row.pos1 = same_row_pos1, same.row.pos2 = same_row_pos2, same.row.match1 = same_row_match1, same.row.match2 = same_row_match2, any.id.col = any_id_col, same.col.pos1 = same_col_pos1, same.col.pos2 = same_col_pos2, same.col.match1 = same_col_match1, same.col.match2 = same_col_match2, identical.content = identical_content, identical = identical_object)
+    output <- base::list(same_class = same_class, class = class, same_mode = same_mode, mode = mode, same_type = same_type , type = type, same_dim = same_dim, dim = dim, same_row_nb = same_row_nb, row_nb = row_nb, same_col_nb = same_col_nb , col_nb = col_nb, same_row_name = same_row_name, row_name = row_name, any_id_row_name = any_id_row_name, same_row_names_pos1 = same_row_names_pos1, same_row_names_pos2 = same_row_names_pos2, same_row_names_match1 = same_row_names_match1, same_row_names_match2 = same_row_names_match2, common_row_names = common_row_names, same_col_name = same_col_name, col_name = col_name,any_id_col_name = any_id_col_name, same_col_names_pos1 = same_col_names_pos1, same_col_names_pos2 = same_col_names_pos2, same_col_names_match1 = same_col_names_match1, same_col_names_match2 = same_col_names_match2, common_col_names = common_col_names, any_id_row = any_id_row, same_row_pos1 = same_row_pos1, same_row_pos2 = same_row_pos2, same_row_match1 = same_row_match1, same_row_match2 = same_row_match2, any_id_col = any_id_col, same_col_pos1 = same_col_pos1, same_col_pos2 = same_col_pos2, same_col_match1 = same_col_match1, same_col_match2 = same_col_match2, identical_content = identical_content, identical = identical_object)
     #### end main code
 
     #### warning output
