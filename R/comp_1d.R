@@ -524,101 +524,101 @@ comp_1d <- function(
     #### end second round of checking and data preparation
 
     #### main code
-    same.class <- FALSE
+    same_class <- FALSE
     class <- NULL
-    same.length <- FALSE
+    same_length <- FALSE
     length <- NULL
-    same.levels <- NULL # not FALSE to deal with no factors
+    same_levels <- NULL # not FALSE to deal with no factors
     levels <- NULL
-    any.id.levels <- FALSE
-    same.levels.pos1 <- NULL
-    same.levels.pos2 <- NULL
-    same.levels.match1 <- NULL
-    same.levels.match2 <- NULL
-    common.levels <- NULL
-    same.names <- NULL # not FALSE to deal with absence of name
+    any_id_levels <- FALSE
+    same_levels_pos1 <- NULL
+    same_levels_pos2 <- NULL
+    same_levels_match1 <- NULL
+    same_levels_match2 <- NULL
+    common_levels <- NULL
+    same_names <- NULL # not FALSE to deal with absence of name
     name <- NULL
-    any.id.names <- FALSE
-    same.names.pos1 <- NULL
-    same.names.pos2 <- NULL
-    same.names.match1 <- NULL
-    same.names.match2 <- NULL
-    common.names <- NULL
-    any.id.elements <- FALSE
-    same.elements.pos1 <- NULL
-    same.elements.pos2 <- NULL
-    same.elements.match1 <- NULL
-    same.elements.match2 <- NULL
-    common.elements <- NULL
-    same.order <- NULL
+    any_id_names <- FALSE
+    same_names_pos1 <- NULL
+    same_names_pos2 <- NULL
+    same_names_match1 <- NULL
+    same_names_match2 <- NULL
+    common_names <- NULL
+    any_id_elements <- FALSE
+    same_elements_pos1 <- NULL
+    same_elements_pos2 <- NULL
+    same_elements_match1 <- NULL
+    same_elements_match2 <- NULL
+    common_elements <- NULL
+    same_order <- NULL
     order1 <- NULL
     order2 <- NULL
-    identical.object <- FALSE
-    identical.content <- FALSE
+    identical_object <- FALSE
+    identical_content <- FALSE
     if(base::identical(data1, data2)){
-        same.class <- TRUE
+        same_class <- TRUE
         class <- base::class(data1)
-        same.length <- TRUE
+        same_length <- TRUE
         length <- base::length(data1)
         if(base::any(base::class(data1) %in% "factor")){
-            same.levels <- TRUE
+            same_levels <- TRUE
             levels <- base::levels(data1)
-            any.id.levels <- TRUE
-            same.levels.pos1 <- 1:base::length(base::levels(data1))
-            same.levels.pos2 <- 1:base::length(base::levels(data2))
-            same.levels.match1 <- 1:base::length(base::levels(data1))
-            same.levels.match2 <- 1:base::length(base::levels(data2))
-            common.levels <- base::levels(data1)
+            any_id_levels <- TRUE
+            same_levels_pos1 <- 1:base::length(base::levels(data1))
+            same_levels_pos2 <- 1:base::length(base::levels(data2))
+            same_levels_match1 <- 1:base::length(base::levels(data1))
+            same_levels_match2 <- 1:base::length(base::levels(data2))
+            common_levels <- base::levels(data1)
         }
         if( ! base::is.null(base::names(data1))){
-            same.names <- TRUE
+            same_names <- TRUE
             name <- base::names(data1)
-            any.id.names <- TRUE
-            same.names.pos1 <- 1:base::length(data1)
-            same.names.pos2 <- 1:base::length(data2)
-            same.names.match1 <- 1:base::length(data1)
-            same.names.match2 <- 1:base::length(data2)
-            common.names <- base::names(data1)
+            any_id_names <- TRUE
+            same_names_pos1 <- 1:base::length(data1)
+            same_names_pos2 <- 1:base::length(data2)
+            same_names_match1 <- 1:base::length(data1)
+            same_names_match2 <- 1:base::length(data2)
+            common_names <- base::names(data1)
         }
-        any.id.elements <- TRUE
-        same.elements.pos1 <- 1:base::length(data1)
-        same.elements.pos2 <- 1:base::length(data2)
-        same.elements.match1 <- 1:base::length(data1)
-        same.elements.match2 <- 1:base::length(data2)
-        common.elements <- data1
-        same.order <- TRUE
+        any_id_elements <- TRUE
+        same_elements_pos1 <- 1:base::length(data1)
+        same_elements_pos2 <- 1:base::length(data2)
+        same_elements_match1 <- 1:base::length(data1)
+        same_elements_match2 <- 1:base::length(data2)
+        common_elements <- data1
+        same_order <- TRUE
         order1 <- base::order(data1)
         order2 <- base::order(data2)
-        identical.object <- TRUE
-        identical.content <- TRUE
+        identical_object <- TRUE
+        identical_content <- TRUE
     }else{
         if(base::identical(base::class(data1), base::class(data2))){
-            same.class <- TRUE
+            same_class <- TRUE
             class <- base::class(data1)
         }
         if(base::identical(base::length(data1), base::length(data2))){
-            same.length<- TRUE
+            same_length<- TRUE
             length <- base::length(data1)
         }
         if(base::any(base::class(data1) %in% "factor") & base::any(base::class(data2) %in% "factor")){
             if(base::identical(base::levels(data1), base::levels(data2))){
-                same.levels <- TRUE
+                same_levels <- TRUE
                 levels <- base::levels(data1)
             }else{
-                same.levels <- FALSE
+                same_levels <- FALSE
             }
             if(base::any(base::levels(data1) %in% base::levels(data2))){
-                any.id.levels <- TRUE
-                same.levels.pos1 <- base::which(base::levels(data1) %in% base::levels(data2))
-                same.levels.match1 <- base::match(base::levels(data1), base::levels(data2))
+                any_id_levels <- TRUE
+                same_levels_pos1 <- base::which(base::levels(data1) %in% base::levels(data2))
+                same_levels_match1 <- base::match(base::levels(data1), base::levels(data2))
             }
             if(base::any(base::levels(data2) %in% base::levels(data1))){
-                any.id.levels <- TRUE
-                same.levels.pos2 <- base::which(base::levels(data2) %in% base::levels(data1))
-                same.levels.match2 <- base::match(base::levels(data2), base::levels(data1))
+                any_id_levels <- TRUE
+                same_levels_pos2 <- base::which(base::levels(data2) %in% base::levels(data1))
+                same_levels_match2 <- base::match(base::levels(data2), base::levels(data1))
             }
-            if(any.id.levels == TRUE){
-                common.levels <- base::unique(base::c(base::levels(data1)[same.levels.pos1], base::levels(data2)[same.levels.pos2]))
+            if(any_id_levels == TRUE){
+                common_levels <- base::unique(base::c(base::levels(data1)[same_levels_pos1], base::levels(data2)[same_levels_pos2]))
             }
         }
         if(base::any(base::class(data1) %in% "factor")){ # to compare content
@@ -629,50 +629,50 @@ comp_1d <- function(
         }
         if( ! (base::is.null(base::names(data1)) & base::is.null(base::names(data2)))){
             if(base::identical(base::names(data1), base::names(data2))){
-                same.names <- TRUE
+                same_names <- TRUE
                 name <- base::names(data1)
             }else{
-                same.names <- FALSE
+                same_names <- FALSE
             }
             if(base::any(base::names(data1) %in% base::names(data2))){
-                any.id.names <- TRUE
-                same.names.pos1 <- base::which(base::names(data1) %in% base::names(data2))
-                same.names.match1 <- base::match(base::names(data1), base::names(data2))
+                any_id_names <- TRUE
+                same_names_pos1 <- base::which(base::names(data1) %in% base::names(data2))
+                same_names_match1 <- base::match(base::names(data1), base::names(data2))
             }
             if(base::any(base::names(data2) %in% base::names(data1))){
-                any.id.names <- TRUE
-                same.names.pos2 <- base::which(base::names(data2) %in% base::names(data1))
-                same.names.match2 <- base::match(base::names(data2), base::names(data1))
+                any_id_names <- TRUE
+                same_names_pos2 <- base::which(base::names(data2) %in% base::names(data1))
+                same_names_match2 <- base::match(base::names(data2), base::names(data1))
             }
-            if(any.id.names == TRUE){
-                common.names <- base::unique(base::c(base::names(data1)[same.names.pos1], base::names(data2)[same.names.pos2]))
+            if(any_id_names == TRUE){
+                common_names <- base::unique(base::c(base::names(data1)[same_names_pos1], base::names(data2)[same_names_pos2]))
             }
         }
         base::names(data1) <- NULL # names solved -> to do not be disturbed by names
         base::names(data2) <- NULL # names solved -> to do not be disturbed by names
         if(base::any(data1 %in% data2)){
-            any.id.elements <- TRUE
-            same.elements.pos1 <- base::which(data1 %in% data2)
-            same.elements.match1 <- base::match(data1, data2)
+            any_id_elements <- TRUE
+            same_elements_pos1 <- base::which(data1 %in% data2)
+            same_elements_match1 <- base::match(data1, data2)
         }
         if(base::any(data2 %in% data1)){
-            any.id.elements <- TRUE
-            same.elements.pos2 <- base::which(data2 %in% data1)
-            same.elements.match2 <- base::match(data2, data1)
+            any_id_elements <- TRUE
+            same_elements_pos2 <- base::which(data2 %in% data1)
+            same_elements_match2 <- base::match(data2, data1)
         }
-        if(any.id.elements == TRUE){
-            common.elements <- base::unique(base::c(data1[same.elements.pos1], data2[same.elements.pos2]))
+        if(any_id_elements == TRUE){
+            common_elements <- base::unique(base::c(data1[same_elements_pos1], data2[same_elements_pos2]))
         }
         if(base::identical(data1, data2)){
-            identical.content <- TRUE
-            same.order <- TRUE
+            identical_content <- TRUE
+            same_order <- TRUE
         }else if(base::identical(base::sort(data1), base::sort(data2))){
-            same.order <- FALSE
+            same_order <- FALSE
             order1 <- base::order(data1)
             order2 <- base::order(data2)
         }
     }
-    output <- base::list(same.class = same.class, class = class, same.length = same.length, length = length, same.levels = same.levels, levels = levels, any.id.levels = any.id.levels, same.levels.pos1 = same.levels.pos1, same.levels.pos2 = same.levels.pos2, same.levels.match1 = same.levels.match1, same.levels.match2 = same.levels.match2, common.levels = common.levels, same.names = same.names, name = name, any.id.names = any.id.names, same.names.pos1 = same.names.pos1, same.names.pos2 = same.names.pos2, same.names.match1 = same.names.match1, same.names.match2 = same.names.match2, common.names = common.names, any.id.elements = any.id.elements, same.elements.pos1 = same.elements.pos1, same.elements.pos2 = same.elements.pos2, same.elements.match1 = same.elements.match1, same.elements.match2 = same.elements.match2, common.elements = common.elements, same.order = same.order, order1 = order1, order2 = order2, identical.object = identical.object, identical.content = identical.content)
+    output <- base::list(same.class = same_class, class = class, same.length = same_length, length = length, same.levels = same_levels, levels = levels, any.id.levels = any_id_levels, same.levels.pos1 = same_levels_pos1, same.levels.pos2 = same_levels_pos2, same.levels.match1 = same_levels_match1, same.levels.match2 = same_levels_match2, common.levels = common_levels, same.names = same_names, name = name, any.id.names = any_id_names, same.names.pos1 = same_names_pos1, same.names.pos2 = same_names_pos2, same.names.match1 = same_names_match1, same.names.match2 = same_names_match2, common.names = common_names, any.id.elements = any_id_elements, same.elements.pos1 = same_elements_pos1, same.elements.pos2 = same_elements_pos2, same.elements.match1 = same_elements_match1, same.elements.match2 = same_elements_match2, common.elements = common_elements, same.order = same_order, order1 = order1, order2 = order2, identical.object = identical_object, identical.content = identical_content)
     #### end main code
 
     #### warning output

@@ -432,8 +432,8 @@ sample2 <- function(
     if( ! base::is.null(x = set_seed)){
         if (base::exists(x = ".Random.seed", where = -1, envir = base::globalenv(), frame = , mode = "any", inherits = TRUE)) {
             # if .Random.seed does not exists, it means that no random operation has been performed yet in any R environment
-            tempo.random.seed <- base::get(x = ".Random.seed", envir = base::globalenv(), mode = "any", inherits = FALSE)
-            base::on.exit(expr = base::assign(x = ".Random.seed", value = tempo.random.seed, pos = -1, envir = base::globalenv(), inherits = FALSE, immediate = TRUE), add = TRUE, after = TRUE)
+            tempo_random_seed <- base::get(x = ".Random.seed", envir = base::globalenv(), mode = "any", inherits = FALSE)
+            base::on.exit(expr = base::assign(x = ".Random.seed", value = tempo_random_seed, pos = -1, envir = base::globalenv(), inherits = FALSE, immediate = TRUE), add = TRUE, after = TRUE)
         }else{
             # if .Random.seed does not exist, it means that no random operation has been performed yet in any R environment, so the initial state is restored by removing .Random.seed (created by the base::set.seed() call just below)
             # warning: base::set.seed(seed = NULL, ...) as initially written in the backbone does not remove the .Random.seed object created by the base::set.seed(seed = set_seed, ...) call above, so it does not restore the initial state (behavior verified in R 4.6.0)

@@ -453,13 +453,13 @@ df_remod <- function(
     #### end second round of checking and data preparation
 
     #### main code
-    tempo.factor <- base::unlist(base::lapply(df, class))
-    for(i in 1:base::length(tempo.factor)){ # convert factor columns as character
-        if(base::all(tempo.factor[i] == "factor", na.rm = TRUE)){
+    tempo_factor <- base::unlist(base::lapply(df, class))
+    for(i in 1:base::length(tempo_factor)){ # convert factor columns as character
+        if(base::all(tempo_factor[i] == "factor", na.rm = TRUE)){
             df[, i] <- base::as.character(df[, i])
         }
     }
-    tempo.factor <- base::unlist(base::lapply(df, mode))
+    tempo_factor <- base::unlist(base::lapply(df, mode))
     if(base::length(df) == 2L){
         if( ! ((base::mode(df[, 1]) == "character" & base::mode(df[, 2]) == "numeric") | base::mode(df[, 2]) == "character" & base::mode(df[, 1]) == "numeric" | base::mode(df[, 2]) == "numeric" & base::mode(df[, 1]) == "numeric") ){
             tempo_cat <- base::paste0(
@@ -480,7 +480,7 @@ df_remod <- function(
             base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
         }
     }else{
-        if( ! base::all(tempo.factor %in% "numeric")){
+        if( ! base::all(tempo_factor %in% "numeric")){
             tempo_cat <- base::paste0(
                 error_text_start, 
                 "IF df ARGUMENT IS A DATA FRAME MADE OF ONE COLUMN, OR MORE THAN 2 COLUMNS, THESE COLUMNS MUST BE NUMERIC",
@@ -490,7 +490,7 @@ df_remod <- function(
             base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
         }
     }
-    if(( ! base::any(tempo.factor %in% "character")) & base::is.null(base::names(df))){
+    if(( ! base::any(tempo_factor %in% "character")) & base::is.null(base::names(df))){
         tempo_cat <- base::paste0(
             error_text_start, 
             "NUMERIC DATA FRAME in the df ARGUMENT MUST HAVE COLUMN NAMES",
@@ -499,7 +499,7 @@ df_remod <- function(
         )
         base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
     }
-    if(base::all(tempo.factor %in% "numeric")){ # transfo 1
+    if(base::all(tempo_factor %in% "numeric")){ # transfo 1
         quanti <- NULL
         for(i in 1:base::length(df)){
             quanti <-base::c(quanti, df[, i])
@@ -508,24 +508,24 @@ df_remod <- function(
         output <- base::data.frame(quanti, quali, stringsAsFactors = TRUE, check.names = FALSE)
         base::names(output) <- base::c(quanti_col_name, quali_col_name)
         # add the ini_rowname column
-        ini.rownames <- base::rownames(df)
-        tempo.df <- df
+        ini_rownames <- base::rownames(df)
+        tempo_df <- df
         
         
-        base::rownames(tempo.df) <- NULL
-        null.rownames <- (tempo.df)
-        if( ! base::identical(ini.rownames, null.rownames)){
-            ini_rowname <- base::rep(ini.rownames, times = base::ncol(df))
+        base::rownames(tempo_df) <- NULL
+        null_rownames <- (tempo_df)
+        if( ! base::identical(ini_rownames, null_rownames)){
+            ini_rowname <- base::rep(ini_rownames, times = base::ncol(df))
             output <- base::cbind(output, ini_rowname, stringsAsFactors = TRUE)
         }
     }else{ # transfo 2
         if(base::class(df[, 1]) == "character"){
             df <- base::cbind(df[2], df[1], stringsAsFactors = TRUE)
         }
-        nc.max <- base::max(base::table(df[, 2])) # effectif maximum des classes
-        nb.na <- nc.max - base::table(df[,2]) # nombre de NA à ajouter pour réaliser la df frame
+        nc_max <- base::max(base::table(df[, 2])) # effectif maximum des classes
+        nb_na <- nc_max - base::table(df[,2]) # nombre de NA à ajouter pour réaliser la df frame
         tempo<-base::split(df[, 1], df[, 2])
-        for(i in 1:base::length(tempo)){tempo[[i]] <- base::append(tempo[[i]], base::rep(NA, nb.na[i]))} # des NA doivent être ajoutés lorsque les effectifs sont différents entre les classes. C'est uniquement pour que chaque colonne ait le même nombre de lignes
+        for(i in 1:base::length(tempo)){tempo[[i]] <- base::append(tempo[[i]], base::rep(NA, nb_na[i]))} # des NA doivent être ajoutés lorsque les effectifs sont différents entre les classes. C'est uniquement pour que chaque colonne ait le même nombre de lignes
         output<-base::data.frame(tempo, stringsAsFactors = TRUE, check.names = FALSE)
     }
 

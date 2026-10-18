@@ -448,93 +448,93 @@ comp_list <- function(
     #### end second round of checking and data preparation
 
     #### main code
-    same.length <- FALSE
+    same_length <- FALSE
     length2 <- NULL
-    same.names <- NULL # not FALSE to deal with absence of name
+    same_names <- NULL # not FALSE to deal with absence of name
     name <- NULL
-    any.id.names <- FALSE
-    same.names.pos1 <- NULL
-    same.names.pos2 <- NULL
-    same.names.match1 <- NULL
-    same.names.match2 <- NULL
-    common.names <- NULL
-    any.id.compartments <- FALSE
-    same.compartments.pos1 <- NULL
-    same.compartments.pos2 <- NULL
-    same.compartments.match1 <- NULL
-    same.compartments.match2 <- NULL
-    common.compartments <- NULL
-    same.order <- NULL
-    identical.object <- FALSE
-    identical.content <- FALSE
+    any_id_names <- FALSE
+    same_names_pos1 <- NULL
+    same_names_pos2 <- NULL
+    same_names_match1 <- NULL
+    same_names_match2 <- NULL
+    common_names <- NULL
+    any_id_compartments <- FALSE
+    same_compartments_pos1 <- NULL
+    same_compartments_pos2 <- NULL
+    same_compartments_match1 <- NULL
+    same_compartments_match2 <- NULL
+    common_compartments <- NULL
+    same_order <- NULL
+    identical_object <- FALSE
+    identical_content <- FALSE
     if(base::identical(data1, data2)){
-        same.length <- TRUE
+        same_length <- TRUE
         length2 <- base::length(x = data1)
         if( ! base::is.null(x = base::names(x = data1))){
-            same.names <- TRUE
+            same_names <- TRUE
             name <- base::names(x = data1)
-            any.id.names <- TRUE
-            same.names.pos1 <- 1:base::length(x = data1)
-            same.names.pos2 <- 1:base::length(x = data2)
-            same.names.match1 <- 1:base::length(x = data1)
-            same.names.match2 <- 1:base::length(x = data2)
-            common.names <- base::names(x = data1)
+            any_id_names <- TRUE
+            same_names_pos1 <- 1:base::length(x = data1)
+            same_names_pos2 <- 1:base::length(x = data2)
+            same_names_match1 <- 1:base::length(x = data1)
+            same_names_match2 <- 1:base::length(x = data2)
+            common_names <- base::names(x = data1)
         }
-        any.id.compartments <- TRUE
-        same.compartments.pos1 <- 1:base::length(x = data1)
-        same.compartments.pos2 <- 1:base::length(x = data2)
-        same.compartments.match1 <- 1:base::length(x = data1)
-        same.compartments.match2 <- 1:base::length(x = data2)
-        common.compartments <- data1
-        same.order <- TRUE
-        identical.object <- TRUE
-        identical.content <- TRUE
+        any_id_compartments <- TRUE
+        same_compartments_pos1 <- 1:base::length(x = data1)
+        same_compartments_pos2 <- 1:base::length(x = data2)
+        same_compartments_match1 <- 1:base::length(x = data1)
+        same_compartments_match2 <- 1:base::length(x = data2)
+        common_compartments <- data1
+        same_order <- TRUE
+        identical_object <- TRUE
+        identical_content <- TRUE
     }else{
         if(base::identical(base::length(x = data1), base::length(x = data2))){
-            same.length <- TRUE
+            same_length <- TRUE
             length2 <- base::length(x = data1)
         }
         if( ! (base::is.null(x = base::names(x = data1)) & base::is.null(x = base::names(x = data2)))){
             if( ! base::identical(base::names(x = data1), base::names(x = data2))){
-                same.names <- FALSE
+                same_names <- FALSE
             }else{
-                same.names <- TRUE
+                same_names <- TRUE
                 name <- base::names(x = data1)
             }
             if(base::any(base::names(x = data1) %in% base::names(x = data2))){
-                any.id.names <- TRUE
-                same.names.pos1 <- base::which(base::names(x = data1) %in% base::names(x = data2))
-                same.names.match1 <- base::match(base::names(x = data1), base::names(x = data2))
+                any_id_names <- TRUE
+                same_names_pos1 <- base::which(base::names(x = data1) %in% base::names(x = data2))
+                same_names_match1 <- base::match(base::names(x = data1), base::names(x = data2))
             }
             if(base::any(base::names(x = data2) %in% base::names(x = data1))){
-                any.id.names <- TRUE
-                same.names.pos2 <- base::which(base::names(x = data2) %in% base::names(x = data1))
-                same.names.match2 <- base::match(base::names(x = data2), base::names(x = data1))
+                any_id_names <- TRUE
+                same_names_pos2 <- base::which(base::names(x = data2) %in% base::names(x = data1))
+                same_names_match2 <- base::match(base::names(x = data2), base::names(x = data1))
             }
-            if(any.id.names == TRUE){
-                common.names <- base::unique(base::c(base::names(x = data1)[same.names.pos1], base::names(x = data2)[same.names.pos2]))
+            if(any_id_names == TRUE){
+                common_names <- base::unique(base::c(base::names(x = data1)[same_names_pos1], base::names(x = data2)[same_names_pos2]))
             }
         }
         base::names(x = data1) <- NULL # names solved -> to do not be disturbed by names
         base::names(x = data2) <- NULL # names solved -> to do not be disturbed by names
         if(base::any(data1 %in% data2)){
-            any.id.compartments <- TRUE
-            same.compartments.pos1 <- base::which(data1 %in% data2)
-            same.compartments.match1 <- base::match(data1, data2)
+            any_id_compartments <- TRUE
+            same_compartments_pos1 <- base::which(data1 %in% data2)
+            same_compartments_match1 <- base::match(data1, data2)
         }
         if(base::any(data2 %in% data1)){
-            any.id.compartments <- TRUE
-            same.compartments.pos2 <- base::which(data2 %in% data1)
-            same.compartments.match2 <- base::match(data2, data1)
+            any_id_compartments <- TRUE
+            same_compartments_pos2 <- base::which(data2 %in% data1)
+            same_compartments_match2 <- base::match(data2, data1)
         }
-        if(any.id.compartments == TRUE){
-            common.compartments <- base::unique(base::c(data1[same.compartments.pos1], data2[same.compartments.pos2]))
+        if(any_id_compartments == TRUE){
+            common_compartments <- base::unique(base::c(data1[same_compartments_pos1], data2[same_compartments_pos2]))
         }
         if(base::identical(data1, data2)){
-            identical.content <- TRUE
-            same.order <- TRUE
-        }else if(same.length == TRUE & ! base::is.null(x = same.compartments.match1) & ! base::is.null(x = same.compartments.match2) & base::all( ! base::is.na(same.compartments.match1)) & base::all( ! base::is.na(same.compartments.match2))){ # bug fix of the initial dev version: the base::is.null(x = ) conditions avoid same.order == FALSE when no compartment is in common (base::all() of an empty logical(0) is TRUE)
-            same.order <- FALSE
+            identical_content <- TRUE
+            same_order <- TRUE
+        }else if(same_length == TRUE & ! base::is.null(x = same_compartments_match1) & ! base::is.null(x = same_compartments_match2) & base::all( ! base::is.na(same_compartments_match1)) & base::all( ! base::is.na(same_compartments_match2))){ # bug fix of the initial dev version: the base::is.null(x = ) conditions avoid same.order == FALSE when no compartment is in common (base::all() of an empty logical(0) is TRUE)
+            same_order <- FALSE
         }
     }
     #### end main code
@@ -543,7 +543,7 @@ comp_list <- function(
     #### end warning output
 
     #### output
-    output <- base::list(same.length = same.length, length = length2, same.names = same.names, name = name, any.id.names = any.id.names, same.names.pos1 = same.names.pos1, same.names.pos2 = same.names.pos2, same.names.match1 = same.names.match1, same.names.match2 = same.names.match2, common.names = common.names, any.id.compartments = any.id.compartments, same.compartments.pos1 = same.compartments.pos1, same.compartments.pos2 = same.compartments.pos2, same.compartments.match1 = same.compartments.match1, same.compartments.match2 = same.compartments.match2, common.compartments = common.compartments, same.order = same.order, identical.object = identical.object, identical.content = identical.content)
+    output <- base::list(same.length = same_length, length = length2, same.names = same_names, name = name, any.id.names = any_id_names, same.names.pos1 = same_names_pos1, same.names.pos2 = same_names_pos2, same.names.match1 = same_names_match1, same.names.match2 = same_names_match2, common.names = common_names, any.id.compartments = any_id_compartments, same.compartments.pos1 = same_compartments_pos1, same.compartments.pos2 = same_compartments_pos2, same.compartments.match1 = same_compartments_match1, same.compartments.match2 = same_compartments_match2, common.compartments = common_compartments, same.order = same_order, identical.object = identical_object, identical.content = identical_content)
     base::return(output)
     #### end output
 }

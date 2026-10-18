@@ -625,82 +625,82 @@ comp_2d <- function(
     #### end second round of checking and data preparation
 
     #### main code
-    same.class <- NULL
+    same_class <- NULL
     class <- NULL
-    same.mode <- NULL
+    same_mode <- NULL
     mode <- NULL
-    same.type <- NULL
+    same_type <- NULL
     type <- NULL
-    same.dim <- NULL
+    same_dim <- NULL
     dim <- NULL
-    same.row.nb <- NULL
-    row.nb <- NULL
-    same.col.nb <- NULL
-    col.nb <- NULL
-    same.row.name <- NULL
-    row.name <- NULL
-    any.id.row.name <- NULL
-    same.row.names.pos1 <- NULL
-    same.row.names.pos2 <- NULL
-    same.row.names.match1 <- NULL
-    same.row.names.match2 <- NULL
-    common.row.names <- NULL
-    same.col.name <- NULL
-    any.id.col.name <- NULL
-    same.col.names.pos1 <- NULL
-    same.col.names.pos2 <- NULL
-    same.col.names.match1 <- NULL
-    same.col.names.match2 <- NULL
-    common.col.names <- NULL
-    col.name <- NULL
-    any.id.row <- NULL
-    same.row.pos1 <- NULL
-    same.row.pos2 <- NULL
-    same.row.match1 <- NULL
-    same.row.match2 <- NULL
-    any.id.col <- NULL
-    same.col.pos1 <- NULL
-    same.col.pos2 <- NULL
-    same.col.match1 <- NULL
-    same.col.match2 <- NULL
-    identical.object <- NULL
-    identical.content <- NULL
+    same_row_nb <- NULL
+    row_nb <- NULL
+    same_col_nb <- NULL
+    col_nb <- NULL
+    same_row_name <- NULL
+    row_name <- NULL
+    any_id_row_name <- NULL
+    same_row_names_pos1 <- NULL
+    same_row_names_pos2 <- NULL
+    same_row_names_match1 <- NULL
+    same_row_names_match2 <- NULL
+    common_row_names <- NULL
+    same_col_name <- NULL
+    any_id_col_name <- NULL
+    same_col_names_pos1 <- NULL
+    same_col_names_pos2 <- NULL
+    same_col_names_match1 <- NULL
+    same_col_names_match2 <- NULL
+    common_col_names <- NULL
+    col_name <- NULL
+    any_id_row <- NULL
+    same_row_pos1 <- NULL
+    same_row_pos2 <- NULL
+    same_row_match1 <- NULL
+    same_row_match2 <- NULL
+    any_id_col <- NULL
+    same_col_pos1 <- NULL
+    same_col_pos2 <- NULL
+    same_col_match1 <- NULL
+    same_col_match2 <- NULL
+    identical_object <- NULL
+    identical_content <- NULL
     # structure
     if( ! base::identical(base::class(data1), base::class(data2))){
-        same.class <- FALSE
+        same_class <- FALSE
     }else{
-        same.class <- TRUE
+        same_class <- TRUE
         class <- base::class(data1)
     }
     if( ! base::identical(base::mode(data1), base::mode(data2))){
-        same.mode<- FALSE
+        same_mode<- FALSE
     }else{
-        same.mode<- TRUE
+        same_mode<- TRUE
         mode <- base::mode(data1)
     }
     if( ! base::identical(base::typeof(data1), base::typeof(data2))){
-        same.type <- FALSE
+        same_type <- FALSE
     }else{
-        same.type <- TRUE
+        same_type <- TRUE
         type<- base::typeof(data1)
     }
     if( ! base::identical(base::dim(data1), base::dim(data2))){
-        same.dim <- FALSE
+        same_dim <- FALSE
     }else{
-        same.dim <- TRUE
+        same_dim <- TRUE
         dim <- base::dim(data1)
     }
     if( ! base::identical(base::nrow(data1), base::nrow(data2))){
-        same.row.nb <- FALSE
+        same_row_nb <- FALSE
     }else{
-        same.row.nb <- TRUE
-        row.nb <- base::nrow(data1)
+        same_row_nb <- TRUE
+        row_nb <- base::nrow(data1)
     }
     if( ! base::identical(base::ncol(data1), base::ncol(data2))){
-        same.col.nb <- FALSE
+        same_col_nb <- FALSE
     }else{
-        same.col.nb <- TRUE
-        col.nb <- base::ncol(data1)
+        same_col_nb <- TRUE
+        col_nb <- base::ncol(data1)
     }
     # end structure
     # conversion of object into matrix and content into characters
@@ -725,114 +725,114 @@ comp_2d <- function(
     }
     # end conversion of object into matrix and content into characters
     if(base::identical(data1, data2)){ # before R4.0.0, it was  ! base::any(base::class(data1) %in% base::c("matrix", "data.frame", "table"))
-        same.row.name <- TRUE
-        row.name <- base::dimnames(data1)[[1]]
-        any.id.row.name <- TRUE
-        same.row.names.pos1 <- 1:row.nb
-        same.row.names.pos2 <- 1:row.nb
-        same.row.names.match1 <- 1:row.nb
-        same.row.names.match2 <- 1:row.nb
-        common.row.names <- base::dimnames(data1)[[1]]
-        same.col.name <- TRUE
-        col.name <- base::dimnames(data1)[[2]]
-        any.id.col.name <- TRUE
-        same.col.names.pos1 <- 1:col.nb
-        same.col.names.pos2 <- 1:col.nb
-        same.col.names.match1 <- 1:col.nb
-        same.col.names.match2 <- 1:col.nb
-        common.col.names <- base::dimnames(data1)[[2]]
-        any.id.row <- TRUE
-        same.row.pos1 <- 1:row.nb
-        same.row.pos2 <- 1:row.nb
-        same.row.match1 <- 1:row.nb
-        same.row.match2 <- 1:row.nb
-        any.id.col <- TRUE
-        same.col.pos1 <- 1:col.nb
-        same.col.pos2 <- 1:col.nb
-        same.col.match1 <- 1:col.nb
-        same.col.match2 <- 1:col.nb
-        identical.object <- TRUE
-        identical.content <- TRUE
+        same_row_name <- TRUE
+        row_name <- base::dimnames(data1)[[1]]
+        any_id_row_name <- TRUE
+        same_row_names_pos1 <- 1:row_nb
+        same_row_names_pos2 <- 1:row_nb
+        same_row_names_match1 <- 1:row_nb
+        same_row_names_match2 <- 1:row_nb
+        common_row_names <- base::dimnames(data1)[[1]]
+        same_col_name <- TRUE
+        col_name <- base::dimnames(data1)[[2]]
+        any_id_col_name <- TRUE
+        same_col_names_pos1 <- 1:col_nb
+        same_col_names_pos2 <- 1:col_nb
+        same_col_names_match1 <- 1:col_nb
+        same_col_names_match2 <- 1:col_nb
+        common_col_names <- base::dimnames(data1)[[2]]
+        any_id_row <- TRUE
+        same_row_pos1 <- 1:row_nb
+        same_row_pos2 <- 1:row_nb
+        same_row_match1 <- 1:row_nb
+        same_row_match2 <- 1:row_nb
+        any_id_col <- TRUE
+        same_col_pos1 <- 1:col_nb
+        same_col_pos2 <- 1:col_nb
+        same_col_match1 <- 1:col_nb
+        same_col_match2 <- 1:col_nb
+        identical_object <- TRUE
+        identical_content <- TRUE
     }else{
-        identical.object <- FALSE
+        identical_object <- FALSE
         # row and col names
         if(base::is.null(base::dimnames(data1)) & base::is.null(base::dimnames(data2))){
-            same.row.name <- NULL # but already NULL
-            same.col.name <- NULL # but already NULL
+            same_row_name <- NULL # but already NULL
+            same_col_name <- NULL # but already NULL
             # other row names param remain NULL
         }else if((base::is.null(base::dimnames(data1)) & ! base::is.null(base::dimnames(data2))) | ( ! base::is.null(base::dimnames(data1)) & base::is.null(base::dimnames(data2)))){
-            same.row.name <- FALSE
-            same.col.name <- FALSE
-            any.id.row.name <- FALSE
-            any.id.col.name <- FALSE
+            same_row_name <- FALSE
+            same_col_name <- FALSE
+            any_id_row_name <- FALSE
+            any_id_col_name <- FALSE
             # other row names param remain NULL
         }else{
             # row names
             if(base::is.null(base::dimnames(data1)[[1]]) & base::is.null(base::dimnames(data2)[[1]])){
-                same.row.name <- NULL # but already NULL
+                same_row_name <- NULL # but already NULL
                 # other row names param remain NULL
             }else if((base::is.null(base::dimnames(data1)[[1]]) & ! base::is.null(base::dimnames(data2)[[1]])) | ( ! base::is.null(base::dimnames(data1)[[1]]) & base::is.null(base::dimnames(data2)[[1]]))){
-                same.row.name <- FALSE
-                any.id.row.name <- FALSE
+                same_row_name <- FALSE
+                any_id_row_name <- FALSE
                 # other row names param remain NULL
             }else if(base::identical(base::dimnames(data1)[[1]], base::dimnames(data2)[[1]])){
-                same.row.name <- TRUE
-                row.name <- base::dimnames(data1)[[1]]
-                any.id.row.name <- TRUE
-                same.row.names.pos1 <- 1:base::nrow(data1)
-                same.row.names.pos2 <- 1:base::nrow(data1)
-                same.row.names.match1 <- 1:base::nrow(data1)
-                same.row.names.match2 <- 1:base::nrow(data1)
-                common.row.names <- base::dimnames(data1)[[1]]
+                same_row_name <- TRUE
+                row_name <- base::dimnames(data1)[[1]]
+                any_id_row_name <- TRUE
+                same_row_names_pos1 <- 1:base::nrow(data1)
+                same_row_names_pos2 <- 1:base::nrow(data1)
+                same_row_names_match1 <- 1:base::nrow(data1)
+                same_row_names_match2 <- 1:base::nrow(data1)
+                common_row_names <- base::dimnames(data1)[[1]]
             }else{
-                same.row.name <- FALSE
-                any.id.row.name <- FALSE
+                same_row_name <- FALSE
+                any_id_row_name <- FALSE
                 if(base::any(base::dimnames(data1)[[1]] %in% base::dimnames(data2)[[1]])){
-                    any.id.row.name <- TRUE
-                    same.row.names.pos1 <- base::which(base::dimnames(data1)[[1]] %in% base::dimnames(data2)[[1]])
-                    same.row.names.match1 <- base::match(base::dimnames(data1)[[1]], base::dimnames(data2)[[1]])
+                    any_id_row_name <- TRUE
+                    same_row_names_pos1 <- base::which(base::dimnames(data1)[[1]] %in% base::dimnames(data2)[[1]])
+                    same_row_names_match1 <- base::match(base::dimnames(data1)[[1]], base::dimnames(data2)[[1]])
                 }
                 if(base::any(base::dimnames(data2)[[1]] %in% base::dimnames(data1)[[1]])){
-                    any.id.row.name <- TRUE
-                    same.row.names.pos2 <- base::which(base::dimnames(data2)[[1]] %in% base::dimnames(data1)[[1]])
-                    same.row.names.match2 <- base::match(base::dimnames(data2)[[1]], base::dimnames(data1)[[1]])
+                    any_id_row_name <- TRUE
+                    same_row_names_pos2 <- base::which(base::dimnames(data2)[[1]] %in% base::dimnames(data1)[[1]])
+                    same_row_names_match2 <- base::match(base::dimnames(data2)[[1]], base::dimnames(data1)[[1]])
                 }
-                if(any.id.row.name == TRUE){
-                    common.row.names <- base::unique(base::c(base::dimnames(data1)[[1]][same.row.names.pos1], base::dimnames(data2)[[1]][same.row.names.pos2]))
+                if(any_id_row_name == TRUE){
+                    common_row_names <- base::unique(base::c(base::dimnames(data1)[[1]][same_row_names_pos1], base::dimnames(data2)[[1]][same_row_names_pos2]))
                 }
             }
             # col names
             if(base::is.null(base::dimnames(data1)[[2]]) & base::is.null(base::dimnames(data2)[[2]])){
-                same.col.name <- NULL # but already NULL
+                same_col_name <- NULL # but already NULL
                 # other col names param remain NULL
             }else if((base::is.null(base::dimnames(data1)[[2]]) & ! base::is.null(base::dimnames(data2)[[2]])) | ( ! base::is.null(base::dimnames(data1)[[2]]) & base::is.null(base::dimnames(data2)[[2]]))){
-                same.col.name <- FALSE
-                any.id.col.name <- FALSE
+                same_col_name <- FALSE
+                any_id_col_name <- FALSE
                 # other col names param remain NULL
             }else if(base::identical(base::dimnames(data1)[[2]], base::dimnames(data2)[[2]])){
-                same.col.name <- TRUE
-                col.name <- base::dimnames(data1)[[2]]
-                any.id.col.name <- TRUE
-                same.col.names.pos1 <- 1:base::ncol(data1)
-                same.col.names.pos2 <- 1:base::ncol(data1)
-                same.col.names.match1 <- 1:base::ncol(data1)
-                same.col.names.match2 <- 1:base::ncol(data1)
-                common.col.names <- base::dimnames(data1)[[2]]
+                same_col_name <- TRUE
+                col_name <- base::dimnames(data1)[[2]]
+                any_id_col_name <- TRUE
+                same_col_names_pos1 <- 1:base::ncol(data1)
+                same_col_names_pos2 <- 1:base::ncol(data1)
+                same_col_names_match1 <- 1:base::ncol(data1)
+                same_col_names_match2 <- 1:base::ncol(data1)
+                common_col_names <- base::dimnames(data1)[[2]]
             }else{
-                same.col.name <- FALSE
-                any.id.col.name <- FALSE
+                same_col_name <- FALSE
+                any_id_col_name <- FALSE
                 if(base::any(base::dimnames(data1)[[2]] %in% base::dimnames(data2)[[2]])){
-                    any.id.col.name <- TRUE
-                    same.col.names.pos1 <- base::which(base::dimnames(data1)[[2]] %in% base::dimnames(data2)[[2]])
-                    same.col.names.match1 <- base::match(base::dimnames(data1)[[2]], base::dimnames(data2)[[2]])
+                    any_id_col_name <- TRUE
+                    same_col_names_pos1 <- base::which(base::dimnames(data1)[[2]] %in% base::dimnames(data2)[[2]])
+                    same_col_names_match1 <- base::match(base::dimnames(data1)[[2]], base::dimnames(data2)[[2]])
                 }
                 if(base::any(base::dimnames(data2)[[2]] %in% base::dimnames(data1)[[2]])){
-                    any.id.col.name <- TRUE
-                    same.col.names.pos2 <- base::which(base::dimnames(data2)[[2]] %in% base::dimnames(data1)[[2]])
-                    same.col.names.match2 <- base::match(base::dimnames(data2)[[2]], base::dimnames(data1)[[2]])
+                    any_id_col_name <- TRUE
+                    same_col_names_pos2 <- base::which(base::dimnames(data2)[[2]] %in% base::dimnames(data1)[[2]])
+                    same_col_names_match2 <- base::match(base::dimnames(data2)[[2]], base::dimnames(data1)[[2]])
                 }
-                if(any.id.col.name == TRUE){
-                    common.col.names <- base::unique(base::c(base::dimnames(data1)[[2]][same.col.names.pos1], base::dimnames(data2)[[2]][same.col.names.pos2]))
+                if(any_id_col_name == TRUE){
+                    common_col_names <- base::unique(base::c(base::dimnames(data1)[[2]][same_col_names_pos1], base::dimnames(data2)[[2]][same_col_names_pos2]))
                 }
             }
         }
@@ -841,75 +841,75 @@ comp_2d <- function(
         base::row.names(data2) <- base::paste0("A", 1:base::nrow(data2))
         base::colnames(data1) <- base::paste0("A", 1:base::ncol(data1))
         base::colnames(data2) <- base::paste0("A", 1:base::ncol(data2))
-        if(same.col.nb == TRUE){ # because if not the same col nb, the row cannot be identical
+        if(same_col_nb == TRUE){ # because if not the same col nb, the row cannot be identical
             if(base::as.double(base::nrow(data1)) * base::as.double(base::nrow(data2)) <= 1e6){
                 tempo1 <- base::c(base::as.data.frame(base::t(data1), stringsAsFactors = FALSE)) # conversion into list. This work fast with characters
                 tempo2 <- base::c(base::as.data.frame(base::t(data2), stringsAsFactors = FALSE)) # conversion into list. This work fast with characters
-                same.row.pos1 <- base::which(tempo1 %in% tempo2)
-                same.row.pos2 <- base::which(tempo2 %in% tempo1)
-                if((base::length(same.row.pos1) == 0L & base::length(same.row.pos2) == 0L) | base::all(base::is.na(same.row.pos1)) | base::all(base::is.na(same.row.pos2))){
-                    any.id.row <- FALSE
-                    same.row.pos1 <- NULL
-                    same.row.pos2 <- NULL
+                same_row_pos1 <- base::which(tempo1 %in% tempo2)
+                same_row_pos2 <- base::which(tempo2 %in% tempo1)
+                if((base::length(same_row_pos1) == 0L & base::length(same_row_pos2) == 0L) | base::all(base::is.na(same_row_pos1)) | base::all(base::is.na(same_row_pos2))){
+                    any_id_row <- FALSE
+                    same_row_pos1 <- NULL
+                    same_row_pos2 <- NULL
                     # same.row.match1 <- NULL # already NULL above
                     # same.row.match2 <- NULL # already NULL above
                 }else{
-                    any.id.row <- TRUE
-                    same.row.pos1 <- same.row.pos1[ ! base::is.na(same.row.pos1)]
-                    same.row.pos2 <- same.row.pos2[ ! base::is.na(same.row.pos2)]
-                    same.row.match1 <- base::match(tempo1, tempo2)
-                    same.row.match2 <- base::match(tempo2, tempo1)
+                    any_id_row <- TRUE
+                    same_row_pos1 <- same_row_pos1[ ! base::is.na(same_row_pos1)]
+                    same_row_pos2 <- same_row_pos2[ ! base::is.na(same_row_pos2)]
+                    same_row_match1 <- base::match(tempo1, tempo2)
+                    same_row_match2 <- base::match(tempo2, tempo1)
                 }
             }else{
-                same.row.pos1 <- "TOO BIG FOR EVALUATION"
-                same.row.pos2 <- "TOO BIG FOR EVALUATION"
-                same.row.match1 <- "TOO BIG FOR EVALUATION"
-                same.row.match2 <- "TOO BIG FOR EVALUATION"
+                same_row_pos1 <- "TOO BIG FOR EVALUATION"
+                same_row_pos2 <- "TOO BIG FOR EVALUATION"
+                same_row_match1 <- "TOO BIG FOR EVALUATION"
+                same_row_match2 <- "TOO BIG FOR EVALUATION"
             }
         }else{
-            any.id.row <- FALSE
+            any_id_row <- FALSE
             # same.row.pos1 and 2 remain NULL
         }
-        if(same.row.nb == TRUE){ # because if not the same row nb, the col cannot be identical
+        if(same_row_nb == TRUE){ # because if not the same row nb, the col cannot be identical
             if(base::as.double(base::ncol(data1)) * base::as.double(base::ncol(data2)) <= 1e6){
                 tempo1 <- base::c(base::as.data.frame(data1, stringsAsFactors = FALSE))
                 tempo2 <- base::c(base::as.data.frame(data2, stringsAsFactors = FALSE))
-                same.col.pos1 <- base::which(tempo1 %in% tempo2)
-                same.col.pos2 <- base::which(tempo2 %in% tempo1)
-                if((base::length(same.col.pos1) == 0L & base::length(same.col.pos2) == 0L) | base::all(base::is.na(same.col.pos1)) | base::all(base::is.na(same.col.pos2))){
-                    any.id.col <- FALSE
-                    same.col.pos1 <- NULL
-                    same.col.pos2 <- NULL
+                same_col_pos1 <- base::which(tempo1 %in% tempo2)
+                same_col_pos2 <- base::which(tempo2 %in% tempo1)
+                if((base::length(same_col_pos1) == 0L & base::length(same_col_pos2) == 0L) | base::all(base::is.na(same_col_pos1)) | base::all(base::is.na(same_col_pos2))){
+                    any_id_col <- FALSE
+                    same_col_pos1 <- NULL
+                    same_col_pos2 <- NULL
                     # same.col.match1 <- NULL # already NULL above
                     # same.col.match2 <- NULL # already NULL above
                 }else{
-                    any.id.col <- TRUE
-                    same.col.pos1 <- same.col.pos1[ ! base::is.na(same.col.pos1)]
-                    same.col.pos2 <- same.col.pos2[ ! base::is.na(same.col.pos2)]
-                    same.col.match1 <- base::match(tempo1, tempo2)
-                    same.col.match2 <- base::match(tempo2, tempo1)
+                    any_id_col <- TRUE
+                    same_col_pos1 <- same_col_pos1[ ! base::is.na(same_col_pos1)]
+                    same_col_pos2 <- same_col_pos2[ ! base::is.na(same_col_pos2)]
+                    same_col_match1 <- base::match(tempo1, tempo2)
+                    same_col_match2 <- base::match(tempo2, tempo1)
                 }
             }else{
-                same.col.pos1 <- "TOO BIG FOR EVALUATION"
-                same.col.pos2 <- "TOO BIG FOR EVALUATION"
-                same.col.match1 <- "TOO BIG FOR EVALUATION"
-                same.col.match2 <- "TOO BIG FOR EVALUATION"
+                same_col_pos1 <- "TOO BIG FOR EVALUATION"
+                same_col_pos2 <- "TOO BIG FOR EVALUATION"
+                same_col_match1 <- "TOO BIG FOR EVALUATION"
+                same_col_match2 <- "TOO BIG FOR EVALUATION"
             }
         }else{
-            any.id.col <- FALSE
+            any_id_col <- FALSE
             # same.col.pos1 and 2 remain NULL
         }
-        if(same.dim == TRUE){
+        if(same_dim == TRUE){
             if(base::all(data1 == data2, na.rm = TRUE)){
-                identical.content <- TRUE
+                identical_content <- TRUE
             }else{
-                identical.content <- FALSE
+                identical_content <- FALSE
             }
         }else{
-            identical.content <- FALSE
+            identical_content <- FALSE
         }
     }
-    output <- base::list(same.class = same.class, class = class, same.mode = same.mode, mode = mode, same.type = same.type , type = type, same.dim = same.dim, dim = dim, same.row.nb = same.row.nb, row.nb = row.nb, same.col.nb = same.col.nb , col.nb = col.nb, same.row.name = same.row.name, row.name = row.name, any.id.row.name = any.id.row.name, same.row.names.pos1 = same.row.names.pos1, same.row.names.pos2 = same.row.names.pos2, same.row.names.match1 = same.row.names.match1, same.row.names.match2 = same.row.names.match2, common.row.names = common.row.names, same.col.name = same.col.name, col.name = col.name,any.id.col.name = any.id.col.name, same.col.names.pos1 = same.col.names.pos1, same.col.names.pos2 = same.col.names.pos2, same.col.names.match1 = same.col.names.match1, same.col.names.match2 = same.col.names.match2, common.col.names = common.col.names, any.id.row = any.id.row, same.row.pos1 = same.row.pos1, same.row.pos2 = same.row.pos2, same.row.match1 = same.row.match1, same.row.match2 = same.row.match2, any.id.col = any.id.col, same.col.pos1 = same.col.pos1, same.col.pos2 = same.col.pos2, same.col.match1 = same.col.match1, same.col.match2 = same.col.match2, identical.content = identical.content, identical = identical.object)
+    output <- base::list(same.class = same_class, class = class, same.mode = same_mode, mode = mode, same.type = same_type , type = type, same.dim = same_dim, dim = dim, same.row.nb = same_row_nb, row.nb = row_nb, same.col.nb = same_col_nb , col.nb = col_nb, same.row.name = same_row_name, row.name = row_name, any.id.row.name = any_id_row_name, same.row.names.pos1 = same_row_names_pos1, same.row.names.pos2 = same_row_names_pos2, same.row.names.match1 = same_row_names_match1, same.row.names.match2 = same_row_names_match2, common.row.names = common_row_names, same.col.name = same_col_name, col.name = col_name,any.id.col.name = any_id_col_name, same.col.names.pos1 = same_col_names_pos1, same.col.names.pos2 = same_col_names_pos2, same.col.names.match1 = same_col_names_match1, same.col.names.match2 = same_col_names_match2, common.col.names = common_col_names, any.id.row = any_id_row, same.row.pos1 = same_row_pos1, same.row.pos2 = same_row_pos2, same.row.match1 = same_row_match1, same.row.match2 = same_row_match2, any.id.col = any_id_col, same.col.pos1 = same_col_pos1, same.col.pos2 = same_col_pos2, same.col.match1 = same_col_match1, same.col.match2 = same_col_match2, identical.content = identical_content, identical = identical_object)
     #### end main code
 
     #### warning output

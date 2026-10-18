@@ -493,17 +493,17 @@ name_change <- function(
     post <- NULL
     if(base::any(data1 %in% data2)){
         ini <- data1[data1 %in% data2]
-        match.names.unique <- base::unique(ini)
+        match_names_unique <- base::unique(ini)
         post <- base::vector(mode = "character", base::length(ini))
-        for(i2 in 1:base::length(match.names.unique)){
+        for(i2 in 1:base::length(match_names_unique)){
             count <- NULL
-            tempo <- base::sum(ini %in% match.names.unique[i2], na.rm = TRUE) # duplicated elements in data1 that match 1 element in data2 
+            tempo <- base::sum(ini %in% match_names_unique[i2], na.rm = TRUE) # duplicated elements in data1 that match 1 element in data2 
             if(tempo > 1 & duplicate == FALSE){ 
                 count <- 1:tempo
             }
-            res <- base::paste0(match.names.unique[i2], added_string, count)
-            data[data1 %in% match.names.unique[i2]] <- res
-            post[ini %in% match.names.unique[i2]] <- res
+            res <- base::paste0(match_names_unique[i2], added_string, count)
+            data[data1 %in% match_names_unique[i2]] <- res
+            post[ini %in% match_names_unique[i2]] <- res
         }
         posi <- base::which( ! data1 %in% data)
     }

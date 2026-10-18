@@ -459,26 +459,26 @@ round2 <- function(
 
     #### main code
     tempo <- base::grepl(x = data, pattern = "\\.") # detection of decimal numbers
-    ini.mode <- base::mode(data)
+    ini_mode <- base::mode(data)
     data <- base::as.character(data) # to really truncate decimal digits
     for(i in 1:base::length(data)){ # scan all the numbers of the vector
         if(tempo[i] == TRUE){ # means decimal number
             if(after_lead_zero == TRUE){
-                zero.pos <- base::unlist(base::gregexpr(text=data[i], pattern = 0)) # recover all the position of the zeros in the number. -1 if no zeros (do not record the leading and trailing zeros)
+                zero_pos <- base::unlist(base::gregexpr(text=data[i], pattern = 0)) # recover all the position of the zeros in the number. -1 if no zeros (do not record the leading and trailing zeros)
             }else{
-                zero.pos <- -1 # -1 as if no zero
+                zero_pos <- -1 # -1 as if no zero
             }
-            dot.pos <- base::unlist(base::gregexpr(text=data[i], pattern = "\\.")) # recover all the position of the zeros in the number
-            digit.pos <- base::unlist(base::gregexpr(text=data[i], pattern = "[[:digit:]]")) # recover all the position of the digits in the number
-            dec.pos <- digit.pos[digit.pos > dot.pos]
+            dot_pos <- base::unlist(base::gregexpr(text=data[i], pattern = "\\.")) # recover all the position of the zeros in the number
+            digit_pos <- base::unlist(base::gregexpr(text=data[i], pattern = "[[:digit:]]")) # recover all the position of the digits in the number
+            dec_pos <- digit_pos[digit_pos > dot_pos]
             count <- 0
-            while((dot.pos + count + 1) %in% zero.pos & (dot.pos + count + 1) <= base::max(dec.pos) & (count + dec_nb) < base::length(dec.pos)){ # count the number of leading zeros in the decimal part
+            while((dot_pos + count + 1) %in% zero_pos & (dot_pos + count + 1) <= base::max(dec_pos) & (count + dec_nb) < base::length(dec_pos)){ # count the number of leading zeros in the decimal part
                 count <- count + 1
             }
             data[i] <- base::formatC(base::as.numeric(data[i]), digits = (count + dec_nb), format = "f")
         }
     }
-    if(ini.mode != "character"){
+    if(ini_mode != "character"){
         data <- base::as.numeric(data)
     }
     #### end main code
