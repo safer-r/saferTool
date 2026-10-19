@@ -65,62 +65,62 @@ comp_list(data1, data2, safer_check = TRUE, lib_path = NULL, error_text = "")
 
 A list containing:
 
-\- \$same.length: logical. Are number of compartments identical?
+\- \$same_length: logical. Are number of compartments identical?
 
 \- \$length: number of compartments in the 2 datasets (NULL otherwise).
 
-\- \$same.names: logical. Are compartment names identical? NULL if data1
+\- \$same_names: logical. Are compartment names identical? NULL if data1
 and data2 have no names.
 
 \- \$name: name of compartments of the 2 datasets if identical (NULL
 otherwise).
 
-\- \$any.id.names: logical. Is there any compartment names identical ?
+\- \$any_id_names: logical. Is there any compartment names identical ?
 
-\- \$same.names.pos1: positions, in data1, of the compartment names
+\- \$same_names_pos1: positions, in data1, of the compartment names
 identical in data2. NULL if no identical names.
 
-\- \$same.names.pos2: positions, in data2, of the compartment names
+\- \$same_names_pos2: positions, in data2, of the compartment names
 identical in data1. NULL if no identical names.
 
-\- \$same.names.match1: positions, in data2, of the names that match the
+\- \$same_names_match1: positions, in data2, of the names that match the
 names in data1, as given by match(data1, data2) (NULL otherwise).
 
-\- \$same.names.match2: positions, in data1, of the names that match the
+\- \$same_names_match2: positions, in data1, of the names that match the
 names in data2, as given by match(data1, data2) (NULL otherwise).
 
-\- \$common.names: common compartment names between data1 and data2 (can
+\- \$common_names: common compartment names between data1 and data2 (can
 be a subset of \$name or not). NULL if no common compartment names.
 
-\- \$any.id.compartments: logical. is there any identical compartments ?
+\- \$any_id_compartments: logical. is there any identical compartments ?
 
-\- \$same.compartments.pos1: positions, in data1, of the compartments
+\- \$same_compartments_pos1: positions, in data1, of the compartments
 identical in data2. NULL if no identical compartments.
 
-\- \$same.compartments.pos2: positions, in data2, of the compartments
+\- \$same_compartments_pos2: positions, in data2, of the compartments
 identical in data1. NULL if no identical compartments.
 
-\- \$same.compartments.match1: positions, in data2, of the compartments
+\- \$same_compartments_match1: positions, in data2, of the compartments
 that match the compartments in data1, as given by match(data1, data2)
 (NULL otherwise).
 
-\- \$same.compartments.match2: positions, in data1, of the compartments
+\- \$same_compartments_match2: positions, in data1, of the compartments
 that match the compartments in data2, as given by match(data1, data2)
 (NULL otherwise).
 
-\- \$common.compartments: common compartments between data1 and data2.
+\- \$common_compartments: common compartments between data1 and data2.
 NULL if no common compartments.
 
-\- \$same.order: logical. Are all compartments in the same order? TRUE
+\- \$same_order: logical. Are all compartments in the same order? TRUE
 if compartments of data1 and data2 are identical. FALSE if compartments
 of data1 and data2 are made of the same compartments but not in the same
 order. NULL otherwise (different length or no common compartment for
 instance).
 
-\- \$identical.object: logical. Are lists identical (compartment names,
+\- \$identical_object: logical. Are lists identical (compartment names,
 content, including content order)?
 
-\- \$identical.content: logical. Are content list identical (identical
+\- \$identical_content: logical. Are content list identical (identical
 compartments, including order, excluding kind of object and compartment
 names)?
 
@@ -142,129 +142,129 @@ obs1 = list(1:5, LETTERS[1:2]) ;
 obs2 = list(a = 1:5, b = LETTERS[1:2]) ; 
 obs3 = list(LETTERS[1:2], 1:5) ; 
 comp_list(obs1, obs2) ;
-#> $same.length
+#> $same_length
 #> [1] TRUE
 #> 
 #> $length
 #> [1] 2
 #> 
-#> $same.names
+#> $same_names
 #> [1] FALSE
 #> 
 #> $name
 #> NULL
 #> 
-#> $any.id.names
+#> $any_id_names
 #> [1] FALSE
 #> 
-#> $same.names.pos1
+#> $same_names_pos1
 #> NULL
 #> 
-#> $same.names.pos2
+#> $same_names_pos2
 #> NULL
 #> 
-#> $same.names.match1
+#> $same_names_match1
 #> NULL
 #> 
-#> $same.names.match2
+#> $same_names_match2
 #> NULL
 #> 
-#> $common.names
+#> $common_names
 #> NULL
 #> 
-#> $any.id.compartments
+#> $any_id_compartments
 #> [1] TRUE
 #> 
-#> $same.compartments.pos1
+#> $same_compartments_pos1
 #> [1] 1 2
 #> 
-#> $same.compartments.pos2
+#> $same_compartments_pos2
 #> [1] 1 2
 #> 
-#> $same.compartments.match1
+#> $same_compartments_match1
 #> [1] 1 2
 #> 
-#> $same.compartments.match2
+#> $same_compartments_match2
 #> [1] 1 2
 #> 
-#> $common.compartments
-#> $common.compartments[[1]]
+#> $common_compartments
+#> $common_compartments[[1]]
 #> [1] 1 2 3 4 5
 #> 
-#> $common.compartments[[2]]
+#> $common_compartments[[2]]
 #> [1] "A" "B"
 #> 
 #> 
-#> $same.order
+#> $same_order
 #> [1] TRUE
 #> 
-#> $identical.object
+#> $identical_object
 #> [1] FALSE
 #> 
-#> $identical.content
+#> $identical_content
 #> [1] TRUE
 #> 
 comp_list(obs1, obs3)
-#> $same.length
+#> $same_length
 #> [1] TRUE
 #> 
 #> $length
 #> [1] 2
 #> 
-#> $same.names
+#> $same_names
 #> NULL
 #> 
 #> $name
 #> NULL
 #> 
-#> $any.id.names
+#> $any_id_names
 #> [1] FALSE
 #> 
-#> $same.names.pos1
+#> $same_names_pos1
 #> NULL
 #> 
-#> $same.names.pos2
+#> $same_names_pos2
 #> NULL
 #> 
-#> $same.names.match1
+#> $same_names_match1
 #> NULL
 #> 
-#> $same.names.match2
+#> $same_names_match2
 #> NULL
 #> 
-#> $common.names
+#> $common_names
 #> NULL
 #> 
-#> $any.id.compartments
+#> $any_id_compartments
 #> [1] TRUE
 #> 
-#> $same.compartments.pos1
+#> $same_compartments_pos1
 #> [1] 1 2
 #> 
-#> $same.compartments.pos2
+#> $same_compartments_pos2
 #> [1] 1 2
 #> 
-#> $same.compartments.match1
+#> $same_compartments_match1
 #> [1] 2 1
 #> 
-#> $same.compartments.match2
+#> $same_compartments_match2
 #> [1] 2 1
 #> 
-#> $common.compartments
-#> $common.compartments[[1]]
+#> $common_compartments
+#> $common_compartments[[1]]
 #> [1] 1 2 3 4 5
 #> 
-#> $common.compartments[[2]]
+#> $common_compartments[[2]]
 #> [1] "A" "B"
 #> 
 #> 
-#> $same.order
+#> $same_order
 #> [1] FALSE
 #> 
-#> $identical.object
+#> $identical_object
 #> [1] FALSE
 #> 
-#> $identical.content
+#> $identical_content
 #> [1] FALSE
 #> 
 ```

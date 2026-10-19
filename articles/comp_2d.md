@@ -60088,121 +60088,121 @@ head(mat2) ;
 >  [5,] 200005 400005 600005 800005 1000005
 >  [6,] 200006 400006 600006 800006 1000006
 comp_2d(mat1, mat2, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] TRUE
 >  
 >  $class
 >  [1] "matrix" "array" 
 >  
->  $same.mode
+>  $same_mode
 >  [1] TRUE
 >  
 >  $mode
 >  [1] "numeric"
 >  
->  $same.type
+>  $same_type
 >  [1] TRUE
 >  
 >  $type
 >  [1] "integer"
 >  
->  $same.dim
+>  $same_dim
 >  [1] TRUE
 >  
 >  $dim
 >  [1] 200000      5
 >  
->  $same.row.nb
+>  $same_row_nb
 >  [1] TRUE
 >  
->  $row.nb
+>  $row_nb
 >  [1] 200000
 >  
->  $same.col.nb
+>  $same_col_nb
 >  [1] TRUE
 >  
->  $col.nb
+>  $col_nb
 >  [1] 5
 >  
->  $same.row.name
+>  $same_row_name
 >  NULL
 >  
->  $row.name
+>  $row_name
 >  NULL
 >  
->  $any.id.row.name
+>  $any_id_row_name
 >  NULL
 >  
->  $same.row.names.pos1
+>  $same_row_names_pos1
 >  NULL
 >  
->  $same.row.names.pos2
+>  $same_row_names_pos2
 >  NULL
 >  
->  $same.row.names.match1
+>  $same_row_names_match1
 >  NULL
 >  
->  $same.row.names.match2
+>  $same_row_names_match2
 >  NULL
 >  
->  $common.row.names
+>  $common_row_names
 >  NULL
 >  
->  $same.col.name
+>  $same_col_name
 >  [1] TRUE
 >  
->  $col.name
+>  $col_name
 >  [1] "A" "B" "C" "D" "E"
 >  
->  $any.id.col.name
+>  $any_id_col_name
 >  [1] TRUE
 >  
->  $same.col.names.pos1
+>  $same_col_names_pos1
 >  [1] 1 2 3 4 5
 >  
->  $same.col.names.pos2
+>  $same_col_names_pos2
 >  [1] 1 2 3 4 5
 >  
->  $same.col.names.match1
+>  $same_col_names_match1
 >  [1] 1 2 3 4 5
 >  
->  $same.col.names.match2
+>  $same_col_names_match2
 >  [1] 1 2 3 4 5
 >  
->  $common.col.names
+>  $common_col_names
 >  [1] "A" "B" "C" "D" "E"
 >  
->  $any.id.row
+>  $any_id_row
 >  NULL
 >  
->  $same.row.pos1
+>  $same_row_pos1
 >  [1] "TOO BIG FOR EVALUATION"
 >  
->  $same.row.pos2
+>  $same_row_pos2
 >  [1] "TOO BIG FOR EVALUATION"
 >  
->  $same.row.match1
+>  $same_row_match1
 >  [1] "TOO BIG FOR EVALUATION"
 >  
->  $same.row.match2
+>  $same_row_match2
 >  [1] "TOO BIG FOR EVALUATION"
 >  
->  $any.id.col
+>  $any_id_col
 >  [1] TRUE
 >  
->  $same.col.pos1
+>  $same_col_pos1
 >  [1] 2 3 4 5
 >  
->  $same.col.pos2
+>  $same_col_pos2
 >  [1] 1 2 3 4
 >  
->  $same.col.match1
+>  $same_col_match1
 >  [1] NA  1  2  3  4
 >  
->  $same.col.match2
+>  $same_col_match2
 >  [1]  2  3  4  5 NA
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 >  
 >  $identical
@@ -60225,121 +60225,121 @@ head(mat3) ;
 >  [5,] 200005 400005 600005 800005 1000005
 >  [6,] 200006 400006 600006 800006 1000006
 comp_2d(mat1, mat3, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] TRUE
 >  
 >  $class
 >  [1] "matrix" "array" 
 >  
->  $same.mode
+>  $same_mode
 >  [1] TRUE
 >  
 >  $mode
 >  [1] "numeric"
 >  
->  $same.type
+>  $same_type
 >  [1] FALSE
 >  
 >  $type
 >  NULL
 >  
->  $same.dim
+>  $same_dim
 >  [1] TRUE
 >  
 >  $dim
 >  [1] 200000      5
 >  
->  $same.row.nb
+>  $same_row_nb
 >  [1] TRUE
 >  
->  $row.nb
+>  $row_nb
 >  [1] 200000
 >  
->  $same.col.nb
+>  $same_col_nb
 >  [1] TRUE
 >  
->  $col.nb
+>  $col_nb
 >  [1] 5
 >  
->  $same.row.name
+>  $same_row_name
 >  NULL
 >  
->  $row.name
+>  $row_name
 >  NULL
 >  
->  $any.id.row.name
+>  $any_id_row_name
 >  NULL
 >  
->  $same.row.names.pos1
+>  $same_row_names_pos1
 >  NULL
 >  
->  $same.row.names.pos2
+>  $same_row_names_pos2
 >  NULL
 >  
->  $same.row.names.match1
+>  $same_row_names_match1
 >  NULL
 >  
->  $same.row.names.match2
+>  $same_row_names_match2
 >  NULL
 >  
->  $common.row.names
+>  $common_row_names
 >  NULL
 >  
->  $same.col.name
+>  $same_col_name
 >  [1] TRUE
 >  
->  $col.name
+>  $col_name
 >  [1] "A" "B" "C" "D" "E"
 >  
->  $any.id.col.name
+>  $any_id_col_name
 >  [1] TRUE
 >  
->  $same.col.names.pos1
+>  $same_col_names_pos1
 >  [1] 1 2 3 4 5
 >  
->  $same.col.names.pos2
+>  $same_col_names_pos2
 >  [1] 1 2 3 4 5
 >  
->  $same.col.names.match1
+>  $same_col_names_match1
 >  [1] 1 2 3 4 5
 >  
->  $same.col.names.match2
+>  $same_col_names_match2
 >  [1] 1 2 3 4 5
 >  
->  $common.col.names
+>  $common_col_names
 >  [1] "A" "B" "C" "D" "E"
 >  
->  $any.id.row
+>  $any_id_row
 >  NULL
 >  
->  $same.row.pos1
+>  $same_row_pos1
 >  [1] "TOO BIG FOR EVALUATION"
 >  
->  $same.row.pos2
+>  $same_row_pos2
 >  [1] "TOO BIG FOR EVALUATION"
 >  
->  $same.row.match1
+>  $same_row_match1
 >  [1] "TOO BIG FOR EVALUATION"
 >  
->  $same.row.match2
+>  $same_row_match2
 >  [1] "TOO BIG FOR EVALUATION"
 >  
->  $any.id.col
+>  $any_id_col
 >  [1] FALSE
 >  
->  $same.col.pos1
+>  $same_col_pos1
 >  NULL
 >  
->  $same.col.pos2
+>  $same_col_pos2
 >  NULL
 >  
->  $same.col.match1
+>  $same_col_match1
 >  NULL
 >  
->  $same.col.match2
+>  $same_col_match2
 >  NULL
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 >  
 >  $identical
@@ -60347,121 +60347,121 @@ comp_2d(mat1, mat3, safer_check = TRUE)
 
 # Matrices: same row content and same row names
 comp_2d(mat4, mat5, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] TRUE
 >  
 >  $class
 >  [1] "matrix" "array" 
 >  
->  $same.mode
+>  $same_mode
 >  [1] TRUE
 >  
 >  $mode
 >  [1] "numeric"
 >  
->  $same.type
+>  $same_type
 >  [1] TRUE
 >  
 >  $type
 >  [1] "integer"
 >  
->  $same.dim
+>  $same_dim
 >  [1] FALSE
 >  
 >  $dim
 >  NULL
 >  
->  $same.row.nb
+>  $same_row_nb
 >  [1] FALSE
 >  
->  $row.nb
+>  $row_nb
 >  NULL
 >  
->  $same.col.nb
+>  $same_col_nb
 >  [1] TRUE
 >  
->  $col.nb
+>  $col_nb
 >  [1] 5
 >  
->  $same.row.name
+>  $same_row_name
 >  [1] FALSE
 >  
->  $row.name
+>  $row_name
 >  NULL
 >  
->  $any.id.row.name
+>  $any_id_row_name
 >  [1] TRUE
 >  
->  $same.row.names.pos1
+>  $same_row_names_pos1
 >  [1] 1 2
 >  
->  $same.row.names.pos2
+>  $same_row_names_pos2
 >  [1] 1 3
 >  
->  $same.row.names.match1
+>  $same_row_names_match1
 >  [1] 1 3
 >  
->  $same.row.names.match2
+>  $same_row_names_match2
 >  [1]  1 NA  2
 >  
->  $common.row.names
+>  $common_row_names
 >  [1] "a" "b"
 >  
->  $same.col.name
+>  $same_col_name
 >  [1] FALSE
 >  
->  $col.name
+>  $col_name
 >  NULL
 >  
->  $any.id.col.name
+>  $any_id_col_name
 >  [1] TRUE
 >  
->  $same.col.names.pos1
+>  $same_col_names_pos1
 >  [1] 1 2 4 5
 >  
->  $same.col.names.pos2
+>  $same_col_names_pos2
 >  [1] 1 2 4 5
 >  
->  $same.col.names.match1
+>  $same_col_names_match1
 >  [1]  1  2 NA  5  4
 >  
->  $same.col.names.match2
+>  $same_col_names_match2
 >  [1]  1  2 NA  5  4
 >  
->  $common.col.names
+>  $common_col_names
 >  [1] "A" "B" "D" "E"
 >  
->  $any.id.row
+>  $any_id_row
 >  [1] TRUE
 >  
->  $same.row.pos1
+>  $same_row_pos1
 >  [1] 1 2
 >  
->  $same.row.pos2
+>  $same_row_pos2
 >  [1] 1 3
 >  
->  $same.row.match1
+>  $same_row_match1
 >  [1] 1 3
 >  
->  $same.row.match2
+>  $same_row_match2
 >  [1]  1 NA  2
 >  
->  $any.id.col
+>  $any_id_col
 >  [1] FALSE
 >  
->  $same.col.pos1
+>  $same_col_pos1
 >  NULL
 >  
->  $same.col.pos2
+>  $same_col_pos2
 >  NULL
 >  
->  $same.col.match1
+>  $same_col_match1
 >  NULL
 >  
->  $same.col.match2
+>  $same_col_match2
 >  NULL
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 >  
 >  $identical
@@ -60469,121 +60469,121 @@ comp_2d(mat4, mat5, safer_check = TRUE)
 
 # Matrices: same row content but not same row names
 comp_2d(mat4, mat6, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] TRUE
 >  
 >  $class
 >  [1] "matrix" "array" 
 >  
->  $same.mode
+>  $same_mode
 >  [1] TRUE
 >  
 >  $mode
 >  [1] "numeric"
 >  
->  $same.type
+>  $same_type
 >  [1] TRUE
 >  
 >  $type
 >  [1] "integer"
 >  
->  $same.dim
+>  $same_dim
 >  [1] FALSE
 >  
 >  $dim
 >  NULL
 >  
->  $same.row.nb
+>  $same_row_nb
 >  [1] FALSE
 >  
->  $row.nb
+>  $row_nb
 >  NULL
 >  
->  $same.col.nb
+>  $same_col_nb
 >  [1] TRUE
 >  
->  $col.nb
+>  $col_nb
 >  [1] 5
 >  
->  $same.row.name
+>  $same_row_name
 >  [1] FALSE
 >  
->  $row.name
+>  $row_name
 >  NULL
 >  
->  $any.id.row.name
+>  $any_id_row_name
 >  [1] FALSE
 >  
->  $same.row.names.pos1
+>  $same_row_names_pos1
 >  NULL
 >  
->  $same.row.names.pos2
+>  $same_row_names_pos2
 >  NULL
 >  
->  $same.row.names.match1
+>  $same_row_names_match1
 >  NULL
 >  
->  $same.row.names.match2
+>  $same_row_names_match2
 >  NULL
 >  
->  $common.row.names
+>  $common_row_names
 >  NULL
 >  
->  $same.col.name
+>  $same_col_name
 >  [1] FALSE
 >  
->  $col.name
+>  $col_name
 >  NULL
 >  
->  $any.id.col.name
+>  $any_id_col_name
 >  [1] TRUE
 >  
->  $same.col.names.pos1
+>  $same_col_names_pos1
 >  [1] 1 2 4 5
 >  
->  $same.col.names.pos2
+>  $same_col_names_pos2
 >  [1] 1 2 4 5
 >  
->  $same.col.names.match1
+>  $same_col_names_match1
 >  [1]  1  2 NA  5  4
 >  
->  $same.col.names.match2
+>  $same_col_names_match2
 >  [1]  1  2 NA  5  4
 >  
->  $common.col.names
+>  $common_col_names
 >  [1] "A" "B" "D" "E"
 >  
->  $any.id.row
+>  $any_id_row
 >  [1] TRUE
 >  
->  $same.row.pos1
+>  $same_row_pos1
 >  [1] 1 2
 >  
->  $same.row.pos2
+>  $same_row_pos2
 >  [1] 1 3
 >  
->  $same.row.match1
+>  $same_row_match1
 >  [1] 1 3
 >  
->  $same.row.match2
+>  $same_row_match2
 >  [1]  1 NA  2
 >  
->  $any.id.col
+>  $any_id_col
 >  [1] FALSE
 >  
->  $same.col.pos1
+>  $same_col_pos1
 >  NULL
 >  
->  $same.col.pos2
+>  $same_col_pos2
 >  NULL
 >  
->  $same.col.match1
+>  $same_col_match1
 >  NULL
 >  
->  $same.col.match2
+>  $same_col_match2
 >  NULL
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 >  
 >  $identical
@@ -60607,121 +60607,121 @@ str(dataframe2) ;
 >   $ E: int  4 104 9
 >   $ D: chr  "5" "105" "10"
 comp_2d(dataframe1, dataframe2, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] TRUE
 >  
 >  $class
 >  [1] "data.frame"
 >  
->  $same.mode
+>  $same_mode
 >  [1] TRUE
 >  
 >  $mode
 >  [1] "list"
 >  
->  $same.type
+>  $same_type
 >  [1] TRUE
 >  
 >  $type
 >  [1] "list"
 >  
->  $same.dim
+>  $same_dim
 >  [1] FALSE
 >  
 >  $dim
 >  NULL
 >  
->  $same.row.nb
+>  $same_row_nb
 >  [1] FALSE
 >  
->  $row.nb
+>  $row_nb
 >  NULL
 >  
->  $same.col.nb
+>  $same_col_nb
 >  [1] TRUE
 >  
->  $col.nb
+>  $col_nb
 >  [1] 5
 >  
->  $same.row.name
+>  $same_row_name
 >  [1] FALSE
 >  
->  $row.name
+>  $row_name
 >  NULL
 >  
->  $any.id.row.name
+>  $any_id_row_name
 >  [1] TRUE
 >  
->  $same.row.names.pos1
+>  $same_row_names_pos1
 >  [1] 1 2
 >  
->  $same.row.names.pos2
+>  $same_row_names_pos2
 >  [1] 1 3
 >  
->  $same.row.names.match1
+>  $same_row_names_match1
 >  [1] 1 3
 >  
->  $same.row.names.match2
+>  $same_row_names_match2
 >  [1]  1 NA  2
 >  
->  $common.row.names
+>  $common_row_names
 >  [1] "a" "b"
 >  
->  $same.col.name
+>  $same_col_name
 >  [1] FALSE
 >  
->  $col.name
+>  $col_name
 >  NULL
 >  
->  $any.id.col.name
+>  $any_id_col_name
 >  [1] TRUE
 >  
->  $same.col.names.pos1
+>  $same_col_names_pos1
 >  [1] 1 2 4 5
 >  
->  $same.col.names.pos2
+>  $same_col_names_pos2
 >  [1] 1 2 4 5
 >  
->  $same.col.names.match1
+>  $same_col_names_match1
 >  [1]  1  2 NA  5  4
 >  
->  $same.col.names.match2
+>  $same_col_names_match2
 >  [1]  1  2 NA  5  4
 >  
->  $common.col.names
+>  $common_col_names
 >  [1] "A" "B" "D" "E"
 >  
->  $any.id.row
+>  $any_id_row
 >  [1] TRUE
 >  
->  $same.row.pos1
+>  $same_row_pos1
 >  [1] 1 2
 >  
->  $same.row.pos2
+>  $same_row_pos2
 >  [1] 1 3
 >  
->  $same.row.match1
+>  $same_row_match1
 >  [1] 1 3
 >  
->  $same.row.match2
+>  $same_row_match2
 >  [1]  1 NA  2
 >  
->  $any.id.col
+>  $any_id_col
 >  [1] FALSE
 >  
->  $same.col.pos1
+>  $same_col_pos1
 >  NULL
 >  
->  $same.col.pos2
+>  $same_col_pos2
 >  NULL
 >  
->  $same.col.match1
+>  $same_col_match1
 >  NULL
 >  
->  $same.col.match2
+>  $same_col_match2
 >  NULL
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 >  
 >  $identical
@@ -60745,121 +60745,121 @@ str(dataframe3) ;
 >   $ E: int  4 104 9
 >   $ D: chr  "5" "105" "10"
 comp_2d(dataframe1, dataframe3, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] TRUE
 >  
 >  $class
 >  [1] "data.frame"
 >  
->  $same.mode
+>  $same_mode
 >  [1] TRUE
 >  
 >  $mode
 >  [1] "list"
 >  
->  $same.type
+>  $same_type
 >  [1] TRUE
 >  
 >  $type
 >  [1] "list"
 >  
->  $same.dim
+>  $same_dim
 >  [1] FALSE
 >  
 >  $dim
 >  NULL
 >  
->  $same.row.nb
+>  $same_row_nb
 >  [1] FALSE
 >  
->  $row.nb
+>  $row_nb
 >  NULL
 >  
->  $same.col.nb
+>  $same_col_nb
 >  [1] TRUE
 >  
->  $col.nb
+>  $col_nb
 >  [1] 5
 >  
->  $same.row.name
+>  $same_row_name
 >  [1] FALSE
 >  
->  $row.name
+>  $row_name
 >  NULL
 >  
->  $any.id.row.name
+>  $any_id_row_name
 >  [1] FALSE
 >  
->  $same.row.names.pos1
+>  $same_row_names_pos1
 >  NULL
 >  
->  $same.row.names.pos2
+>  $same_row_names_pos2
 >  NULL
 >  
->  $same.row.names.match1
+>  $same_row_names_match1
 >  NULL
 >  
->  $same.row.names.match2
+>  $same_row_names_match2
 >  NULL
 >  
->  $common.row.names
+>  $common_row_names
 >  NULL
 >  
->  $same.col.name
+>  $same_col_name
 >  [1] FALSE
 >  
->  $col.name
+>  $col_name
 >  NULL
 >  
->  $any.id.col.name
+>  $any_id_col_name
 >  [1] TRUE
 >  
->  $same.col.names.pos1
+>  $same_col_names_pos1
 >  [1] 1 2 4 5
 >  
->  $same.col.names.pos2
+>  $same_col_names_pos2
 >  [1] 1 2 4 5
 >  
->  $same.col.names.match1
+>  $same_col_names_match1
 >  [1]  1  2 NA  5  4
 >  
->  $same.col.names.match2
+>  $same_col_names_match2
 >  [1]  1  2 NA  5  4
 >  
->  $common.col.names
+>  $common_col_names
 >  [1] "A" "B" "D" "E"
 >  
->  $any.id.row
+>  $any_id_row
 >  [1] TRUE
 >  
->  $same.row.pos1
+>  $same_row_pos1
 >  [1] 1 2
 >  
->  $same.row.pos2
+>  $same_row_pos2
 >  [1] 1 3
 >  
->  $same.row.match1
+>  $same_row_match1
 >  [1] 1 3
 >  
->  $same.row.match2
+>  $same_row_match2
 >  [1]  1 NA  2
 >  
->  $any.id.col
+>  $any_id_col
 >  [1] FALSE
 >  
->  $same.col.pos1
+>  $same_col_pos1
 >  NULL
 >  
->  $same.col.pos2
+>  $same_col_pos2
 >  NULL
 >  
->  $same.col.match1
+>  $same_col_match1
 >  NULL
 >  
->  $same.col.match2
+>  $same_col_match2
 >  NULL
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 >  
 >  $identical

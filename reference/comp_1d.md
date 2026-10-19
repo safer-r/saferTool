@@ -69,97 +69,97 @@ comp_1d(data1, data2, safer_check = TRUE, lib_path = NULL, error_text = "")
 
 A list containing:
 
-\- \$same.class: logical. Are class identical?
+\- \$same_class: logical. Are class identical?
 
 \- \$class: class of the 2 datasets (NULL otherwise).
 
-\- \$same.length: logical. Are number of elements identical?
+\- \$same_length: logical. Are number of elements identical?
 
 \- \$length: number of elements in the 2 datasets (NULL otherwise).
 
-\- \$same.levels: logical. Are levels identical? NULL if data1 and data2
+\- \$same_levels: logical. Are levels identical? NULL if data1 and data2
 are not factors.
 
 \- \$levels: levels of the 2 datasets if identical (NULL otherwise or
 NULL if data1 and data2 are not factors).
 
-\- \$any.id.levels: logical. Is there any identical levels? (NULL if
+\- \$any_id_levels: logical. Is there any identical levels? (NULL if
 data1 and data2 are not factors).
 
-\- \$same.levels.pos1: positions, in data1, of the levels identical in
+\- \$same_levels_pos1: positions, in data1, of the levels identical in
 data2 (NULL otherwise or NULL if data1 and data2 are not factors).
 
-\- \$same.levels.pos2: positions, in data2, of the levels identical in
+\- \$same_levels_pos2: positions, in data2, of the levels identical in
 data1 (NULL otherwise or NULL if data1 and data2 are not factors).
 
-\- \$same.levels.match1: positions, in data2, of the levels that match
+\- \$same_levels_match1: positions, in data2, of the levels that match
 the levels in data1, as given by match(data1, data2) (NULL otherwise or
 NULL if data1 and data2 are not factors).
 
-\- \$same.levels.match2: positions, in data1, of the levels that match
+\- \$same_levels_match2: positions, in data1, of the levels that match
 the levels in data2, as given by match(data1, data2) (NULL otherwise or
 NULL if data1 and data2 are not factors).
 
-\- \$common.levels: common levels between data1 and data2 (can be a
+\- \$common_levels: common levels between data1 and data2 (can be a
 subset of \$levels or not). NULL if no common levels or if data1 and
 data2 are not factors.
 
-\- \$same.names: logical. Are element names identical? NULL if data1 and
+\- \$same_names: logical. Are element names identical? NULL if data1 and
 data2 have no names.
 
 \- \$name: name of elements of the 2 datasets if identical (NULL
 otherwise).
 
-\- \$any.id.names: logical. Is there any element names identical ?
+\- \$any_id_names: logical. Is there any element names identical ?
 
-\- \$same.names.pos1: positions, in data1, of the element names
+\- \$same_names_pos1: positions, in data1, of the element names
 identical in data2. NULL if no identical names.
 
-\- \$same.names.pos2: positions, in data2, of the element names
+\- \$same_names_pos2: positions, in data2, of the element names
 identical in data1. NULL if no identical names.
 
-\- \$same.names.match1: positions, in data2, of the names that match the
+\- \$same_names_match1: positions, in data2, of the names that match the
 names in data1, as given by match(data1, data2) (NULL otherwise).
 
-\- \$same.names.match2: positions, in data1, of the names that match the
+\- \$same_names_match2: positions, in data1, of the names that match the
 names in data2, as given by match(data1, data2) (NULL otherwise).
 
-\- \$common.names: common element names between data1 and data2 (can be
+\- \$common_names: common element names between data1 and data2 (can be
 a subset of \$name or not). NULL if no common element names.
 
-\- \$any.id.elements: logical. is there any identical elements ?
+\- \$any_id_elements: logical. is there any identical elements ?
 
-\- \$same.elements.pos1: positions, in data1, of the elements identical
+\- \$same_elements_pos1: positions, in data1, of the elements identical
 in data2. NULL if no identical elements.
 
-\- \$same.elements.pos2: positions, in data2, of the elements identical
+\- \$same_elements_pos2: positions, in data2, of the elements identical
 in data1. NULL if no identical elements.
 
-\- \$same.elements.match1: positions, in data2, of the elements that
+\- \$same_elements_match1: positions, in data2, of the elements that
 match the elements in data1, as given by match(data1, data2) (NULL
 otherwise).
 
-\- \$same.elements.match2: positions, in data1, of the elements that
+\- \$same_elements_match2: positions, in data1, of the elements that
 match the elements in data2, as given by match(data1, data2) (NULL
 otherwise).
 
-\- \$common.elements: common elements between data1 and data2. NULL if
+\- \$common_elements: common elements between data1 and data2. NULL if
 no common elements.
 
-\- \$same.order: logical. Are all elements in the same order? TRUE or
+\- \$same_order: logical. Are all elements in the same order? TRUE or
 FALSE if elements of data1 and data2 are identical but not necessary in
 the same order. NULL otherwise (different length for instance).
 
-\- \$order1: order of all elements of data1. NULL if \$same.order is
+\- \$order1: order of all elements of data1. NULL if \$same_order is
 NULL.
 
-\- \$order2: order of all elements of data2. NULL if \$same.order is
+\- \$order2: order of all elements of data2. NULL if \$same_order is
 NULL.
 
-\- \$identical.object: logical. Are objects identical (kind of object,
+\- \$identical_object: logical. Are objects identical (kind of object,
 element names, content, including content order)?
 
-\- \$identical.content: logical. Are content objects identical
+\- \$identical_content: logical. Are content objects identical
 (identical elements, including order, excluding kind of object and
 element names)?
 
@@ -178,86 +178,86 @@ Haiding Wang \<wanghaiding442@gmail.com\>
 # because of a particular environment. Please, copy-paste in a local environment.
 # See also https://safer-r.github.io/saferTool/articles/comp_1d.html
 obs1 = 1:5 ; obs2 = 1:5 ; names(obs1) <- LETTERS[1:5] ; names(obs2) <- LETTERS[1:5] ; comp_1d(obs1, obs2)
-#> $same.class
+#> $same_class
 #> [1] TRUE
 #> 
 #> $class
 #> [1] "integer"
 #> 
-#> $same.length
+#> $same_length
 #> [1] TRUE
 #> 
 #> $length
 #> [1] 5
 #> 
-#> $same.levels
+#> $same_levels
 #> NULL
 #> 
 #> $levels
 #> NULL
 #> 
-#> $any.id.levels
+#> $any_id_levels
 #> [1] FALSE
 #> 
-#> $same.levels.pos1
+#> $same_levels_pos1
 #> NULL
 #> 
-#> $same.levels.pos2
+#> $same_levels_pos2
 #> NULL
 #> 
-#> $same.levels.match1
+#> $same_levels_match1
 #> NULL
 #> 
-#> $same.levels.match2
+#> $same_levels_match2
 #> NULL
 #> 
-#> $common.levels
+#> $common_levels
 #> NULL
 #> 
-#> $same.names
+#> $same_names
 #> [1] TRUE
 #> 
 #> $name
 #> [1] "A" "B" "C" "D" "E"
 #> 
-#> $any.id.names
+#> $any_id_names
 #> [1] TRUE
 #> 
-#> $same.names.pos1
+#> $same_names_pos1
 #> [1] 1 2 3 4 5
 #> 
-#> $same.names.pos2
+#> $same_names_pos2
 #> [1] 1 2 3 4 5
 #> 
-#> $same.names.match1
+#> $same_names_match1
 #> [1] 1 2 3 4 5
 #> 
-#> $same.names.match2
+#> $same_names_match2
 #> [1] 1 2 3 4 5
 #> 
-#> $common.names
+#> $common_names
 #> [1] "A" "B" "C" "D" "E"
 #> 
-#> $any.id.elements
+#> $any_id_elements
 #> [1] TRUE
 #> 
-#> $same.elements.pos1
+#> $same_elements_pos1
 #> [1] 1 2 3 4 5
 #> 
-#> $same.elements.pos2
+#> $same_elements_pos2
 #> [1] 1 2 3 4 5
 #> 
-#> $same.elements.match1
+#> $same_elements_match1
 #> [1] 1 2 3 4 5
 #> 
-#> $same.elements.match2
+#> $same_elements_match2
 #> [1] 1 2 3 4 5
 #> 
-#> $common.elements
+#> $common_elements
 #> A B C D E 
 #> 1 2 3 4 5 
 #> 
-#> $same.order
+#> $same_order
 #> [1] TRUE
 #> 
 #> $order1
@@ -266,93 +266,93 @@ obs1 = 1:5 ; obs2 = 1:5 ; names(obs1) <- LETTERS[1:5] ; names(obs2) <- LETTERS[1
 #> $order2
 #> [1] 1 2 3 4 5
 #> 
-#> $identical.object
+#> $identical_object
 #> [1] TRUE
 #> 
-#> $identical.content
+#> $identical_content
 #> [1] TRUE
 #> 
 obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[1:5]) ; comp_1d(obs1, obs2)
-#> $same.class
+#> $same_class
 #> [1] TRUE
 #> 
 #> $class
 #> [1] "factor"
 #> 
-#> $same.length
+#> $same_length
 #> [1] TRUE
 #> 
 #> $length
 #> [1] 5
 #> 
-#> $same.levels
+#> $same_levels
 #> [1] TRUE
 #> 
 #> $levels
 #> [1] "A" "B" "C" "D" "E"
 #> 
-#> $any.id.levels
+#> $any_id_levels
 #> [1] TRUE
 #> 
-#> $same.levels.pos1
+#> $same_levels_pos1
 #> [1] 1 2 3 4 5
 #> 
-#> $same.levels.pos2
+#> $same_levels_pos2
 #> [1] 1 2 3 4 5
 #> 
-#> $same.levels.match1
+#> $same_levels_match1
 #> [1] 1 2 3 4 5
 #> 
-#> $same.levels.match2
+#> $same_levels_match2
 #> [1] 1 2 3 4 5
 #> 
-#> $common.levels
+#> $common_levels
 #> [1] "A" "B" "C" "D" "E"
 #> 
-#> $same.names
+#> $same_names
 #> NULL
 #> 
 #> $name
 #> NULL
 #> 
-#> $any.id.names
+#> $any_id_names
 #> [1] FALSE
 #> 
-#> $same.names.pos1
+#> $same_names_pos1
 #> NULL
 #> 
-#> $same.names.pos2
+#> $same_names_pos2
 #> NULL
 #> 
-#> $same.names.match1
+#> $same_names_match1
 #> NULL
 #> 
-#> $same.names.match2
+#> $same_names_match2
 #> NULL
 #> 
-#> $common.names
+#> $common_names
 #> NULL
 #> 
-#> $any.id.elements
+#> $any_id_elements
 #> [1] TRUE
 #> 
-#> $same.elements.pos1
+#> $same_elements_pos1
 #> [1] 1 2 3 4 5
 #> 
-#> $same.elements.pos2
+#> $same_elements_pos2
 #> [1] 1 2 3 4 5
 #> 
-#> $same.elements.match1
+#> $same_elements_match1
 #> [1] 1 2 3 4 5
 #> 
-#> $same.elements.match2
+#> $same_elements_match2
 #> [1] 1 2 3 4 5
 #> 
-#> $common.elements
+#> $common_elements
 #> [1] A B C D E
 #> Levels: A B C D E
 #> 
-#> $same.order
+#> $same_order
 #> [1] TRUE
 #> 
 #> $order1
@@ -361,92 +361,92 @@ obs1 = factor(LETTERS[1:5]) ; obs2 = factor(LETTERS[1:5]) ; comp_1d(obs1, obs2)
 #> $order2
 #> [1] 1 2 3 4 5
 #> 
-#> $identical.object
+#> $identical_object
 #> [1] TRUE
 #> 
-#> $identical.content
+#> $identical_content
 #> [1] TRUE
 #> 
 obs1 = factor(c(LETTERS[1:4], "E")) ; obs2 = factor(c(LETTERS[1:4], "F")) ; comp_1d(obs1, obs2)
-#> $same.class
+#> $same_class
 #> [1] TRUE
 #> 
 #> $class
 #> [1] "factor"
 #> 
-#> $same.length
+#> $same_length
 #> [1] TRUE
 #> 
 #> $length
 #> [1] 5
 #> 
-#> $same.levels
+#> $same_levels
 #> [1] FALSE
 #> 
 #> $levels
 #> NULL
 #> 
-#> $any.id.levels
+#> $any_id_levels
 #> [1] TRUE
 #> 
-#> $same.levels.pos1
+#> $same_levels_pos1
 #> [1] 1 2 3 4
 #> 
-#> $same.levels.pos2
+#> $same_levels_pos2
 #> [1] 1 2 3 4
 #> 
-#> $same.levels.match1
+#> $same_levels_match1
 #> [1]  1  2  3  4 NA
 #> 
-#> $same.levels.match2
+#> $same_levels_match2
 #> [1]  1  2  3  4 NA
 #> 
-#> $common.levels
+#> $common_levels
 #> [1] "A" "B" "C" "D"
 #> 
-#> $same.names
+#> $same_names
 #> NULL
 #> 
 #> $name
 #> NULL
 #> 
-#> $any.id.names
+#> $any_id_names
 #> [1] FALSE
 #> 
-#> $same.names.pos1
+#> $same_names_pos1
 #> NULL
 #> 
-#> $same.names.pos2
+#> $same_names_pos2
 #> NULL
 #> 
-#> $same.names.match1
+#> $same_names_match1
 #> NULL
 #> 
-#> $same.names.match2
+#> $same_names_match2
 #> NULL
 #> 
-#> $common.names
+#> $common_names
 #> NULL
 #> 
-#> $any.id.elements
+#> $any_id_elements
 #> [1] TRUE
 #> 
-#> $same.elements.pos1
+#> $same_elements_pos1
 #> [1] 1 2 3 4
 #> 
-#> $same.elements.pos2
+#> $same_elements_pos2
 #> [1] 1 2 3 4
 #> 
-#> $same.elements.match1
+#> $same_elements_match1
 #> [1]  1  2  3  4 NA
 #> 
-#> $same.elements.match2
+#> $same_elements_match2
 #> [1]  1  2  3  4 NA
 #> 
-#> $common.elements
+#> $common_elements
 #> [1] "A" "B" "C" "D"
 #> 
-#> $same.order
+#> $same_order
 #> NULL
 #> 
 #> $order1
@@ -455,92 +455,92 @@ obs1 = factor(c(LETTERS[1:4], "E")) ; obs2 = factor(c(LETTERS[1:4], "F")) ; comp
 #> $order2
 #> NULL
 #> 
-#> $identical.object
+#> $identical_object
 #> [1] FALSE
 #> 
-#> $identical.content
+#> $identical_content
 #> [1] FALSE
 #> 
 obs1 = 1:5 ; obs2 = 1.1:6.1 ; comp_1d(obs1, obs2)
-#> $same.class
+#> $same_class
 #> [1] FALSE
 #> 
 #> $class
 #> NULL
 #> 
-#> $same.length
+#> $same_length
 #> [1] FALSE
 #> 
 #> $length
 #> NULL
 #> 
-#> $same.levels
+#> $same_levels
 #> NULL
 #> 
 #> $levels
 #> NULL
 #> 
-#> $any.id.levels
+#> $any_id_levels
 #> [1] FALSE
 #> 
-#> $same.levels.pos1
+#> $same_levels_pos1
 #> NULL
 #> 
-#> $same.levels.pos2
+#> $same_levels_pos2
 #> NULL
 #> 
-#> $same.levels.match1
+#> $same_levels_match1
 #> NULL
 #> 
-#> $same.levels.match2
+#> $same_levels_match2
 #> NULL
 #> 
-#> $common.levels
+#> $common_levels
 #> NULL
 #> 
-#> $same.names
+#> $same_names
 #> NULL
 #> 
 #> $name
 #> NULL
 #> 
-#> $any.id.names
+#> $any_id_names
 #> [1] FALSE
 #> 
-#> $same.names.pos1
+#> $same_names_pos1
 #> NULL
 #> 
-#> $same.names.pos2
+#> $same_names_pos2
 #> NULL
 #> 
-#> $same.names.match1
+#> $same_names_match1
 #> NULL
 #> 
-#> $same.names.match2
+#> $same_names_match2
 #> NULL
 #> 
-#> $common.names
+#> $common_names
 #> NULL
 #> 
-#> $any.id.elements
+#> $any_id_elements
 #> [1] FALSE
 #> 
-#> $same.elements.pos1
+#> $same_elements_pos1
 #> NULL
 #> 
-#> $same.elements.pos2
+#> $same_elements_pos2
 #> NULL
 #> 
-#> $same.elements.match1
+#> $same_elements_match1
 #> NULL
 #> 
-#> $same.elements.match2
+#> $same_elements_match2
 #> NULL
 #> 
-#> $common.elements
+#> $common_elements
 #> NULL
 #> 
-#> $same.order
+#> $same_order
 #> NULL
 #> 
 #> $order1
@@ -549,10 +549,10 @@ obs1 = 1:5 ; obs2 = 1.1:6.1 ; comp_1d(obs1, obs2)
 #> $order2
 #> NULL
 #> 
-#> $identical.object
+#> $identical_object
 #> [1] FALSE
 #> 
-#> $identical.content
+#> $identical_content
 #> [1] FALSE
 #> 
 ```

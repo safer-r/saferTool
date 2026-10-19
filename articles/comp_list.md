@@ -74,59 +74,59 @@ list4 # list
 
 ``` r
 comp_list(list1, list1, safer_check = TRUE)
->  $same.length
+>  $same_length
 >  [1] TRUE
 >  
 >  $length
 >  [1] 3
 >  
->  $same.names
+>  $same_names
 >  [1] TRUE
 >  
 >  $name
 >  [1] "a" "b" "d"
 >  
->  $any.id.names
+>  $any_id_names
 >  [1] TRUE
 >  
->  $same.names.pos1
+>  $same_names_pos1
 >  [1] 1 2 3
 >  
->  $same.names.pos2
+>  $same_names_pos2
 >  [1] 1 2 3
 >  
->  $same.names.match1
+>  $same_names_match1
 >  [1] 1 2 3
 >  
->  $same.names.match2
+>  $same_names_match2
 >  [1] 1 2 3
 >  
->  $common.names
+>  $common_names
 >  [1] "a" "b" "d"
 >  
->  $any.id.compartments
+>  $any_id_compartments
 >  [1] TRUE
 >  
->  $same.compartments.pos1
+>  $same_compartments_pos1
 >  [1] 1 2 3
 >  
->  $same.compartments.pos2
+>  $same_compartments_pos2
 >  [1] 1 2 3
 >  
->  $same.compartments.match1
+>  $same_compartments_match1
 >  [1] 1 2 3
 >  
->  $same.compartments.match2
+>  $same_compartments_match2
 >  [1] 1 2 3
 >  
->  $common.compartments
->  $common.compartments$a
+>  $common_compartments
+>  $common_compartments$a
 >  [1] 1 2 3 4 5
 >  
->  $common.compartments$b
+>  $common_compartments$b
 >  [1] "A" "B"
 >  
->  $common.compartments$d
+>  $common_compartments$d
 >       [,1]
 >  [1,]    1
 >  [2,]    2
@@ -136,198 +136,198 @@ comp_list(list1, list1, safer_check = TRUE)
 >  [6,]    6
 >  
 >  
->  $same.order
+>  $same_order
 >  [1] TRUE
 >  
->  $identical.object
+>  $identical_object
 >  [1] TRUE
 >  
->  $identical.content
+>  $identical_content
 >  [1] TRUE
 
 comp_list(list1, list2, safer_check = TRUE)
->  $same.length
+>  $same_length
 >  [1] FALSE
 >  
 >  $length
 >  NULL
 >  
->  $same.names
+>  $same_names
 >  [1] FALSE
 >  
 >  $name
 >  NULL
 >  
->  $any.id.names
+>  $any_id_names
 >  [1] FALSE
 >  
->  $same.names.pos1
+>  $same_names_pos1
 >  NULL
 >  
->  $same.names.pos2
+>  $same_names_pos2
 >  NULL
 >  
->  $same.names.match1
+>  $same_names_match1
 >  NULL
 >  
->  $same.names.match2
+>  $same_names_match2
 >  NULL
 >  
->  $common.names
+>  $common_names
 >  NULL
 >  
->  $any.id.compartments
+>  $any_id_compartments
 >  [1] TRUE
 >  
->  $same.compartments.pos1
+>  $same_compartments_pos1
 >  [1] 1 2
 >  
->  $same.compartments.pos2
+>  $same_compartments_pos2
 >  [1] 1 2
 >  
->  $same.compartments.match1
+>  $same_compartments_match1
 >  [1]  1  2 NA
 >  
->  $same.compartments.match2
+>  $same_compartments_match2
 >  [1] 1 2
 >  
->  $common.compartments
->  $common.compartments[[1]]
+>  $common_compartments
+>  $common_compartments[[1]]
 >  [1] 1 2 3 4 5
 >  
->  $common.compartments[[2]]
+>  $common_compartments[[2]]
 >  [1] "A" "B"
 >  
 >  
->  $same.order
+>  $same_order
 >  NULL
 >  
->  $identical.object
+>  $identical_object
 >  [1] FALSE
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 
 comp_list(list1, list3, safer_check = TRUE)
->  $same.length
+>  $same_length
 >  [1] FALSE
 >  
 >  $length
 >  NULL
 >  
->  $same.names
+>  $same_names
 >  [1] FALSE
 >  
 >  $name
 >  NULL
 >  
->  $any.id.names
+>  $any_id_names
 >  [1] TRUE
 >  
->  $same.names.pos1
+>  $same_names_pos1
 >  [1] 1 2
 >  
->  $same.names.pos2
+>  $same_names_pos2
 >  [1] 1 2
 >  
->  $same.names.match1
+>  $same_names_match1
 >  [1]  1  2 NA
 >  
->  $same.names.match2
+>  $same_names_match2
 >  [1] 1 2
 >  
->  $common.names
+>  $common_names
 >  [1] "a" "b"
 >  
->  $any.id.compartments
+>  $any_id_compartments
 >  [1] TRUE
 >  
->  $same.compartments.pos1
+>  $same_compartments_pos1
 >  [1] 1 2
 >  
->  $same.compartments.pos2
+>  $same_compartments_pos2
 >  [1] 1 2
 >  
->  $same.compartments.match1
+>  $same_compartments_match1
 >  [1]  1  2 NA
 >  
->  $same.compartments.match2
+>  $same_compartments_match2
 >  [1] 1 2
 >  
->  $common.compartments
->  $common.compartments[[1]]
+>  $common_compartments
+>  $common_compartments[[1]]
 >  [1] 1 2 3 4 5
 >  
->  $common.compartments[[2]]
+>  $common_compartments[[2]]
 >  [1] "A" "B"
 >  
 >  
->  $same.order
+>  $same_order
 >  NULL
 >  
->  $identical.object
+>  $identical_object
 >  [1] FALSE
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 
 comp_list(list2, list4, safer_check = TRUE)
->  $same.length
+>  $same_length
 >  [1] FALSE
 >  
 >  $length
 >  NULL
 >  
->  $same.names
+>  $same_names
 >  NULL
 >  
 >  $name
 >  NULL
 >  
->  $any.id.names
+>  $any_id_names
 >  [1] FALSE
 >  
->  $same.names.pos1
+>  $same_names_pos1
 >  NULL
 >  
->  $same.names.pos2
+>  $same_names_pos2
 >  NULL
 >  
->  $same.names.match1
+>  $same_names_match1
 >  NULL
 >  
->  $same.names.match2
+>  $same_names_match2
 >  NULL
 >  
->  $common.names
+>  $common_names
 >  NULL
 >  
->  $any.id.compartments
+>  $any_id_compartments
 >  [1] TRUE
 >  
->  $same.compartments.pos1
+>  $same_compartments_pos1
 >  [1] 1
 >  
->  $same.compartments.pos2
+>  $same_compartments_pos2
 >  [1] 3
 >  
->  $same.compartments.match1
+>  $same_compartments_match1
 >  [1]  3 NA
 >  
->  $same.compartments.match2
+>  $same_compartments_match2
 >  [1] NA NA  1
 >  
->  $common.compartments
->  $common.compartments[[1]]
+>  $common_compartments
+>  $common_compartments[[1]]
 >  [1] 1 2 3 4 5
 >  
 >  
->  $same.order
+>  $same_order
 >  NULL
 >  
->  $identical.object
+>  $identical_object
 >  [1] FALSE
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 ```

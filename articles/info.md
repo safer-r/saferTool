@@ -94,21 +94,21 @@ name1 # object of class "name", mode "name" & type "symbol"
 fun1 # closure function of class "function", mode "function" & type "closure"
 >  function (x, ...) 
 >  UseMethod("mean")
->  <bytecode: 0x5568d4a05ba0>
+>  <bytecode: 0x5645d097afa0>
 >  <environment: namespace:base>
 fun2 # primitive function of class "function", mode "function" & type "builtin"
 >  function (..., na.rm = FALSE)  .Primitive("sum")
 fun3 # primitive function of class "function", mode "function" &  type "special"
 >  .Primitive("<-")
 env1 # environment
->  <environment: 0x5568d7b74f60>
+>  <environment: 0x5645d3b02048>
 s4 # S4 object
 >  standardGeneric for "show" defined from package "methods"
 >  
 >  function (object) 
 >  standardGeneric("show")
->  <bytecode: 0x5568d463f628>
->  <environment: 0x5568d31aa498>
+>  <bytecode: 0x5645d05bb1d0>
+>  <environment: 0x5645cf11f898>
 >  Methods may be defined for arguments: object
 >  Use  showMethods(show)  for currently available ones.
 >  (This generic function excludes non-simple inheritance; see ?setIs)
@@ -825,7 +825,7 @@ info(data = env1) # environment
 >  
 >  $STRUCTURE
 >                                 
->   <environment: 0x5568d7b74f60>
+>   <environment: 0x5645d3b02048>
 info(data = s4) # S4 object
 >  $NAME
 >  [1] "s4"

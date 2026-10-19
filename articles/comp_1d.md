@@ -48,85 +48,85 @@ tab1 # 1D table
 ``` r
 names(vec1) <- LETTERS[1:5] ; 
 comp_1d(vec1, vec2, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] TRUE
 >  
 >  $class
 >  [1] "integer"
 >  
->  $same.length
+>  $same_length
 >  [1] FALSE
 >  
 >  $length
 >  NULL
 >  
->  $same.levels
+>  $same_levels
 >  NULL
 >  
 >  $levels
 >  NULL
 >  
->  $any.id.levels
+>  $any_id_levels
 >  [1] FALSE
 >  
->  $same.levels.pos1
+>  $same_levels_pos1
 >  NULL
 >  
->  $same.levels.pos2
+>  $same_levels_pos2
 >  NULL
 >  
->  $same.levels.match1
+>  $same_levels_match1
 >  NULL
 >  
->  $same.levels.match2
+>  $same_levels_match2
 >  NULL
 >  
->  $common.levels
+>  $common_levels
 >  NULL
 >  
->  $same.names
+>  $same_names
 >  [1] FALSE
 >  
 >  $name
 >  NULL
 >  
->  $any.id.names
+>  $any_id_names
 >  [1] FALSE
 >  
->  $same.names.pos1
+>  $same_names_pos1
 >  NULL
 >  
->  $same.names.pos2
+>  $same_names_pos2
 >  NULL
 >  
->  $same.names.match1
+>  $same_names_match1
 >  NULL
 >  
->  $same.names.match2
+>  $same_names_match2
 >  NULL
 >  
->  $common.names
+>  $common_names
 >  NULL
 >  
->  $any.id.elements
+>  $any_id_elements
 >  [1] TRUE
 >  
->  $same.elements.pos1
+>  $same_elements_pos1
 >  [1] 3 4 5
 >  
->  $same.elements.pos2
+>  $same_elements_pos2
 >  [1] 1 2 3
 >  
->  $same.elements.match1
+>  $same_elements_match1
 >  [1] NA NA  1  2  3
 >  
->  $same.elements.match2
+>  $same_elements_match2
 >  [1]  3  4  5 NA
 >  
->  $common.elements
+>  $common_elements
 >  [1] 3 4 5
 >  
->  $same.order
+>  $same_order
 >  NULL
 >  
 >  $order1
@@ -135,94 +135,94 @@ comp_1d(vec1, vec2, safer_check = TRUE)
 >  $order2
 >  NULL
 >  
->  $identical.object
+>  $identical_object
 >  [1] FALSE
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 
 names(vec1) <- LETTERS[1:5] ; 
 names(vec2) <- LETTERS[1:4] ; 
 comp_1d(vec1, vec2, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] TRUE
 >  
 >  $class
 >  [1] "integer"
 >  
->  $same.length
+>  $same_length
 >  [1] FALSE
 >  
 >  $length
 >  NULL
 >  
->  $same.levels
+>  $same_levels
 >  NULL
 >  
 >  $levels
 >  NULL
 >  
->  $any.id.levels
+>  $any_id_levels
 >  [1] FALSE
 >  
->  $same.levels.pos1
+>  $same_levels_pos1
 >  NULL
 >  
->  $same.levels.pos2
+>  $same_levels_pos2
 >  NULL
 >  
->  $same.levels.match1
+>  $same_levels_match1
 >  NULL
 >  
->  $same.levels.match2
+>  $same_levels_match2
 >  NULL
 >  
->  $common.levels
+>  $common_levels
 >  NULL
 >  
->  $same.names
+>  $same_names
 >  [1] FALSE
 >  
 >  $name
 >  NULL
 >  
->  $any.id.names
+>  $any_id_names
 >  [1] TRUE
 >  
->  $same.names.pos1
+>  $same_names_pos1
 >  [1] 1 2 3 4
 >  
->  $same.names.pos2
+>  $same_names_pos2
 >  [1] 1 2 3 4
 >  
->  $same.names.match1
+>  $same_names_match1
 >  [1]  1  2  3  4 NA
 >  
->  $same.names.match2
+>  $same_names_match2
 >  [1] 1 2 3 4
 >  
->  $common.names
+>  $common_names
 >  [1] "A" "B" "C" "D"
 >  
->  $any.id.elements
+>  $any_id_elements
 >  [1] TRUE
 >  
->  $same.elements.pos1
+>  $same_elements_pos1
 >  [1] 3 4 5
 >  
->  $same.elements.pos2
+>  $same_elements_pos2
 >  [1] 1 2 3
 >  
->  $same.elements.match1
+>  $same_elements_match1
 >  [1] NA NA  1  2  3
 >  
->  $same.elements.match2
+>  $same_elements_match2
 >  [1]  3  4  5 NA
 >  
->  $common.elements
+>  $common_elements
 >  [1] 3 4 5
 >  
->  $same.order
+>  $same_order
 >  NULL
 >  
 >  $order1
@@ -231,92 +231,92 @@ comp_1d(vec1, vec2, safer_check = TRUE)
 >  $order2
 >  NULL
 >  
->  $identical.object
+>  $identical_object
 >  [1] FALSE
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 
 comp_1d(fac1, fac2, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] TRUE
 >  
 >  $class
 >  [1] "factor"
 >  
->  $same.length
+>  $same_length
 >  [1] FALSE
 >  
 >  $length
 >  NULL
 >  
->  $same.levels
+>  $same_levels
 >  [1] FALSE
 >  
 >  $levels
 >  NULL
 >  
->  $any.id.levels
+>  $any_id_levels
 >  [1] TRUE
 >  
->  $same.levels.pos1
+>  $same_levels_pos1
 >  [1] 4 5
 >  
->  $same.levels.pos2
+>  $same_levels_pos2
 >  [1] 1 2
 >  
->  $same.levels.match1
+>  $same_levels_match1
 >  [1] NA NA NA  1  2
 >  
->  $same.levels.match2
+>  $same_levels_match2
 >  [1]  4  5 NA NA
 >  
->  $common.levels
+>  $common_levels
 >  [1] "D" "E"
 >  
->  $same.names
+>  $same_names
 >  NULL
 >  
 >  $name
 >  NULL
 >  
->  $any.id.names
+>  $any_id_names
 >  [1] FALSE
 >  
->  $same.names.pos1
+>  $same_names_pos1
 >  NULL
 >  
->  $same.names.pos2
+>  $same_names_pos2
 >  NULL
 >  
->  $same.names.match1
+>  $same_names_match1
 >  NULL
 >  
->  $same.names.match2
+>  $same_names_match2
 >  NULL
 >  
->  $common.names
+>  $common_names
 >  NULL
 >  
->  $any.id.elements
+>  $any_id_elements
 >  [1] TRUE
 >  
->  $same.elements.pos1
+>  $same_elements_pos1
 >  [1] 4 5
 >  
->  $same.elements.pos2
+>  $same_elements_pos2
 >  [1] 1 2
 >  
->  $same.elements.match1
+>  $same_elements_match1
 >  [1] NA NA NA  1  2
 >  
->  $same.elements.match2
+>  $same_elements_match2
 >  [1]  4  5 NA NA
 >  
->  $common.elements
+>  $common_elements
 >  [1] "D" "E"
 >  
->  $same.order
+>  $same_order
 >  NULL
 >  
 >  $order1
@@ -325,92 +325,92 @@ comp_1d(fac1, fac2, safer_check = TRUE)
 >  $order2
 >  NULL
 >  
->  $identical.object
+>  $identical_object
 >  [1] FALSE
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 
 comp_1d(fac1, fac3, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] TRUE
 >  
 >  $class
 >  [1] "factor"
 >  
->  $same.length
+>  $same_length
 >  [1] FALSE
 >  
 >  $length
 >  NULL
 >  
->  $same.levels
+>  $same_levels
 >  [1] FALSE
 >  
 >  $levels
 >  NULL
 >  
->  $any.id.levels
+>  $any_id_levels
 >  [1] FALSE
 >  
->  $same.levels.pos1
+>  $same_levels_pos1
 >  NULL
 >  
->  $same.levels.pos2
+>  $same_levels_pos2
 >  NULL
 >  
->  $same.levels.match1
+>  $same_levels_match1
 >  NULL
 >  
->  $same.levels.match2
+>  $same_levels_match2
 >  NULL
 >  
->  $common.levels
+>  $common_levels
 >  NULL
 >  
->  $same.names
+>  $same_names
 >  NULL
 >  
 >  $name
 >  NULL
 >  
->  $any.id.names
+>  $any_id_names
 >  [1] FALSE
 >  
->  $same.names.pos1
+>  $same_names_pos1
 >  NULL
 >  
->  $same.names.pos2
+>  $same_names_pos2
 >  NULL
 >  
->  $same.names.match1
+>  $same_names_match1
 >  NULL
 >  
->  $same.names.match2
+>  $same_names_match2
 >  NULL
 >  
->  $common.names
+>  $common_names
 >  NULL
 >  
->  $any.id.elements
+>  $any_id_elements
 >  [1] FALSE
 >  
->  $same.elements.pos1
+>  $same_elements_pos1
 >  NULL
 >  
->  $same.elements.pos2
+>  $same_elements_pos2
 >  NULL
 >  
->  $same.elements.match1
+>  $same_elements_match1
 >  NULL
 >  
->  $same.elements.match2
+>  $same_elements_match2
 >  NULL
 >  
->  $common.elements
+>  $common_elements
 >  NULL
 >  
->  $same.order
+>  $same_order
 >  NULL
 >  
 >  $order1
@@ -419,92 +419,92 @@ comp_1d(fac1, fac3, safer_check = TRUE)
 >  $order2
 >  NULL
 >  
->  $identical.object
+>  $identical_object
 >  [1] FALSE
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 
 comp_1d(vec1, fac1, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] FALSE
 >  
 >  $class
 >  NULL
 >  
->  $same.length
+>  $same_length
 >  [1] TRUE
 >  
 >  $length
 >  [1] 5
 >  
->  $same.levels
+>  $same_levels
 >  NULL
 >  
 >  $levels
 >  NULL
 >  
->  $any.id.levels
+>  $any_id_levels
 >  [1] FALSE
 >  
->  $same.levels.pos1
+>  $same_levels_pos1
 >  NULL
 >  
->  $same.levels.pos2
+>  $same_levels_pos2
 >  NULL
 >  
->  $same.levels.match1
+>  $same_levels_match1
 >  NULL
 >  
->  $same.levels.match2
+>  $same_levels_match2
 >  NULL
 >  
->  $common.levels
+>  $common_levels
 >  NULL
 >  
->  $same.names
+>  $same_names
 >  [1] FALSE
 >  
 >  $name
 >  NULL
 >  
->  $any.id.names
+>  $any_id_names
 >  [1] FALSE
 >  
->  $same.names.pos1
+>  $same_names_pos1
 >  NULL
 >  
->  $same.names.pos2
+>  $same_names_pos2
 >  NULL
 >  
->  $same.names.match1
+>  $same_names_match1
 >  NULL
 >  
->  $same.names.match2
+>  $same_names_match2
 >  NULL
 >  
->  $common.names
+>  $common_names
 >  NULL
 >  
->  $any.id.elements
+>  $any_id_elements
 >  [1] FALSE
 >  
->  $same.elements.pos1
+>  $same_elements_pos1
 >  NULL
 >  
->  $same.elements.pos2
+>  $same_elements_pos2
 >  NULL
 >  
->  $same.elements.match1
+>  $same_elements_match1
 >  NULL
 >  
->  $same.elements.match2
+>  $same_elements_match2
 >  NULL
 >  
->  $common.elements
+>  $common_elements
 >  NULL
 >  
->  $same.order
+>  $same_order
 >  NULL
 >  
 >  $order1
@@ -513,93 +513,93 @@ comp_1d(vec1, fac1, safer_check = TRUE)
 >  $order2
 >  NULL
 >  
->  $identical.object
+>  $identical_object
 >  [1] FALSE
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 
 comp_1d(tab1, tab1, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] TRUE
 >  
 >  $class
 >  [1] "table"
 >  
->  $same.length
+>  $same_length
 >  [1] TRUE
 >  
 >  $length
 >  [1] 5
 >  
->  $same.levels
+>  $same_levels
 >  NULL
 >  
 >  $levels
 >  NULL
 >  
->  $any.id.levels
+>  $any_id_levels
 >  [1] FALSE
 >  
->  $same.levels.pos1
+>  $same_levels_pos1
 >  NULL
 >  
->  $same.levels.pos2
+>  $same_levels_pos2
 >  NULL
 >  
->  $same.levels.match1
+>  $same_levels_match1
 >  NULL
 >  
->  $same.levels.match2
+>  $same_levels_match2
 >  NULL
 >  
->  $common.levels
+>  $common_levels
 >  NULL
 >  
->  $same.names
+>  $same_names
 >  [1] TRUE
 >  
 >  $name
 >  [1] "A" "B" "C" "D" "E"
 >  
->  $any.id.names
+>  $any_id_names
 >  [1] TRUE
 >  
->  $same.names.pos1
+>  $same_names_pos1
 >  [1] 1 2 3 4 5
 >  
->  $same.names.pos2
+>  $same_names_pos2
 >  [1] 1 2 3 4 5
 >  
->  $same.names.match1
+>  $same_names_match1
 >  [1] 1 2 3 4 5
 >  
->  $same.names.match2
+>  $same_names_match2
 >  [1] 1 2 3 4 5
 >  
->  $common.names
+>  $common_names
 >  [1] "A" "B" "C" "D" "E"
 >  
->  $any.id.elements
+>  $any_id_elements
 >  [1] TRUE
 >  
->  $same.elements.pos1
+>  $same_elements_pos1
 >  [1] 1 2 3 4 5
 >  
->  $same.elements.pos2
+>  $same_elements_pos2
 >  [1] 1 2 3 4 5
 >  
->  $same.elements.match1
+>  $same_elements_match1
 >  [1] 1 2 3 4 5
 >  
->  $same.elements.match2
+>  $same_elements_match2
 >  [1] 1 2 3 4 5
 >  
->  $common.elements
+>  $common_elements
 >  A B C D E 
 >  1 2 3 4 5 
 >  
->  $same.order
+>  $same_order
 >  [1] TRUE
 >  
 >  $order1
@@ -608,92 +608,92 @@ comp_1d(tab1, tab1, safer_check = TRUE)
 >  $order2
 >  [1] 1 2 3 4 5
 >  
->  $identical.object
+>  $identical_object
 >  [1] TRUE
 >  
->  $identical.content
+>  $identical_content
 >  [1] TRUE
 
 comp_1d(tab1, vec1, safer_check = TRUE)
->  $same.class
+>  $same_class
 >  [1] FALSE
 >  
 >  $class
 >  NULL
 >  
->  $same.length
+>  $same_length
 >  [1] TRUE
 >  
 >  $length
 >  [1] 5
 >  
->  $same.levels
+>  $same_levels
 >  NULL
 >  
 >  $levels
 >  NULL
 >  
->  $any.id.levels
+>  $any_id_levels
 >  [1] FALSE
 >  
->  $same.levels.pos1
+>  $same_levels_pos1
 >  NULL
 >  
->  $same.levels.pos2
+>  $same_levels_pos2
 >  NULL
 >  
->  $same.levels.match1
+>  $same_levels_match1
 >  NULL
 >  
->  $same.levels.match2
+>  $same_levels_match2
 >  NULL
 >  
->  $common.levels
+>  $common_levels
 >  NULL
 >  
->  $same.names
+>  $same_names
 >  [1] TRUE
 >  
 >  $name
 >  [1] "A" "B" "C" "D" "E"
 >  
->  $any.id.names
+>  $any_id_names
 >  [1] TRUE
 >  
->  $same.names.pos1
+>  $same_names_pos1
 >  [1] 1 2 3 4 5
 >  
->  $same.names.pos2
+>  $same_names_pos2
 >  [1] 1 2 3 4 5
 >  
->  $same.names.match1
+>  $same_names_match1
 >  [1] 1 2 3 4 5
 >  
->  $same.names.match2
+>  $same_names_match2
 >  [1] 1 2 3 4 5
 >  
->  $common.names
+>  $common_names
 >  [1] "A" "B" "C" "D" "E"
 >  
->  $any.id.elements
+>  $any_id_elements
 >  [1] TRUE
 >  
->  $same.elements.pos1
+>  $same_elements_pos1
 >  [1] 1 2 3 4 5
 >  
->  $same.elements.pos2
+>  $same_elements_pos2
 >  [1] 1 2 3 4 5
 >  
->  $same.elements.match1
+>  $same_elements_match1
 >  [1] 1 2 3 4 5
 >  
->  $same.elements.match2
+>  $same_elements_match2
 >  [1] 1 2 3 4 5
 >  
->  $common.elements
+>  $common_elements
 >  [1] 1 2 3 4 5
 >  
->  $same.order
+>  $same_order
 >  NULL
 >  
 >  $order1
@@ -702,9 +702,9 @@ comp_1d(tab1, vec1, safer_check = TRUE)
 >  $order2
 >  NULL
 >  
->  $identical.object
+>  $identical_object
 >  [1] FALSE
 >  
->  $identical.content
+>  $identical_content
 >  [1] FALSE
 ```
