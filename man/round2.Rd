@@ -33,6 +33,16 @@ The modified vector.
 Round a vector of values, if decimal, with the desired number of decimal digits after the decimal leading zeros.
 }
 \details{
+Same purpose as \code{\link[base]{round}}, with the following differences:
+
+- With \code{after_lead_zero = TRUE} (default), the \code{dec_nb} decimal digits are counted after the leading zeros of the decimal part (e.g., \code{round2(0.00128, dec_nb = 2)} returns \code{0.0013}, while \code{base::round(0.00128, digits = 2)} returns \code{0}). With \code{after_lead_zero = FALSE}, the rounding is the same as \code{base::round(x, digits = dec_nb)}, except for the floating point remarks below.
+
+- \code{data} can also be a vector of numbers written as character strings, which are returned as character strings. Only decimal numbers are modified.
+
+- \code{dec_nb} must be a single non negative integer (negative values of \code{digits}, accepted by \code{base::round()} to round to tens, hundreds, etc., are rejected), and \code{Inf} values, empty strings, NULL, empty or NA-only objects in \code{data} are rejected with an explicit error message.
+
+- The "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+
 WARNINGS
 
 Work well with numbers as character strings, but not always with numerical numbers because of the floating point.

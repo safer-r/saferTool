@@ -32,6 +32,15 @@ The minimum value and the maximum value of the given arguments.
 \description{
 Find and return the minimum value and the maximum value of a set of data.
 }
+\details{
+Same as \code{\link[base]{range}} (which is called internally, using \code{base::range(x = x, na.rm = na_rm, finite = finite)}), with the following differences:
+
+- A single object is accepted in \code{x} (no \code{...} argument), which must be a numeric or logical vector, matrix or table. Character values, NULL, empty objects (like \code{numeric(0)}, for which \code{base::range()} returns \code{c(Inf, -Inf)} with warnings) and objects made of NA only are rejected with an explicit error message.
+
+- The \code{na.rm} argument is named \code{na_rm}.
+
+- The "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+}
 \examples{
 # Warning: these examples may not work well when using the "Run examples" link 
 # because of a particular environment. Please, copy-paste in a local environment.

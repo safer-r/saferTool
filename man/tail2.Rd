@@ -33,6 +33,14 @@ The tail.
 As utils::tail() but display the left or right tail of big 2D objects.
 }
 \details{
+Same as \code{\link[utils]{tail}} (which is called internally for objects that are not 2D matrices, data frames or tables), with the following differences:
+
+- For 2D matrices, data frames and tables, \code{n} is applied to both rows and columns (instead of rows only), and the \code{side} argument selects the left or right columns. The 2D structure is kept, even when a single row or column is returned.
+
+- \code{n} must be a single positive integer (negative values, accepted by \code{utils::tail()} to remove the first elements, are rejected), and NULL, empty or NA-only objects in \code{data1} are rejected with an explicit error message.
+
+- The "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+
 Warning: other arguments of utils::tail() not used.
 
 For 2D objects, rows are always displayed from the bottom. Columns are displayed from the left if \code{side = "l"} and from the right if \code{side = "r"}.
