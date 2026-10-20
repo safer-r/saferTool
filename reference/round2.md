@@ -76,6 +76,31 @@ The modified vector.
 
 ## Details
 
+Same purpose as [`round`](https://rdrr.io/r/base/Round.html), with the
+following differences:
+
+\- With `after_lead_zero = TRUE` (default), the `dec_nb` decimal digits
+are counted after the leading zeros of the decimal part (e.g.,
+`round2(0.00128, dec_nb = 2)` returns `0.0013`, while
+`base::round(0.00128, digits = 2)` returns `0`). With
+`after_lead_zero = FALSE`, the rounding is the same as
+`base::round(x, digits = dec_nb)`, except for the floating point remarks
+below.
+
+\- `data` can also be a vector of numbers written as character strings,
+which are returned as character strings. Only decimal numbers are
+modified.
+
+\- `dec_nb` must be a single non negative integer (negative values of
+`digits`, accepted by
+[`base::round()`](https://rdrr.io/r/base/Round.html) to round to tens,
+hundreds, etc., are rejected), and `Inf` values, empty strings, NULL,
+empty or NA-only objects in `data` are rejected with an explicit error
+message.
+
+\- The "safer" checkings of the arguments and environment (see the
+`safer_check`, `lib_path` and `error_text` arguments).
+
 WARNINGS
 
 Work well with numbers as character strings, but not always with

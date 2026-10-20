@@ -26,6 +26,7 @@
     <li><a class="dropdown-item" href="../articles/head2.html">head2</a></li>
     <li><a class="dropdown-item" href="../articles/info.html">info</a></li>
     <li><a class="dropdown-item" href="../articles/max2.html">max2</a></li>
+    <li><a class="dropdown-item" href="../articles/mean2.html">mean2</a></li>
     <li><a class="dropdown-item" href="../articles/min2.html">min2</a></li>
     <li><a class="dropdown-item" href="../articles/name_change.html">name_change</a></li>
     <li><a class="dropdown-item" href="../articles/range2.html">range2</a></li>
@@ -100,7 +101,11 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Warning: other arguments of utils::head() not used.</p>
+    <p>Same as <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></code> (which is called internally for objects that are not 2D matrices, data frames or tables), with the following differences:</p>
+<p>- For 2D matrices, data frames and tables, <code>n</code> is applied to both rows and columns (instead of rows only), and the <code>side</code> argument selects the left or right columns. The 2D structure is kept, even when a single row or column is returned.</p>
+<p>- <code>n</code> must be a single positive integer (negative values, accepted by <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">utils::head()</a></code> to remove the last elements, are rejected), and NULL, empty or NA-only objects in <code>data1</code> are rejected with an explicit error message.</p>
+<p>- The "safer" checkings of the arguments and environment (see the <code>safer_check</code>, <code>lib_path</code> and <code>error_text</code> arguments).</p>
+<p>Warning: other arguments of utils::head() not used.</p>
 <p>For 2D objects, rows are always displayed from the top. Columns are displayed from the left if <code>side = "l"</code> and from the right if <code>side = "r"</code>.</p>
     </div>
     <div class="section level2">

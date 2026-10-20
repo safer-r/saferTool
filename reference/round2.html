@@ -26,6 +26,7 @@
     <li><a class="dropdown-item" href="../articles/head2.html">head2</a></li>
     <li><a class="dropdown-item" href="../articles/info.html">info</a></li>
     <li><a class="dropdown-item" href="../articles/max2.html">max2</a></li>
+    <li><a class="dropdown-item" href="../articles/mean2.html">mean2</a></li>
     <li><a class="dropdown-item" href="../articles/min2.html">min2</a></li>
     <li><a class="dropdown-item" href="../articles/name_change.html">name_change</a></li>
     <li><a class="dropdown-item" href="../articles/range2.html">range2</a></li>
@@ -100,7 +101,12 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>WARNINGS</p>
+    <p>Same purpose as <code><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></code>, with the following differences:</p>
+<p>- With <code>after_lead_zero = TRUE</code> (default), the <code>dec_nb</code> decimal digits are counted after the leading zeros of the decimal part (e.g., <code>round2(0.00128, dec_nb = 2)</code> returns <code>0.0013</code>, while <code>base::round(0.00128, digits = 2)</code> returns <code>0</code>). With <code>after_lead_zero = FALSE</code>, the rounding is the same as <code>base::round(x, digits = dec_nb)</code>, except for the floating point remarks below.</p>
+<p>- <code>data</code> can also be a vector of numbers written as character strings, which are returned as character strings. Only decimal numbers are modified.</p>
+<p>- <code>dec_nb</code> must be a single non negative integer (negative values of <code>digits</code>, accepted by <code><a href="https://rdrr.io/r/base/Round.html" class="external-link">base::round()</a></code> to round to tens, hundreds, etc., are rejected), and <code>Inf</code> values, empty strings, NULL, empty or NA-only objects in <code>data</code> are rejected with an explicit error message.</p>
+<p>- The "safer" checkings of the arguments and environment (see the <code>safer_check</code>, <code>lib_path</code> and <code>error_text</code> arguments).</p>
+<p>WARNINGS</p>
 <p>Work well with numbers as character strings, but not always with numerical numbers because of the floating point.</p>
 <p>Numeric values are really truncated from a part of their decimal digits, whatever options(digits) settings.</p>
 <p>See ?.Machine or https://stackoverflow.com/questions/5173692/how-to-return-number-of-decimal-places-in-r, with the interexting formula: abs(x - round(x)) &gt; .Machine$double.eps^0.5.</p>

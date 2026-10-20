@@ -44,6 +44,7 @@
     <li><a class="dropdown-item" href="articles/head2.html">head2</a></li>
     <li><a class="dropdown-item" href="articles/info.html">info</a></li>
     <li><a class="dropdown-item" href="articles/max2.html">max2</a></li>
+    <li><a class="dropdown-item" href="articles/mean2.html">mean2</a></li>
     <li><a class="dropdown-item" href="articles/min2.html">min2</a></li>
     <li><a class="dropdown-item" href="articles/name_change.html">name_change</a></li>
     <li><a class="dropdown-item" href="articles/range2.html">range2</a></li>
@@ -93,7 +94,7 @@
 <div class="section level2">
 <h2 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
 </h2>
-<p>Set of R functions for the development of R functions, written according to the <a href="https://github.com/safer-r" class="external-link">safer-R project</a> specifications.</p>
+<p>Set of R basic functions, like 1D or 2D objects comparison, or the rewriting of <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max()</a></code>, <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min()</a></code>, <code><a href="https://rdrr.io/r/base/range.html" class="external-link">range()</a></code>, <code><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum()</a></code>, <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean()</a></code>, <code><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample()</a></code>, according to the <a href="https://github.com/safer-r" class="external-link">safer-R project</a> specifications.</p>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -128,7 +129,7 @@
 </tr>
 <tr>
 <td align="left"><strong>head2()</strong></td>
-<td align="left">As utils::head() but display the left or right head of big 2D objects.</td>
+<td align="left">As <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">utils::head()</a></code> but display the left or right head of big 2D objects.</td>
 </tr>
 <tr>
 <td align="left"><strong>info()</strong></td>
@@ -136,11 +137,15 @@
 </tr>
 <tr>
 <td align="left"><strong>max2()</strong></td>
-<td align="left">As base::max() but accepting logical values.</td>
+<td align="left">As <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">base::max()</a></code> but accepting logical values.</td>
+</tr>
+<tr>
+<td align="left"><strong>mean2()</strong></td>
+<td align="left">As <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">base::mean()</a></code> but accepting logical values, with an explicit error for factor inputs (base::mean() silently returns NA with a warning) and a range checking of the trim argument (0 to 0.5).</td>
 </tr>
 <tr>
 <td align="left"><strong>min2()</strong></td>
-<td align="left">As base::min() but accepting logical values.</td>
+<td align="left">As <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">base::min()</a></code> but accepting logical values.</td>
 </tr>
 <tr>
 <td align="left"><strong>name_change()</strong></td>
@@ -148,7 +153,7 @@
 </tr>
 <tr>
 <td align="left"><strong>range2()</strong></td>
-<td align="left">As base::range() but accepting logical values.</td>
+<td align="left">As <code><a href="https://rdrr.io/r/base/range.html" class="external-link">base::range()</a></code> but accepting logical values.</td>
 </tr>
 <tr>
 <td align="left"><strong>round2()</strong></td>
@@ -156,15 +161,15 @@
 </tr>
 <tr>
 <td align="left"><strong>sample2()</strong></td>
-<td align="left">As base::sample() but with a corrected behavior when x is made of a single positive numeric value (the single value is sampled as itself, instead of being used as the size of the population 1:x), and a set_seed argument that restores the initial .Random.seed state after execution.</td>
+<td align="left">As <code><a href="https://rdrr.io/r/base/sample.html" class="external-link">base::sample()</a></code> but with a corrected behavior when <code>x</code> is made of a single positive numeric value (the single value is sampled as itself, instead of being used as the size of the population <code>1:x</code>), and a <code>set_seed</code> argument that restores the initial .Random.seed state after execution.</td>
 </tr>
 <tr>
 <td align="left"><strong>sum2()</strong></td>
-<td align="left">As base::sum() but accepting logical values.</td>
+<td align="left">As <code><a href="https://rdrr.io/r/base/sum.html" class="external-link">base::sum()</a></code> but accepting logical values.</td>
 </tr>
 <tr>
 <td align="left"><strong>tail2()</strong></td>
-<td align="left">As utils::tail() but display the left or right tail of big 2D objects.</td>
+<td align="left">As <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">utils::tail()</a></code> but display the left or right tail of big 2D objects.</td>
 </tr>
 </tbody>
 </table>
@@ -175,7 +180,7 @@
 <div class="section level2">
 <h2 id="versions">Versions<a class="anchor" aria-label="anchor" href="#versions"></a>
 </h2>
-<p>The different <em>saferTool</em> releases are tagged <a href="https://github.com/safer-r/saferTool/tags" class="external-link">here</a>.</p>
+<p>The different <em>saferTool</em> releases are tagged <a href="https://github.com/safer-r/saferTool/releases" class="external-link">here</a>.</p>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -202,7 +207,7 @@
 </h2>
 <p>If you are using functions of <em>saferTool</em>, please cite:</p>
 <blockquote>
-<p>Wang H, Han Y, Serizay J, Millot GA (2023). <em>The R saferTool package</em>. <a href="https://github.com/safer-r/saferTool/" class="external-link uri">https://github.com/safer-r/saferTool/</a>.</p>
+<p>Wang H, Han Y, Legras M, Serizay J, Millot GA (2026). <em>The R saferTool package</em>. <a href="https://github.com/safer-r/saferTool/" class="external-link uri">https://github.com/safer-r/saferTool/</a>.</p>
 </blockquote>
 <p><br></p>
 </div>
@@ -210,9 +215,10 @@
 <h2 id="credits">Credits<a class="anchor" aria-label="anchor" href="#credits"></a>
 </h2>
 <p><a href="https://github.com/Tintin2710" class="external-link">Haiding Wang</a>, Bioinformatics and Biostatistics Hub, Institut Pasteur, Paris, France</p>
-<p><a href="https://github.com/yushiHn/" class="external-link">Yushi Han</a>, Bioinformatics and Biostatistics Hub, Institut Pasteur, Paris, France</p>
+<p><a href="https://github.com/yushiHn" class="external-link">Yushi Han</a>, Bioinformatics and Biostatistics Hub, Institut Pasteur, Paris, France</p>
 <p><a href="https://github.com/mialgrs" class="external-link">Mia Legras</a>, Bioinformatics and Biostatistics Hub, Institut Pasteur, Paris, France</p>
 <p><a href="https://github.com/js2264" class="external-link">Jacques Serizay</a>, Spatial Regulation of Genomes team, Institut Pasteur, Paris, France</p>
+<p><a href="https://docs.z.ai/guides/llm/glm-5.3" class="external-link">GLM-5.3</a>, hosted to Institut Pasteur, Paris, France</p>
 <p><a href="https://github.com/gael-millot" class="external-link">Gael A. Millot</a>, Bioinformatics and Biostatistics Hub, Institut Pasteur, Paris, France</p>
 <p><br></p>
 </div>
@@ -224,7 +230,10 @@
 <li><a href="https://www.r-project.org/" class="external-link">R</a></li>
 <li><a href="https://git-scm.com/" class="external-link">Git</a></li>
 <li><a href="https://github.com/" class="external-link">Github</a></li>
+<li><a href="https://opencode.ai/" class="external-link">opencode</a></li>
+<li><a href="https://docs.z.ai/guides/llm/glm-5.3" class="external-link">GLM-5.3</a></li>
 </ul>
+<p>The Information Technology team of Institut Pasteur.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">

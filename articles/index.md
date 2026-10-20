@@ -9,6 +9,7 @@
 - [head2](head2.md):
 - [info](info.md):
 - [max2](max2.md):
+- [mean2](mean2.md):
 - [min2](min2.md):
 - [name_change](name_change.md):
 - [range2](range2.md):

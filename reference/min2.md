@@ -73,6 +73,27 @@ min2(
 
 The minimum value of the given arguments.
 
+## Details
+
+Same as [`min`](https://rdrr.io/r/base/Extremes.html) (which is called
+internally, using `base::min(x = x, na.rm = na_rm)`), with the following
+differences:
+
+\- A single object is accepted in `x` (no `...` argument), which must be
+a numeric or logical vector, matrix or table. Character values, NULL,
+empty objects (like `numeric(0)`, for which
+[`base::min()`](https://rdrr.io/r/base/Extremes.html) returns `Inf` with
+a warning) and objects made of NA only are rejected with an explicit
+error message.
+
+\- The `na.rm` argument is named `na_rm`.
+
+\- The additional `finite` argument removes the `Inf` and `-Inf` values
+before computation.
+
+\- The "safer" checkings of the arguments and environment (see the
+`safer_check`, `lib_path` and `error_text` arguments).
+
 ## See also
 
 [`min`](https://rdrr.io/r/base/Extremes.html)

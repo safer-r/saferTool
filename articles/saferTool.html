@@ -42,6 +42,7 @@
     <li><a class="dropdown-item" href="../articles/head2.html">head2</a></li>
     <li><a class="dropdown-item" href="../articles/info.html">info</a></li>
     <li><a class="dropdown-item" href="../articles/max2.html">max2</a></li>
+    <li><a class="dropdown-item" href="../articles/mean2.html">mean2</a></li>
     <li><a class="dropdown-item" href="../articles/min2.html">min2</a></li>
     <li><a class="dropdown-item" href="../articles/name_change.html">name_change</a></li>
     <li><a class="dropdown-item" href="../articles/range2.html">range2</a></li>
@@ -151,26 +152,32 @@ optional truncation warning).</td>
 <td align="left">As base::max() but accepting logical values.</td>
 </tr>
 <tr class="even">
+<td align="left"><strong>mean2()</strong></td>
+<td align="left">As base::mean() but accepting logical values, with an
+explicit error for factor inputs (base::mean() silently returns NA with
+a warning) and a range checking of the trim argument (0 to 0.5).</td>
+</tr>
+<tr class="odd">
 <td align="left"><strong>min2()</strong></td>
 <td align="left">As base::min() but accepting logical values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><strong>name_change()</strong></td>
 <td align="left">This function allow to check if a vector of character
 strings, like column names of a data frame, has elements present in
 another vector (vector of reserved words or column names of another data
 frame before merging).</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><strong>range2()</strong></td>
 <td align="left">As base::range() but accepting logical values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><strong>round2()</strong></td>
 <td align="left">Round a vector of values, if decimal, with the desired
 number of decimal digits after the decimal leading zeros.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><strong>sample2()</strong></td>
 <td align="left">As base::sample() but with a corrected behavior when x
 is made of a single positive numeric value (the single value is sampled
@@ -178,11 +185,11 @@ as itself, instead of being used as the size of the population 1:x), and
 a set_seed argument that restores the initial .Random.seed state after
 execution.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><strong>sum2()</strong></td>
 <td align="left">As base::sum() but accepting logical values.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><strong>tail2()</strong></td>
 <td align="left">As utils::tail() but display the left or right tail of
 big 2D objects.</td>
@@ -197,6 +204,7 @@ big 2D objects.</td>
 <a href="https://safer-r.github.io/saferTool/articles/head2.html" class="external-link">head2</a>,
 <a href="https://safer-r.github.io/saferTool/articles/info.html" class="external-link">info</a>,
 <a href="https://safer-r.github.io/saferTool/articles/max2.html" class="external-link">max2</a>,
+<a href="https://safer-r.github.io/saferTool/articles/mean2.html" class="external-link">mean2</a>,
 <a href="https://safer-r.github.io/saferTool/articles/min2.html" class="external-link">min2</a>,
 <a href="https://safer-r.github.io/saferTool/articles/name_change.html" class="external-link">name_change</a>,
 <a href="https://safer-r.github.io/saferTool/articles/range2.html" class="external-link">range2</a>,

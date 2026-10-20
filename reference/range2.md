@@ -76,6 +76,24 @@ range2(
 
 The minimum value and the maximum value of the given arguments.
 
+## Details
+
+Same as [`range`](https://rdrr.io/r/base/range.html) (which is called
+internally, using `base::range(x = x, na.rm = na_rm, finite = finite)`),
+with the following differences:
+
+\- A single object is accepted in `x` (no `...` argument), which must be
+a numeric or logical vector, matrix or table. Character values, NULL,
+empty objects (like `numeric(0)`, for which
+[`base::range()`](https://rdrr.io/r/base/range.html) returns
+`c(Inf, -Inf)` with warnings) and objects made of NA only are rejected
+with an explicit error message.
+
+\- The `na.rm` argument is named `na_rm`.
+
+\- The "safer" checkings of the arguments and environment (see the
+`safer_check`, `lib_path` and `error_text` arguments).
+
 ## See also
 
 [`range`](https://rdrr.io/r/base/range.html)

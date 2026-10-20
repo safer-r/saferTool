@@ -78,6 +78,23 @@ The head.
 
 ## Details
 
+Same as [`head`](https://rdrr.io/r/utils/head.html) (which is called
+internally for objects that are not 2D matrices, data frames or tables),
+with the following differences:
+
+\- For 2D matrices, data frames and tables, `n` is applied to both rows
+and columns (instead of rows only), and the `side` argument selects the
+left or right columns. The 2D structure is kept, even when a single row
+or column is returned.
+
+\- `n` must be a single positive integer (negative values, accepted by
+[`utils::head()`](https://rdrr.io/r/utils/head.html) to remove the last
+elements, are rejected), and NULL, empty or NA-only objects in `data1`
+are rejected with an explicit error message.
+
+\- The "safer" checkings of the arguments and environment (see the
+`safer_check`, `lib_path` and `error_text` arguments).
+
 Warning: other arguments of utils::head() not used.
 
 For 2D objects, rows are always displayed from the top. Columns are

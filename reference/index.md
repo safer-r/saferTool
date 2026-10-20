@@ -28,6 +28,10 @@
 
 - [`max2()`](max2.md) : max2
 
+## mean2
+
+- [`mean2()`](mean2.md) : mean2
+
 ## min2
 
 - [`min2()`](min2.md) : min2

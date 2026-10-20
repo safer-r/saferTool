@@ -110,6 +110,14 @@ sampling a matrix returns a vector).
 
 ## Details
 
+Same as [`sample`](https://rdrr.io/r/base/sample.html), with the
+following differences: 1) the corrected behavior when `x` is made of a
+single positive numeric value (see below), 2) the additional `set_seed`
+argument, which does not modify the random generator state of the user,
+3) the stricter checking of `size` and `prob` (see these arguments), and
+4) the "safer" checkings of the arguments and environment (see the
+`safer_check`, `lib_path` and `error_text` arguments).
+
 The [`sample`](https://rdrr.io/r/base/sample.html) function behaves in a
 confusing way when `x` is made of a single positive numeric value:
 `base::sample(x = 4, size = 3, replace = TRUE)` draws 3 values between 1

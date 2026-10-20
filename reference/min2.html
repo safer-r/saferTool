@@ -26,6 +26,7 @@
     <li><a class="dropdown-item" href="../articles/head2.html">head2</a></li>
     <li><a class="dropdown-item" href="../articles/info.html">info</a></li>
     <li><a class="dropdown-item" href="../articles/max2.html">max2</a></li>
+    <li><a class="dropdown-item" href="../articles/mean2.html">mean2</a></li>
     <li><a class="dropdown-item" href="../articles/min2.html">min2</a></li>
     <li><a class="dropdown-item" href="../articles/name_change.html">name_change</a></li>
     <li><a class="dropdown-item" href="../articles/range2.html">range2</a></li>
@@ -97,6 +98,14 @@
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>The minimum value of the given arguments.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Same as <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></code> (which is called internally, using <code>base::min(x = x, na.rm = na_rm)</code>), with the following differences:</p>
+<p>- A single object is accepted in <code>x</code> (no <code>...</code> argument), which must be a numeric or logical vector, matrix or table. Character values, NULL, empty objects (like <code>numeric(0)</code>, for which <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">base::min()</a></code> returns <code>Inf</code> with a warning) and objects made of NA only are rejected with an explicit error message.</p>
+<p>- The <code>na.rm</code> argument is named <code>na_rm</code>.</p>
+<p>- The additional <code>finite</code> argument removes the <code>Inf</code> and <code>-Inf</code> values before computation.</p>
+<p>- The "safer" checkings of the arguments and environment (see the <code>safer_check</code>, <code>lib_path</code> and <code>error_text</code> arguments).</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

@@ -21,6 +21,7 @@ specifications.
 | **head2()** | As utils::head() but display the left or right head of big 2D objects. |
 | **info()** | Provide the class, the type, the length, the head, the tail and other info of an object in a list (does not print, except the optional truncation warning). |
 | **max2()** | As base::max() but accepting logical values. |
+| **mean2()** | As base::mean() but accepting logical values, with an explicit error for factor inputs (base::mean() silently returns NA with a warning) and a range checking of the trim argument (0 to 0.5). |
 | **min2()** | As base::min() but accepting logical values. |
 | **name_change()** | This function allow to check if a vector of character strings, like column names of a data frame, has elements present in another vector (vector of reserved words or column names of another data frame before merging). |
 | **range2()** | As base::range() but accepting logical values. |
@@ -39,6 +40,7 @@ See the articles for more examples of each function:
 [head2](https://safer-r.github.io/saferTool/articles/head2.html),
 [info](https://safer-r.github.io/saferTool/articles/info.html),
 [max2](https://safer-r.github.io/saferTool/articles/max2.html),
+[mean2](https://safer-r.github.io/saferTool/articles/mean2.html),
 [min2](https://safer-r.github.io/saferTool/articles/min2.html),
 [name_change](https://safer-r.github.io/saferTool/articles/name_change.html),
 [range2](https://safer-r.github.io/saferTool/articles/range2.html),
