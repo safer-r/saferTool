@@ -21,6 +21,7 @@ testthat::test_that("mandatory arg block of safer-r functions (public functions)
         min2 = base::quote(min2(x = 1:3, na_rm = TRUE, finite = FALSE, safer_check = FALSE, error_text = "")),
         range2 = base::quote(range2(x = 1:3, na_rm = TRUE, finite = FALSE, safer_check = FALSE, error_text = "")),
         sum2 = base::quote(sum2(x = 1:3, na_rm = TRUE, finite = FALSE, safer_check = FALSE, error_text = "")),
+        mean2 = base::quote(mean2(x = 1:3, trim = 0, na_rm = TRUE, finite = FALSE, safer_check = FALSE, error_text = "")),
         tail2 = base::quote(tail2(data1 = base::matrix(1:4, ncol = 2), n = 2, side = "l", safer_check = FALSE, error_text = ""))
     )
     ## end data argument values

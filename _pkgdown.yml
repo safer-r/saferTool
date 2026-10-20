@@ -36,6 +36,9 @@ reference:
 - title: "max2"
   contents: 
   - max2
+- title: "mean2"
+  contents: 
+  - mean2
 - title: "min2"
   contents: 
   - min2
