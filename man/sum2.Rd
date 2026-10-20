@@ -32,6 +32,17 @@ The sum of the given arguments. Returns NA if the input contains NA and the argu
 \description{
 Calculate the sum of numeric and logical value.
 }
+\details{
+Same as \code{\link[base]{sum}} (which is called internally, using \code{base::sum(x = x, na.rm = na_rm)}), with the following differences:
+
+- A single object is accepted in \code{x} (no \code{...} argument), which must be a numeric or logical vector, matrix or table. Character values, NULL, empty objects (like \code{numeric(0)}, for which \code{base::sum()} returns \code{0}) and objects made of NA only are rejected with an explicit error message.
+
+- The \code{na.rm} argument is named \code{na_rm}.
+
+- The additional \code{finite} argument removes the \code{Inf} and \code{-Inf} values before computation.
+
+- The "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+}
 \examples{
 # Warning: these examples may not work well when using the "Run examples" link 
 # because of a particular environment. Please, copy-paste in a local environment.

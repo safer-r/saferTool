@@ -8,6 +8,16 @@
 #' @param lib_path Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{unique(c(new, .Library.site, .Library))}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.
 #' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.
 #' @returns The minimum value of the given arguments. 
+#' @details
+#' Same as \code{\link[base]{min}} (which is called internally, using \code{base::min(x = x, na.rm = na_rm)}), with the following differences:
+#' 
+#' - A single object is accepted in \code{x} (no \code{...} argument), which must be a numeric or logical vector, matrix or table. Character values, NULL, empty objects (like \code{numeric(0)}, for which \code{base::min()} returns \code{Inf} with a warning) and objects made of NA only are rejected with an explicit error message.
+#' 
+#' - The \code{na.rm} argument is named \code{na_rm}.
+#' 
+#' - The additional \code{finite} argument removes the \code{Inf} and \code{-Inf} values before computation.
+#' 
+#' - The "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
 #' @seealso \code{\link[base]{min}}
 #' @author Gael Millot <gael.millot@pasteur.fr>
 #' @author Yushi Han <yushi.han2000@gmail.com>
