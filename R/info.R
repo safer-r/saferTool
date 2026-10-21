@@ -593,7 +593,7 @@ info <- function(
         output <- base::c(output, tempo)
     }
     if( ! base::is.null(x = n)){
-        output[base::names(x = output) != "STRUCTURE"] <- base::lapply(X = output[base::names(x = output) != "STRUCTURE"], FUN = utils::head, n = n, simplify = FALSE)
+        output[base::names(x = output) != "STRUCTURE"] <- base::lapply(X = output[base::names(x = output) != "STRUCTURE"], FUN = utils::head, n = n)
     }
     #### end main code
 
