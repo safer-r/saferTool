@@ -1,8 +1,8 @@
 Package: saferTool
 Type: Package
 Title: Basic Tools for Object Analysis and Object Modification
-Version: 1.1.0
-Date: 2026-10-16
+Version: 1.2.0
+Date: 2026-10-24
 Authors@R: c(
     person(given = "Haiding", family = "Wang", role = "ctb"),
     person(given = "Yushi", family = "Han", role = "ctb"),
