@@ -24,7 +24,7 @@ min2(
 
 \item{lib_path}{Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{unique(c(new, .Library.site, .Library))}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.}
 
-\item{error_text}{Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.}
+\item{error_text}{Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.}
 }
 \value{
 The minimum value of the given arguments.
@@ -33,35 +33,37 @@ The minimum value of the given arguments.
 Find and return the minimum value of a set of data.
 }
 \details{
-Same as \code{\link[base]{min}} (which is called internally, using \code{base::min(x = x, na.rm = na_rm)}), with the following differences:
+Same as \code{base::min()} but:
+\itemize{
+  \item a single object in \code{x} (no \code{...} argument), made of numeric or logical values (vector, matrix or table).
+  \item error message if \code{x} is made of characters, is \code{NULL}, is empty (\code{base::min(numeric(0))} returns \code{Inf} with a warning) or is made of \code{NA} only.
+  \item \code{na_rm} instead of \code{na.rm}.
+  \item \code{finite} argument added, to remove \code{Inf} and \code{-Inf} values before computation.
+  \item "safer" checkings (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+}
 
-- A single object is accepted in \code{x} (no \code{...} argument), which must be a numeric or logical vector, matrix or table. Character values, NULL, empty objects (like \code{numeric(0)}, for which \code{base::min()} returns \code{Inf} with a warning) and objects made of NA only are rejected with an explicit error message.
-
-- The \code{na.rm} argument is named \code{na_rm}.
-
-- The additional \code{finite} argument removes the \code{Inf} and \code{-Inf} values before computation.
-
-- The "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+Of note, \code{base::min(x = x, na.rm = na_rm)} is used internally.
 }
 \examples{
 # Warning: these examples may not work well when using the "Run examples" link 
 # because of a particular environment. Please, copy-paste in a local environment.
 # See also https://safer-r.github.io/saferTool/articles/min2.html
-vec <- c(1:3) ; min2(x = vec)
+saferTool::min2(x = 1:3)
 
-vec <- c(1, 3, 5, TRUE, FALSE) ; min2(x = vec)
+saferTool::min2(x = c(1, 3, 5, TRUE, FALSE))
 
-
-# This example returns an error because of the character in the vector
-# vec <- c(1,3,5,TRUE,"apple") ; min2(x = vec)
+\dontrun{
+# Example that returns an error (character in the vector)
+saferTool::min2(x = c(1, 3, 5, TRUE, "apple"))
+}
 }
 \seealso{
 \code{\link[base]{min}}
 }
 \author{
-Gael Millot <gael.millot@pasteur.fr>
+\href{mailto:gael.millot@pasteur.fr}{Gael Millot}
 
-Yushi Han <yushi.han2000@gmail.com>
+Haiding Wang
 
-Haiding Wang <wanghaiding442@gmail.com>
+Yushi Han
 }

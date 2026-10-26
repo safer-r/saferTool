@@ -6,32 +6,33 @@
 #' @param side Either "l" or "r" for the left or right side of the 2D object (only for matrix, data frame or table). Ignored if data1 is not a matrix, data frame or table.
 #' @param safer_check Single logical value. Perform some "safer" checks? If \code{TRUE}, checkings are performed before main code running (see the \href{https://github.com/safer-r}{safer-r project}): 1) correct \code{lib_path} argument value 2) required functions and related packages effectively present in local R libraries and 3) R classical operators (like \code{"<-"}) not overwritten by another package because of the R scope. Must be set to \code{FALSE} if this function is used inside another "safer" function to avoid pointless multiple checkings.
 #' @param lib_path Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{unique(c(new, .Library.site, .Library))}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.
-#' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.
+#' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.
 #' @returns The head.
 #' @details 
-#' Same as \code{\link[utils]{head}} (which is called internally for objects that are not 2D matrices, data frames or tables), with the following differences:
-#' 
-#' - For 2D matrices, data frames and tables, \code{n} is applied to both rows and columns (instead of rows only), and the \code{side} argument selects the left or right columns. The 2D structure is kept, even when a single row or column is returned.
-#' 
-#' - \code{n} must be a single positive integer (negative values, accepted by \code{utils::head()} to remove the last elements, are rejected), and NULL, empty or NA-only objects in \code{data1} are rejected with an explicit error message.
-#' 
-#' - The "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
-#' 
+#' Same as \code{utils::head()} but:
+#' \itemize{
+#'   \item for 2D matrices, data frames and tables, \code{n} is used for rows and columns (not only rows), and \code{side} selects the left or right columns. The 2D structure is kept, even if a single row or column is returned.
+#'   \item error message if \code{n} is not a single positive integer (\code{utils::head()} uses negative values to remove the last elements), and if \code{data1} is \code{NULL}, empty or made of \code{NA} only.
+#'   \item "safer" checkings (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+#' }
+#'
+#' Of note, \code{utils::head()} is used internally for objects that are not 2D matrices, data frames or tables.
+#'
 #' Warning: other arguments of utils::head() not used.
 #' 
 #' For 2D objects, rows are always displayed from the top. Columns are displayed from the left if \code{side = "l"} and from the right if \code{side = "r"}.
 #' @seealso \code{\link[utils]{head}}
-#' @author Gael Millot <gael.millot@pasteur.fr>
-#' @author Yushi Han <yushi.han2000@gmail.com>
-#' @author Haiding Wang <wanghaiding442@gmail.com>
+#' @author \href{mailto:gael.millot@pasteur.fr}{Gael Millot}
+#' @author Haiding Wang
+#' @author Yushi Han
 #' @examples
 #' # Warning: these examples may not work well when using the "Run examples" link 
 #' # because of a particular environment. Please, copy-paste in a local environment.
 #' # See also https://safer-r.github.io/saferTool/articles/head2.html
-#' obs1 = matrix(1:30, ncol = 5, dimnames = list(letters[1:6], LETTERS[1:5])) ; 
-#' obs1 ; 
-#' head2(obs1, 3)
-#' head2(letters, 8)
+#' obs1 <- matrix(1:30, ncol = 5, dimnames = list(letters[1:6], LETTERS[1:5]))
+#' obs1
+#' saferTool::head2(data1 = obs1, n = 3)
+#' saferTool::head2(data1 = letters, n = 8)
 #' @importFrom saferDev arg_check
 #' @export
 head2 <- function(

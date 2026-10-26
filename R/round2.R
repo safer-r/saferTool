@@ -6,18 +6,16 @@
 #' @param after_lead_zero Single logical value. If FALSE, rounding is performed for all the decimal numbers, whatever the leading zeros (e.g., 0.123 -> 0.12 and 0.00128 -> 0.00). If TRUE, dec_nb are taken after the leading zeros (e.g., 0.123 -> 0.12 and 0.00128 -> 0.0013).
 #' @param safer_check Single logical value. Perform some "safer" checks? If \code{TRUE}, checkings are performed before main code running (see the \href{https://github.com/safer-r}{safer-r project}): 1) correct \code{lib_path} argument value 2) required functions and related packages effectively present in local R libraries and 3) R classical operators (like \code{"<-"}) not overwritten by another package because of the R scope. Must be set to \code{FALSE} if this function is used inside another "safer" function to avoid pointless multiple checkings.
 #' @param lib_path Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{unique(c(new, .Library.site, .Library))}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.
-#' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.
+#' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.
 #' @returns The modified vector.
 #' @details 
-#' Same purpose as \code{\link[base]{round}}, with the following differences:
-#' 
-#' - With \code{after_lead_zero = TRUE} (default), the \code{dec_nb} decimal digits are counted after the leading zeros of the decimal part (e.g., \code{round2(0.00128, dec_nb = 2)} returns \code{0.0013}, while \code{base::round(0.00128, digits = 2)} returns \code{0}). With \code{after_lead_zero = FALSE}, the rounding is the same as \code{base::round(x, digits = dec_nb)}, except for the floating point remarks below.
-#' 
-#' - \code{data} can also be a vector of numbers written as character strings, which are returned as character strings. Only decimal numbers are modified.
-#' 
-#' - \code{dec_nb} must be a single non negative integer (negative values of \code{digits}, accepted by \code{base::round()} to round to tens, hundreds, etc., are rejected), and \code{Inf} values, empty strings, NULL, empty or NA-only objects in \code{data} are rejected with an explicit error message.
-#' 
-#' - The "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+#' Same purpose as \code{base::round()} but:
+#' \itemize{
+#'   \item with \code{after_lead_zero = TRUE} (default), \code{dec_nb} decimal digits taken after the leading zeros of the decimal part. Example: \code{round2(0.00128, dec_nb = 2)} returns \code{0.0013}, while \code{base::round(0.00128, digits = 2)} returns \code{0}. With \code{after_lead_zero = FALSE}, same as \code{base::round(x, digits = dec_nb)}, except for the floating point remarks below.
+#'   \item \code{data} can also be numbers written as character strings, which are returned as character strings. Only decimal numbers are modified.
+#'   \item error message if \code{dec_nb} is not a single non negative integer (\code{base::round()} uses negative values to round to tens, hundreds, etc.), and if \code{data} contains \code{Inf} or \code{""}, is \code{NULL}, empty or made of \code{NA} only.
+#'   \item "safer" checkings (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+#' }
 #' 
 #' WARNINGS
 #' 
@@ -27,17 +25,20 @@
 #' 
 #' See ?.Machine or https://stackoverflow.com/questions/5173692/how-to-return-number-of-decimal-places-in-r, with the interexting formula: abs(x - round(x)) > .Machine$double.eps^0.5.
 #' @seealso \code{\link{round}}
-#' @author Gael Millot <gael.millot@pasteur.fr>
-#' @author Yushi Han <yushi.han2000@gmail.com>
-#' @author Haiding Wang <wanghaiding442@gmail.com>
+#' @author \href{mailto:gael.millot@pasteur.fr}{Gael Millot}
+#' @author Haiding Wang
+#' @author Yushi Han
 #' @examples
 #' # Warning: these examples may not work well when using the "Run examples" link 
 #' # because of a particular environment. Please, copy-paste in a local environment.
 #' # See also https://safer-r.github.io/saferTool/articles/round2.html
-#' ini.options <- options()$digits ; 
-#' options(digits = 8) ; 
-#' cat(round2(data = c(NA, 10, 100.001, 333.0001254, 12312.1235), dec_nb = 2, after_lead_zero = FALSE), "\n\n") ; 
-#' options(digits = ini.options)
+#' ini_digits <- options()$digits
+#' options(digits = 8)
+#' saferTool::round2(data = c(NA, 10, 100.001, 333.0001254, 12312.1235), dec_nb = 2,
+#'     after_lead_zero = FALSE)
+#' saferTool::round2(data = c(NA, 10, 100.001, 333.0001254, 12312.1235), dec_nb = 2,
+#'     after_lead_zero = TRUE)
+#' options(digits = ini_digits)
 #' @importFrom saferDev arg_check
 #' @export
 round2 <- function(

@@ -1,12 +1,12 @@
 
-# saferTool <a href="https://safer-r.github.io/saferTool">[<img src="man/figures/new_saferTool.png" align="right" height="140" />](https://safer-r.github.io/saferTool/)</a>
+# saferTool <a href="https://safer-r.github.io/saferTool">[<img src="man/figures/saferTool.png" align="right" height="140" />](https://safer-r.github.io/saferTool/)</a>
 
 <br />
 
 <!-- badges: start -->
 
 [![CRAN status](https://img.shields.io/cran/v/saferTool.svg)](https://cran.r-project.org/package=saferTool)
-[![R Version](https://img.shields.io/badge/R-%3E%3D%204.5.0-blue?logo=R)](https://cran.r-project.org/)
+[![R Version](https://img.shields.io/badge/R-%3E%3D%204.6.0-blue?logo=R)](https://cran.r-project.org/)
 [![Downloads](https://cranlogs.r-pkg.org/badges/saferTool)](https://r-pkg.org/pkg/saferTool)<br />
 [![Rworkflows](https://github.com/safer-r/saferTool/actions/workflows/rworkflows.yml/badge.svg)](https://github.com/safer-r/saferTool/actions/workflows/rworkflows.yml)
 [![Codecov](https://codecov.io/github/safer-r/saferTool/coverage.svg?branch=master)](https://app.codecov.io/github/safer-r/saferTool?branch=master)
@@ -76,7 +76,7 @@ The different *saferTool* releases are tagged [here](https://github.com/safer-r/
 
 ```r
 install.packages("remotes")
-remotes::install_github("https://github.com/safer-r/saferTool") # or open R as admin and remotes::install_github("https://github.com/safer-r/saferTool", lib = "C:/Program Files/R/R-4.5.2/library")
+remotes::install_github("https://github.com/safer-r/saferTool") # or open R as admin and remotes::install_github("https://github.com/safer-r/saferTool", lib = "C:/Program Files/R/R-4.6.0/library")
 ```
 
 Older versions can be installed like this:

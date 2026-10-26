@@ -8,29 +8,36 @@
 #' @param set_seed Either \code{NULL} (default) or a single positive or negative integer (integers of type \code{double} are accepted when they have a 0 modulo) used in \code{base::set.seed()} before sampling. Warning: unlike \code{base::set.seed()} called in the global environment, the \code{.Random.seed} object of the user global environment is restored at the end of the function execution (the random generator state existing before the function call), so that the function does not modify the random generator state of the user. If \code{NULL}, the current random generator state of the user is directly used and modified, like in \code{\link[base]{sample}}.
 #' @param safer_check Single logical value. Perform some "safer" checks? If \code{TRUE}, checkings are performed before main code running (see the \href{https://github.com/safer-r}{safer-r project}): 1) correct \code{lib_path} argument value 2) required functions and related packages effectively present in local R libraries and 3) R classical operators (like \code{"<-"}) not overwritten by another package because of the R scope. Must be set to \code{FALSE} if this function is used inside another "safer" function to avoid pointless multiple checkings.
 #' @param lib_path Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{unique(c(new, .Library.site, .Library))}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.
-#' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.
+#' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.
 #' @returns The sampled elements, with the subsetting semantics of the \code{[} operator, i.e., the same class as \code{x}, with the dimensions possibly dropped like in \code{\link[base]{sample}} (for instance, sampling a matrix returns a vector).
 #' @details
-#' Same as \code{\link[base]{sample}}, with the following differences: 1) the corrected behavior when \code{x} is made of a single positive numeric value (see below), 2) the additional \code{set_seed} argument, which does not modify the random generator state of the user, 3) the stricter checking of \code{size} and \code{prob} (see these arguments), and 4) the "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
-#' 
-#' The \code{\link[base]{sample}} function behaves in a confusing way when \code{x} is made of a single positive numeric value: \code{base::sample(x = 4, size = 3, replace = TRUE)} draws 3 values between 1 and 4 (the single value 4 is used as the size of the population 1:4), and \code{base::sample(x = 4, size = 3, replace = FALSE)} returns 3 distinct values between 1 and 4 without error, although a single value cannot be sampled 3 times without replacement. \code{sample2()} corrects these behaviors: the single value is used as the population itself, made of this single element. Thus, \code{sample2(x = 4, size = 3, replace = TRUE)} returns \code{4 4 4}, and \code{sample2(x = 4, size = 3, replace = FALSE)} returns an error because the single value 4 cannot be sampled 3 times without replacement. Note that this also implies \code{sample2(x = 4)} (i.e., with \code{size = NULL}) returns the single value 4, unlike \code{base::sample(x = 4)} which draws 4 values between 1 and 4. For any other \code{x} value (length superior to 1, or length 1 but not made of a positive numeric value), \code{sample2()} behaves exactly like \code{\link[base]{sample}}.
+#' Same as \code{base::sample()} but:
+#' \itemize{
+#'   \item corrected behavior when \code{x} is made of a single positive numeric value (see below).
+#'   \item \code{set_seed} argument added, which does not modify the random generator state of the user.
+#'   \item stricter checking of \code{size} and \code{prob} (see these arguments).
+#'   \item "safer" checkings (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+#' }
+#'
+#' Warning: \code{base::sample()} is confusing when \code{x} is made of a single positive numeric value. Indeed, \code{base::sample(x = 4, size = 3, replace = TRUE)} returns 3 values between 1 and 4 (4 is used as the size of the population 1:4), and \code{base::sample(x = 4, size = 3, replace = FALSE)} returns 3 different values between 1 and 4 without error, while a single value cannot be sampled 3 times without replacement. With \code{sample2()}, the single value is the population itself. Thus, \code{sample2(x = 4, size = 3, replace = TRUE)} returns \code{4 4 4}, \code{sample2(x = 4, size = 3, replace = FALSE)} returns an error and \code{sample2(x = 4)} (\code{size = NULL}) returns 4, while \code{base::sample(x = 4)} returns 4 values between 1 and 4. Otherwise (length of \code{x} > 1, or length 1 but not a positive numeric value), \code{sample2()} is exactly like \code{base::sample()}.
 #' @seealso \code{\link[base]{sample}}
-#' @author Gael Millot <gael.millot@pasteur.fr>
-#' @author Yushi Han <yushi.han2000@gmail.com>
-#' @author Haiding Wang <wanghaiding442@gmail.com>
+#' @author \href{mailto:gael.millot@pasteur.fr}{Gael Millot}
+#' @author Haiding Wang
+#' @author Yushi Han
 #' @examples
 #' # Warning: these examples may not work well when using the "Run examples" link
 #' # because of a particular environment. Please, copy-paste in a local environment.
 #' # See also https://safer-r.github.io/saferTool/articles/sample2.html
-#' vec <- c(1:5) ; sample2(x = vec, size = 3, set_seed = 1)
+#' saferTool::sample2(x = 1:5, size = 3, set_seed = 1)
 #'
-#' sample2(x = 4, size = 3, replace = TRUE, set_seed = 1) # 4 4 4 (see the details below)
+#' saferTool::sample2(x = 4, size = 3, replace = TRUE, set_seed = 1) # 4 4 4 (see the details)
 #'
-#' # This example returns an error: the single value 4 cannot be sampled 3 times without replacement
-#' # sample2(x = 4, size = 3, replace = FALSE)
-#'
-#' # This example returns an error because of the negative probability
-#' # sample2(x = c(1:5), size = 3, replace = TRUE, prob = c(-1, 1, 1, 1, 1))
+#' \dontrun{
+#' # Example that returns an error (4 cannot be sampled 3 times without replacement)
+#' saferTool::sample2(x = 4, size = 3, replace = FALSE)
+#' # Example that returns an error (negative probability)
+#' saferTool::sample2(x = 1:5, size = 3, replace = TRUE, prob = c(-1, 1, 1, 1, 1))
+#' }
 #' @importFrom saferDev arg_check
 #' @export
 sample2 <- function(

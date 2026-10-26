@@ -39,15 +39,15 @@ If the data frame is made of one numeric column and one character or factor colu
 # Warning: these examples may not work well when using the "Run examples" link 
 # because of a particular environment. Please, copy-paste in a local environment.
 # See also https://safer-r.github.io/saferTool/articles/df_remod.html
-obs <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE) ; 
-rownames(obs) <- paste0("row", 1:4) ; 
-obs ;
-df_remod(obs, quanti_col_name = "quanti", quali_col_name = "quali")
+obs <- data.frame(col1 = (1:4) * 10, col2 = 5:8, stringsAsFactors = TRUE)
+rownames(obs) <- paste0("row", 1:4)
+obs
+saferTool::df_remod(df = obs, quanti_col_name = "quanti", quali_col_name = "quali")
 }
 \author{
-Gael Millot <gael.millot@pasteur.fr>
+\href{mailto:gael.millot@pasteur.fr}{Gael Millot}
 
-Yushi Han <yushi.han2000@gmail.com>
+Haiding Wang
 
-Haiding Wang <wanghaiding442@gmail.com>
+Yushi Han
 }

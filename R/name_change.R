@@ -7,31 +7,32 @@
 #' @param duplicate Single logical value. Return the elements of data1 still with duplicated elements? Defaut to TRUE, i.e., duplicated elements remain duplicated.
 #' @param safer_check Single logical value. Perform some "safer" checks? If \code{TRUE}, checkings are performed before main code running (see the \href{https://github.com/safer-r}{safer-r project}): 1) correct \code{lib_path} argument value 2) required functions and related packages effectively present in local R libraries and 3) R classical operators (like \code{"<-"}) not overwritten by another package because of the R scope. Must be set to \code{FALSE} if this function is used inside another "safer" function to avoid pointless multiple checkings.
 #' @param lib_path Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{unique(c(new, .Library.site, .Library))}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.
-#' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.
+#' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.
 #' @returns
 #' A list containing :
 #' 
-#' - $data: the modified data1 (in the same order as in the initial data1).
-#' 
-#' - $posi: the modified positions in data1. NULL if no modification.
-#' 
-#' - $ini: the initial elements before modification. NULL if no modification.
-#' 
-#' - $post: the modified elements in the same order as in ini. NULL if no modification.
+#' \itemize{
+#'   \item \code{data}: the modified data1 (in the same order as in the initial data1).
+#'   \item \code{posi}: the modified positions in data1. NULL if no modification.
+#'   \item \code{ini}: the initial elements before modification. NULL if no modification.
+#'   \item \code{post}: the modified elements in the same order as in ini. NULL if no modification.
+#' }
 #' @details
-#'  - If elements are duplicated in data1 and match an element of data2, then the value of added_string is added at the end of the matched element of data1.
-#'  - If the same occurs with the argument duplicate = FALSE, then value of added_string is added at the end of the matched element of data1, together with an incremented number so that elements in data1 are not anymore duplicated.
-#'  - An error message is returned if any of the data1 elements end with the string in added_string.
-#' @author Gael Millot <gael.millot@pasteur.fr>
-#' @author Yushi Han <yushi.han2000@gmail.com>
-#' @author Haiding Wang <wanghaiding442@gmail.com>
+#' \itemize{
+#'   \item If elements are duplicated in data1 and match an element of data2, then the value of added_string is added at the end of the matched element of data1.
+#'   \item If the same occurs with the argument duplicate = FALSE, then value of added_string is added at the end of the matched element of data1, together with an incremented number so that elements in data1 are not anymore duplicated.
+#'   \item An error message is returned if any of the data1 elements end with the string in added_string.
+#' }
+#' @author \href{mailto:gael.millot@pasteur.fr}{Gael Millot}
+#' @author Haiding Wang
+#' @author Yushi Han
 #' @examples
 #' # Warning: these examples may not work well when using the "Run examples" link 
 #' # because of a particular environment. Please, copy-paste in a local environment.
 #' # See also https://safer-r.github.io/saferTool/articles/name_change.html
-#' obs1 <- c("A", "B", "C", "A", "D") ; 
-#' obs2 <- c("A", "C") ; 
-#' name_change(obs1, obs2)
+#' obs1 <- c("A", "B", "C", "A", "D")
+#' obs2 <- c("A", "C")
+#' saferTool::name_change(data1 = obs1, data2 = obs2)
 #' @importFrom saferDev arg_check
 #' @export
 name_change <- function(

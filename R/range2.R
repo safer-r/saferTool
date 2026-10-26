@@ -6,31 +6,34 @@
 #' @param finite Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na_rm argument. Warning for range2() only: when finite is TRUE, the NAs present in x are silently ignored (as in base::range()), even when na_rm is FALSE.
 #' @param safer_check Single logical value. Perform some "safer" checks? If \code{TRUE}, checkings are performed before main code running (see the \href{https://github.com/safer-r}{safer-r project}): 1) correct \code{lib_path} argument value 2) required functions and related packages effectively present in local R libraries and 3) R classical operators (like \code{"<-"}) not overwritten by another package because of the R scope. Must be set to \code{FALSE} if this function is used inside another "safer" function to avoid pointless multiple checkings.
 #' @param lib_path Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{unique(c(new, .Library.site, .Library))}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.
-#' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.
+#' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.
 #' @returns The minimum value and the maximum value of the given arguments. 
 #' @details
-#' Same as \code{\link[base]{range}} (which is called internally, using \code{base::range(x = x, na.rm = na_rm, finite = finite)}), with the following differences:
-#' 
-#' - A single object is accepted in \code{x} (no \code{...} argument), which must be a numeric or logical vector, matrix or table. Character values, NULL, empty objects (like \code{numeric(0)}, for which \code{base::range()} returns \code{c(Inf, -Inf)} with warnings) and objects made of NA only are rejected with an explicit error message.
-#' 
-#' - The \code{na.rm} argument is named \code{na_rm}.
-#' 
-#' - The "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+#' Same as \code{base::range()} but:
+#' \itemize{
+#'   \item a single object in \code{x} (no \code{...} argument), made of numeric or logical values (vector, matrix or table).
+#'   \item error message if \code{x} is made of characters, is \code{NULL}, is empty (\code{base::range(numeric(0))} returns \code{c(Inf, -Inf)} with warnings) or is made of \code{NA} only.
+#'   \item \code{na_rm} instead of \code{na.rm}.
+#'   \item "safer" checkings (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+#' }
+#'
+#' Of note, \code{base::range(x = x, na.rm = na_rm, finite = finite)} is used internally.
 #' @seealso \code{\link[base]{range}}
-#' @author Gael Millot <gael.millot@pasteur.fr>
-#' @author Yushi Han <yushi.han2000@gmail.com>
-#' @author Haiding Wang <wanghaiding442@gmail.com>
+#' @author \href{mailto:gael.millot@pasteur.fr}{Gael Millot}
+#' @author Haiding Wang
+#' @author Yushi Han
 #' @examples
 #' # Warning: these examples may not work well when using the "Run examples" link 
 #' # because of a particular environment. Please, copy-paste in a local environment.
 #' # See also https://safer-r.github.io/saferTool/articles/range2.html
-#' vec <- c(1:3) ; range2(x = vec)
-#' 
-#' vec <- c(1,3,5,TRUE) ; range2(x = vec)
-#' 
-#' 
-#' # This example returns an error because of the character in the vector
-#' # vec <- c(1,3,5,TRUE,"apple") ; range2(x = vec)
+#' saferTool::range2(x = 1:3)
+#'
+#' saferTool::range2(x = c(1, 3, 5, TRUE))
+#'
+#' \dontrun{
+#' # Example that returns an error (character in the vector)
+#' saferTool::range2(x = c(1, 3, 5, TRUE, "apple"))
+#' }
 #' @importFrom saferDev arg_check
 #' @export
 range2 <- function(
@@ -377,8 +380,8 @@ range2 <- function(
     arg_check_error_text <- base::paste0("ERROR ", embed_error_text, "\n\n", collapse = NULL, recycle0 = FALSE) # must be used instead of error_text = embed_error_text when several arg_check are performed on the same argument (tempo1, tempo2, see below)
     ee <- base::expression(argum_check <- base::c(argum_check, tempo$problem) , text_check <- base::c(text_check, tempo$text) , checked_arg_names <- base::c(checked_arg_names, tempo$object_name))
     # add as many lines as below, one for each of the arguments of your own function
-    tempo1 <- saferDev::arg_check(data = x, class = NULL, typeof = NULL, mode = "numeric", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # covers numeric vectors, matrices and tables of numbers (all have mode "numeric")
-    tempo1b <- saferDev::arg_check(data = x, class = NULL, typeof = NULL, mode = "logical", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # covers logical vectors and matrices
+    tempo1 <- saferDev::arg_check(data = x, class = NULL, typeof = NULL, mode = "numeric", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # numeric vectors, matrices and tables (all mode "numeric")
+    tempo1b <- saferDev::arg_check(data = x, class = NULL, typeof = NULL, mode = "logical", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # logical vectors and matrices
     if(tempo1$problem == TRUE & tempo1b$problem == TRUE){
         tempo_cat <- base::paste0(
             arg_check_error_text, 
@@ -392,7 +395,7 @@ range2 <- function(
     }
     tempo <- saferDev::arg_check(data = na_rm, class = NULL, typeof = "logical", mode = NULL, length = 1, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = FALSE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) ; base::eval(expr = ee, envir = base::environment(fun = NULL), enclos = base::environment(fun = NULL))
     tempo <- saferDev::arg_check(data = finite, class = NULL, typeof = "logical", mode = NULL, length = 1, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = FALSE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) ; base::eval(expr = ee, envir = base::environment(fun = NULL), enclos = base::environment(fun = NULL))
-    # data1 (x here) not checked by arg_check() because several classes are allowed: covered by the tempo1/tempo1b calls above
+    # x already checked above (tempo1 and tempo1b) because several classes are possible
     # lib_path already checked above
     # safer_check already checked above
     # error_text converted to single string above

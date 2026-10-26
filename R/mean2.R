@@ -2,41 +2,45 @@
 #' @description
 #' Calculate the mean of numeric and logical value.
 #' @param x Numeric or logical vector or matrix or numeric table where find the initial values to use.
-#' @param trim Single numeric value between 0 and 0.5 indicating the fraction (0 to 0.5) of observations to be trimmed from each end of \code{x} before the mean is computed (as in \code{base::mean()}). A value of 0.5 returns the median (as in \code{base::mean()}). Warning: a factor value is rejected with an error, even if factors have mode "numeric".
+#' @param trim Single numeric value between 0 and 0.5. Fraction of observations to be trimmed from each end of \code{x} before the mean is computed (as in \code{base::mean()}). Value 0.5 returns the median. Warning: factor not accepted, even if factors are mode \code{"numeric"}.
 #' @param na_rm Single logical value. Should missing values (NA and NaN) be removed ?
 #' @param finite Single logical value. Should infinite values (Inf and -Inf) be removed ? Warning: this argument does not remove NA and NaN. Please use the na_rm argument.
 #' @param safer_check Single logical value. Perform some "safer" checks? If \code{TRUE}, checkings are performed before main code running (see the \href{https://github.com/safer-r}{safer-r project}): 1) correct \code{lib_path} argument value 2) required functions and related packages effectively present in local R libraries and 3) R classical operators (like \code{"<-"}) not overwritten by another package because of the R scope. Must be set to \code{FALSE} if this function is used inside another "safer" function to avoid pointless multiple checkings.
 #' @param lib_path Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{unique(c(new, .Library.site, .Library))}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.
-#' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.
+#' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.
 #' @returns The mean of the given arguments. Returns NA if the input contains NA and the argument na_rm = FALSE, else returns a value.
 #' @details
-#' Same as \code{\link[base]{mean}} (which is called internally, using \code{base::mean(x = x, trim = trim, na.rm = na_rm)}), with the following differences:
-#' 
-#' - \code{x} must be a numeric or logical vector, matrix or table. Character values, factors (for which \code{base::mean()} returns NA with a warning), NULL, empty objects (like \code{numeric(0)}, for which \code{base::mean()} returns \code{NaN}) and objects made of NA only are rejected with an explicit error message.
-#' 
-#' - \code{trim} must be a single numeric value between 0 and 0.5 (\code{base::mean()} silently treats negative values as 0 and values above 0.5 as 0.5, i.e., returns the median).
-#' 
-#' - The \code{na.rm} argument is named \code{na_rm}, and no \code{...} argument is available.
-#' 
-#' - The additional \code{finite} argument removes the \code{Inf} and \code{-Inf} values before computation.
-#' 
-#' - The "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+#' Same as \code{base::mean()} but:
+#' \itemize{
+#'   \item \code{x} made of numeric or logical values (vector, matrix or table).
+#'   \item error message if \code{x} is made of characters, is a factor (\code{base::mean()} returns \code{NA} with a warning), is \code{NULL}, is empty (\code{base::mean(numeric(0))} returns \code{NaN}) or is made of \code{NA} only.
+#'   \item error message if \code{trim} is not between 0 and 0.5 (\code{base::mean()} silently uses 0 for negative values and 0.5, i.e., the median, for values above 0.5).
+#'   \item \code{na_rm} instead of \code{na.rm}, and no \code{...} argument.
+#'   \item \code{finite} argument added, to remove \code{Inf} and \code{-Inf} values before computation.
+#'   \item "safer" checkings (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+#' }
+#'
+#' Of note, \code{base::mean(x = x, trim = trim, na.rm = na_rm)} is used internally.
 #' @seealso \code{\link[base]{mean}}
-#' @author Gael Millot <gael.millot@pasteur.fr>
-#' @author Yushi Han <yushi.han2000@gmail.com>
-#' @author Haiding Wang <wanghaiding442@gmail.com>
+#' @author \href{mailto:gael.millot@pasteur.fr}{Gael Millot}
+#' @author Haiding Wang
+#' @author Yushi Han
 #' @examples
 #' # Warning: these examples may not work well when using the "Run examples" link 
 #' # because of a particular environment. Please, copy-paste in a local environment.
 #' # See also https://safer-r.github.io/saferTool/articles/mean2.html
-#' vec <- c(1:3) ; mean2(x = vec)
-#' 
-#' vec <- c(1,3,5,TRUE) ; mean2(x = vec)
-#' 
-#' vec <- c(1,2,3,4,100) ; mean2(x = vec, trim = 0.2)
-#' 
-#' # This example returns an error because of the character in the vector
-#' # vec <- c(1,3,5,TRUE,"apple") ; mean2(x = vec)
+#' saferTool::mean2(x = 1:3)
+#'
+#' saferTool::mean2(x = c(1, 3, 5, TRUE))
+#'
+#' saferTool::mean2(x = c(1, 2, 3, 4, 100), trim = 0.2)
+#'
+#' \dontrun{
+#' # Example that returns an error (character in the vector)
+#' saferTool::mean2(x = c(1, 3, 5, TRUE, "apple"))
+#' # Example that returns an error (factor, while base::mean() returns NA with a warning)
+#' saferTool::mean2(x = factor(1:3))
+#' }
 #' @importFrom saferDev arg_check
 #' @export
 mean2 <- function(
@@ -386,8 +390,8 @@ mean2 <- function(
     arg_check_error_text <- base::paste0("ERROR ", embed_error_text, "\n\n", collapse = NULL, recycle0 = FALSE) # must be used instead of error_text = embed_error_text when several arg_check are performed on the same argument (tempo1, tempo2, see below)
     ee <- base::expression(argum_check <- base::c(argum_check, tempo$problem) , text_check <- base::c(text_check, tempo$text) , checked_arg_names <- base::c(checked_arg_names, tempo$object_name))
     # add as many lines as below, one for each of the arguments of your own function
-    tempo1 <- saferDev::arg_check(data = x, class = NULL, typeof = NULL, mode = "numeric", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # covers numeric vectors, matrices and tables of numbers (all have mode "numeric")
-    tempo1b <- saferDev::arg_check(data = x, class = NULL, typeof = NULL, mode = "logical", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # covers logical vectors and matrices
+    tempo1 <- saferDev::arg_check(data = x, class = NULL, typeof = NULL, mode = "numeric", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # numeric vectors, matrices and tables (all mode "numeric")
+    tempo1b <- saferDev::arg_check(data = x, class = NULL, typeof = NULL, mode = "logical", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # logical vectors and matrices
     if(tempo1$problem == TRUE & tempo1b$problem == TRUE){
         tempo_cat <- base::paste0(
             arg_check_error_text, 
@@ -399,10 +403,10 @@ mean2 <- function(
         argum_check <- base::c(argum_check, TRUE)
         checked_arg_names <- base::c(checked_arg_names, tempo1$object_name)
     }
-    tempo <- saferDev::arg_check(data = trim, class = NULL, typeof = NULL, mode = "numeric", length = 1, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = FALSE, neg_values = TRUE, inf_values = FALSE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) ; base::eval(expr = ee, envir = base::environment(fun = NULL), enclos = base::environment(fun = NULL)) # negative and > 0.5 values checked in the other checkings section below, because arg_check() has no range checking option
+    tempo <- saferDev::arg_check(data = trim, class = NULL, typeof = NULL, mode = "numeric", length = 1, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = FALSE, neg_values = TRUE, inf_values = FALSE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) ; base::eval(expr = ee, envir = base::environment(fun = NULL), enclos = base::environment(fun = NULL)) # range between 0 and 0.5 checked below in the other checkings section, because not possible with arg_check()
     tempo <- saferDev::arg_check(data = na_rm, class = NULL, typeof = "logical", mode = NULL, length = 1, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = FALSE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) ; base::eval(expr = ee, envir = base::environment(fun = NULL), enclos = base::environment(fun = NULL))
     tempo <- saferDev::arg_check(data = finite, class = NULL, typeof = "logical", mode = NULL, length = 1, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = FALSE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) ; base::eval(expr = ee, envir = base::environment(fun = NULL), enclos = base::environment(fun = NULL))
-    # data1 (x here) not checked by arg_check() because several classes are allowed: covered by the tempo1/tempo1b calls above
+    # x already checked above (tempo1 and tempo1b) because several classes are possible
     # lib_path already checked above
     # safer_check already checked above
     # error_text converted to single string above
@@ -433,7 +437,7 @@ mean2 <- function(
     ######## end graphic device checking
 
     ######## other checkings
-    if(base::is.factor(x = trim) == TRUE){ # a factor passes the arg_check() of the trim argument above (mode "numeric"), but would make the range checking below fail with a cryptic message. Also, base::mean() rejects it with its own error, but the message is not explicit enough
+    if(base::is.factor(x = trim) == TRUE){ # factors are mode "numeric", thus not detected by arg_check() above. Must be before the range checking below, which returns a non explicit error with factors
         tempo_cat <- base::paste0(
             error_text_start, 
             "THE trim ARGUMENT CANNOT BE A FACTOR. PLEASE, PROVIDE A SINGLE NUMERIC VALUE BETWEEN 0 AND 0.5.", 
@@ -442,7 +446,7 @@ mean2 <- function(
         )
         base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
     }
-    if(trim < 0 | trim > 0.5){ # no range checking option in arg_check(), so checked here. base::mean() silently treats trim > 0.5 as the median and silently accepts negative trim values, which is not a secured behavior
+    if(trim < 0 | trim > 0.5){ # not possible with arg_check(). Warning: base::mean() silently uses 0 if trim < 0, and the median if trim > 0.5
         tempo_cat <- base::paste0(
             error_text_start, 
             "THE trim ARGUMENT VALUE MUST BE A SINGLE NUMERIC VALUE BETWEEN 0 AND 0.5.\nHERE IT IS:\n", 
@@ -452,7 +456,7 @@ mean2 <- function(
         )
         base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
     }
-    if(base::is.factor(x = x) == TRUE){ # a factor passes the arg_check() of the x argument above (mode "numeric"), but base::mean() does not return an error for a factor: it returns NA_real_ with a warning. A safer function must return an error instead of a silent NA
+    if(base::is.factor(x = x) == TRUE){ # factors are mode "numeric", thus not detected by arg_check() above. Warning: base::mean() returns NA with a warning for factors, not an error
         tempo_cat <- base::paste0(
             error_text_start, 
             "THE x ARGUMENT CANNOT BE A FACTOR. PLEASE, PROVIDE A VECTOR, MATRIX OR TABLE OF NUMBERS OR LOGICAL VALUES.", 

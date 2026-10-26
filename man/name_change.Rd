@@ -27,39 +27,40 @@ name_change(
 
 \item{safer_check}{Single logical value. Perform some "safer" checks? If \code{TRUE}, checkings are performed before main code running (see the \href{https://github.com/safer-r}{safer-r project}): 1) correct \code{lib_path} argument value 2) required functions and related packages effectively present in local R libraries and 3) R classical operators (like \code{"<-"}) not overwritten by another package because of the R scope. Must be set to \code{FALSE} if this function is used inside another "safer" function to avoid pointless multiple checkings.}
 
-\item{error_text}{Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.}
+\item{error_text}{Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.}
 }
 \value{
 A list containing :
 
-- $data: the modified data1 (in the same order as in the initial data1).
-
-- $posi: the modified positions in data1. NULL if no modification.
-
-- $ini: the initial elements before modification. NULL if no modification.
-
-- $post: the modified elements in the same order as in ini. NULL if no modification.
+\itemize{
+  \item \code{data}: the modified data1 (in the same order as in the initial data1).
+  \item \code{posi}: the modified positions in data1. NULL if no modification.
+  \item \code{ini}: the initial elements before modification. NULL if no modification.
+  \item \code{post}: the modified elements in the same order as in ini. NULL if no modification.
+}
 }
 \description{
 This function checks if a vector of character strings, like column names of a data frame, has elements present in another vector (vector of reserved words or column names of another data frame before merging).
 }
 \details{
-- If elements are duplicated in data1 and match an element of data2, then the value of added_string is added at the end of the matched element of data1.
- - If the same occurs with the argument duplicate = FALSE, then value of added_string is added at the end of the matched element of data1, together with an incremented number so that elements in data1 are not anymore duplicated.
- - An error message is returned if any of the data1 elements end with the string in added_string.
+\itemize{
+  \item If elements are duplicated in data1 and match an element of data2, then the value of added_string is added at the end of the matched element of data1.
+  \item If the same occurs with the argument duplicate = FALSE, then value of added_string is added at the end of the matched element of data1, together with an incremented number so that elements in data1 are not anymore duplicated.
+  \item An error message is returned if any of the data1 elements end with the string in added_string.
+}
 }
 \examples{
 # Warning: these examples may not work well when using the "Run examples" link 
 # because of a particular environment. Please, copy-paste in a local environment.
 # See also https://safer-r.github.io/saferTool/articles/name_change.html
-obs1 <- c("A", "B", "C", "A", "D") ; 
-obs2 <- c("A", "C") ; 
-name_change(obs1, obs2)
+obs1 <- c("A", "B", "C", "A", "D")
+obs2 <- c("A", "C")
+saferTool::name_change(data1 = obs1, data2 = obs2)
 }
 \author{
-Gael Millot <gael.millot@pasteur.fr>
+\href{mailto:gael.millot@pasteur.fr}{Gael Millot}
 
-Yushi Han <yushi.han2000@gmail.com>
+Haiding Wang
 
-Haiding Wang <wanghaiding442@gmail.com>
+Yushi Han
 }

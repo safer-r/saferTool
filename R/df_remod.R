@@ -11,17 +11,17 @@
 #' @param lib_path Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{c(lib_path, .libPaths())}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.
 #' @param error_text Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.
 #' @returns The modified data frame.
-#' @author Gael Millot <gael.millot@pasteur.fr>
-#' @author Yushi Han <yushi.han2000@gmail.com>
-#' @author Haiding Wang <wanghaiding442@gmail.com>
+#' @author \href{mailto:gael.millot@pasteur.fr}{Gael Millot}
+#' @author Haiding Wang
+#' @author Yushi Han
 #' @examples
 #' # Warning: these examples may not work well when using the "Run examples" link 
 #' # because of a particular environment. Please, copy-paste in a local environment.
 #' # See also https://safer-r.github.io/saferTool/articles/df_remod.html
-#' obs <- data.frame(col1 = (1:4)*10, col2 = 5:8, stringsAsFactors = TRUE) ; 
-#' rownames(obs) <- paste0("row", 1:4) ; 
-#' obs ;
-#' df_remod(obs, quanti_col_name = "quanti", quali_col_name = "quali")
+#' obs <- data.frame(col1 = (1:4) * 10, col2 = 5:8, stringsAsFactors = TRUE)
+#' rownames(obs) <- paste0("row", 1:4)
+#' obs
+#' saferTool::df_remod(df = obs, quanti_col_name = "quanti", quali_col_name = "quali")
 #' @importFrom saferDev arg_check
 #' @export
 df_remod <- function(
@@ -522,10 +522,10 @@ df_remod <- function(
         if(base::class(df[, 1]) == "character"){
             df <- base::cbind(df[2], df[1], stringsAsFactors = TRUE)
         }
-        nc_max <- base::max(base::table(df[, 2])) # effectif maximum des classes
-        nb_na <- nc_max - base::table(df[,2]) # nombre de NA à ajouter pour réaliser la df frame
+        nc_max <- base::max(base::table(df[, 2])) # max number of values among the classes
+        nb_na <- nc_max - base::table(df[,2]) # number of NA to add in each class, to build the data frame
         tempo<-base::split(df[, 1], df[, 2])
-        for(i in 1:base::length(tempo)){tempo[[i]] <- base::append(tempo[[i]], base::rep(NA, nb_na[i]))} # des NA doivent être ajoutés lorsque les effectifs sont différents entre les classes. C'est uniquement pour que chaque colonne ait le même nombre de lignes
+        for(i in 1:base::length(tempo)){tempo[[i]] <- base::append(tempo[[i]], base::rep(NA, nb_na[i]))} # NA added when the number of values differs between classes, only to have the same number of rows in each column
         output<-base::data.frame(tempo, stringsAsFactors = TRUE, check.names = FALSE)
     }
 

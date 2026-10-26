@@ -17,7 +17,7 @@ mean2(
 \arguments{
 \item{x}{Numeric or logical vector or matrix or numeric table where find the initial values to use.}
 
-\item{trim}{Single numeric value between 0 and 0.5 indicating the fraction (0 to 0.5) of observations to be trimmed from each end of \code{x} before the mean is computed (as in \code{base::mean()}). A value of 0.5 returns the median (as in \code{base::mean()}). Warning: a factor value is rejected with an error, even if factors have mode "numeric".}
+\item{trim}{Single numeric value between 0 and 0.5. Fraction of observations to be trimmed from each end of \code{x} before the mean is computed (as in \code{base::mean()}). Value 0.5 returns the median. Warning: factor not accepted, even if factors are mode \code{"numeric"}.}
 
 \item{na_rm}{Single logical value. Should missing values (NA and NaN) be removed ?}
 
@@ -27,7 +27,7 @@ mean2(
 
 \item{lib_path}{Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{unique(c(new, .Library.site, .Library))}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.}
 
-\item{error_text}{Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.}
+\item{error_text}{Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.}
 }
 \value{
 The mean of the given arguments. Returns NA if the input contains NA and the argument na_rm = FALSE, else returns a value.
@@ -36,38 +36,42 @@ The mean of the given arguments. Returns NA if the input contains NA and the arg
 Calculate the mean of numeric and logical value.
 }
 \details{
-Same as \code{\link[base]{mean}} (which is called internally, using \code{base::mean(x = x, trim = trim, na.rm = na_rm)}), with the following differences:
+Same as \code{base::mean()} but:
+\itemize{
+  \item \code{x} made of numeric or logical values (vector, matrix or table).
+  \item error message if \code{x} is made of characters, is a factor (\code{base::mean()} returns \code{NA} with a warning), is \code{NULL}, is empty (\code{base::mean(numeric(0))} returns \code{NaN}) or is made of \code{NA} only.
+  \item error message if \code{trim} is not between 0 and 0.5 (\code{base::mean()} silently uses 0 for negative values and 0.5, i.e., the median, for values above 0.5).
+  \item \code{na_rm} instead of \code{na.rm}, and no \code{...} argument.
+  \item \code{finite} argument added, to remove \code{Inf} and \code{-Inf} values before computation.
+  \item "safer" checkings (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+}
 
-- \code{x} must be a numeric or logical vector, matrix or table. Character values, factors (for which \code{base::mean()} returns NA with a warning), NULL, empty objects (like \code{numeric(0)}, for which \code{base::mean()} returns \code{NaN}) and objects made of NA only are rejected with an explicit error message.
-
-- \code{trim} must be a single numeric value between 0 and 0.5 (\code{base::mean()} silently treats negative values as 0 and values above 0.5 as 0.5, i.e., returns the median).
-
-- The \code{na.rm} argument is named \code{na_rm}, and no \code{...} argument is available.
-
-- The additional \code{finite} argument removes the \code{Inf} and \code{-Inf} values before computation.
-
-- The "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+Of note, \code{base::mean(x = x, trim = trim, na.rm = na_rm)} is used internally.
 }
 \examples{
 # Warning: these examples may not work well when using the "Run examples" link 
 # because of a particular environment. Please, copy-paste in a local environment.
 # See also https://safer-r.github.io/saferTool/articles/mean2.html
-vec <- c(1:3) ; mean2(x = vec)
+saferTool::mean2(x = 1:3)
 
-vec <- c(1,3,5,TRUE) ; mean2(x = vec)
+saferTool::mean2(x = c(1, 3, 5, TRUE))
 
-vec <- c(1,2,3,4,100) ; mean2(x = vec, trim = 0.2)
+saferTool::mean2(x = c(1, 2, 3, 4, 100), trim = 0.2)
 
-# This example returns an error because of the character in the vector
-# vec <- c(1,3,5,TRUE,"apple") ; mean2(x = vec)
+\dontrun{
+# Example that returns an error (character in the vector)
+saferTool::mean2(x = c(1, 3, 5, TRUE, "apple"))
+# Example that returns an error (factor, while base::mean() returns NA with a warning)
+saferTool::mean2(x = factor(1:3))
+}
 }
 \seealso{
 \code{\link[base]{mean}}
 }
 \author{
-Gael Millot <gael.millot@pasteur.fr>
+\href{mailto:gael.millot@pasteur.fr}{Gael Millot}
 
-Yushi Han <yushi.han2000@gmail.com>
+Haiding Wang
 
-Haiding Wang <wanghaiding442@gmail.com>
+Yushi Han
 }

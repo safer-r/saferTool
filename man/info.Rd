@@ -24,58 +24,53 @@ info(
 
 \item{lib_path}{Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{unique(c(new, .Library.site, .Library))}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.}
 
-\item{error_text}{Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.}
+\item{error_text}{Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.}
 }
 \value{
 A list containing information, depending on the class and type of data. The backbone is generally:
 
-- $NAME: name of the object.
-
-- $CLASS: class of the object (class() value).
-
-- $TYPE: type of the object (typeof() value).
-
-- $LENGTH: length of the object (length() value).
-
-- $NA.NB: number of NA and NaN (only for type "logical", "integer", "double", "complex", "character" or "list").
-
-- $HEAD: head of the object (head() value).
-
-- $TAIL: tail of the object (tail() value).
-
-- $DIMENSION: dimension (only for object with dimensions).
-
-- $SUMMARY: object summary (summary() value).
-
-- $STRUCTURE: object structure (str() value).
-
-- $WARNING: warning messages (only if the warn_print argument is FALSE).
+\itemize{
+  \item \code{NAME}: name of the object.
+  \item \code{CLASS}: class of the object (class() value).
+  \item \code{TYPE}: type of the object (typeof() value).
+  \item \code{LENGTH}: length of the object (length() value).
+  \item \code{NA.NB}: number of NA and NaN (only for type "logical", "integer", "double", "complex", "character" or "list").
+  \item \code{HEAD}: head of the object (head() value).
+  \item \code{TAIL}: tail of the object (tail() value).
+  \item \code{DIMENSION}: dimension (only for object with dimensions).
+  \item \code{SUMMARY}: object summary (summary() value).
+  \item \code{STRUCTURE}: object structure (str() value).
+  \item \code{WARNING}: warning messages (only if the warn_print argument is FALSE).
+}
 
 If data is made of numerics, provide also:
 
-- $INF.NB: number of Inf and -Inf.
-
-- $RANGE: range after removing Inf and NA.
-
-- $SUM: sum after removing Inf and NA.
-
-- $MEAN: mean after removing Inf and NA.
+\itemize{
+  \item \code{INF.NB}: number of Inf and -Inf.
+  \item \code{RANGE}: range after removing Inf and NA.
+  \item \code{SUM}: sum after removing Inf and NA.
+  \item \code{MEAN}: mean after removing Inf and NA.
+}
 
 If data is a 2D object, provide also:
 
-- $ROW_NAMES: row names.
-
-- $COL_NAMES: column names.
+\itemize{
+  \item \code{ROW_NAMES}: row names.
+  \item \code{COL_NAMES}: column names.
+}
 
 If data is a data frame, provide also:
 
-- $COLUMN_TYPE: type of each column (typeof() value).
+\itemize{
+  \item \code{COLUMN_TYPE}: type of each column (typeof() value).
+}
 
 If data is a list, provide also:
 
-- $COMPARTMENT_NAMES: names of the compartments.
-
-- $COMPARTMENT_TYPE: type of each compartment (typeof() value).
+\itemize{
+  \item \code{COMPARTMENT_NAMES}: names of the compartments.
+  \item \code{COMPARTMENT_TYPE}: type of each compartment (typeof() value).
+}
 }
 \description{
 Provide a broad description of an object.
@@ -84,12 +79,12 @@ Provide a broad description of an object.
 # Warning: these examples may not work well when using the "Run examples" link 
 # because of a particular environment. Please, copy-paste in a local environment.
 # See also https://safer-r.github.io/saferTool/articles/info.html
-info(data = 1:3)
+saferTool::info(data = 1:3)
 }
 \author{
-Gael Millot <gael.millot@pasteur.fr>
+\href{mailto:gael.millot@pasteur.fr}{Gael Millot}
 
-Yushi Han <yushi.han2000@gmail.com>
+Haiding Wang
 
-Haiding Wang <wanghaiding442@gmail.com>
+Yushi Han
 }

@@ -30,7 +30,7 @@ sample2(
 
 \item{lib_path}{Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{unique(c(new, .Library.site, .Library))}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.}
 
-\item{error_text}{Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.}
+\item{error_text}{Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.}
 }
 \value{
 The sampled elements, with the subsetting semantics of the \code{[} operator, i.e., the same class as \code{x}, with the dimensions possibly dropped like in \code{\link[base]{sample}} (for instance, sampling a matrix returns a vector).
@@ -39,31 +39,38 @@ The sampled elements, with the subsetting semantics of the \code{[} operator, i.
 Randomly sample elements from an object \code{x}, with a corrected behavior when \code{x} is made of a single element (see the details below).
 }
 \details{
-Same as \code{\link[base]{sample}}, with the following differences: 1) the corrected behavior when \code{x} is made of a single positive numeric value (see below), 2) the additional \code{set_seed} argument, which does not modify the random generator state of the user, 3) the stricter checking of \code{size} and \code{prob} (see these arguments), and 4) the "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+Same as \code{base::sample()} but:
+\itemize{
+  \item corrected behavior when \code{x} is made of a single positive numeric value (see below).
+  \item \code{set_seed} argument added, which does not modify the random generator state of the user.
+  \item stricter checking of \code{size} and \code{prob} (see these arguments).
+  \item "safer" checkings (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+}
 
-The \code{\link[base]{sample}} function behaves in a confusing way when \code{x} is made of a single positive numeric value: \code{base::sample(x = 4, size = 3, replace = TRUE)} draws 3 values between 1 and 4 (the single value 4 is used as the size of the population 1:4), and \code{base::sample(x = 4, size = 3, replace = FALSE)} returns 3 distinct values between 1 and 4 without error, although a single value cannot be sampled 3 times without replacement. \code{sample2()} corrects these behaviors: the single value is used as the population itself, made of this single element. Thus, \code{sample2(x = 4, size = 3, replace = TRUE)} returns \code{4 4 4}, and \code{sample2(x = 4, size = 3, replace = FALSE)} returns an error because the single value 4 cannot be sampled 3 times without replacement. Note that this also implies \code{sample2(x = 4)} (i.e., with \code{size = NULL}) returns the single value 4, unlike \code{base::sample(x = 4)} which draws 4 values between 1 and 4. For any other \code{x} value (length superior to 1, or length 1 but not made of a positive numeric value), \code{sample2()} behaves exactly like \code{\link[base]{sample}}.
+Warning: \code{base::sample()} is confusing when \code{x} is made of a single positive numeric value. Indeed, \code{base::sample(x = 4, size = 3, replace = TRUE)} returns 3 values between 1 and 4 (4 is used as the size of the population 1:4), and \code{base::sample(x = 4, size = 3, replace = FALSE)} returns 3 different values between 1 and 4 without error, while a single value cannot be sampled 3 times without replacement. With \code{sample2()}, the single value is the population itself. Thus, \code{sample2(x = 4, size = 3, replace = TRUE)} returns \code{4 4 4}, \code{sample2(x = 4, size = 3, replace = FALSE)} returns an error and \code{sample2(x = 4)} (\code{size = NULL}) returns 4, while \code{base::sample(x = 4)} returns 4 values between 1 and 4. Otherwise (length of \code{x} > 1, or length 1 but not a positive numeric value), \code{sample2()} is exactly like \code{base::sample()}.
 }
 \examples{
 # Warning: these examples may not work well when using the "Run examples" link
 # because of a particular environment. Please, copy-paste in a local environment.
 # See also https://safer-r.github.io/saferTool/articles/sample2.html
-vec <- c(1:5) ; sample2(x = vec, size = 3, set_seed = 1)
+saferTool::sample2(x = 1:5, size = 3, set_seed = 1)
 
-sample2(x = 4, size = 3, replace = TRUE, set_seed = 1) # 4 4 4 (see the details below)
+saferTool::sample2(x = 4, size = 3, replace = TRUE, set_seed = 1) # 4 4 4 (see the details)
 
-# This example returns an error: the single value 4 cannot be sampled 3 times without replacement
-# sample2(x = 4, size = 3, replace = FALSE)
-
-# This example returns an error because of the negative probability
-# sample2(x = c(1:5), size = 3, replace = TRUE, prob = c(-1, 1, 1, 1, 1))
+\dontrun{
+# Example that returns an error (4 cannot be sampled 3 times without replacement)
+saferTool::sample2(x = 4, size = 3, replace = FALSE)
+# Example that returns an error (negative probability)
+saferTool::sample2(x = 1:5, size = 3, replace = TRUE, prob = c(-1, 1, 1, 1, 1))
+}
 }
 \seealso{
 \code{\link[base]{sample}}
 }
 \author{
-Gael Millot <gael.millot@pasteur.fr>
+\href{mailto:gael.millot@pasteur.fr}{Gael Millot}
 
-Yushi Han <yushi.han2000@gmail.com>
+Haiding Wang
 
-Haiding Wang <wanghaiding442@gmail.com>
+Yushi Han
 }

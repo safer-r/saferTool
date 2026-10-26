@@ -7,21 +7,21 @@ Authors@R: c(
     person(given = "Haiding", family = "Wang", role = "ctb"),
     person(given = "Yushi", family = "Han", role = "ctb"),
     person(given = "Mia", family = "Legras", role = "ctb"),
-    person(given = "Gael", family = "Millot",  email = "gael.millot@pasteur.fr", role = c("cre", "aut", "ctb"), comment = c(ORCID = "0000-0002-0591-3509"))
+    person(given = "Gael", family = "Millot",  email = "gael.millot@pasteur.fr", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-0591-3509"))
   )
 Encoding: UTF-8
 Maintainer: Gael Millot <gael.millot@pasteur.fr>
-Description: Set of functions that perform checks according to the safer-r project recommendations for R function development (see <https://github.com/safer-r>). This includes checking argument values, ensuring correct specification of all mandatory arguments for embedded functions, as well as their explicit package namespace qualification, among other things.
-URL: <https://github.com/safer-r/saferTool>, <https://safer-r.github.io/saferTool/>
+Description: Set of basic functions written according to the safer-r project recommendations (see <https://github.com/safer-r>): comparison of two 1D objects, two 2D objects or two lists, description of an object, modification of data frames, renaming of character strings present in a reference vector, rounding of numbers after the decimal leading zeros, and head or tail of big 2D objects. Rewriting of the max(), min(), range(), sum(), mean() and sample() base functions, with logical values accepted, explicit error messages instead of silent results (like the empty object, factor or single value cases) and strong checking of the arguments.
+URL: https://github.com/safer-r/saferTool, https://safer-r.github.io/saferTool/
+BugReports: https://github.com/safer-r/saferTool/issues
 License: GPL-3
 Depends: 
-    R (>= 4.5.0)
+    R (>= 4.6.0)
 Config/roxygen2/version: 8.0.0
 Imports: 
-    saferDev
+    saferDev (>= 3.0.0)
 Suggests: 
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
-RoxygenNote: 8.0.0

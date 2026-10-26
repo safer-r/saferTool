@@ -24,7 +24,7 @@ tail2(
 
 \item{lib_path}{Vector of characters specifying the absolute pathways of the directories containing the required packages for the function, if not in the default directories. Useful when R packages are not installed in the default directories because of lack of admin rights. More precisely, \code{lib_path} is passed through the \code{new} argument of \code{.libPaths()} so that the new library paths are \code{unique(c(new, .Library.site, .Library))}. Warning: \code{.libPaths()} is restored to the initial paths, after function execution. Ignored if \code{NULL} (default) or if the \code{safer_check} argument is \code{FALSE}: only the pathways specified by the current \code{.libPaths()} are used for package calling.}
 
-\item{error_text}{Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}. Of note, in \code{arg_check()}, \code{error_text} is also used at the end of the string returned when no problem is detected.}
+\item{error_text}{Single character string used to add information in error messages returned by the function, notably if the function is inside other functions, which is practical for debugging. Example: \code{error_text = " INSIDE <PACKAGE_1>::<FUNCTION_1> INSIDE <PACKAGE_2>::<FUNCTION_2>."}. If \code{NULL}, converted into \code{""}.}
 }
 \value{
 The tail.
@@ -33,13 +33,14 @@ The tail.
 As utils::tail() but display the left or right tail of big 2D objects.
 }
 \details{
-Same as \code{\link[utils]{tail}} (which is called internally for objects that are not 2D matrices, data frames or tables), with the following differences:
+Same as \code{utils::tail()} but:
+\itemize{
+  \item for 2D matrices, data frames and tables, \code{n} is used for rows and columns (not only rows), and \code{side} selects the left or right columns. The 2D structure is kept, even if a single row or column is returned.
+  \item error message if \code{n} is not a single positive integer (\code{utils::tail()} uses negative values to remove the first elements), and if \code{data1} is \code{NULL}, empty or made of \code{NA} only.
+  \item "safer" checkings (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+}
 
-- For 2D matrices, data frames and tables, \code{n} is applied to both rows and columns (instead of rows only), and the \code{side} argument selects the left or right columns. The 2D structure is kept, even when a single row or column is returned.
-
-- \code{n} must be a single positive integer (negative values, accepted by \code{utils::tail()} to remove the first elements, are rejected), and NULL, empty or NA-only objects in \code{data1} are rejected with an explicit error message.
-
-- The "safer" checkings of the arguments and environment (see the \code{safer_check}, \code{lib_path} and \code{error_text} arguments).
+Of note, \code{utils::tail()} is used internally for objects that are not 2D matrices, data frames or tables.
 
 Warning: other arguments of utils::tail() not used.
 
@@ -49,18 +50,18 @@ For 2D objects, rows are always displayed from the bottom. Columns are displayed
 # Warning: these examples may not work well when using the "Run examples" link 
 # because of a particular environment. Please, copy-paste in a local environment.
 # See also https://safer-r.github.io/saferTool/articles/tail2.html
-obs1 = matrix(1:30, ncol = 5, dimnames = list(letters[1:6], LETTERS[1:5])) ; 
-obs1 ; 
-tail2(obs1, 3, "r")
-tail2(letters, 3)
+obs1 <- matrix(1:30, ncol = 5, dimnames = list(letters[1:6], LETTERS[1:5]))
+obs1
+saferTool::tail2(data1 = obs1, n = 3, side = "r")
+saferTool::tail2(data1 = letters, n = 3)
 }
 \seealso{
 \code{\link[utils]{tail}}
 }
 \author{
-Gael Millot <gael.millot@pasteur.fr>
+\href{mailto:gael.millot@pasteur.fr}{Gael Millot}
 
-Yushi Han <yushi.han2000@gmail.com>
+Haiding Wang
 
-Haiding Wang <wanghaiding442@gmail.com>
+Yushi Han
 }

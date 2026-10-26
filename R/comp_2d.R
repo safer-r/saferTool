@@ -2,21 +2,16 @@
 #' @description
 #' Compare two 2D datasets of the same class or not. Check and report in a list if the 2 datasets have:
 #' 
-#' - same class
-#' 
-#' - same type
-#' 
-#' - common row names
-#' 
-#' - common column names
-#' 
-#' - same row number
-#' 
-#' - same column number
-#' 
-#' - potential identical rows between the 2 datasets
-#' 
-#' - potential identical columns between the 2 datasets
+#' \itemize{
+#'   \item same class
+#'   \item same type
+#'   \item common row names
+#'   \item common column names
+#'   \item same row number
+#'   \item same column number
+#'   \item potential identical rows between the 2 datasets
+#'   \item potential identical columns between the 2 datasets
+#' }
 #' @param data1 Matrix, data frame or table.
 #' @param data2 Matrix, data frame or table.
 #' @param safer_check Single logical value. Perform the "safer" checks? If \code{TRUE}, checkings are performed before main code running (see the \href{https://github.com/safer-r}{safer-r project}): 1) correct \code{lib_path} argument value 2) required functions and related packages effectively present in local R libraries and 3) R classical operators (like \code{"<-"}) not overwritten by another package because of the R scope. Warning: must be set to \code{FALSE} if this function is used inside another "safer" function to avoid pointless multiple checkings.
@@ -25,85 +20,48 @@
 #' @returns 
 #' A list containing:
 #' 
-#' - $same_class: logical. Are classes identical ?
-#' 
-#' - $class: identical class of the 2 datasets (NULL otherwise).
-#' 
-#' - $same_mode: logical. Are modes identical ?
-#' 
-#' - $mode: identical mode of the 2 datasets (NULL otherwise).
-#' 
-#' - $same_type: logical. Are types identical ?
-#' 
-#' - $type: identical type of the 2 datasets (NULL otherwise).
-#' 
-#' - $same_dim: logical. Are dimension identical ?
-#' 
-#' - $dim: dimension of the 2 datasets (NULL otherwise).
-#' 
-#' - $same_row_nb: logical. Are number of rows identical ?
-#' 
-#' - $row_nb: nb of rows of the 2 datasets if identical (NULL otherwise).
-#' 
-#' - $same_col_nb: logical. Are number of columns identical ?
-#' 
-#' - $col_nb: nb of columns of the 2 datasets if identical (NULL otherwise).
-#' 
-#' - $same_row_name: logical. Are row names identical ? NULL if no row names in the two 2D datasets.
-#' 
-#' - $row_name: name of rows of the 2 datasets if identical (NULL otherwise).
-#' 
-#' - $any_id_row_name: logical. Is there any row names identical ? NULL if no row names in the two 2D datasets.
-#' 
-#' - $same_row_names_pos1: positions, in data1, of the row names identical in data2.
-#' 
-#' - $same_row_names_pos2: positions, in data2, of the row names identical in data1.
-#' 
-#' - $same_row_names_match1: positions, in data2, of the row names that match the row names in data1, as given by match(data1, data2) (NULL otherwise).
-#' 
-#' - $same_row_names_match2: positions, in data1, of the row names that match the row names in data2, as given by match(data1, data2) (NULL otherwise).
-#' 
-#' - $common_row_names: common row names between data1 and data2 (can be a subset of $name or not). NULL if no common row names.
-#' 
-#' - $same_col_name: logical. Are column names identical ? NULL if no col names in the two 2D datasets.
-#' 
-#' - $col_name: name of columns of the 2 datasets if identical (NULL otherwise).
-#' 
-#' - $any_id_col_name: logical. Is there any column names identical ? NULL if no col names in the two 2D datasets.
-#' 
-#' - $same_col_names_pos1: positions, in data1, of the column names identical in data2.
-#' 
-#' - $same_col_names_pos2: positions, in data2, of the column names identical in data1.
-#' 
-#' - $same_col_names_match1: positions, in data2, of the column names that match the column names in data1, as given by match(data1, data2) (NULL otherwise).
-#' 
-#' - $same_col_names_match2: positions, in data1, of the column names that match the column names in data2, as given by match(data1, data2) (NULL otherwise).
-#' 
-#' - $common_col_names: common column names between data1 and data2 (can be a subset of $name or not). NULL if no common column names.
-#' 
-#' - $any_id_row: logical. is there identical rows (not considering row names)? NULL if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
-#' 
-#' - $same_row_pos1: positions, in data1, of the rows identical in data2 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
-#' 
-#' - $same_row_pos2: positions, in data2, of the rows identical in data1 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
-#' 
-#' - $same_row_match1: positions, in data2, of the rows that match the rows in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
-#' 
-#' - $same_row_match2: positions, in data1, of the rows that match the rows in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
-#' 
-#' - $any_id_col: logical. is there identical columns (not considering column names)? NULL if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
-#' 
-#' - $same_col_pos1: position in data1 of the cols identical in data2 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
-#' 
-#' - $same_col_pos2: position in data2 of the cols identical in data1 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
-#' 
-#' - $same_col_match1: positions, in data2, of the columns that match the columns in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
-#' 
-#' - $same_row_match2: positions, in data1, of the columns that match the columns in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
-#' 
-#' - $identical_content: logical. Are contents identical ? Row and column names are not considered. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character).
-#' 
-#' - $identical: logical. Idem as $identical_content but including row & column names.
+#' \itemize{
+#'   \item \code{same_class}: logical. Are classes identical ?
+#'   \item \code{class}: identical class of the 2 datasets (NULL otherwise).
+#'   \item \code{same_mode}: logical. Are modes identical ?
+#'   \item \code{mode}: identical mode of the 2 datasets (NULL otherwise).
+#'   \item \code{same_type}: logical. Are types identical ?
+#'   \item \code{type}: identical type of the 2 datasets (NULL otherwise).
+#'   \item \code{same_dim}: logical. Are dimension identical ?
+#'   \item \code{dim}: dimension of the 2 datasets (NULL otherwise).
+#'   \item \code{same_row_nb}: logical. Are number of rows identical ?
+#'   \item \code{row_nb}: nb of rows of the 2 datasets if identical (NULL otherwise).
+#'   \item \code{same_col_nb}: logical. Are number of columns identical ?
+#'   \item \code{col_nb}: nb of columns of the 2 datasets if identical (NULL otherwise).
+#'   \item \code{same_row_name}: logical. Are row names identical ? NULL if no row names in the two 2D datasets.
+#'   \item \code{row_name}: name of rows of the 2 datasets if identical (NULL otherwise).
+#'   \item \code{any_id_row_name}: logical. Is there any row names identical ? NULL if no row names in the two 2D datasets.
+#'   \item \code{same_row_names_pos1}: positions, in data1, of the row names identical in data2.
+#'   \item \code{same_row_names_pos2}: positions, in data2, of the row names identical in data1.
+#'   \item \code{same_row_names_match1}: positions, in data2, of the row names that match the row names in data1, as given by match(data1, data2) (NULL otherwise).
+#'   \item \code{same_row_names_match2}: positions, in data1, of the row names that match the row names in data2, as given by match(data1, data2) (NULL otherwise).
+#'   \item \code{common_row_names}: common row names between data1 and data2 (can be a subset of $name or not). NULL if no common row names.
+#'   \item \code{same_col_name}: logical. Are column names identical ? NULL if no col names in the two 2D datasets.
+#'   \item \code{col_name}: name of columns of the 2 datasets if identical (NULL otherwise).
+#'   \item \code{any_id_col_name}: logical. Is there any column names identical ? NULL if no col names in the two 2D datasets.
+#'   \item \code{same_col_names_pos1}: positions, in data1, of the column names identical in data2.
+#'   \item \code{same_col_names_pos2}: positions, in data2, of the column names identical in data1.
+#'   \item \code{same_col_names_match1}: positions, in data2, of the column names that match the column names in data1, as given by match(data1, data2) (NULL otherwise).
+#'   \item \code{same_col_names_match2}: positions, in data1, of the column names that match the column names in data2, as given by match(data1, data2) (NULL otherwise).
+#'   \item \code{common_col_names}: common column names between data1 and data2 (can be a subset of $name or not). NULL if no common column names.
+#'   \item \code{any_id_row}: logical. is there identical rows (not considering row names)? NULL if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#'   \item \code{same_row_pos1}: positions, in data1, of the rows identical in data2 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#'   \item \code{same_row_pos2}: positions, in data2, of the rows identical in data1 (not considering row names). Return "TOO BIG FOR EVALUATION" if nrow(data1) * nrow(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#'   \item \code{same_row_match1}: positions, in data2, of the rows that match the rows in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#'   \item \code{same_row_match2}: positions, in data1, of the rows that match the rows in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#'   \item \code{any_id_col}: logical. is there identical columns (not considering column names)? NULL if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#'   \item \code{same_col_pos1}: position in data1 of the cols identical in data2 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#'   \item \code{same_col_pos2}: position in data2 of the cols identical in data1 (not considering column names). Return "TOO BIG FOR EVALUATION" if ncol(data1) * ncol(data2) > 1e6. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#'   \item \code{same_col_match1}: positions, in data2, of the columns that match the columns in data1, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#'   \item \code{same_row_match2}: positions, in data1, of the columns that match the columns in data2, as given by match(data1, data2) (NULL otherwise). Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character.
+#'   \item \code{identical_content}: logical. Are contents identical ? Row and column names are not considered. Warning: class, mode and type are not considered (comparison of content is performed after conversion of the elements into character).
+#'   \item \code{identical}: logical. Idem as $identical_content but including row & column names.
+#' }
 #' @details 
 #' WARNINGS
 #' 
@@ -140,27 +98,26 @@
 #' 
 #' 
 #' "TOO BIG FOR EVALUATION" returned in $same_col_pos1, $same_col_pos2, $same_col_match1 and $same_col_match2 when ncol(data1) * ncol(data2) > 1e6 and $any_id_col is returned NULL.
-#' @author Gael Millot <gael.millot@pasteur.fr>
-#' @author Yushi Han <yushi.han2000@gmail.com>
-#' @author Haiding Wang <wanghaiding442@gmail.com>
+#' @author \href{mailto:gael.millot@pasteur.fr}{Gael Millot}
+#' @author Haiding Wang
+#' @author Yushi Han
 #' @examples
 #' # Warning: these examples may not work well when using the "Run examples" link 
 #' # because of a particular environment. Please, copy-paste in a local environment.
 #' # See also https://safer-r.github.io/saferTool/articles/comp_2d.html
-#' obs1 = matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])) ; 
-#' obs2 = as.data.frame(matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])), stringsAsFactors = TRUE) ;
-#' obs1 ; 
-#' obs2 ; 
-#' comp_2d(obs1, obs2)
-#' 
-#' 
+#' obs1 <- matrix(1:10, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5]))
+#' obs2 <- as.data.frame(obs1, stringsAsFactors = TRUE)
+#' obs1
+#' obs2
+#' saferTool::comp_2d(data1 = obs1, data2 = obs2)
+#'
 #' # Matrices: same row content but not same row names
-#' 
-#' obs1 = t(matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5]))) ; 
-#' obs2 = t(matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5, dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4])))) ; 
-#' obs1 ; 
-#' obs2 ; 
-#' comp_2d(obs1, obs2)
+#' obs1 <- t(matrix(1:10, byrow = TRUE, ncol = 5, dimnames = list(letters[1:2], LETTERS[1:5])))
+#' obs2 <- t(matrix(c(1:5, 101:105, 6:10), byrow = TRUE, ncol = 5,
+#'     dimnames = list(c("a", "z", "b"), c(LETTERS[1:2], "k", LETTERS[5:4]))))
+#' obs1
+#' obs2
+#' saferTool::comp_2d(data1 = obs1, data2 = obs2)
 #' @importFrom saferDev arg_check
 #' @export
 comp_2d <- function(
@@ -521,7 +478,7 @@ comp_2d <- function(
     arg_check_error_text <- base::paste0("ERROR ", embed_error_text, "\n\n", collapse = NULL, recycle0 = FALSE) # must be used instead of error_text = embed_error_text when several arg_check are performed on the same argument (tempo1, tempo2, see below)
     ee <- base::expression(argum_check <- base::c(argum_check, tempo$problem) , text_check <- base::c(text_check, tempo$text) , checked_arg_names <- base::c(checked_arg_names, tempo$object_name))
     tempo1 <- saferDev::arg_check(data = data1, class = "data.frame", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo2 <- saferDev::arg_check(data = data1, class = c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # since R 4.0.0 (exact class of a matrix); R < 4.0.0 not supported because of the Depends R (>= 4.5.0) field of the DESCRIPTION file
+    tempo2 <- saferDev::arg_check(data = data1, class = c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # since R 4.0.0. No need of class = "matrix" (before R 4.0.0) because of the Depends field of the DESCRIPTION file
     tempo3 <- saferDev::arg_check(data = data1, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
     if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE){
         tempo_cat <- base::paste0(
@@ -535,7 +492,7 @@ comp_2d <- function(
         checked_arg_names <- base::c(checked_arg_names, tempo1$object_name)
     }
     tempo1 <- saferDev::arg_check(data = data2, class = "data.frame", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo2 <- saferDev::arg_check(data = data2, class = c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # since R 4.0.0 (exact class of a matrix); R < 4.0.0 not supported because of the Depends R (>= 4.5.0) field of the DESCRIPTION file
+    tempo2 <- saferDev::arg_check(data = data2, class = c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # since R 4.0.0. No need of class = "matrix" (before R 4.0.0) because of the Depends field of the DESCRIPTION file
     tempo3 <- saferDev::arg_check(data = data2, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
     if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE){
         tempo_cat <- base::paste0(
