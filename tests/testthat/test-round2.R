@@ -97,6 +97,8 @@ testthat::test_that("round2()", {
     testthat::expect_error(round2(data = vec_num1, dec_nb = 2, after_lead_zero = TRUE, safer_check = TRUE, lib_path = expr1, error_text = ""))
     testthat::expect_error(round2(data = vec_num1, dec_nb = 2, after_lead_zero = TRUE, safer_check = TRUE, lib_path = fun1, error_text = ""))
     testthat::expect_error(round2(data = vec_num1, dec_nb = 2, after_lead_zero = TRUE, safer_check = TRUE, lib_path = "PATH_NOT_GOOD", error_text = ""))
+    # lib_path is checked even when safer_check is FALSE (backbone v21.2: lib_path used outside if(safer_check == TRUE){}, so the lib_path check is always executed)
+    testthat::expect_error(round2(data = vec_num1, dec_nb = 2, after_lead_zero = TRUE, safer_check = FALSE, lib_path = "PATH_NOT_GOOD", error_text = ""))
     testthat::expect_no_error(round2(data = vec_num1, dec_nb = 2, after_lead_zero = TRUE, safer_check = TRUE, lib_path = base:::.libPaths(new = , include.site = TRUE), error_text = ""))
     ######## end check of lib_path
 

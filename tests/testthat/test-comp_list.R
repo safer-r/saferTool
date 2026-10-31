@@ -82,6 +82,8 @@ testthat::test_that("comp_list()", {
     testthat::expect_error(comp_list(data1 = list1, data2 = list4, safer_check = TRUE, lib_path = expr1, error_text = ""))
     testthat::expect_error(comp_list(data1 = list1, data2 = list4, safer_check = TRUE, lib_path = fun1, error_text = ""))
     testthat::expect_error(comp_list(data1 = list1, data2 = list4, safer_check = TRUE, lib_path = "PATH_NOT_GOOD", error_text = ""))
+    # lib_path is checked even when safer_check is FALSE (backbone v21.2: lib_path used outside if(safer_check == TRUE){}, so the lib_path check is always executed)
+    testthat::expect_error(comp_list(data1 = list1, data2 = list4, safer_check = FALSE, lib_path = "PATH_NOT_GOOD", error_text = ""))
     testthat::expect_no_error(comp_list(data1 = list1, data2 = list4, safer_check = TRUE, lib_path = base:::.libPaths(new = , include.site = TRUE), error_text = ""))
     ######## end check of lib_path
 

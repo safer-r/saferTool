@@ -118,6 +118,8 @@ testthat::test_that("sample2()", {
     testthat::expect_error(sample2(x = vec1, size = 2, replace = FALSE, prob = NULL, set_seed = NULL, safer_check = TRUE, lib_path = expr1, error_text = ""))
     testthat::expect_error(sample2(x = vec1, size = 2, replace = FALSE, prob = NULL, set_seed = NULL, safer_check = TRUE, lib_path = fun1, error_text = ""))
     testthat::expect_error(sample2(x = vec1, size = 2, replace = FALSE, prob = NULL, set_seed = NULL, safer_check = TRUE, lib_path = "PATH_NOT_GOOD", error_text = ""))
+    # lib_path is checked even when safer_check is FALSE (backbone v21.2: lib_path used outside if(safer_check == TRUE){}, so the lib_path check is always executed)
+    testthat::expect_error(sample2(x = vec1, size = 2, replace = FALSE, prob = NULL, set_seed = NULL, safer_check = FALSE, lib_path = "PATH_NOT_GOOD", error_text = ""))
     testthat::expect_no_error(sample2(x = vec1, size = 2, replace = FALSE, prob = NULL, set_seed = NULL, safer_check = TRUE, lib_path = base:::.libPaths(new = , include.site = TRUE), error_text = ""))
     ######## end check of lib_path
 
