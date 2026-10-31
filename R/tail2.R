@@ -338,7 +338,8 @@ tail2 <- function(
 
     ######## check of the required functions from the required packages
     if(safer_check == TRUE){
-        saferDev:::.pack_and_function_check(
+        .pack_and_function_check <- utils::getFromNamespace(x = ".pack_and_function_check", ns = "saferDev", pos = -1, envir = )
+        .pack_and_function_check(
             fun = base::c(
                 # functions required in this code
                 "saferDev::arg_check", # write each function preceeded by their package name
@@ -355,6 +356,7 @@ tail2 <- function(
 
     ######## escaping CRAN submission NOTE for internal functions
 
+    .base_op_check <- utils::getFromNamespace(x = ".base_op_check", ns = "saferDev", pos = -1, envir = )
     # add here in the internal functions that are used in your main code (copy-paste the line above and replace .base_op_check by the name of the internal function
     # not mandatory if your function is not designed for submission to the CRAN
 
@@ -362,7 +364,7 @@ tail2 <- function(
 
     ######## critical operator checking
     if(safer_check == TRUE){
-        saferDev:::.base_op_check(
+        .base_op_check(
             error_text = embed_error_text
         )
     }
@@ -437,7 +439,7 @@ tail2 <- function(
     #### end second round of checking and data preparation
 
     #### main code
-    if( ! ((base::any(base::class(x = data1) %in% base::c("data.frame", "table")) | base::all(base::class(x = data1) %in% base::c("matrix", "array"))) & base::length(x = base::dim(x = data1)) == 2)){ # class of a matrix is c("matrix", "array") since R 4.0.0 (exact class check, as in arg_check()). The base::length(x = base::dim(x = data1)) == 2 condition sends 1D arrays/matrices to utils::tail(), because they have no column to select
+    if( ! ((base::any(base::class(x = data1) %in% base::c("data.frame", "table"), na.rm = FALSE) | base::all(base::class(x = data1) %in% base::c("matrix", "array"), na.rm = FALSE)) & base::length(x = base::dim(x = data1)) == 2)){ # class of a matrix is c("matrix", "array") since R 4.0.0 (exact class check, as in arg_check()). The base::length(x = base::dim(x = data1)) == 2 condition sends 1D arrays/matrices to utils::tail(), because they have no column to select
         base::return(utils::tail(x = data1, n = n))
     }else{
         obs_dim <- base::dim(x = data1)

@@ -370,7 +370,8 @@ comp_1d <- function(
 
     ######## check of the required functions from the required packages
     if(safer_check == TRUE){
-        saferDev:::.pack_and_function_check(
+        .pack_and_function_check <- utils::getFromNamespace(x = ".pack_and_function_check", ns = "saferDev", pos = -1, envir = )
+        .pack_and_function_check(
             fun = base::c(
                 # functions required in this code
                 "saferDev::arg_check", # write each function preceeded by their package name
@@ -387,6 +388,7 @@ comp_1d <- function(
 
     ######## escaping CRAN submission NOTE for internal functions
 
+    .base_op_check <- utils::getFromNamespace(x = ".base_op_check", ns = "saferDev", pos = -1, envir = )
     # add here in the internal functions that are used in your main code (copy-paste the line above and replace .base_op_check by the name of the internal function
     # not mandatory if your function is not designed for submission to the CRAN
 
@@ -394,7 +396,7 @@ comp_1d <- function(
 
     ######## critical operator checking
     if(safer_check == TRUE){
-        saferDev:::.base_op_check(
+        .base_op_check(
             error_text = embed_error_text
         )
     }
@@ -415,7 +417,7 @@ comp_1d <- function(
     tempo1b <- saferDev::arg_check(data = data1, class = NULL, typeof = NULL, mode = "character", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # character vectors
     tempo1c <- saferDev::arg_check(data = data1, class = NULL, typeof = NULL, mode = "logical", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # logical vectors
     tempo2 <- saferDev::arg_check(data = data1, class = "factor", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo3 <- saferDev::arg_check(data = data1, class = c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # since R 4.0.0
+    tempo3 <- saferDev::arg_check(data = data1, class = base::c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # since R 4.0.0
     tempo4 <- saferDev::arg_check(data = data1, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
     if(tempo1$problem == TRUE & tempo1b$problem == TRUE & tempo1c$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE){
         tempo_cat <- base::paste0(
@@ -432,7 +434,7 @@ comp_1d <- function(
     tempo1b <- saferDev::arg_check(data = data2, class = NULL, typeof = NULL, mode = "character", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # character vectors
     tempo1c <- saferDev::arg_check(data = data2, class = NULL, typeof = NULL, mode = "logical", length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # logical vectors
     tempo2 <- saferDev::arg_check(data = data2, class = "factor", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo3 <- saferDev::arg_check(data = data2, class = c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # since R 4.0.0
+    tempo3 <- saferDev::arg_check(data = data2, class = base::c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # since R 4.0.0
     tempo4 <- saferDev::arg_check(data = data2, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
     if(tempo1$problem == TRUE & tempo1b$problem == TRUE & tempo1c$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE & tempo4$problem == TRUE){
         tempo_cat <- base::paste0(
@@ -475,8 +477,8 @@ comp_1d <- function(
     ######## end graphic device checking
 
     ######## other checkings
-    if(base::any(base::c("table", "matrix", "array") %in% base::class(data1))){
-        if(base::length(base::dim(data1)) > 1){
+    if(base::any(base::c("table", "matrix", "array") %in% base::class(x = data1), na.rm = FALSE)){
+        if(base::length(x = base::dim(x = data1)) > 1){
             tempo_cat <- base::paste0(
                 error_text_start, 
                 "THE data1 ARGUMENT MUST BE A 1D 1D TABLE/MATRIX/ARRAY.",
@@ -486,8 +488,8 @@ comp_1d <- function(
             base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
         }
     }
-    if(base::any(base::c("table", "matrix", "array") %in% base::class(data2))){
-        if(base::length(base::dim(data2)) > 1){
+    if(base::any(base::c("table", "matrix", "array") %in% base::class(x = data2), na.rm = FALSE)){
+        if(base::length(x = base::dim(x = data2)) > 1){
             tempo_cat <- base::paste0(
                 error_text_start, 
                 "THE data2 ARGUMENT MUST BE A 1D 1D TABLE/MATRIX/ARRAY.",
@@ -533,121 +535,121 @@ comp_1d <- function(
     order2 <- NULL
     identical_object <- FALSE
     identical_content <- FALSE
-    if(base::identical(data1, data2)){
+    if(base::identical(x = data1, y = data2, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
         same_class <- TRUE
-        class <- base::class(data1)
+        class <- base::class(x = data1)
         same_length <- TRUE
-        length <- base::length(data1)
-        if(base::any(base::class(data1) %in% "factor")){
+        length <- base::length(x = data1)
+        if(base::any(base::class(x = data1) %in% "factor", na.rm = FALSE)){
             same_levels <- TRUE
-            levels <- base::levels(data1)
+            levels <- base::levels(x = data1)
             any_id_levels <- TRUE
-            same_levels_pos1 <- 1:base::length(base::levels(data1))
-            same_levels_pos2 <- 1:base::length(base::levels(data2))
-            same_levels_match1 <- 1:base::length(base::levels(data1))
-            same_levels_match2 <- 1:base::length(base::levels(data2))
-            common_levels <- base::levels(data1)
+            same_levels_pos1 <- 1:base::length(x = base::levels(x = data1))
+            same_levels_pos2 <- 1:base::length(x = base::levels(x = data2))
+            same_levels_match1 <- 1:base::length(x = base::levels(x = data1))
+            same_levels_match2 <- 1:base::length(x = base::levels(x = data2))
+            common_levels <- base::levels(x = data1)
         }
-        if( ! base::is.null(base::names(data1))){
+        if( ! base::is.null(x = base::names(x = data1))){
             same_names <- TRUE
-            name <- base::names(data1)
+            name <- base::names(x = data1)
             any_id_names <- TRUE
-            same_names_pos1 <- 1:base::length(data1)
-            same_names_pos2 <- 1:base::length(data2)
-            same_names_match1 <- 1:base::length(data1)
-            same_names_match2 <- 1:base::length(data2)
-            common_names <- base::names(data1)
+            same_names_pos1 <- 1:base::length(x = data1)
+            same_names_pos2 <- 1:base::length(x = data2)
+            same_names_match1 <- 1:base::length(x = data1)
+            same_names_match2 <- 1:base::length(x = data2)
+            common_names <- base::names(x = data1)
         }
         any_id_elements <- TRUE
-        same_elements_pos1 <- 1:base::length(data1)
-        same_elements_pos2 <- 1:base::length(data2)
-        same_elements_match1 <- 1:base::length(data1)
-        same_elements_match2 <- 1:base::length(data2)
+        same_elements_pos1 <- 1:base::length(x = data1)
+        same_elements_pos2 <- 1:base::length(x = data2)
+        same_elements_match1 <- 1:base::length(x = data1)
+        same_elements_match2 <- 1:base::length(x = data2)
         common_elements <- data1
         same_order <- TRUE
-        order1 <- base::order(data1)
-        order2 <- base::order(data2)
+        order1 <- base::order(data1, na.last = TRUE, decreasing = FALSE, method = base::c("auto", "shell", "radix"))
+        order2 <- base::order(data2, na.last = TRUE, decreasing = FALSE, method = base::c("auto", "shell", "radix"))
         identical_object <- TRUE
         identical_content <- TRUE
     }else{
-        if(base::identical(base::class(data1), base::class(data2))){
+        if(base::identical(x = base::class(x = data1), y = base::class(x = data2), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
             same_class <- TRUE
-            class <- base::class(data1)
+            class <- base::class(x = data1)
         }
-        if(base::identical(base::length(data1), base::length(data2))){
+        if(base::identical(x = base::length(x = data1), y = base::length(x = data2), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
             same_length<- TRUE
-            length <- base::length(data1)
+            length <- base::length(x = data1)
         }
-        if(base::any(base::class(data1) %in% "factor") & base::any(base::class(data2) %in% "factor")){
-            if(base::identical(base::levels(data1), base::levels(data2))){
+        if(base::any(base::class(x = data1) %in% "factor", na.rm = FALSE) & base::any(base::class(x = data2) %in% "factor", na.rm = FALSE)){
+            if(base::identical(x = base::levels(x = data1), y = base::levels(x = data2), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
                 same_levels <- TRUE
-                levels <- base::levels(data1)
+                levels <- base::levels(x = data1)
             }else{
                 same_levels <- FALSE
             }
-            if(base::any(base::levels(data1) %in% base::levels(data2))){
+            if(base::any(base::levels(x = data1) %in% base::levels(x = data2), na.rm = FALSE)){
                 any_id_levels <- TRUE
-                same_levels_pos1 <- base::which(base::levels(data1) %in% base::levels(data2))
-                same_levels_match1 <- base::match(base::levels(data1), base::levels(data2))
+                same_levels_pos1 <- base::which(x = base::levels(x = data1) %in% base::levels(x = data2), arr.ind = FALSE, useNames = TRUE)
+                same_levels_match1 <- base::match(x = base::levels(x = data1), table = base::levels(x = data2), nomatch = NA_integer_, incomparables = NULL)
             }
-            if(base::any(base::levels(data2) %in% base::levels(data1))){
+            if(base::any(base::levels(x = data2) %in% base::levels(x = data1), na.rm = FALSE)){
                 any_id_levels <- TRUE
-                same_levels_pos2 <- base::which(base::levels(data2) %in% base::levels(data1))
-                same_levels_match2 <- base::match(base::levels(data2), base::levels(data1))
+                same_levels_pos2 <- base::which(x = base::levels(x = data2) %in% base::levels(x = data1), arr.ind = FALSE, useNames = TRUE)
+                same_levels_match2 <- base::match(x = base::levels(x = data2), table = base::levels(x = data1), nomatch = NA_integer_, incomparables = NULL)
             }
             if(any_id_levels == TRUE){
-                common_levels <- base::unique(base::c(base::levels(data1)[same_levels_pos1], base::levels(data2)[same_levels_pos2]))
+                common_levels <- base::unique(x = base::c(base::levels(x = data1)[same_levels_pos1], base::levels(x = data2)[same_levels_pos2]), incomparables = FALSE)
             }
         }
-        if(base::any(base::class(data1) %in% "factor")){ # to compare content
-            data1 <- base::as.character(data1)
+        if(base::any(base::class(x = data1) %in% "factor", na.rm = FALSE)){ # to compare content
+            data1 <- base::as.character(x = data1)
         }
-        if(base::any(base::class(data2) %in% "factor")){ # to compare content
-            data2 <- base::as.character(data2)
+        if(base::any(base::class(x = data2) %in% "factor", na.rm = FALSE)){ # to compare content
+            data2 <- base::as.character(x = data2)
         }
-        if( ! (base::is.null(base::names(data1)) & base::is.null(base::names(data2)))){
-            if(base::identical(base::names(data1), base::names(data2))){
+        if( ! (base::is.null(x = base::names(x = data1)) & base::is.null(x = base::names(x = data2)))){
+            if(base::identical(x = base::names(x = data1), y = base::names(x = data2), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
                 same_names <- TRUE
-                name <- base::names(data1)
+                name <- base::names(x = data1)
             }else{
                 same_names <- FALSE
             }
-            if(base::any(base::names(data1) %in% base::names(data2))){
+            if(base::any(base::names(x = data1) %in% base::names(x = data2), na.rm = FALSE)){
                 any_id_names <- TRUE
-                same_names_pos1 <- base::which(base::names(data1) %in% base::names(data2))
-                same_names_match1 <- base::match(base::names(data1), base::names(data2))
+                same_names_pos1 <- base::which(x = base::names(x = data1) %in% base::names(x = data2), arr.ind = FALSE, useNames = TRUE)
+                same_names_match1 <- base::match(x = base::names(x = data1), table = base::names(x = data2), nomatch = NA_integer_, incomparables = NULL)
             }
-            if(base::any(base::names(data2) %in% base::names(data1))){
+            if(base::any(base::names(x = data2) %in% base::names(x = data1), na.rm = FALSE)){
                 any_id_names <- TRUE
-                same_names_pos2 <- base::which(base::names(data2) %in% base::names(data1))
-                same_names_match2 <- base::match(base::names(data2), base::names(data1))
+                same_names_pos2 <- base::which(x = base::names(x = data2) %in% base::names(x = data1), arr.ind = FALSE, useNames = TRUE)
+                same_names_match2 <- base::match(x = base::names(x = data2), table = base::names(x = data1), nomatch = NA_integer_, incomparables = NULL)
             }
             if(any_id_names == TRUE){
-                common_names <- base::unique(base::c(base::names(data1)[same_names_pos1], base::names(data2)[same_names_pos2]))
+                common_names <- base::unique(x = base::c(base::names(x = data1)[same_names_pos1], base::names(x = data2)[same_names_pos2]), incomparables = FALSE)
             }
         }
-        base::names(data1) <- NULL # names solved -> to do not be disturbed by names
-        base::names(data2) <- NULL # names solved -> to do not be disturbed by names
-        if(base::any(data1 %in% data2)){
+        base::names(x = data1) <- NULL # names solved -> to do not be disturbed by names
+        base::names(x = data2) <- NULL # names solved -> to do not be disturbed by names
+        if(base::any(data1 %in% data2, na.rm = FALSE)){
             any_id_elements <- TRUE
-            same_elements_pos1 <- base::which(data1 %in% data2)
-            same_elements_match1 <- base::match(data1, data2)
+            same_elements_pos1 <- base::which(x = data1 %in% data2, arr.ind = FALSE, useNames = TRUE)
+            same_elements_match1 <- base::match(x = data1, table = data2, nomatch = NA_integer_, incomparables = NULL)
         }
-        if(base::any(data2 %in% data1)){
+        if(base::any(data2 %in% data1, na.rm = FALSE)){
             any_id_elements <- TRUE
-            same_elements_pos2 <- base::which(data2 %in% data1)
-            same_elements_match2 <- base::match(data2, data1)
+            same_elements_pos2 <- base::which(x = data2 %in% data1, arr.ind = FALSE, useNames = TRUE)
+            same_elements_match2 <- base::match(x = data2, table = data1, nomatch = NA_integer_, incomparables = NULL)
         }
         if(any_id_elements == TRUE){
-            common_elements <- base::unique(base::c(data1[same_elements_pos1], data2[same_elements_pos2]))
+            common_elements <- base::unique(x = base::c(data1[same_elements_pos1], data2[same_elements_pos2]), incomparables = FALSE)
         }
-        if(base::identical(data1, data2)){
+        if(base::identical(x = data1, y = data2, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
             identical_content <- TRUE
             same_order <- TRUE
-        }else if(base::identical(base::sort(data1), base::sort(data2))){
+        }else if(base::identical(x = base::sort(x = data1, decreasing = FALSE), y = base::sort(x = data2, decreasing = FALSE), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
             same_order <- FALSE
-            order1 <- base::order(data1)
-            order2 <- base::order(data2)
+            order1 <- base::order(data1, na.last = TRUE, decreasing = FALSE, method = base::c("auto", "shell", "radix"))
+            order2 <- base::order(data2, na.last = TRUE, decreasing = FALSE, method = base::c("auto", "shell", "radix"))
         }
     }
     output <- base::list(same_class = same_class, class = class, same_length = same_length, length = length, same_levels = same_levels, levels = levels, any_id_levels = any_id_levels, same_levels_pos1 = same_levels_pos1, same_levels_pos2 = same_levels_pos2, same_levels_match1 = same_levels_match1, same_levels_match2 = same_levels_match2, common_levels = common_levels, same_names = same_names, name = name, any_id_names = any_id_names, same_names_pos1 = same_names_pos1, same_names_pos2 = same_names_pos2, same_names_match1 = same_names_match1, same_names_match2 = same_names_match2, common_names = common_names, any_id_elements = any_id_elements, same_elements_pos1 = same_elements_pos1, same_elements_pos2 = same_elements_pos2, same_elements_match1 = same_elements_match1, same_elements_match2 = same_elements_match2, common_elements = common_elements, same_order = same_order, order1 = order1, order2 = order2, identical_object = identical_object, identical_content = identical_content)

@@ -354,7 +354,8 @@ comp_list <- function(
 
     ######## check of the required functions from the required packages
     if(safer_check == TRUE){
-        saferDev:::.pack_and_function_check(
+        .pack_and_function_check <- utils::getFromNamespace(x = ".pack_and_function_check", ns = "saferDev", pos = -1, envir = )
+        .pack_and_function_check(
             fun = base::c(
                 # functions required in this code
                 "saferDev::arg_check", # write each function preceeded by their package name
@@ -371,6 +372,7 @@ comp_list <- function(
 
     ######## escaping CRAN submission NOTE for internal functions
 
+    .base_op_check <- utils::getFromNamespace(x = ".base_op_check", ns = "saferDev", pos = -1, envir = )
     # add here in the internal functions that are used in your main code (copy-paste the line above and replace .base_op_check by the name of the internal function
     # not mandatory if your function is not designed for submission to the CRAN
 
@@ -378,7 +380,7 @@ comp_list <- function(
 
     ######## critical operator checking
     if(safer_check == TRUE){
-        saferDev:::.base_op_check(
+        .base_op_check(
             error_text = embed_error_text
         )
     }
@@ -451,7 +453,7 @@ comp_list <- function(
     same_order <- NULL
     identical_object <- FALSE
     identical_content <- FALSE
-    if(base::identical(data1, data2)){
+    if(base::identical(x = data1, y = data2, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
         same_length <- TRUE
         length2 <- base::length(x = data1)
         if( ! base::is.null(x = base::names(x = data1))){
@@ -474,50 +476,50 @@ comp_list <- function(
         identical_object <- TRUE
         identical_content <- TRUE
     }else{
-        if(base::identical(base::length(x = data1), base::length(x = data2))){
+        if(base::identical(x = base::length(x = data1), y = base::length(x = data2), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
             same_length <- TRUE
             length2 <- base::length(x = data1)
         }
         if( ! (base::is.null(x = base::names(x = data1)) & base::is.null(x = base::names(x = data2)))){
-            if( ! base::identical(base::names(x = data1), base::names(x = data2))){
+            if( ! base::identical(x = base::names(x = data1), y = base::names(x = data2), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
                 same_names <- FALSE
             }else{
                 same_names <- TRUE
                 name <- base::names(x = data1)
             }
-            if(base::any(base::names(x = data1) %in% base::names(x = data2))){
+            if(base::any(base::names(x = data1) %in% base::names(x = data2), na.rm = FALSE)){
                 any_id_names <- TRUE
-                same_names_pos1 <- base::which(base::names(x = data1) %in% base::names(x = data2))
-                same_names_match1 <- base::match(base::names(x = data1), base::names(x = data2))
+                same_names_pos1 <- base::which(x = base::names(x = data1) %in% base::names(x = data2), arr.ind = FALSE, useNames = TRUE)
+                same_names_match1 <- base::match(x = base::names(x = data1), table = base::names(x = data2), nomatch = NA_integer_, incomparables = NULL)
             }
-            if(base::any(base::names(x = data2) %in% base::names(x = data1))){
+            if(base::any(base::names(x = data2) %in% base::names(x = data1), na.rm = FALSE)){
                 any_id_names <- TRUE
-                same_names_pos2 <- base::which(base::names(x = data2) %in% base::names(x = data1))
-                same_names_match2 <- base::match(base::names(x = data2), base::names(x = data1))
+                same_names_pos2 <- base::which(x = base::names(x = data2) %in% base::names(x = data1), arr.ind = FALSE, useNames = TRUE)
+                same_names_match2 <- base::match(x = base::names(x = data2), table = base::names(x = data1), nomatch = NA_integer_, incomparables = NULL)
             }
             if(any_id_names == TRUE){
-                common_names <- base::unique(base::c(base::names(x = data1)[same_names_pos1], base::names(x = data2)[same_names_pos2]))
+                common_names <- base::unique(x = base::c(base::names(x = data1)[same_names_pos1], base::names(x = data2)[same_names_pos2]), incomparables = FALSE)
             }
         }
         base::names(x = data1) <- NULL # names solved -> to do not be disturbed by names
         base::names(x = data2) <- NULL # names solved -> to do not be disturbed by names
-        if(base::any(data1 %in% data2)){
+        if(base::any(data1 %in% data2, na.rm = FALSE)){
             any_id_compartments <- TRUE
-            same_compartments_pos1 <- base::which(data1 %in% data2)
-            same_compartments_match1 <- base::match(data1, data2)
+            same_compartments_pos1 <- base::which(x = data1 %in% data2, arr.ind = FALSE, useNames = TRUE)
+            same_compartments_match1 <- base::match(x = data1, table = data2, nomatch = NA_integer_, incomparables = NULL)
         }
-        if(base::any(data2 %in% data1)){
+        if(base::any(data2 %in% data1, na.rm = FALSE)){
             any_id_compartments <- TRUE
-            same_compartments_pos2 <- base::which(data2 %in% data1)
-            same_compartments_match2 <- base::match(data2, data1)
+            same_compartments_pos2 <- base::which(x = data2 %in% data1, arr.ind = FALSE, useNames = TRUE)
+            same_compartments_match2 <- base::match(x = data2, table = data1, nomatch = NA_integer_, incomparables = NULL)
         }
         if(any_id_compartments == TRUE){
-            common_compartments <- base::unique(base::c(data1[same_compartments_pos1], data2[same_compartments_pos2]))
+            common_compartments <- base::unique(x = base::c(data1[same_compartments_pos1], data2[same_compartments_pos2]), incomparables = FALSE)
         }
-        if(base::identical(data1, data2)){
+        if(base::identical(x = data1, y = data2, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
             identical_content <- TRUE
             same_order <- TRUE
-        }else if(same_length == TRUE & ! base::is.null(x = same_compartments_match1) & ! base::is.null(x = same_compartments_match2) & base::all( ! base::is.na(same_compartments_match1)) & base::all( ! base::is.na(same_compartments_match2))){ # bug fix of the initial dev version: the base::is.null(x = ) conditions avoid same.order == FALSE when no compartment is in common (base::all() of an empty logical(0) is TRUE)
+        }else if(same_length == TRUE & ! base::is.null(x = same_compartments_match1) & ! base::is.null(x = same_compartments_match2) & base::all( ! base::is.na(x = same_compartments_match1), na.rm = FALSE) & base::all( ! base::is.na(x = same_compartments_match2), na.rm = FALSE)){ # bug fix of the initial dev version: the base::is.null(x = ) conditions avoid same.order == FALSE when no compartment is in common (base::all() of an empty logical(0) is TRUE)
             same_order <- FALSE
         }
     }

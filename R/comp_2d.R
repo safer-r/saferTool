@@ -437,7 +437,8 @@ comp_2d <- function(
 
     ######## check of the required functions from the required packages
     if(safer_check == TRUE){
-        saferDev:::.pack_and_function_check(
+        .pack_and_function_check <- utils::getFromNamespace(x = ".pack_and_function_check", ns = "saferDev", pos = -1, envir = )
+        .pack_and_function_check(
             fun = base::c(
                 # functions required in this code
                 "saferDev::arg_check", # write each function preceeded by their package name
@@ -454,6 +455,7 @@ comp_2d <- function(
 
     ######## escaping CRAN submission NOTE for internal functions
 
+    .base_op_check <- utils::getFromNamespace(x = ".base_op_check", ns = "saferDev", pos = -1, envir = )
     # add here in the internal functions that are used in your main code (copy-paste the line above and replace .base_op_check by the name of the internal function
     # not mandatory if your function is not designed for submission to the CRAN
 
@@ -461,7 +463,7 @@ comp_2d <- function(
 
     ######## critical operator checking
     if(safer_check == TRUE){
-        saferDev:::.base_op_check(
+        .base_op_check(
             error_text = embed_error_text
         )
     }
@@ -478,7 +480,7 @@ comp_2d <- function(
     arg_check_error_text <- base::paste0("ERROR ", embed_error_text, "\n\n", collapse = NULL, recycle0 = FALSE) # must be used instead of error_text = embed_error_text when several arg_check are performed on the same argument (tempo1, tempo2, see below)
     ee <- base::expression(argum_check <- base::c(argum_check, tempo$problem) , text_check <- base::c(text_check, tempo$text) , checked_arg_names <- base::c(checked_arg_names, tempo$object_name))
     tempo1 <- saferDev::arg_check(data = data1, class = "data.frame", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo2 <- saferDev::arg_check(data = data1, class = c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # since R 4.0.0. No need of class = "matrix" (before R 4.0.0) because of the Depends field of the DESCRIPTION file
+    tempo2 <- saferDev::arg_check(data = data1, class = base::c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # since R 4.0.0. No need of class = "matrix" (before R 4.0.0) because of the Depends field of the DESCRIPTION file
     tempo3 <- saferDev::arg_check(data = data1, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
     if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE){
         tempo_cat <- base::paste0(
@@ -492,7 +494,7 @@ comp_2d <- function(
         checked_arg_names <- base::c(checked_arg_names, tempo1$object_name)
     }
     tempo1 <- saferDev::arg_check(data = data2, class = "data.frame", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
-    tempo2 <- saferDev::arg_check(data = data2, class = c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # since R 4.0.0. No need of class = "matrix" (before R 4.0.0) because of the Depends field of the DESCRIPTION file
+    tempo2 <- saferDev::arg_check(data = data2, class = base::c("matrix", "array"), typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text) # since R 4.0.0. No need of class = "matrix" (before R 4.0.0) because of the Depends field of the DESCRIPTION file
     tempo3 <- saferDev::arg_check(data = data2, class = "table", typeof = NULL, mode = NULL, length = NULL, prop = FALSE, double_as_integer_allowed = FALSE, options = NULL, all_options_in_data = FALSE, na_contain = TRUE, neg_values = TRUE, inf_values = TRUE, print = FALSE, data_name = NULL, data_arg = TRUE, safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
     if(tempo1$problem == TRUE & tempo2$problem == TRUE & tempo3$problem == TRUE){
         tempo_cat <- base::paste0(
@@ -535,7 +537,7 @@ comp_2d <- function(
     ######## end graphic device checking
 
     ######## other checkings
-    if( ! (base::any(base::class(data1) %in% base::c("data.frame", "table")) | base::all(base::class(data1) %in% base::c("matrix", "array")))){ # before R4.0.0, it was  ! base::any(base::class(data1) %in% base::c("matrix", "data.frame", "table"))
+    if( ! (base::any(base::class(x = data1) %in% base::c("data.frame", "table"), na.rm = FALSE) | base::all(base::class(x = data1) %in% base::c("matrix", "array"), na.rm = FALSE))){ # before R4.0.0, it was  ! base::any(base::class(data1) %in% base::c("matrix", "data.frame", "table"))
         # nocov start
         # codecov inactivated because arg_check() above only allows data.frame/matrix/array/table classes, so this branch is unreachable with argument values.
         tempo_cat <- base::paste0(
@@ -547,7 +549,7 @@ comp_2d <- function(
         base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
         # nocov end
     }
-    if( ! (base::any(base::class(data2) %in% base::c("data.frame", "table")) | base::all(base::class(data2) %in% base::c("matrix", "array")))){ # before R4.0.0, it was  ! base::any(base::class(data2) %in% base::c("matrix", "data.frame", "table"))
+    if( ! (base::any(base::class(x = data2) %in% base::c("data.frame", "table"), na.rm = FALSE) | base::all(base::class(x = data2) %in% base::c("matrix", "array"), na.rm = FALSE))){ # before R4.0.0, it was  ! base::any(base::class(data2) %in% base::c("matrix", "data.frame", "table"))
         # nocov start
         # codecov inactivated because arg_check() above only allows data.frame/matrix/array/table classes, so this branch is unreachable with argument values.
         tempo_cat <- base::paste0(
@@ -559,7 +561,7 @@ comp_2d <- function(
         base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
         # nocov end
     }
-    if(base::all(base::class(data1) == "table") & base::length(base::dim(data1)) == 1L){ # base::class() cannot return NA
+    if(base::all(base::class(x = data1) == "table", na.rm = FALSE) & base::length(x = base::dim(x = data1)) == 1L){ # base::class() cannot return NA
         tempo_cat <- base::paste0(
             error_text_start, 
             "THE data1 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION",
@@ -568,7 +570,7 @@ comp_2d <- function(
         )
         base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
     }
-    if(base::all(base::class(data2) == "table", na.rm = TRUE) & base::length(base::dim(data2)) == 1L){ # base::class() cannot return NA
+    if(base::all(base::class(x = data2) == "table", na.rm = TRUE) & base::length(x = base::dim(x = data2)) == 1L){ # base::class() cannot return NA
         tempo_cat <- base::paste0(
             error_text_start, 
             "THE data2 ARGUMENT IS A 1D TABLE. USE THE comp_1d FUNCTION",
@@ -623,81 +625,81 @@ comp_2d <- function(
     identical_object <- NULL
     identical_content <- NULL
     # structure
-    if( ! base::identical(base::class(data1), base::class(data2))){
+    if( ! base::identical(x = base::class(x = data1), y = base::class(x = data2), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
         same_class <- FALSE
     }else{
         same_class <- TRUE
-        class <- base::class(data1)
+        class <- base::class(x = data1)
     }
-    if( ! base::identical(base::mode(data1), base::mode(data2))){
+    if( ! base::identical(x = base::mode(x = data1), y = base::mode(x = data2), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
         same_mode<- FALSE
     }else{
         same_mode<- TRUE
-        mode <- base::mode(data1)
+        mode <- base::mode(x = data1)
     }
-    if( ! base::identical(base::typeof(data1), base::typeof(data2))){
+    if( ! base::identical(x = base::typeof(x = data1), y = base::typeof(x = data2), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
         same_type <- FALSE
     }else{
         same_type <- TRUE
-        type<- base::typeof(data1)
+        type<- base::typeof(x = data1)
     }
-    if( ! base::identical(base::dim(data1), base::dim(data2))){
+    if( ! base::identical(x = base::dim(x = data1), y = base::dim(x = data2), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
         same_dim <- FALSE
     }else{
         same_dim <- TRUE
-        dim <- base::dim(data1)
+        dim <- base::dim(x = data1)
     }
-    if( ! base::identical(base::nrow(data1), base::nrow(data2))){
+    if( ! base::identical(x = base::nrow(x = data1), y = base::nrow(x = data2), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
         same_row_nb <- FALSE
     }else{
         same_row_nb <- TRUE
-        row_nb <- base::nrow(data1)
+        row_nb <- base::nrow(x = data1)
     }
-    if( ! base::identical(base::ncol(data1), base::ncol(data2))){
+    if( ! base::identical(x = base::ncol(x = data1), y = base::ncol(x = data2), num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
         same_col_nb <- FALSE
     }else{
         same_col_nb <- TRUE
-        col_nb <- base::ncol(data1)
+        col_nb <- base::ncol(x = data1)
     }
     # end structure
     # conversion of object into matrix and content into characters
-    if(base::all(base::class(data1) %in% base::c("data.frame"))){
-        tempo_dim_names <- base::dimnames(data1)
-        data1 <- base::apply(data1, 2, function(x){base::gsub('\\s+', '',x)}) # convert into matrix of character whitout space in the character strings, since as.matrix use base::format() to convert into characters
-        data1 <- base::as.matrix(data1)
-        base::dimnames(data1) <- tempo_dim_names
+    if(base::all(base::class(x = data1) %in% base::c("data.frame"), na.rm = FALSE)){
+        tempo_dim_names <- base::dimnames(x = data1)
+        data1 <- base::apply(X = data1, MARGIN = 2, FUN = function(x){base::gsub(pattern = "\\s+", replacement = "", x = x, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE)}, simplify = TRUE) # convert into matrix of character whitout space in the character strings, since as.matrix use base::format() to convert into characters
+        data1 <- base::as.matrix(x = data1)
+        base::dimnames(x = data1) <- tempo_dim_names
 
-    }else if(base::all(base::class(data1) %in% base::c("table"))){
-        data1 <- base::matrix(data1, ncol = base::ncol(data1), dimnames = base::dimnames(data1))
-        base::mode(data1) <- "character"
+    }else if(base::all(base::class(x = data1) %in% base::c("table"), na.rm = FALSE)){
+        data1 <- base::matrix(data = data1, ncol = base::ncol(x = data1), dimnames = base::dimnames(x = data1), nrow = base::nrow(x = data1), byrow = FALSE) # nrow written with its value: the default value nrow = 1 of base::matrix() is not used when nrow is missing (nrow then computed from the data length and ncol)
+        base::mode(x = data1) <- "character"
     }
-    if(base::all(base::class(data2) %in% base::c("data.frame"))){
-        tempo_dim_names <- base::dimnames(data2)
-        data2 <- base::apply(data2, 2, function(x){base::gsub('\\s+', '',x)}) # convert into matrix of character whitout space in the character strings, since as.matrix use base::format() to convert into characters
-        data2 <- base::as.matrix(data2)
-        base::dimnames(data2) <- tempo_dim_names
-    }else if(base::all(base::class(data2) %in% base::c("table"))){
-        data2 <- base::matrix(data2, ncol = base::ncol(data2), dimnames = base::dimnames(data2))
-        base::mode(data2) <- "character"
+    if(base::all(base::class(x = data2) %in% base::c("data.frame"), na.rm = FALSE)){
+        tempo_dim_names <- base::dimnames(x = data2)
+        data2 <- base::apply(X = data2, MARGIN = 2, FUN = function(x){base::gsub(pattern = "\\s+", replacement = "", x = x, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE)}, simplify = TRUE) # convert into matrix of character whitout space in the character strings, since as.matrix use base::format() to convert into characters
+        data2 <- base::as.matrix(x = data2)
+        base::dimnames(x = data2) <- tempo_dim_names
+    }else if(base::all(base::class(x = data2) %in% base::c("table"), na.rm = FALSE)){
+        data2 <- base::matrix(data = data2, ncol = base::ncol(x = data2), dimnames = base::dimnames(x = data2), nrow = base::nrow(x = data2), byrow = FALSE) # nrow written with its value: the default value nrow = 1 of base::matrix() is not used when nrow is missing (nrow then computed from the data length and ncol)
+        base::mode(x = data2) <- "character"
     }
     # end conversion of object into matrix and content into characters
-    if(base::identical(data1, data2)){ # before R4.0.0, it was  ! base::any(base::class(data1) %in% base::c("matrix", "data.frame", "table"))
+    if(base::identical(x = data1, y = data2, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){ # before R4.0.0, it was  ! base::any(base::class(data1) %in% base::c("matrix", "data.frame", "table"))
         same_row_name <- TRUE
-        row_name <- base::dimnames(data1)[[1]]
+        row_name <- base::dimnames(x = data1)[[1]]
         any_id_row_name <- TRUE
         same_row_names_pos1 <- 1:row_nb
         same_row_names_pos2 <- 1:row_nb
         same_row_names_match1 <- 1:row_nb
         same_row_names_match2 <- 1:row_nb
-        common_row_names <- base::dimnames(data1)[[1]]
+        common_row_names <- base::dimnames(x = data1)[[1]]
         same_col_name <- TRUE
-        col_name <- base::dimnames(data1)[[2]]
+        col_name <- base::dimnames(x = data1)[[2]]
         any_id_col_name <- TRUE
         same_col_names_pos1 <- 1:col_nb
         same_col_names_pos2 <- 1:col_nb
         same_col_names_match1 <- 1:col_nb
         same_col_names_match2 <- 1:col_nb
-        common_col_names <- base::dimnames(data1)[[2]]
+        common_col_names <- base::dimnames(x = data1)[[2]]
         any_id_row <- TRUE
         same_row_pos1 <- 1:row_nb
         same_row_pos2 <- 1:row_nb
@@ -713,11 +715,11 @@ comp_2d <- function(
     }else{
         identical_object <- FALSE
         # row and col names
-        if(base::is.null(base::dimnames(data1)) & base::is.null(base::dimnames(data2))){
+        if(base::is.null(x = base::dimnames(x = data1)) & base::is.null(x = base::dimnames(x = data2))){
             same_row_name <- NULL # but already NULL
             same_col_name <- NULL # but already NULL
             # other row names param remain NULL
-        }else if((base::is.null(base::dimnames(data1)) & ! base::is.null(base::dimnames(data2))) | ( ! base::is.null(base::dimnames(data1)) & base::is.null(base::dimnames(data2)))){
+        }else if((base::is.null(x = base::dimnames(x = data1)) & ! base::is.null(x = base::dimnames(x = data2))) | ( ! base::is.null(x = base::dimnames(x = data1)) & base::is.null(x = base::dimnames(x = data2)))){
             same_row_name <- FALSE
             same_col_name <- FALSE
             any_id_row_name <- FALSE
@@ -725,86 +727,87 @@ comp_2d <- function(
             # other row names param remain NULL
         }else{
             # row names
-            if(base::is.null(base::dimnames(data1)[[1]]) & base::is.null(base::dimnames(data2)[[1]])){
+            if(base::is.null(x = base::dimnames(x = data1)[[1]]) & base::is.null(x = base::dimnames(x = data2)[[1]])){
                 same_row_name <- NULL # but already NULL
                 # other row names param remain NULL
-            }else if((base::is.null(base::dimnames(data1)[[1]]) & ! base::is.null(base::dimnames(data2)[[1]])) | ( ! base::is.null(base::dimnames(data1)[[1]]) & base::is.null(base::dimnames(data2)[[1]]))){
+            }else if((base::is.null(x = base::dimnames(x = data1)[[1]]) & ! base::is.null(x = base::dimnames(x = data2)[[1]])) | ( ! base::is.null(x = base::dimnames(x = data1)[[1]]) & base::is.null(x = base::dimnames(x = data2)[[1]]))){
                 same_row_name <- FALSE
                 any_id_row_name <- FALSE
                 # other row names param remain NULL
-            }else if(base::identical(base::dimnames(data1)[[1]], base::dimnames(data2)[[1]])){
+            }else if(base::identical(x = base::dimnames(x = data1)[[1]], y = base::dimnames(x = data2)[[1]], num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
                 same_row_name <- TRUE
-                row_name <- base::dimnames(data1)[[1]]
+                row_name <- base::dimnames(x = data1)[[1]]
                 any_id_row_name <- TRUE
-                same_row_names_pos1 <- 1:base::nrow(data1)
-                same_row_names_pos2 <- 1:base::nrow(data1)
-                same_row_names_match1 <- 1:base::nrow(data1)
-                same_row_names_match2 <- 1:base::nrow(data1)
-                common_row_names <- base::dimnames(data1)[[1]]
+                same_row_names_pos1 <- 1:base::nrow(x = data1)
+                same_row_names_pos2 <- 1:base::nrow(x = data1)
+                same_row_names_match1 <- 1:base::nrow(x = data1)
+                same_row_names_match2 <- 1:base::nrow(x = data1)
+                common_row_names <- base::dimnames(x = data1)[[1]]
             }else{
                 same_row_name <- FALSE
                 any_id_row_name <- FALSE
-                if(base::any(base::dimnames(data1)[[1]] %in% base::dimnames(data2)[[1]])){
+                if(base::any(base::dimnames(x = data1)[[1]] %in% base::dimnames(x = data2)[[1]], na.rm = FALSE)){
                     any_id_row_name <- TRUE
-                    same_row_names_pos1 <- base::which(base::dimnames(data1)[[1]] %in% base::dimnames(data2)[[1]])
-                    same_row_names_match1 <- base::match(base::dimnames(data1)[[1]], base::dimnames(data2)[[1]])
+                    same_row_names_pos1 <- base::which(x = base::dimnames(x = data1)[[1]] %in% base::dimnames(x = data2)[[1]], arr.ind = FALSE, useNames = TRUE)
+                    same_row_names_match1 <- base::match(x = base::dimnames(x = data1)[[1]], table = base::dimnames(x = data2)[[1]], nomatch = NA_integer_, incomparables = NULL)
                 }
-                if(base::any(base::dimnames(data2)[[1]] %in% base::dimnames(data1)[[1]])){
+                if(base::any(base::dimnames(x = data2)[[1]] %in% base::dimnames(x = data1)[[1]], na.rm = FALSE)){
                     any_id_row_name <- TRUE
-                    same_row_names_pos2 <- base::which(base::dimnames(data2)[[1]] %in% base::dimnames(data1)[[1]])
-                    same_row_names_match2 <- base::match(base::dimnames(data2)[[1]], base::dimnames(data1)[[1]])
+                    same_row_names_pos2 <- base::which(x = base::dimnames(x = data2)[[1]] %in% base::dimnames(x = data1)[[1]], arr.ind = FALSE, useNames = TRUE)
+                    same_row_names_match2 <- base::match(x = base::dimnames(x = data2)[[1]], table = base::dimnames(x = data1)[[1]], nomatch = NA_integer_, incomparables = NULL)
                 }
                 if(any_id_row_name == TRUE){
-                    common_row_names <- base::unique(base::c(base::dimnames(data1)[[1]][same_row_names_pos1], base::dimnames(data2)[[1]][same_row_names_pos2]))
+                    common_row_names <- base::unique(x = base::c(base::dimnames(x = data1)[[1]][same_row_names_pos1], base::dimnames(x = data2)[[1]][same_row_names_pos2]), incomparables = FALSE)
                 }
             }
             # col names
-            if(base::is.null(base::dimnames(data1)[[2]]) & base::is.null(base::dimnames(data2)[[2]])){
+            if(base::is.null(x = base::dimnames(x = data1)[[2]]) & base::is.null(x = base::dimnames(x = data2)[[2]])){
                 same_col_name <- NULL # but already NULL
                 # other col names param remain NULL
-            }else if((base::is.null(base::dimnames(data1)[[2]]) & ! base::is.null(base::dimnames(data2)[[2]])) | ( ! base::is.null(base::dimnames(data1)[[2]]) & base::is.null(base::dimnames(data2)[[2]]))){
+            }else if((base::is.null(x = base::dimnames(x = data1)[[2]]) & ! base::is.null(x = base::dimnames(x = data2)[[2]])) | ( ! base::is.null(x = base::dimnames(x = data1)[[2]]) & base::is.null(x = base::dimnames(x = data2)[[2]]))){
                 same_col_name <- FALSE
                 any_id_col_name <- FALSE
                 # other col names param remain NULL
-            }else if(base::identical(base::dimnames(data1)[[2]], base::dimnames(data2)[[2]])){
+            }else if(base::identical(x = base::dimnames(x = data1)[[2]], y = base::dimnames(x = data2)[[2]], num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
                 same_col_name <- TRUE
-                col_name <- base::dimnames(data1)[[2]]
+                col_name <- base::dimnames(x = data1)[[2]]
                 any_id_col_name <- TRUE
-                same_col_names_pos1 <- 1:base::ncol(data1)
-                same_col_names_pos2 <- 1:base::ncol(data1)
-                same_col_names_match1 <- 1:base::ncol(data1)
-                same_col_names_match2 <- 1:base::ncol(data1)
-                common_col_names <- base::dimnames(data1)[[2]]
+                same_col_names_pos1 <- 1:base::ncol(x = data1)
+                same_col_names_pos2 <- 1:base::ncol(x = data1)
+                same_col_names_match1 <- 1:base::ncol(x = data1)
+                same_col_names_match2 <- 1:base::ncol(x = data1)
+                common_col_names <- base::dimnames(x = data1)[[2]]
             }else{
                 same_col_name <- FALSE
                 any_id_col_name <- FALSE
-                if(base::any(base::dimnames(data1)[[2]] %in% base::dimnames(data2)[[2]])){
+                if(base::any(base::dimnames(x = data1)[[2]] %in% base::dimnames(x = data2)[[2]], na.rm = FALSE)){
                     any_id_col_name <- TRUE
-                    same_col_names_pos1 <- base::which(base::dimnames(data1)[[2]] %in% base::dimnames(data2)[[2]])
-                    same_col_names_match1 <- base::match(base::dimnames(data1)[[2]], base::dimnames(data2)[[2]])
+                    same_col_names_pos1 <- base::which(x = base::dimnames(x = data1)[[2]] %in% base::dimnames(x = data2)[[2]], arr.ind = FALSE, useNames = TRUE)
+                    same_col_names_match1 <- base::match(x = base::dimnames(x = data1)[[2]], table = base::dimnames(x = data2)[[2]], nomatch = NA_integer_, incomparables = NULL)
                 }
-                if(base::any(base::dimnames(data2)[[2]] %in% base::dimnames(data1)[[2]])){
+                if(base::any(base::dimnames(x = data2)[[2]] %in% base::dimnames(x = data1)[[2]], na.rm = FALSE)){
                     any_id_col_name <- TRUE
-                    same_col_names_pos2 <- base::which(base::dimnames(data2)[[2]] %in% base::dimnames(data1)[[2]])
-                    same_col_names_match2 <- base::match(base::dimnames(data2)[[2]], base::dimnames(data1)[[2]])
+                    same_col_names_pos2 <- base::which(x = base::dimnames(x = data2)[[2]] %in% base::dimnames(x = data1)[[2]], arr.ind = FALSE, useNames = TRUE)
+                    same_col_names_match2 <- base::match(x = base::dimnames(x = data2)[[2]], table = base::dimnames(x = data1)[[2]], nomatch = NA_integer_, incomparables = NULL)
                 }
                 if(any_id_col_name == TRUE){
-                    common_col_names <- base::unique(base::c(base::dimnames(data1)[[2]][same_col_names_pos1], base::dimnames(data2)[[2]][same_col_names_pos2]))
+                    common_col_names <- base::unique(x = base::c(base::dimnames(x = data1)[[2]][same_col_names_pos1], base::dimnames(x = data2)[[2]][same_col_names_pos2]), incomparables = FALSE)
                 }
             }
         }
         # identical row and col content
-        base::row.names(data1) <- base::paste0("A", 1:base::nrow(data1))
-        base::row.names(data2) <- base::paste0("A", 1:base::nrow(data2))
-        base::colnames(data1) <- base::paste0("A", 1:base::ncol(data1))
-        base::colnames(data2) <- base::paste0("A", 1:base::ncol(data2))
+        base::row.names(x = data1) <- base::paste0("A", 1:base::nrow(x = data1), collapse = NULL, recycle0 = FALSE)
+        base::row.names(x = data2) <- base::paste0("A", 1:base::nrow(x = data2), collapse = NULL, recycle0 = FALSE)
+        # column names written with dimnames() instead of colnames(x = data1) <-, because saferDev::all_args_here() adds the do.NULL and prefix arguments of colnames(), which are not arguments of the replacement function colnames<-()
+        base::dimnames(x = data1)[[2]] <- base::paste0("A", 1:base::ncol(x = data1), collapse = NULL, recycle0 = FALSE)
+        base::dimnames(x = data2)[[2]] <- base::paste0("A", 1:base::ncol(x = data2), collapse = NULL, recycle0 = FALSE)
         if(same_col_nb == TRUE){ # because if not the same col nb, the row cannot be identical
-            if(base::as.double(base::nrow(data1)) * base::as.double(base::nrow(data2)) <= 1e6){
-                tempo1 <- base::c(base::as.data.frame(base::t(data1), stringsAsFactors = FALSE)) # conversion into list. This work fast with characters
-                tempo2 <- base::c(base::as.data.frame(base::t(data2), stringsAsFactors = FALSE)) # conversion into list. This work fast with characters
-                same_row_pos1 <- base::which(tempo1 %in% tempo2)
-                same_row_pos2 <- base::which(tempo2 %in% tempo1)
-                if((base::length(same_row_pos1) == 0L & base::length(same_row_pos2) == 0L) | base::all(base::is.na(same_row_pos1)) | base::all(base::is.na(same_row_pos2))){
+            if(base::as.double(x = base::nrow(x = data1)) * base::as.double(x = base::nrow(x = data2)) <= 1e6){
+                tempo1 <- base::c(base::as.data.frame(x = base::t(x = data1), stringsAsFactors = FALSE, row.names = NULL, optional = FALSE)) # conversion into list. This work fast with characters
+                tempo2 <- base::c(base::as.data.frame(x = base::t(x = data2), stringsAsFactors = FALSE, row.names = NULL, optional = FALSE)) # conversion into list. This work fast with characters
+                same_row_pos1 <- base::which(x = tempo1 %in% tempo2, arr.ind = FALSE, useNames = TRUE)
+                same_row_pos2 <- base::which(x = tempo2 %in% tempo1, arr.ind = FALSE, useNames = TRUE)
+                if((base::length(x = same_row_pos1) == 0L & base::length(x = same_row_pos2) == 0L) | base::all(base::is.na(x = same_row_pos1), na.rm = FALSE) | base::all(base::is.na(x = same_row_pos2), na.rm = FALSE)){
                     any_id_row <- FALSE
                     same_row_pos1 <- NULL
                     same_row_pos2 <- NULL
@@ -812,10 +815,10 @@ comp_2d <- function(
                     # same.row.match2 <- NULL # already NULL above
                 }else{
                     any_id_row <- TRUE
-                    same_row_pos1 <- same_row_pos1[ ! base::is.na(same_row_pos1)]
-                    same_row_pos2 <- same_row_pos2[ ! base::is.na(same_row_pos2)]
-                    same_row_match1 <- base::match(tempo1, tempo2)
-                    same_row_match2 <- base::match(tempo2, tempo1)
+                    same_row_pos1 <- same_row_pos1[ ! base::is.na(x = same_row_pos1)]
+                    same_row_pos2 <- same_row_pos2[ ! base::is.na(x = same_row_pos2)]
+                    same_row_match1 <- base::match(x = tempo1, table = tempo2, nomatch = NA_integer_, incomparables = NULL)
+                    same_row_match2 <- base::match(x = tempo2, table = tempo1, nomatch = NA_integer_, incomparables = NULL)
                 }
             }else{
                 same_row_pos1 <- "TOO BIG FOR EVALUATION"
@@ -828,12 +831,12 @@ comp_2d <- function(
             # same.row.pos1 and 2 remain NULL
         }
         if(same_row_nb == TRUE){ # because if not the same row nb, the col cannot be identical
-            if(base::as.double(base::ncol(data1)) * base::as.double(base::ncol(data2)) <= 1e6){
-                tempo1 <- base::c(base::as.data.frame(data1, stringsAsFactors = FALSE))
-                tempo2 <- base::c(base::as.data.frame(data2, stringsAsFactors = FALSE))
-                same_col_pos1 <- base::which(tempo1 %in% tempo2)
-                same_col_pos2 <- base::which(tempo2 %in% tempo1)
-                if((base::length(same_col_pos1) == 0L & base::length(same_col_pos2) == 0L) | base::all(base::is.na(same_col_pos1)) | base::all(base::is.na(same_col_pos2))){
+            if(base::as.double(x = base::ncol(x = data1)) * base::as.double(x = base::ncol(x = data2)) <= 1e6){
+                tempo1 <- base::c(base::as.data.frame(x = data1, stringsAsFactors = FALSE, row.names = NULL, optional = FALSE))
+                tempo2 <- base::c(base::as.data.frame(x = data2, stringsAsFactors = FALSE, row.names = NULL, optional = FALSE))
+                same_col_pos1 <- base::which(x = tempo1 %in% tempo2, arr.ind = FALSE, useNames = TRUE)
+                same_col_pos2 <- base::which(x = tempo2 %in% tempo1, arr.ind = FALSE, useNames = TRUE)
+                if((base::length(x = same_col_pos1) == 0L & base::length(x = same_col_pos2) == 0L) | base::all(base::is.na(x = same_col_pos1), na.rm = FALSE) | base::all(base::is.na(x = same_col_pos2), na.rm = FALSE)){
                     any_id_col <- FALSE
                     same_col_pos1 <- NULL
                     same_col_pos2 <- NULL
@@ -841,10 +844,10 @@ comp_2d <- function(
                     # same.col.match2 <- NULL # already NULL above
                 }else{
                     any_id_col <- TRUE
-                    same_col_pos1 <- same_col_pos1[ ! base::is.na(same_col_pos1)]
-                    same_col_pos2 <- same_col_pos2[ ! base::is.na(same_col_pos2)]
-                    same_col_match1 <- base::match(tempo1, tempo2)
-                    same_col_match2 <- base::match(tempo2, tempo1)
+                    same_col_pos1 <- same_col_pos1[ ! base::is.na(x = same_col_pos1)]
+                    same_col_pos2 <- same_col_pos2[ ! base::is.na(x = same_col_pos2)]
+                    same_col_match1 <- base::match(x = tempo1, table = tempo2, nomatch = NA_integer_, incomparables = NULL)
+                    same_col_match2 <- base::match(x = tempo2, table = tempo1, nomatch = NA_integer_, incomparables = NULL)
                 }
             }else{
                 same_col_pos1 <- "TOO BIG FOR EVALUATION"

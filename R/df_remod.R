@@ -334,7 +334,8 @@ df_remod <- function(
 
     ######## check of the required functions from the required packages
     if(safer_check == TRUE){
-        saferDev:::.pack_and_function_check(
+        .pack_and_function_check <- utils::getFromNamespace(x = ".pack_and_function_check", ns = "saferDev", pos = -1, envir = )
+        .pack_and_function_check(
             fun = base::c(
                 # functions required in this code
                 "saferDev::arg_check", # write each function preceeded by their package name
@@ -351,6 +352,7 @@ df_remod <- function(
 
     ######## escaping CRAN submission NOTE for internal functions
 
+    .base_op_check <- utils::getFromNamespace(x = ".base_op_check", ns = "saferDev", pos = -1, envir = )
     # add here in the internal functions that are used in your main code (copy-paste the line above and replace .base_op_check by the name of the internal function
     # not mandatory if your function is not designed for submission to the CRAN
 
@@ -358,7 +360,7 @@ df_remod <- function(
 
     ######## critical operator checking
     if(safer_check == TRUE){
-        saferDev:::.base_op_check(
+        .base_op_check(
             error_text = embed_error_text
         )
     }
@@ -411,7 +413,7 @@ df_remod <- function(
             " NOT CLASS \"character\":\n", 
             base::paste0(tempo_arg[tempo_log], collapse = "\n", recycle0 = FALSE), 
             "\nIf saferMake::saferMake() HAS BEEN USED TO MODIFY YOUR FUNCTION, PLEASE RESTART WITH YOUR MAIN CODE AND SELECT PROPER CLASS, TYPE AND/OR MODE FOR YOUR ARGUMENTS\n.HERE, ARGUMENTS ARE TYPE:\n", 
-            base::paste0(base::sapply(X = tempo_arg, FUN = function(x){base::paste0(x, ": \"", base::typeof(x = base::get(x = x, pos = -1L, envir = base::parent.frame(n = 3), mode = "any", inherits = FALSE)), '"', collapse = NULL, recycle0 = FALSE)}), collapse = "\n", recycle0 = FALSE), # parent.frame(n = 3) because the get() is evaluated inside the FUN closure of sapply. But sapply(FUN) calls lapply(FUN) internally !! So parent.frame(n = 1) is the internal lapply() frame called by sapply, parent.frame(n = 2) is sapply's frame, parent.frame(n = 3) is BACKBONE's frame. NB: paste0() and typeof() are primitives and add no frame.
+            base::paste0(base::sapply(X = tempo_arg, FUN = function(x){base::paste0(x, ": \"", base::typeof(x = base::get(x = x, pos = -1L, envir = base::parent.frame(n = 3), mode = "any", inherits = FALSE)), "\"", collapse = NULL, recycle0 = FALSE)}, simplify = TRUE, USE.NAMES = TRUE), collapse = "\n", recycle0 = FALSE), # parent.frame(n = 3) because the get() is evaluated inside the FUN closure of sapply. But sapply(FUN) calls lapply(FUN) internally !! So parent.frame(n = 1) is the internal lapply() frame called by sapply, parent.frame(n = 2) is sapply's frame, parent.frame(n = 3) is BACKBONE's frame. NB: paste0() and typeof() are primitives and add no frame.
             intern_error_text_end, 
             collapse = NULL, 
             recycle0 = FALSE
@@ -453,15 +455,15 @@ df_remod <- function(
     #### end second round of checking and data preparation
 
     #### main code
-    tempo_factor <- base::unlist(base::lapply(df, class))
-    for(i in 1:base::length(tempo_factor)){ # convert factor columns as character
+    tempo_factor <- base::unlist(x = base::lapply(X = df, FUN = base::class), recursive = TRUE, use.names = TRUE)
+    for(i in base::seq_along(along.with = tempo_factor)){ # convert factor columns as character
         if(base::all(tempo_factor[i] == "factor", na.rm = TRUE)){
-            df[, i] <- base::as.character(df[, i])
+            df[, i] <- base::as.character(x = df[, i])
         }
     }
-    tempo_factor <- base::unlist(base::lapply(df, mode))
-    if(base::length(df) == 2L){
-        if( ! ((base::mode(df[, 1]) == "character" & base::mode(df[, 2]) == "numeric") | base::mode(df[, 2]) == "character" & base::mode(df[, 1]) == "numeric" | base::mode(df[, 2]) == "numeric" & base::mode(df[, 1]) == "numeric") ){
+    tempo_factor <- base::unlist(x = base::lapply(X = df, FUN = base::mode), recursive = TRUE, use.names = TRUE)
+    if(base::length(x = df) == 2L){
+        if( ! ((base::mode(x = df[, 1]) == "character" & base::mode(x = df[, 2]) == "numeric") | base::mode(x = df[, 2]) == "character" & base::mode(x = df[, 1]) == "numeric" | base::mode(x = df[, 2]) == "numeric" & base::mode(x = df[, 1]) == "numeric") ){
             tempo_cat <- base::paste0(
                 error_text_start, 
                 "IF df ARGUMENT IS A DATA FRAME MADE OF 2 COLUMNS, EITHER A COLUMN MUST BE NUMERIC AND THE OTHER CHARACTER, OR THE TWO COLUMNS MUST BE NUMERIC",
@@ -470,7 +472,7 @@ df_remod <- function(
             )
             base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
         }
-        if((base::mode(df[, 1]) == "character" | base::mode(df[, 2]) == "character") & (quanti_col_name != "quanti" | quali_col_name != "quali")){
+        if((base::mode(x = df[, 1]) == "character" | base::mode(x = df[, 2]) == "character") & (quanti_col_name != "quanti" | quali_col_name != "quali")){
             tempo_cat <- base::paste0(
                 error_text_start, 
                 "IMPROPER quanti_col_name OR quali_col_name RESETTINGS. THESE ARGUMENTS ARE RESERVED FOR DATA FRAMES MADE OF n NUMERIC COLUMNS ONLY",
@@ -480,7 +482,7 @@ df_remod <- function(
             base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
         }
     }else{
-        if( ! base::all(tempo_factor %in% "numeric")){
+        if( ! base::all(tempo_factor %in% "numeric", na.rm = FALSE)){
             tempo_cat <- base::paste0(
                 error_text_start, 
                 "IF df ARGUMENT IS A DATA FRAME MADE OF ONE COLUMN, OR MORE THAN 2 COLUMNS, THESE COLUMNS MUST BE NUMERIC",
@@ -490,7 +492,7 @@ df_remod <- function(
             base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
         }
     }
-    if(( ! base::any(tempo_factor %in% "character")) & base::is.null(base::names(df))){
+    if(( ! base::any(tempo_factor %in% "character", na.rm = FALSE)) & base::is.null(x = base::names(x = df))){
         tempo_cat <- base::paste0(
             error_text_start, 
             "NUMERIC DATA FRAME in the df ARGUMENT MUST HAVE COLUMN NAMES",
@@ -499,35 +501,36 @@ df_remod <- function(
         )
         base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
     }
-    if(base::all(tempo_factor %in% "numeric")){ # transfo 1
+    if(base::all(tempo_factor %in% "numeric", na.rm = FALSE)){ # transfo 1
         quanti <- NULL
-        for(i in 1:base::length(df)){
+        for(i in base::seq_along(along.with = df)){
             quanti <-base::c(quanti, df[, i])
         }
-        quali <- base::rep(base::names(df), each = base::nrow(df))
-        output <- base::data.frame(quanti, quali, stringsAsFactors = TRUE, check.names = FALSE)
-        base::names(output) <- base::c(quanti_col_name, quali_col_name)
+        quali <- base::rep(x = base::names(x = df), each = base::nrow(x = df))
+        output <- base::data.frame(quanti, quali, stringsAsFactors = TRUE, check.names = FALSE, row.names = NULL, check.rows = FALSE, fix.empty.names = TRUE)
+        base::names(x = output) <- base::c(quanti_col_name, quali_col_name)
         # add the ini_rowname column
-        ini_rownames <- base::rownames(df)
+        ini_rownames <- base::rownames(x = df, do.NULL = TRUE, prefix = "row")
         tempo_df <- df
         
         
-        base::rownames(tempo_df) <- NULL
+        base::row.names(x = tempo_df) <- NULL # row.names() instead of rownames(x = tempo_df) <-, because saferDev::all_args_here() adds the do.NULL and prefix arguments of rownames(), which are not arguments of the replacement function rownames<-()
         null_rownames <- (tempo_df)
-        if( ! base::identical(ini_rownames, null_rownames)){
-            ini_rowname <- base::rep(ini_rownames, times = base::ncol(df))
-            output <- base::cbind(output, ini_rowname, stringsAsFactors = TRUE)
+        if( ! base::identical(x = ini_rownames, y = null_rownames, num.eq = TRUE, single.NA = TRUE, attrib.as.set = TRUE, ignore.bytecode = TRUE, ignore.environment = FALSE, ignore.srcref = TRUE, extptr.as.ref = FALSE)){
+            ini_rowname <- base::rep(x = ini_rownames, times = base::ncol(x = df))
+            output <- base::cbind(output, ini_rowname, stringsAsFactors = TRUE, deparse.level = 1)
         }
     }else{ # transfo 2
-        if(base::class(df[, 1]) == "character"){
-            df <- base::cbind(df[2], df[1], stringsAsFactors = TRUE)
+        if(base::class(x = df[, 1]) == "character"){
+            df <- base::cbind(df[2], df[1], stringsAsFactors = TRUE, deparse.level = 1)
         }
-        nc_max <- base::max(base::table(df[, 2])) # max number of values among the classes
-        nb_na <- nc_max - base::table(df[,2]) # number of NA to add in each class, to build the data frame
-        tempo<-base::split(df[, 1], df[, 2])
-        for(i in 1:base::length(tempo)){tempo[[i]] <- base::append(tempo[[i]], base::rep(NA, nb_na[i]))} # NA added when the number of values differs between classes, only to have the same number of rows in each column
-        output<-base::data.frame(tempo, stringsAsFactors = TRUE, check.names = FALSE)
+        nc_max <- base::max(base::table(df[, 2], exclude = , useNA = base::c("no", "ifany", "always"), dnn = , deparse.level = 1), na.rm = FALSE) # max number of values among the classes
+        nb_na <- nc_max - base::table(df[,2], exclude = , useNA = base::c("no", "ifany", "always"), dnn = , deparse.level = 1) # number of NA to add in each class, to build the data frame
+        tempo<-base::split(x = df[, 1], f = df[, 2], drop = FALSE)
+        for(i in base::seq_along(along.with = tempo)){tempo[[i]] <- base::append(x = tempo[[i]], values = base::rep(x = NA, nb_na[i]), after = )} # NA added when the number of values differs between classes, only to have the same number of rows in each column
+        output<-base::data.frame(tempo, stringsAsFactors = TRUE, check.names = FALSE, row.names = NULL, check.rows = FALSE, fix.empty.names = TRUE)
     }
+    #### end main code
 
     #### warning output
     #### end warning output

@@ -349,7 +349,8 @@ sample2 <- function(
 
     ######## check of the required functions from the required packages
     if(safer_check == TRUE){
-        saferDev:::.pack_and_function_check(
+        .pack_and_function_check <- utils::getFromNamespace(x = ".pack_and_function_check", ns = "saferDev", pos = -1, envir = )
+        .pack_and_function_check(
             fun = base::c(
                 # functions required in this code
                 "saferDev::arg_check", # write each function preceeded by their package name
@@ -366,6 +367,7 @@ sample2 <- function(
 
     ######## escaping CRAN submission NOTE for internal functions
 
+    .base_op_check <- utils::getFromNamespace(x = ".base_op_check", ns = "saferDev", pos = -1, envir = )
     # add here in the internal functions that are used in your main code (copy-paste the line above and replace .base_op_check by the name of the internal function
     # not mandatory if your function is not designed for submission to the CRAN
 
@@ -373,7 +375,7 @@ sample2 <- function(
 
     ######## critical operator checking
     if(safer_check == TRUE){
-        saferDev:::.base_op_check(
+        .base_op_check(
             error_text = embed_error_text
         )
     }
@@ -441,15 +443,15 @@ sample2 <- function(
     if( ! base::is.null(x = set_seed)){
         if (base::exists(x = ".Random.seed", where = -1, envir = base::globalenv(), frame = , mode = "any", inherits = TRUE)) {
             # if .Random.seed does not exists, it means that no random operation has been performed yet in any R environment
-            tempo_random_seed <- base::get(x = ".Random.seed", envir = base::globalenv(), mode = "any", inherits = FALSE)
+            tempo_random_seed <- base::get(x = ".Random.seed", envir = base::globalenv(), mode = "any", inherits = FALSE, pos = -1L)
             base::on.exit(expr = base::assign(x = ".Random.seed", value = tempo_random_seed, pos = -1, envir = base::globalenv(), inherits = FALSE, immediate = TRUE), add = TRUE, after = TRUE)
         }else{
             # if .Random.seed does not exist, it means that no random operation has been performed yet in any R environment, so the initial state is restored by removing .Random.seed (created by the base::set.seed() call just below)
             # warning: base::set.seed(seed = NULL, ...) as initially written in the backbone does not remove the .Random.seed object created by the base::set.seed(seed = set_seed, ...) call above, so it does not restore the initial state (behavior verified in R 4.6.0)
             # the base::exists() check is required because the base::set.seed() call just below can return an error before creating .Random.seed (e.g., seed out of the integer range), so that the base::rm() on exit does not return a warning when .Random.seed does not exist
-            base::on.exit(expr = if(base::exists(x = ".Random.seed", envir = base::globalenv(), inherits = FALSE)){base::rm(list = ".Random.seed", envir = base::globalenv(), inherits = FALSE)}, add = TRUE, after = TRUE) # inactivate seeding -> return to complete randomness
+            base::on.exit(expr = if(base::exists(x = ".Random.seed", envir = base::globalenv(), inherits = FALSE, where = -1, frame = , mode = "any")){base::rm(list = ".Random.seed", envir = base::globalenv(), inherits = FALSE, pos = -1)}, add = TRUE, after = TRUE) # inactivate seeding -> return to complete randomness
         }
-        base::suppressWarnings(expr = base::set.seed(seed = set_seed, kind = NULL, normal.kind = NULL, sample.kind = NULL)) # set_seed value is the seed argument of the function. suppressWarnings() used because base::set.seed() first warns ("NAs introduced by coercion to integer range") when the seed cannot be coerced to an integer, and then returns a clear error (e.g., "supplied seed is not a valid integer"): the warning is redundant and would be printed before the error message
+        base::suppressWarnings(expr = base::set.seed(seed = set_seed, kind = NULL, normal.kind = NULL, sample.kind = NULL), classes = "warning") # set_seed value is the seed argument of the function. suppressWarnings() used because base::set.seed() first warns ("NAs introduced by coercion to integer range") when the seed cannot be coerced to an integer, and then returns a clear error (e.g., "supplied seed is not a valid integer"): the warning is redundant and would be printed before the error message
     }
     ######## end code that protects set.seed() in the global environment
 
@@ -485,7 +487,7 @@ sample2 <- function(
 
     #### main code
     # the vector path of base::sample() (x[sample.int(length(x), size, replace, prob)]) is always used, whatever the length of x, in order to correct the confusing behavior of base::sample() when x is made of a single positive numeric value (see the details of the documentation)
-    output <- x[base::sample.int(n = base::length(x = x), size = size, replace = replace, prob = prob)]
+    output <- x[base::sample.int(n = base::length(x = x), size = size, replace = replace, prob = prob, useHash = )]
     #### end main code
 
     #### warning output

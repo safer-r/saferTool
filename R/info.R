@@ -365,7 +365,8 @@ info <- function(
 
     ######## check of the required functions from the required packages
     if(safer_check == TRUE){
-        saferDev:::.pack_and_function_check(
+        .pack_and_function_check <- utils::getFromNamespace(x = ".pack_and_function_check", ns = "saferDev", pos = -1, envir = )
+        .pack_and_function_check(
             fun = base::c(
                 # functions required in this code
                 "saferDev::arg_check", # write each function preceeded by their package name
@@ -383,6 +384,7 @@ info <- function(
 
     ######## escaping CRAN submission NOTE for internal functions
 
+    .base_op_check <- utils::getFromNamespace(x = ".base_op_check", ns = "saferDev", pos = -1, envir = )
     # add here in the internal functions that are used in your main code (copy-paste the line above and replace .base_op_check by the name of the internal function
     # not mandatory if your function is not designed for submission to the CRAN
 
@@ -390,7 +392,7 @@ info <- function(
 
     ######## critical operator checking
     if(safer_check == TRUE){
-        saferDev:::.base_op_check(
+        .base_op_check(
             error_text = embed_error_text
         )
     }
@@ -445,7 +447,6 @@ info <- function(
     base::on.exit(expr = base::options(warning.length = ini_warning_length), add = TRUE, after = TRUE) # registered here so that warning.length is restored even if an error occurs before the end-of-function on.exit() registration (e.g., on the n checking error paths just below)
     warn <- NULL
     warn_count <- 0 
-    #### end warning initiation
     ######## end warning initiation
 
     ######## graphic device checking
@@ -492,7 +493,7 @@ info <- function(
     #### end second round of checking and data preparation
 
     #### main code
-    data_name <- base::deparse(base::substitute(data))
+    data_name <- base::deparse(expr = base::substitute(expr = data, env = ), width.cutoff = 60L, backtick = , control = base::c("keepNA", "keepInteger", "niceNames", "showAttributes"), nlines = -1L)
     output <- base::list("NAME" = data_name)
     tempo_try_error <- saferDev::get_message(data = "base::class(data)", kind = "error", header = FALSE, print_no = FALSE, text = NULL, env = base::environment(fun = NULL), safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
     if(base::is.null(x = tempo_try_error)){
@@ -509,18 +510,18 @@ info <- function(
         tempo <- base::list("LENGTH" = base::length(x = data))
         output <- base::c(output, tempo)
     }
-    if(base::all(base::typeof(x = data) %in% base::c("integer", "double")) & ! base::any(base::class(x = data) %in% "factor")){ # typeof of NA/NaN is "logical" so NA only objects are excluded # base::all() without na.rm -> ok because base::typeof() returns a single value
-        tempo <- base::list("INF.NB" = base::sum(base::is.infinite(x = data)))
+    if(base::all(base::typeof(x = data) %in% base::c("integer", "double"), na.rm = FALSE) & ! base::any(base::class(x = data) %in% "factor", na.rm = FALSE)){ # typeof of NA/NaN is "logical" so NA only objects are excluded # base::all() without na.rm -> ok because base::typeof() returns a single value
+        tempo <- base::list("INF.NB" = base::sum(base::is.infinite(x = data), na.rm = FALSE))
         output <- base::c(output, tempo)
         tempo <- base::list("RANGE" = base::range(data[ ! base::is.infinite(x = data)], na.rm = TRUE))
         output <- base::c(output, tempo)
         tempo <- base::list("SUM" = base::sum(data[ ! base::is.infinite(x = data)], na.rm = TRUE))
         output <- base::c(output, tempo)
-        tempo <- base::list("MEAN" = base::mean(data[ ! base::is.infinite(x = data)], na.rm = TRUE))
+        tempo <- base::list("MEAN" = base::mean(x = data[ ! base::is.infinite(x = data)], na.rm = TRUE))
         output <- base::c(output, tempo)
     }
-    if(base::all(base::typeof(x = data) %in% base::c("logical", "integer", "double", "complex", "character", "list"))){ # base::all() without na.rm -> ok because base::typeof() returns a single value
-        tempo <- base::list("NA.NB" = base::sum(base::is.na(x = data)))
+    if(base::all(base::typeof(x = data) %in% base::c("logical", "integer", "double", "complex", "character", "list"), na.rm = FALSE)){ # base::all() without na.rm -> ok because base::typeof() returns a single value
+        tempo <- base::list("NA.NB" = base::sum(base::is.na(x = data), na.rm = FALSE))
         output <- base::c(output, tempo)
     }
     tempo_try_error <- saferDev::get_message(data = "utils::head(data)", kind = "error", header = FALSE, print_no = FALSE, text = NULL, env = base::environment(fun = NULL), safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
@@ -540,7 +541,7 @@ info <- function(
             output <- base::c(output, tempo)
         }
     }
-    if(base::all(base::class(x = data) == "data.frame") | base::all(base::class(x = data) %in% base::c("matrix", "array")) | base::all(base::class(x = data) == "table")){ # base::all() without na.rm -> ok because base::class() returns a vector
+    if(base::all(base::class(x = data) == "data.frame", na.rm = FALSE) | base::all(base::class(x = data) %in% base::c("matrix", "array"), na.rm = FALSE) | base::all(base::class(x = data) == "table", na.rm = FALSE)){ # base::all() without na.rm -> ok because base::class() returns a vector
         if(base::length(x = base::dim(x = data)) > 1){ # to avoid 1D table
             tempo <- base::list("ROW_NAMES" = base::dimnames(x = data)[[1]])
             output <- base::c(output, tempo)
@@ -550,38 +551,38 @@ info <- function(
     }
     tempo_try_error <- saferDev::get_message(data = "base::summary(data)", kind = "error", header = FALSE, print_no = FALSE, text = NULL, env = base::environment(fun = NULL), safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
     if(base::is.null(x = tempo_try_error)){
-        tempo <- base::list("SUMMARY" = base::summary(data))
+        tempo <- base::list("SUMMARY" = base::summary(object = data))
         output <- base::c(output, tempo)
     }
     tempo_try_error <- saferDev::get_message(data = "base::noquote(base::matrix(utils::capture.output(utils::str(data))))", kind = "error", header = FALSE, print_no = FALSE, text = NULL, env = base::environment(fun = NULL), safer_check = FALSE, lib_path = lib_path, error_text = embed_error_text)
     if(base::is.null(x = tempo_try_error)){
-        tempo <- utils::capture.output(utils::str(object = data))
-        tempo <- base::list("STRUCTURE" = base::noquote(base::matrix(data = tempo, nrow = base::length(x = tempo), ncol = 1, dimnames = base::list(base::rep(x = "", times = base::length(x = tempo)), "")))) # utils::str() print automatically, utils::ls.str() not but does not give the order of the data.frame
+        tempo <- utils::capture.output(utils::str(object = data), file = NULL, append = FALSE, type = base::c("output", "message"), split = FALSE)
+        tempo <- base::list("STRUCTURE" = base::noquote(obj = base::matrix(data = tempo, nrow = base::length(x = tempo), ncol = 1, dimnames = base::list(base::rep(x = "", times = base::length(x = tempo)), ""), byrow = FALSE), right = FALSE)) # utils::str() print automatically, utils::ls.str() not but does not give the order of the data.frame
         output <- base::c(output, tempo)
     }
-    if(base::all(base::class(x = data) == "data.frame")){ # base::all() without na.rm -> ok because base::class() returns a vector
+    if(base::all(base::class(x = data) == "data.frame", na.rm = FALSE)){ # base::all() without na.rm -> ok because base::class() returns a vector
         tempo <- base::list("COLUMN_TYPE" = base::sapply(X = data, FUN = "typeof", simplify = TRUE, USE.NAMES = TRUE))
         if(base::any(base::sapply(X = data, FUN = "class", simplify = TRUE, USE.NAMES = TRUE) %in% "factor", na.rm = TRUE)){ # if an ordered factor is present, then base::sapply(data, FUN = "class") return a list but works with base::any(base::sapply(data, FUN = "class") %in% "factor") # base::any() without na.rm -> ok because base::class() returns a vector
             tempo_class <- base::sapply(X = data, FUN = "class", simplify = TRUE, USE.NAMES = TRUE)
-            if(base::any(base::unlist(x = tempo_class) %in% "ordered", na.rm = TRUE)){ # base::any() without na.rm -> ok because base::class() returns a vector
+            if(base::any(base::unlist(x = tempo_class, recursive = TRUE, use.names = TRUE) %in% "ordered", na.rm = TRUE)){ # base::any() without na.rm -> ok because base::class() returns a vector
                 tempo2 <- base::sapply(X = tempo_class, FUN = base::paste, collapse = " ", simplify = TRUE, USE.NAMES = TRUE) # paste the "ordered factor" in "ordered factor"
             }else{
-                tempo2 <- base::unlist(x = tempo_class)
+                tempo2 <- base::unlist(x = tempo_class, recursive = TRUE, use.names = TRUE)
             }
             tempo[["COLUMN_TYPE"]][base::grepl(x = tempo2, pattern = "factor", ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE)] <- tempo2[base::grepl(x = tempo2, pattern = "factor", ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE)]
         }
         output <- base::c(output, tempo)
     }
-    if(base::all(base::class(x = data) == "list")){ # base::all() without na.rm -> ok because base::class() returns a vector
+    if(base::all(base::class(x = data) == "list", na.rm = FALSE)){ # base::all() without na.rm -> ok because base::class() returns a vector
         tempo <- base::list("COMPARTMENT_NAMES" = base::names(x = data))
         output <- base::c(output, tempo)
         tempo <- base::list("COMPARTMENT_TYPE" = base::sapply(X = data, FUN = "typeof", simplify = TRUE, USE.NAMES = TRUE))
-        if(base::any(base::unlist(x = base::sapply(X = data, FUN = "class", simplify = TRUE, USE.NAMES = TRUE)) %in% "factor", na.rm = TRUE)){ # if an ordered factor is present, then base::sapply(data, FUN = "class") return a list but works with base::any(base::sapply(data, FUN = "class") %in% "factor")  # base::any() without na.rm -> ok because base::class() returns a vector
+        if(base::any(base::unlist(x = base::sapply(X = data, FUN = "class", simplify = TRUE, USE.NAMES = TRUE), recursive = TRUE, use.names = TRUE) %in% "factor", na.rm = TRUE)){ # if an ordered factor is present, then base::sapply(data, FUN = "class") return a list but works with base::any(base::sapply(data, FUN = "class") %in% "factor")  # base::any() without na.rm -> ok because base::class() returns a vector
             tempo_class <- base::sapply(X = data, FUN = "class", simplify = TRUE, USE.NAMES = TRUE)
-            if(base::any(base::unlist(x = tempo_class) %in% "ordered", na.rm = TRUE)){ # base::any() without na.rm -> ok because base::class() returns a vector
+            if(base::any(base::unlist(x = tempo_class, recursive = TRUE, use.names = TRUE) %in% "ordered", na.rm = TRUE)){ # base::any() without na.rm -> ok because base::class() returns a vector
                 tempo2 <- base::sapply(X = tempo_class, FUN = base::paste, collapse = " ", simplify = TRUE, USE.NAMES = TRUE) # paste the "ordered factor" in "ordered factor"
             }else{
-                tempo2 <- base::unlist(x = tempo_class)
+                tempo2 <- base::unlist(x = tempo_class, recursive = TRUE, use.names = TRUE)
             }
             tempo[["COMPARTMENT_TYPE"]][base::grepl(x = tempo2, pattern = "factor", ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE)] <- tempo2[base::grepl(x = tempo2, pattern = "factor", ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE)]
         }
@@ -594,7 +595,7 @@ info <- function(
 
     #### warning output
     if(warn_print == TRUE & ! base::is.null(x = warn)){
-        base::on.exit(expr = base::warning(base::paste0("FROM ", function_name, ":\n\n", warn, collapse = NULL, recycle0 = FALSE), call. = FALSE), add = TRUE, after = TRUE)
+        base::on.exit(expr = base::warning(base::paste0("FROM ", function_name, ":\n\n", warn, collapse = NULL, recycle0 = FALSE), call. = FALSE, immediate. = FALSE, noBreaks. = FALSE, domain = NULL), add = TRUE, after = TRUE)
     }
     base::on.exit(expr = base::options(warning.length = ini_warning_length), add = TRUE, after = TRUE)
     if(warn_print == FALSE){

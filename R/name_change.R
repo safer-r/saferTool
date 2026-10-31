@@ -345,7 +345,8 @@ name_change <- function(
 
     ######## check of the required functions from the required packages
     if(safer_check == TRUE){
-        saferDev:::.pack_and_function_check(
+        .pack_and_function_check <- utils::getFromNamespace(x = ".pack_and_function_check", ns = "saferDev", pos = -1, envir = )
+        .pack_and_function_check(
             fun = base::c(
                 # functions required in this code
                 "saferDev::arg_check", # write each function preceeded by their package name
@@ -362,6 +363,7 @@ name_change <- function(
 
     ######## escaping CRAN submission NOTE for internal functions
 
+    .base_op_check <- utils::getFromNamespace(x = ".base_op_check", ns = "saferDev", pos = -1, envir = )
     # add here in the internal functions that are used in your main code (copy-paste the line above and replace .base_op_check by the name of the internal function
     # not mandatory if your function is not designed for submission to the CRAN
 
@@ -369,7 +371,7 @@ name_change <- function(
 
     ######## critical operator checking
     if(safer_check == TRUE){
-        saferDev:::.base_op_check(
+        .base_op_check(
             error_text = embed_error_text
         )
     }
@@ -460,18 +462,18 @@ name_change <- function(
     ######## end graphic device checking
 
     ######## other checkings
-    if(base::any(base::duplicated(data2))){
+    if(base::any(base::duplicated(x = data2, incomparables = FALSE), na.rm = FALSE)){
         tempo_cat <- base::paste0(
             error_text_start, 
             "THE data2 ARGUMENT CANNOT HAVE DUPLICATED ELEMENTS:\n", 
-            base::paste0(base::unique(data2[base::duplicated(data2)]), collapse = "\n", recycle0 = FALSE),
+            base::paste0(base::unique(x = data2[base::duplicated(x = data2, incomparables = FALSE)], incomparables = FALSE), collapse = "\n", recycle0 = FALSE),
             collapse = NULL, 
             recycle0 = FALSE
         )
         base::stop(base::paste0("\n\n================\n\n", tempo_cat, "\n\n================\n\n", collapse = NULL, recycle0 = FALSE), call. = FALSE, domain = NULL)
     }
-    tempo <- base::grepl(x = data1, pattern = base::paste0("^.*", added_string, "$"))
-    if(base::any(tempo)){
+    tempo <- base::grepl(x = data1, pattern = base::paste0("^.*", added_string, "$", collapse = NULL, recycle0 = FALSE), ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE)
+    if(base::any(tempo, na.rm = FALSE)){
         tempo_cat <- base::paste0(
             error_text_start, 
             "ELEMENTS OF THE data1 ARGUMENT END WITH THE STRING OF THE added_string (",
@@ -492,21 +494,21 @@ name_change <- function(
     posi <- NULL
     ini <- NULL
     post <- NULL
-    if(base::any(data1 %in% data2)){
+    if(base::any(data1 %in% data2, na.rm = FALSE)){
         ini <- data1[data1 %in% data2]
-        match_names_unique <- base::unique(ini)
-        post <- base::vector(mode = "character", base::length(ini))
-        for(i2 in 1:base::length(match_names_unique)){
+        match_names_unique <- base::unique(x = ini, incomparables = FALSE)
+        post <- base::vector(mode = "character", length = base::length(x = ini))
+        for(i2 in base::seq_along(along.with = match_names_unique)){
             count <- NULL
             tempo <- base::sum(ini %in% match_names_unique[i2], na.rm = TRUE) # duplicated elements in data1 that match 1 element in data2 
             if(tempo > 1 & duplicate == FALSE){ 
                 count <- 1:tempo
             }
-            res <- base::paste0(match_names_unique[i2], added_string, count)
+            res <- base::paste0(match_names_unique[i2], added_string, count, collapse = NULL, recycle0 = FALSE)
             data[data1 %in% match_names_unique[i2]] <- res
             post[ini %in% match_names_unique[i2]] <- res
         }
-        posi <- base::which( ! data1 %in% data)
+        posi <- base::which( x = ! data1 %in% data, arr.ind = FALSE, useNames = TRUE)
     }
     output <- base::list(data = data, posi = posi, ini = ini, post = post)
     #### end main code

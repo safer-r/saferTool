@@ -344,7 +344,8 @@ round2 <- function(
 
     ######## check of the required functions from the required packages
     if(safer_check == TRUE){
-        saferDev:::.pack_and_function_check(
+        .pack_and_function_check <- utils::getFromNamespace(x = ".pack_and_function_check", ns = "saferDev", pos = -1, envir = )
+        .pack_and_function_check(
             fun = base::c(
                 # functions required in this code
                 "saferDev::arg_check", # write each function preceeded by their package name
@@ -361,6 +362,7 @@ round2 <- function(
 
     ######## escaping CRAN submission NOTE for internal functions
 
+    .base_op_check <- utils::getFromNamespace(x = ".base_op_check", ns = "saferDev", pos = -1, envir = )
     # add here in the internal functions that are used in your main code (copy-paste the line above and replace .base_op_check by the name of the internal function
     # not mandatory if your function is not designed for submission to the CRAN
 
@@ -368,7 +370,7 @@ round2 <- function(
 
     ######## critical operator checking
     if(safer_check == TRUE){
-        saferDev:::.base_op_check(
+        .base_op_check(
             error_text = embed_error_text
         )
     }
@@ -469,28 +471,28 @@ round2 <- function(
     #### end second round of checking and data preparation
 
     #### main code
-    tempo <- base::grepl(x = data, pattern = "\\.") # detection of decimal numbers
-    ini_mode <- base::mode(data)
-    data <- base::as.character(data) # to really truncate decimal digits
-    for(i in 1:base::length(data)){ # scan all the numbers of the vector
+    tempo <- base::grepl(pattern = "\\.", x = data, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE) # detection of decimal numbers
+    ini_mode <- base::mode(x = data)
+    data <- base::as.character(x = data) # to really truncate decimal digits
+    for(i in base::seq_along(along.with = data)){ # scan all the numbers of the vector
         if(tempo[i] == TRUE){ # means decimal number
             if(after_lead_zero == TRUE){
-                zero_pos <- base::unlist(base::gregexpr(text=data[i], pattern = 0)) # recover all the position of the zeros in the number. -1 if no zeros (do not record the leading and trailing zeros)
+                zero_pos <- base::unlist(x = base::gregexpr(text=data[i], pattern = 0, ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE), recursive = TRUE, use.names = TRUE) # recover all the position of the zeros in the number. -1 if no zeros (do not record the leading and trailing zeros)
             }else{
                 zero_pos <- -1 # -1 as if no zero
             }
-            dot_pos <- base::unlist(base::gregexpr(text=data[i], pattern = "\\.")) # recover all the position of the zeros in the number
-            digit_pos <- base::unlist(base::gregexpr(text=data[i], pattern = "[[:digit:]]")) # recover all the position of the digits in the number
+            dot_pos <- base::unlist(x = base::gregexpr(pattern = "\\.", text = data[i], ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE), recursive = TRUE, use.names = TRUE) # recover all the position of the zeros in the number
+            digit_pos <- base::unlist(x = base::gregexpr(text=data[i], pattern = "[[:digit:]]", ignore.case = FALSE, perl = FALSE, fixed = FALSE, useBytes = FALSE), recursive = TRUE, use.names = TRUE) # recover all the position of the digits in the number
             dec_pos <- digit_pos[digit_pos > dot_pos]
             count <- 0
-            while((dot_pos + count + 1) %in% zero_pos & (dot_pos + count + 1) <= base::max(dec_pos) & (count + dec_nb) < base::length(dec_pos)){ # count the number of leading zeros in the decimal part
+            while((dot_pos + count + 1) %in% zero_pos & (dot_pos + count + 1) <= base::max(dec_pos, na.rm = FALSE) & (count + dec_nb) < base::length(x = dec_pos)){ # count the number of leading zeros in the decimal part
                 count <- count + 1
             }
-            data[i] <- base::formatC(base::as.numeric(data[i]), digits = (count + dec_nb), format = "f")
+            data[i] <- base::formatC(x = base::as.numeric(x = data[i]), digits = (count + dec_nb), format = "f", width = NULL, flag = "", mode = NULL, big.mark = "", big.interval = 3L, small.mark = "", small.interval = 5L, decimal.mark = base::getOption(x = "OutDec", default = NULL), preserve.width = "individual", zero.print = NULL, replace.zero = TRUE, drop0trailing = FALSE)
         }
     }
     if(ini_mode != "character"){
-        data <- base::as.numeric(data)
+        data <- base::as.numeric(x = data)
     }
     #### end main code
 
